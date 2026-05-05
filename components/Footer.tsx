@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Globe, Camera, MessageCircle, Briefcase, Play } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -21,11 +21,11 @@ const projectTypes = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Globe, href: "#", label: "Facebook" },
+  { icon: Camera, href: "#", label: "Instagram" },
+  { icon: MessageCircle, href: "#", label: "Twitter" },
+  { icon: Briefcase, href: "#", label: "LinkedIn" },
+  { icon: Play, href: "#", label: "YouTube" },
 ];
 
 export default function Footer() {
