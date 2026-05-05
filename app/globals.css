@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-teko: 'Teko', sans-serif;
+  
+  --color-primary: #f14201;
+  --color-dark: #111111;
+  --color-lightGrey: #f4f4f4;
+  --color-borderGrey: #e5e7eb;
+}
+
+:root {
+  --primary: #f14201;
+  --dark: #111111;
+  --dark-secondary: #0a0a0a;
+  --light-grey: #f4f4f4;
+  --border-grey: #e5e7eb;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  color: #111111;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-teko {
+  font-family: 'Teko', sans-serif;
+}
+
+/* Swiper Styles */
+.swiper-button-next, .swiper-button-prev { 
+  color: #fff !important; 
+}
+.swiper-pagination-bullet-active { 
+  background: #f14201 !important; 
+}
+
+/* Amenity Card Light */
+.amenity-card-light {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-grey);
+  background-color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.amenity-card-light:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(241, 66, 1, 0.2);
+}
+
+.amenity-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: rgba(241, 66, 1, 0.1);
+  color: var(--primary);
+}
+
+.amenity-card-light:hover .amenity-icon {
+  background: rgba(241, 66, 1, 0.2);
+  transform: scale(1.1);
+}
+
+/* Developer Stats */
+.developer-stat-light {
+  border-bottom: 1px solid var(--border-grey);
+  padding-bottom: 1.5rem;
+}
+
+/* CTA Buttons */
+.cta-button-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.125rem;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: var(--primary);
+  color: white;
+}
+
+.cta-button-large:hover {
+  background: #d63801;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(241, 66, 1, 0.4);
+}
+
+/* Project Card */
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Location Card */
+.location-card {
+  transition: all 0.3s ease;
+}
+
+.location-card:hover {
+  border-color: rgba(241, 66, 1, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* WhatsApp Button Animation */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 3s infinite ease-in-out;
+}
+
+/* Morph Animation */
+.morph {
+  animation: morph 1.5s ease-in-out 0s infinite normal none;
+}
+
+@keyframes morph {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .amenity-card-light {
+    padding: 1rem;
+  }
+
+  .amenity-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  nav, footer {
+    display: none;
+  }
+}
