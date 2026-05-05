@@ -1,0 +1,21 @@
+User-agent: *
+
+Allow: /
+Allow: /wp-content/uploads/
+Allow: /blogs/wp-content/uploads/
+
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /blogs/wp-admin/
+Disallow: /blogs/wp-includes/
+Disallow: /cgi-bin/
+
+Allow: /blogs/wp-admin/admin-ajax.php
+
+Disallow: /?s=
+Disallow: /blogs/?s=
+Disallow: /search/
+
+Sitemap: https://www.dwarkaexpresswayncr.com/sitemap.xml
+Sitemap: https://www.dwarkaexpresswayncr.com/blogs/sitemap.xml
+
