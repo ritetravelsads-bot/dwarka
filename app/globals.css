@@ -1,22 +1,22 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --primary: #c8a55d;
-  --primary-dark: #b8954d;
-  --secondary: #1a1a2e;
-  --dark: #0f0f1a;
-  --light: #f8f9fa;
-  --gray: #6c757d;
-  --success: #28a745;
-  --danger: #dc3545;
-  --warning: #ffc107;
-  --info: #17a2b8;
+@theme inline {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-teko: 'Teko', sans-serif;
+  
+  --color-primary: #f14201;
+  --color-dark: #111111;
+  --color-lightGrey: #f4f4f4;
+  --color-borderGrey: #e5e7eb;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --primary: #f14201;
+  --dark: #111111;
+  --dark-secondary: #0a0a0a;
+  --light-grey: #f4f4f4;
+  --border-grey: #e5e7eb;
 }
 
 html {
@@ -24,216 +24,146 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--dark);
-  color: #ffffff;
-  line-height: 1.6;
+  background-color: white;
+  color: #111111;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Gold Gradient Text */
-.gold-text {
-  background: linear-gradient(135deg, #c8a55d 0%, #f5d998 50%, #c8a55d 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
 }
 
-/* Gold Button */
-.btn-gold {
-  background: linear-gradient(135deg, #c8a55d 0%, #d4b06a 100%);
-  color: #0f0f1a;
-  font-weight: 600;
-  padding: 12px 30px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
+.font-teko {
+  font-family: 'Teko', sans-serif;
+}
+
+/* Swiper Styles */
+.swiper-button-next, .swiper-button-prev { 
+  color: #fff !important; 
+}
+.swiper-pagination-bullet-active { 
+  background: #f14201 !important; 
+}
+
+/* Amenity Card Light */
+.amenity-card-light {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-grey);
+  background-color: white;
+  text-align: center;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.btn-gold:hover {
-  background: linear-gradient(135deg, #d4b06a 0%, #c8a55d 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(200, 165, 93, 0.3);
+.amenity-card-light:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(241, 66, 1, 0.2);
 }
 
-/* Section Styling */
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+.amenity-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1rem;
-}
-
-.section-subtitle {
-  color: var(--gray);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Card Styling */
-.card {
-  background: linear-gradient(145deg, #1a1a2e 0%, #16162a 100%);
-  border: 1px solid rgba(200, 165, 93, 0.1);
-  border-radius: 15px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(200, 165, 93, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Glass Effect */
-.glass {
-  background: rgba(26, 26, 46, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 165, 93, 0.1);
-}
-
-/* Input Styling */
-.input-field {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(200, 165, 93, 0.2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  color: #ffffff;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(200, 165, 93, 0.1);
-}
-
-.input-field::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
-}
-
-/* Animation Classes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-/* WhatsApp Float Button */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  width: 60px;
-  height: 60px;
-  background: #25d366;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  background: rgba(241, 66, 1, 0.1);
+  color: var(--primary);
+}
+
+.amenity-card-light:hover .amenity-icon {
+  background: rgba(241, 66, 1, 0.2);
+  transform: scale(1.1);
+}
+
+/* Developer Stats */
+.developer-stat-light {
+  border-bottom: 1px solid var(--border-grey);
+  padding-bottom: 1.5rem;
+}
+
+/* CTA Buttons */
+.cta-button-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.125rem;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: var(--primary);
+  color: white;
+}
+
+.cta-button-large:hover {
+  background: #d63801;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(241, 66, 1, 0.4);
+}
+
+/* Project Card */
+.project-card {
   transition: all 0.3s ease;
 }
 
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* Swiper Custom Styles */
-.swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.5) !important;
-  opacity: 1 !important;
+/* Location Card */
+.location-card {
+  transition: all 0.3s ease;
 }
 
-.swiper-pagination-bullet-active {
-  background: var(--primary) !important;
+.location-card:hover {
+  border-color: rgba(241, 66, 1, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: var(--primary) !important;
+/* WhatsApp Button Animation */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-/* Status Badge */
-.status-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.animate-bounce-subtle {
+  animation: bounce-subtle 3s infinite ease-in-out;
 }
 
-.status-new-launch {
-  background: linear-gradient(135deg, #c8a55d 0%, #d4b06a 100%);
-  color: #0f0f1a;
+/* Morph Animation */
+.morph {
+  animation: morph 1.5s ease-in-out 0s infinite normal none;
 }
 
-.status-under-construction {
-  background: rgba(255, 193, 7, 0.2);
-  color: #ffc107;
-  border: 1px solid rgba(255, 193, 7, 0.3);
+@keyframes morph {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-.status-ready-to-move {
-  background: rgba(40, 167, 69, 0.2);
-  color: #28a745;
-  border: 1px solid rgba(40, 167, 69, 0.3);
+/* Responsive */
+@media (max-width: 768px) {
+  .amenity-card-light {
+    padding: 1rem;
+  }
+
+  .amenity-icon {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
-/* Price Badge */
-.price-badge {
-  background: linear-gradient(135deg, rgba(200, 165, 93, 0.1) 0%, rgba(200, 165, 93, 0.05) 100%);
-  border: 1px solid rgba(200, 165, 93, 0.2);
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
-/* Loading Spinner */
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(200, 165, 93, 0.2);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+/* Print Styles */
+@media print {
+  nav, footer {
+    display: none;
   }
 }

@@ -1,167 +1,220 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  {
-    name: "Projects",
-    href: "/projects",
-    children: [
-      { name: "All Projects", href: "/projects" },
-      { name: "New Launch", href: "/projects?status=new-launch" },
-      { name: "Under Construction", href: "/projects?status=under-construction" },
-      { name: "Ready to Move", href: "/projects?status=ready-to-move" },
-    ],
-  },
-  { name: "Amenities", href: "/amenities" },
+  { name: "Projects", href: "/projects" },
   { name: "Connectivity", href: "/connectivity" },
+  { name: "Amenities", href: "/amenities" },
   { name: "Contact", href: "/contact" },
+  { name: "About Us", href: "/about" },
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [showPopupForm, setShowPopupForm] = useState(false);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#0f0f1a]/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <>
+      <header className="fixed w-full z-50 bg-white backdrop-blur-md border-b border-borderGrey">
+        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/">
             <Image
-              src="/images/logo.png"
-              alt="Dwarka Expressway"
-              width={180}
-              height={50}
-              className="h-12 w-auto"
+              src="/assets/img/logo.png"
+              alt="Dwarka Expressway Logo"
+              width={160}
+              height={64}
+              className="h-10 md:h-16 w-auto"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wide">
             {navigation.map((item) => (
-              <div
+              <Link
                 key={item.name}
-                className="relative"
-                onMouseEnter={() => item.children && setOpenDropdown(item.name)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                href={item.href}
+                className="text-dark hover:text-primary transition"
               >
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1 text-white/90 hover:text-[#c8a55d] transition-colors text-sm font-medium uppercase tracking-wider"
-                >
-                  {item.name}
-                  {item.children && <ChevronDown className="w-4 h-4" />}
-                </Link>
-                {item.children && openDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-[#1a1a2e] border border-[#c8a55d]/20 rounded-lg shadow-xl overflow-hidden">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        className="block px-4 py-3 text-white/80 hover:bg-[#c8a55d]/10 hover:text-[#c8a55d] transition-colors text-sm"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                {item.name}
+              </Link>
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="tel:+919999999999"
-              className="flex items-center gap-2 text-white/90 hover:text-[#c8a55d] transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="text-sm font-medium">+91 99999 99999</span>
-            </a>
-            <Link
-              href="/contact"
-              className="btn-gold text-sm px-6 py-3"
-            >
-              Enquire Now
-            </Link>
-          </div>
+          {/* Desktop CTA */}
+          <button
+            onClick={() => setShowPopupForm(true)}
+            className="hidden md:block morph relative bg-dark rounded text-white px-4 py-2.5 font-bold text-sm uppercase hover:bg-black transition"
+          >
+            Free Site Visit
+          </button>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden text-white p-2"
-            aria-label="Toggle menu"
+            className="md:hidden text-2xl text-primary"
+            aria-label="Menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            <i className={`fa-solid ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#1a1a2e] border-t border-[#c8a55d]/20">
-          <nav className="px-4 py-4 space-y-2">
-            {navigation.map((item) => (
-              <div key={item.name}>
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white/95 border-t border-borderGrey rounded-b-lg">
+            <nav className="flex flex-col px-4 py-6 space-y-4 font-semibold text-sm uppercase">
+              {navigation.map((item) => (
                 <Link
+                  key={item.name}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-3 text-white/90 hover:text-[#c8a55d] transition-colors font-medium"
+                  className="text-dark hover:text-primary transition"
                 >
                   {item.name}
                 </Link>
-                {item.children && (
-                  <div className="pl-4 space-y-1">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.name}
-                        href={child.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-white/60 hover:text-[#c8a55d] transition-colors text-sm"
-                      >
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <a
-              href="tel:+919999999999"
-              className="flex items-center gap-2 py-3 text-[#c8a55d]"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="font-medium">+91 99999 99999</span>
-            </a>
-          </nav>
-        </div>
+              ))}
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Popup Form */}
+      {showPopupForm && (
+        <PopupForm onClose={() => setShowPopupForm(false)} />
       )}
-    </header>
+    </>
+  );
+}
+
+function PopupForm({ onClose }: { onClose: () => void }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          source: 'popup_form',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitMessage({ type: 'success', text: 'Thank you! We will contact you shortly.' });
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
+        setSubmitMessage({ type: 'error', text: result.message || 'Something went wrong. Please try again.' });
+      }
+    } catch {
+      setSubmitMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center bg-primary/20 px-8">
+      <div className="relative md:left-1/3 bg-white/95 backdrop-blur-md px-4 py-6 rounded-lg shadow-md md:w-full max-w-md top-1/4 md:top-20 mx-auto">
+        {/* Close Button */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-3 right-3 cursor-pointer text-primary"
+          aria-label="close"
+        >
+          <i className="fa-solid fa-x"></i>
+        </button>
+
+        <h2 className="text-center text-xl sm:text-2xl py-4 text-dark">
+          Speak with Our Property Expert
+        </h2>
+
+        <form onSubmit={handleSubmit} className="rounded-md space-y-4">
+          <div>
+            <label className="block text-black mb-1">Name*</label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-black mb-1">Email</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div>
+            <label className="block text-black mb-1">WhatsApp Number*</label>
+            <input
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="Enter your WhatsApp number"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-black mb-1">Address</label>
+            <input
+              type="text"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-1 focus:ring-gray-600"
+              placeholder="Enter your address"
+            />
+          </div>
+
+          {submitMessage && (
+            <div className={`p-3 rounded-lg text-center text-sm font-medium ${
+              submitMessage.type === 'success' 
+                ? 'bg-green-100 text-green-700' 
+                : 'bg-red-100 text-red-700'
+            }`}>
+              {submitMessage.text}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition disabled:opacity-50"
+          >
+            {isSubmitting ? 'Sending...' : 'Submit'}
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
