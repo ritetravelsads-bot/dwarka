@@ -23,12 +23,12 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, variant = "default" }: ProjectCardProps) {
-  // Try to enrich with local data for correct images and occupancy
+  // Enrich with local data for correct images and occupancy from PHP version
   const localData = project.slug 
     ? getProjectBySlug(project.slug) 
     : getProjectByName(project.name);
 
-  // Use local image if available, fallback to API image, then default
+  // Use local image (p-X.webp) if available, fallback to API image, then default
   const imageUrl = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
   
   // Generate proper slug
@@ -38,7 +38,7 @@ export default function ProjectCard({ project, variant = "default" }: ProjectCar
   // Use local badge/status or API data
   const statusBadge = localData?.badge || project.badge || project.status?.replace(/-/g, " ");
   
-  // Use local occupancy (which has correct values from PHP) or API data
+  // Use local occupancy (correct values from PHP) or API data
   const occupancy = localData?.occupancy ?? project.occupancy ?? 0;
   
   // Use local alt text or fallback

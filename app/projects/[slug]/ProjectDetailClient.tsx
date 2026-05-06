@@ -89,13 +89,14 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  // Enrich project data with local data for correct images
+  // Enrich project data with local data for correct images (p-X.webp format from PHP)
   const localData = project.slug 
     ? getProjectBySlug(project.slug) 
     : getProjectByName(project.name);
 
-  // Use local image if API image is missing or placeholder
+  // Use local image if API image is missing or is a placeholder
   const enrichedMainImage = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
+  const enrichedAlt = localData?.alt || project.name;
 
   // Process gallery images
   const galleryImages: { url: string; alt: string }[] = [];
@@ -108,7 +109,8 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
       }
     });
   } else if (enrichedMainImage) {
-    galleryImages.push({ url: enrichedMainImage, alt: localData?.alt || project.name });
+    // Use enriched main image as fallback gallery image
+    galleryImages.push({ url: enrichedMainImage, alt: enrichedAlt });
   }
 
   const heroImage = project.hero?.image || enrichedMainImage;
