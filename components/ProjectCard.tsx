@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProjectByName, getProjectBySlug, DEFAULT_PROJECT_IMAGE, makeSlug } from "@/lib/project-data";
 
 interface ProjectCardProps {
   project: {
@@ -22,11 +23,26 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, variant = "default" }: ProjectCardProps) {
-  const imageUrl = project.mainImage || "/images/placeholder-project.jpg";
-  const projectUrl = `/projects/${project.slug || project._id}`;
+  // Try to enrich with local data for correct images and occupancy
+  const localData = project.slug 
+    ? getProjectBySlug(project.slug) 
+    : getProjectByName(project.name);
+
+  // Use local image if available, fallback to API image, then default
+  const imageUrl = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
   
-  const statusBadge = project.badge || project.status?.replace(/-/g, " ");
-  const occupancy = project.occupancy || 0;
+  // Generate proper slug
+  const projectSlug = project.slug || localData?.slug || makeSlug(project.name);
+  const projectUrl = `/projects/${projectSlug}`;
+  
+  // Use local badge/status or API data
+  const statusBadge = localData?.badge || project.badge || project.status?.replace(/-/g, " ");
+  
+  // Use local occupancy (which has correct values from PHP) or API data
+  const occupancy = localData?.occupancy ?? project.occupancy ?? 0;
+  
+  // Use local alt text or fallback
+  const altText = localData?.alt || project.alt || project.name;
   
   // SVG Math for occupancy circle
   const radius = 15.915;
@@ -39,7 +55,7 @@ export default function ProjectCard({ project, variant = "default" }: ProjectCar
       <div className="relative">
         <Image
           src={imageUrl}
-          alt={project.alt || project.name}
+          alt={altText}
           width={400}
           height={224}
           className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"

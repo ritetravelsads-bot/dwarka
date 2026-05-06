@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BreadcrumbSchema, WebPageSchema, FAQSchema, ItemListSchema } from "@/components/seo/SchemaMarkup";
+import { projectsData, makeSlug } from "@/lib/project-data";
 
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
@@ -21,20 +22,27 @@ export const metadata: Metadata = {
   },
 };
 
-const projects = [
-  { name: "Signature Global Sarvam", sector: "Sector 37D", price: "2.81 Cr*", occupancy: "70%", tag: "Branded Residences", dxp_conn: "Located just 2 mins from the Dwarka Expressway cloverleaf, offering rapid, signal-free access to NH-48." },
-  { name: "Whiteland Westin Residences", sector: "Sector 103", price: "5.5 Cr*", occupancy: "65%", tag: "Forest-themed Living", dxp_conn: "Direct frontage on Dwarka Expressway, ensuring a smooth 15-minute drive directly to IGI Airport." },
-  { name: "Godrej Vrikshya", sector: "Sector 103", price: "3.6 Cr*", occupancy: "82%", tag: "High-rise Development", dxp_conn: "Zero-kilometer access to the main carriageway, providing seamless transit to upcoming commercial projects in Gurgaon." },
-  { name: "Signature Global De Luxe DXP", sector: "Sector 37D", price: "3.5 Cr*", occupancy: "98%", tag: "Near Completion", dxp_conn: "Strategically placed near the CPR and Dwarka Expressway junction for multi-directional city connectivity." },
-  { name: "Hero Homes The Palatial", sector: "Sector 104", price: "1.8 Cr*", occupancy: "92%", tag: "Possession (Dec 2026)", dxp_conn: "Sits right along the expressway, offering rapid connectivity to the Delhi border and nearby social infrastructure." },
-  { name: "M3M Capital", sector: "Sector 113", price: "5.2 Cr*", occupancy: "88%", tag: "Ultra-Luxury Living", dxp_conn: "First sector on the Gurgaon side, providing literally zero-minute access to Delhi via the expressway." },
-  { name: "Elan The Presidential", sector: "Sector 106", price: "6.5 Cr*", occupancy: "78%", tag: "Under Construction (2028)", dxp_conn: "Prime expressway frontage with upcoming infrastructure and quick routes to Sector 21 Metro." },
-  { name: "M3M Crown", sector: "Sector 111", price: "4.5 Cr*", occupancy: "85%", tag: "Under Construction (2027)", dxp_conn: "Bordering Delhi, offering one of the shortest commute times to Yashobhoomi (IICC) and the airport." },
-  { name: "Smartworld One DXP", sector: "Sector 113", price: "3.5 Cr*", occupancy: "90%", tag: "Exclusive Launch", dxp_conn: "Immediate Dwarka Express Highway access, perfectly positioning it between Gurugram IT hubs and Delhi." },
-  { name: "Puri Diplomatic Residences", sector: "Sector 111", price: "4.2 Cr*", occupancy: "60%", tag: "Premium High-rise", dxp_conn: "Located at the Delhi-Gurgaon toll plaza equivalent, making interstate travel entirely frictionless." },
-  { name: "Sobha Altus", sector: "Sector 106", price: "5.0 Cr*", occupancy: "55%", tag: "Ultra-Luxury Living", dxp_conn: "Direct access to the expressway service lanes, bypassing internal sector traffic entirely." },
-  { name: "BPTP Amstoria Verti Greens", sector: "Sector 102", price: "3.5 Cr*", occupancy: "12%", tag: "Branded Residences", dxp_conn: "Connected via a wide sector road directly merging onto the Dwarka Expressway within 2 minutes." },
-];
+// Connectivity details for each project
+const connectivityDetails: Record<string, string> = {
+  "Signature Global Sarvam": "Located just 2 mins from the Dwarka Expressway cloverleaf, offering rapid, signal-free access to NH-48.",
+  "Whiteland Westin Residences": "Direct frontage on Dwarka Expressway, ensuring a smooth 15-minute drive directly to IGI Airport.",
+  "Godrej Vrikshya": "Zero-kilometer access to the main carriageway, providing seamless transit to upcoming commercial projects in Gurgaon.",
+  "Signature Global De Luxe DXP": "Strategically placed near the CPR and Dwarka Expressway junction for multi-directional city connectivity.",
+  "Hero Homes The Palatial": "Sits right along the expressway, offering rapid connectivity to the Delhi border and nearby social infrastructure.",
+  "M3M Capital": "First sector on the Gurgaon side, providing literally zero-minute access to Delhi via the expressway.",
+  "Elan The Presidential": "Prime expressway frontage with upcoming infrastructure and quick routes to Sector 21 Metro.",
+  "M3M Crown": "Bordering Delhi, offering one of the shortest commute times to Yashobhoomi (IICC) and the airport.",
+  "Smartworld One DXP": "Immediate Dwarka Express Highway access, perfectly positioning it between Gurugram IT hubs and Delhi.",
+  "Puri Diplomatic Residences": "Located at the Delhi-Gurgaon toll plaza equivalent, making interstate travel entirely frictionless.",
+  "Sobha Altus": "Direct access to the expressway service lanes, bypassing internal sector traffic entirely.",
+  "BPTP Amstoria Verti Greens": "Connected via a wide sector road directly merging onto the Dwarka Expressway within 2 minutes.",
+};
+
+// Get first 12 projects with connectivity details
+const projects = projectsData.slice(0, 12).map(p => ({
+  ...p,
+  dxp_conn: connectivityDetails[p.name] || "Direct connectivity to Dwarka Expressway with excellent access to Delhi and Gurgaon.",
+}));
 
 // FAQs specific to connectivity page
 const connectivityFaqs = [
@@ -63,14 +71,10 @@ const connectivityFaqs = [
 // Generate project list for schema
 const projectListForSchema = projects.map((project) => ({
   name: project.name,
-  url: `${BASE_URL}/projects/${makeSlug(project.name)}`,
-  image: `${BASE_URL}/assets/img/default-project.webp`,
+  url: `${BASE_URL}/projects/${project.slug}`,
+  image: `${BASE_URL}${project.image}`,
   price: project.price,
 }));
-
-function makeSlug(name: string) {
-  return name.toLowerCase().trim().replace(/[^A-Za-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-}
 
 export default function ConnectivityPage() {
   return (
@@ -161,54 +165,51 @@ export default function ConnectivityPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((prop, index) => {
-              const urlSlug = makeSlug(prop.name);
-              return (
-                <div
-                  key={index}
-                  className="bg-white border border-borderGrey hover:border-primary/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col"
-                >
-                  <div className="p-6 flex-1">
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="bg-lightGrey text-dark text-xs font-bold px-3 py-1 rounded-md border border-borderGrey/80">
-                        {prop.sector}
-                      </span>
-                      <span className="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-md">
-                        {prop.tag}
-                      </span>
+            {projects.map((prop, index) => (
+              <div
+                key={index}
+                className="bg-white border border-borderGrey hover:border-primary/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col"
+              >
+                <div className="p-6 flex-1">
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="bg-lightGrey text-dark text-xs font-bold px-3 py-1 rounded-md border border-borderGrey/80">
+                      {prop.sector}
+                    </span>
+                    <span className="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-md">
+                      {prop.badge}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-dark mb-2 group-hover:text-primary transition-colors">
+                    {prop.name}
+                  </h3>
+                  <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
+                    <div className="flex items-center gap-1">
+                      <i className="fa-solid fa-tag text-primary"></i> {prop.price}
                     </div>
-                    <h3 className="text-xl font-bold text-dark mb-2 group-hover:text-primary transition-colors">
-                      {prop.name}
-                    </h3>
-                    <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
-                      <div className="flex items-center gap-1">
-                        <i className="fa-solid fa-tag text-primary"></i> {prop.price}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <i className="fa-solid fa-building-circle-check text-primary"></i> {prop.occupancy} Occupancy
-                      </div>
-                    </div>
-                    
-                    <div className="pt-4 border-t border-borderGrey border-dashed">
-                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-                        Expressway Connectivity:
-                      </h4>
-                      <p className="text-sm text-slate-600 leading-relaxed">
-                        {prop.dxp_conn}
-                      </p>
+                    <div className="flex items-center gap-1">
+                      <i className="fa-solid fa-building-circle-check text-primary"></i> {prop.occupancy}% Occupancy
                     </div>
                   </div>
-                  <div className="p-4 bg-lightGrey border-t border-borderGrey/50 text-center">
-                    <Link
-                      href={`/projects/${urlSlug}`}
-                      className="text-sm font-bold text-primary hover:text-dark transition-colors uppercase tracking-wide flex items-center justify-center gap-2"
-                    >
-                      View Details <i className="fa-solid fa-arrow-right"></i>
-                    </Link>
+                  
+                  <div className="pt-4 border-t border-borderGrey border-dashed">
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                      Expressway Connectivity:
+                    </h4>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {prop.dxp_conn}
+                    </p>
                   </div>
                 </div>
-              );
-            })}
+                <div className="p-4 bg-lightGrey border-t border-borderGrey/50 text-center">
+                  <Link
+                    href={`/projects/${prop.slug}`}
+                    className="text-sm font-bold text-primary hover:text-dark transition-colors uppercase tracking-wide flex items-center justify-center gap-2"
+                  >
+                    View Details <i className="fa-solid fa-arrow-right"></i>
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
