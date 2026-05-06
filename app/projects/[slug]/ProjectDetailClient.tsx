@@ -6,6 +6,7 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import EmiCalculator from "@/components/EmiCalculator";
+import { getProjectBySlug, getProjectByName, DEFAULT_PROJECT_IMAGE } from "@/lib/project-data";
 
 interface FloorPlan {
   title: string;
@@ -88,6 +89,15 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  // Enrich project data with local data for correct images (p-X.webp format from PHP)
+  const localData = project.slug 
+    ? getProjectBySlug(project.slug) 
+    : getProjectByName(project.name);
+
+  // Use local image if API image is missing or is a placeholder
+  const enrichedMainImage = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
+  const enrichedAlt = localData?.alt || project.name;
+
   // Process gallery images
   const galleryImages: { url: string; alt: string }[] = [];
   if (project.gallery && project.gallery.length > 0) {
@@ -98,11 +108,12 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
         galleryImages.push({ url: img.url, alt: img.alt || `${project.name} - Image ${idx + 1}` });
       }
     });
-  } else if (project.mainImage) {
-    galleryImages.push({ url: project.mainImage, alt: project.name });
+  } else if (enrichedMainImage) {
+    // Use enriched main image as fallback gallery image
+    galleryImages.push({ url: enrichedMainImage, alt: enrichedAlt });
   }
 
-  const heroImage = project.hero?.image || project.mainImage || "";
+  const heroImage = project.hero?.image || enrichedMainImage;
 
   const defaultAmenities = [
     { icon: "fa-person-swimming", name: "Swimming Pool" },
@@ -227,11 +238,11 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
               </div>
 
               <div className="relative overflow-hidden min-h-[400px]">
-                {(project.about?.image || project.mainImage) ? (
+                {(project.about?.image || enrichedMainImage) ? (
                   <>
                     <div className="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-dark to-transparent w-1/4"></div>
                     <Image
-                      src={project.about?.image || project.mainImage || ""}
+                      src={project.about?.image || enrichedMainImage}
                       alt={`${project.name} — About image`}
                       fill
                       className="w-full h-full object-cover transition duration-700 hover:scale-110"

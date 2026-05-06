@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/SchemaMarkup";
+import { BreadcrumbSchema, WebPageSchema, FAQSchema, ItemListSchema } from "@/components/seo/SchemaMarkup";
 
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
@@ -36,6 +36,38 @@ const projects = [
   { name: "BPTP Amstoria Verti Greens", sector: "Sector 102", price: "3.5 Cr*", occupancy: "12%", tag: "Branded Residences", dxp_conn: "Connected via a wide sector road directly merging onto the Dwarka Expressway within 2 minutes." },
 ];
 
+// FAQs specific to connectivity page
+const connectivityFaqs = [
+  {
+    question: "How long is Dwarka Expressway?",
+    answer: "Dwarka Expressway is a 27.6 km, 16-lane highway connecting Delhi to Gurgaon.",
+  },
+  {
+    question: "How far is Dwarka Expressway from IGI Airport?",
+    answer: "Dwarka Expressway offers direct connectivity to IGI Airport in just 15-20 minutes via signal-free roads.",
+  },
+  {
+    question: "Which sectors are best connected on Dwarka Expressway?",
+    answer: "Sectors 113, 112, 111, 106, 103, and 102 have the best connectivity to Delhi and Gurgaon.",
+  },
+  {
+    question: "Is metro connectivity available on Dwarka Expressway?",
+    answer: "Metro extension is planned and will connect Dwarka Expressway to Delhi Metro network.",
+  },
+  {
+    question: "What is the route of Dwarka Expressway?",
+    answer: "Dwarka Expressway runs from Shiv Murti (Mahipalpur, Delhi) to Kherki Daula Toll Plaza (Gurgaon).",
+  },
+];
+
+// Generate project list for schema
+const projectListForSchema = projects.map((project) => ({
+  name: project.name,
+  url: `${BASE_URL}/projects/${makeSlug(project.name)}`,
+  image: `${BASE_URL}/assets/img/default-project.webp`,
+  price: project.price,
+}));
+
 function makeSlug(name: string) {
   return name.toLowerCase().trim().replace(/[^A-Za-z0-9-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
 }
@@ -43,6 +75,21 @@ function makeSlug(name: string) {
 export default function ConnectivityPage() {
   return (
     <main className="text-dark antialiased pt-20">
+      {/* Schema Markup for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Connectivity", url: `${BASE_URL}/connectivity` },
+        ]}
+      />
+      <WebPageSchema
+        title="Dwarka Expressway Map & Connectivity | Prime Real Estate in Delhi NCR"
+        description="Explore the Dwarka Expressway map with projects, seamless connectivity to IGI Airport, NH-48."
+        url={`${BASE_URL}/connectivity`}
+      />
+      <FAQSchema faqs={connectivityFaqs} />
+      <ItemListSchema projects={projectListForSchema} />
+
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-24 md:pt-10 md:pb-32 bg-gradient-to-br from-slate-900 via-dark to-slate-800 overflow-hidden text-white">
         <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
