@@ -2,9 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import LayoutWrapper from "@/components/LayoutWrapper";
+import { OrganizationSchema, WebsiteSearchSchema } from "@/components/seo/SchemaMarkup";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -19,19 +18,45 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Projects in Dwarka Expressway Ncr- Residential | Commercial",
+  // Ensures Google uses this exact title (not generated from page content)
+  title: {
+    default: "Projects in Dwarka Expressway NCR - Residential | Commercial",
+    template: "%s | Dwarka Expressway NCR",
+  },
+  // Ensures Google uses this exact description (not generated from page content)
   description:
     "2026 Rapid Infrastructure makes Dwarka Expressway Real estate Top Investment Destinations in NCR. Get Latest Price Trends, EMI Calculator.",
   keywords:
-    "dwarka expressway, gurgaon real estate, premium apartments, luxury homes, commercial projects, new launch projects",
+    "dwarka expressway, gurgaon real estate, premium apartments, luxury homes, commercial projects, new launch projects, gurugram property, dwarka expressway projects",
   authors: [{ name: "Dwarka Expressway NCR" }],
+  creator: "Dwarka Expressway NCR",
+  publisher: "Dwarka Expressway NCR",
+  // Canonical URL for SEO
+  metadataBase: new URL("https://www.dwarkaexpresswayncr.com"),
+  alternates: {
+    canonical: "/",
+  },
+  // Robots directives - ensures search engines index properly
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Projects in Dwarka Expressway – Residential & Commercial Properties",
+    title: "Projects in Dwarka Expressway - Residential & Commercial Properties",
     description:
-      "Explore premium residential & commercial properties on Dwarka Expressway.",
+      "Explore premium residential & commercial properties on Dwarka Expressway. RERA verified projects from top developers.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
+    url: "https://www.dwarkaexpresswayncr.com",
     images: [
       {
         url: "https://www.dwarkaexpresswayncr.com/assets/img/Og-Image.png",
@@ -43,9 +68,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dwarka Expressway NCR",
-    description: "Explore premium properties.",
+    title: "Dwarka Expressway NCR - Premium Properties",
+    description: "Explore premium residential & commercial properties on Dwarka Expressway.",
     images: ["https://www.dwarkaexpresswayncr.com/assets/img/Og-Image.png"],
+    creator: "@dwarkaexpresswayncr",
+  },
+  // Verification tags
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || "",
+  },
+  // Other important meta tags
+  other: {
+    "google-site-verification": process.env.GOOGLE_SITE_VERIFICATION || "",
   },
 };
 
@@ -76,10 +110,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-white text-dark antialiased" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        {/* Global Schema Markup for SEO */}
+        <OrganizationSchema />
+        <WebsiteSearchSchema />
+        
+        <LayoutWrapper>{children}</LayoutWrapper>
+        
         <Script
           src="https://kit.fontawesome.com/c1d1e2319d.js"
           crossOrigin="anonymous"

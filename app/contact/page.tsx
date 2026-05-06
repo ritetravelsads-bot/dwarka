@@ -1,201 +1,210 @@
 import { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import { BreadcrumbSchema, WebPageSchema, LocalBusinessSchema } from "@/components/seo/SchemaMarkup";
+
+const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Dwarka Expressway Real Estate",
+  title: "Contact Us | Dwarka Expressway NCR",
   description:
-    "Get in touch with Dwarka Expressway NCR for property enquiries, site visits, and expert consultation. Call +91 93549 02932 or visit our office.",
+    "Book a site visit, request pricing details, and connect with Dwarka Expressway property experts. Call +91 9873702365 for instant assistance.",
+  keywords: "contact dwarka expressway, book site visit, real estate consultation, dwarka expressway helpline, property enquiry gurugram",
+  alternates: {
+    canonical: `${BASE_URL}/contact`,
+  },
+  openGraph: {
+    title: "Contact Us | Dwarka Expressway NCR",
+    description: "Book a site visit, request pricing details, and connect with Dwarka Expressway property experts.",
+    url: `${BASE_URL}/contact`,
+    type: "website",
+  },
 };
 
-const contactInfo = [
+const contactCards = [
   {
-    icon: Phone,
-    title: "Phone",
-    details: ["+91 93549 02932", "+91 98737 02365"],
-    action: "tel:+919354902932",
+    icon: "fa-phone",
+    title: "Call Us",
+    description: "Talk directly with our property consultants for instant guidance and project details.",
+    value: "+91 9873702365",
+    href: "tel:+919873702365",
   },
   {
-    icon: Mail,
-    title: "Email",
-    details: ["info@dwarkaexpresswayncr.com", "sales@dwarkaexpresswayncr.com"],
-    action: "mailto:info@dwarkaexpresswayncr.com",
+    icon: "fa-envelope",
+    title: "Email Us",
+    description: "Send us your requirements and receive detailed project information, pricing, and brochures.",
+    value: "info@dwarkaexpresswayncr.com",
+    href: "mailto:info@dwarkaexpresswayncr.com",
   },
   {
-    icon: MapPin,
-    title: "Office Address",
-    details: [
-      "Unit no. 555, JMD Megapolis",
-      "Badshahpur Sohna Road, Sector 48",
-      "Gurugram, Haryana 122018",
-    ],
-    action: "https://maps.google.com",
+    icon: "fa-clock",
+    title: "Office Hours",
+    description: "Our team is available to assist you from Monday to Saturday, ensuring quick and reliable support.",
+    value: "Mon - Sat, 9:00 AM - 6:00 PM",
+    href: null,
   },
-  {
-    icon: Clock,
-    title: "Working Hours",
-    details: ["Monday - Sunday", "9:00 AM - 7:00 PM"],
-  },
+];
+
+const benefits = [
+  "Latest Price List & Payment Plans",
+  "Exclusive Offers & Discounts",
+  "Site Visit Assistance",
+  "Expert Consultation (No Cost)",
 ];
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Get in <span className="text-[#c8a55d]">Touch</span>
+    <main className="pt-20">
+      {/* Schema Markup for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "Contact Us", url: `${BASE_URL}/contact` },
+        ]}
+      />
+      <WebPageSchema
+        title="Contact Us | Dwarka Expressway NCR"
+        description="Book a site visit, request pricing details, and connect with Dwarka Expressway property experts."
+        url={`${BASE_URL}/contact`}
+      />
+      <LocalBusinessSchema />
+
+      {/* HERO SECTION */}
+      <section className="relative h-[400px] md:h-[500px] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#0f172a] via-[#f97c44] to-[#fb923c]"></div>
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "30px 30px" }}></div>
+
+        <div className="relative z-10 container mx-auto px-6">
+          <div className="max-w-4xl">
+            <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-white uppercase bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
+              Dwarka Expressway Real Estate
+            </span>
+
+            <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight font-heading">
+              Your Dream Home <br className="hidden md:block" />
+              <span className="text-orange-200">Expertly Curated.</span>
             </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Have questions about properties on Dwarka Expressway? Our team is here to
-              help you find your perfect home.
+
+            <p className="text-white/90 mt-6 max-w-2xl text-base md:text-xl leading-relaxed font-light">
+              Navigate the Dwarka Expressway market with confidence. Get access to <span className="font-semibold text-white underline decoration-orange-400 underline-offset-4">exclusive pre-launch pricing</span> and verified project insights from the region&apos;s top consultants.
             </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Contact Info Cards */}
-      <section className="py-16 -mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((info, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="w-14 h-14 rounded-xl bg-[#c8a55d]/10 flex items-center justify-center mb-4">
-                  <info.icon className="w-7 h-7 text-[#c8a55d]" />
-                </div>
-                <h3 className="text-lg font-semibold text-[#0f0f1a] mb-3">{info.title}</h3>
-                <div className="space-y-1">
-                  {info.details.map((detail, idx) => (
-                    <p key={idx} className="text-gray-600 text-sm">
-                      {detail}
-                    </p>
-                  ))}
-                </div>
-                {info.action && (
-                  <a
-                    href={info.action}
-                    className="inline-block mt-4 text-[#c8a55d] font-medium text-sm hover:underline"
-                  >
-                    {info.icon === Phone
-                      ? "Call Now"
-                      : info.icon === Mail
-                      ? "Send Email"
-                      : "Get Directions"}
-                  </a>
-                )}
+            <div className="mt-10 flex flex-wrap gap-y-4 gap-x-8 border-t border-white/20 pt-8">
+              <div className="flex items-center space-x-2">
+                <span className="text-orange-300 text-lg">&#9733;</span>
+                <span className="text-white text-sm md:text-base font-medium">1,000+ Happy Families</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form & Map */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-[#0f0f1a] mb-2">Send us a Message</h2>
-              <p className="text-gray-600 mb-8">
-                Fill out the form below and our team will get back to you within 24 hours.
-              </p>
-              <ContactForm source="contact-page" variant="modal" />
+              <div className="flex items-center space-x-2">
+                <span className="text-orange-300 text-lg">&#10004;</span>
+                <span className="text-white text-sm md:text-base font-medium">RERA Verified Projects</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-orange-300 text-lg">&#9889;</span>
+                <span className="text-white text-sm md:text-base font-medium">Instant Expert Callback</span>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Map */}
-            <div className="space-y-6">
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.8234534023744!2d77.03899231507825!3d28.41025698250182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d229d84c8c0f7%3A0x4d1b4d79e4d3f8a8!2sDwarka%20Expressway!5e0!3m2!1sen!2sin!4v1623456789012!5m2!1sen!2sin"
-                  width="100%"
-                  height="350"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full"
-                />
+      {/* CONTACT CARDS SECTION */}
+      <section className="py-16 px-6 bg-white border-b border-borderGrey">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
+          {contactCards.map((card, index) => (
+            <div
+              key={index}
+              className="group bg-lightGrey rounded-2xl p-7 border border-borderGrey shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all"
+            >
+              <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center text-primary mb-4">
+                <i className={`fa-solid ${card.icon} text-xl`}></i>
               </div>
-
-              {/* WhatsApp CTA */}
-              <a
-                href="https://wa.me/919354902932?text=Hello!%20I%27m%20interested%20in%20properties%20on%20Dwarka%20Expressway."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold py-4 rounded-xl transition-colors"
-              >
-                <MessageCircle className="w-6 h-6" />
-                Chat with us on WhatsApp
-              </a>
-
-              {/* Quick Contact */}
-              <div className="bg-gradient-to-br from-[#c8a55d] to-[#b8954d] rounded-2xl p-8 text-white">
-                <h3 className="text-xl font-bold mb-4">Prefer a Call?</h3>
-                <p className="text-white/80 mb-6">
-                  Speak directly with our property experts for immediate assistance.
-                </p>
-                <a
-                  href="tel:+919354902932"
-                  className="inline-flex items-center gap-2 bg-white text-[#c8a55d] font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  <Phone className="w-5 h-5" />
-                  +91 93549 02932
+              <p className="text-primary font-semibold uppercase text-xs tracking-wider mb-2">{card.title}</p>
+              <p className="text-slate-700 mb-3">{card.description}</p>
+              {card.href ? (
+                <a href={card.href} className={`${card.icon === "fa-phone" ? "text-primary text-2xl font-extrabold hover:underline" : "text-dark text-lg font-bold hover:text-primary transition-colors"}`}>
+                  {card.value}
                 </a>
-              </div>
+              ) : (
+                <p className="text-dark text-lg font-bold">{card.value}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CONTACT FORM SECTION */}
+      <section id="contact" className="relative py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-dark/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 items-start">
+          {/* Form Card */}
+          <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-12 border border-white/20">
+            <div className="mb-8">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-dark mb-3 tracking-tight">
+                Book a Free Site Visit or Get Best Price Deals
+              </h2>
+              <p className="text-slate-600">
+                Fill in your details and our experts will connect with you shortly to assist with the best available options on Dwarka Expressway.
+              </p>
+            </div>
+
+            <ContactForm source="contact-page" variant="modal" />
+          </div>
+
+          {/* Side Content */}
+          <div className="space-y-6">
+            <div className="bg-white/95 rounded-2xl border border-white/20 shadow-xl p-7">
+              <h3 className="text-2xl font-bold text-dark mb-4 font-heading">What You&apos;ll Get</h3>
+              <ul className="space-y-3 text-slate-700">
+                {benefits.map((benefit, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <i className="fa-solid fa-circle-check text-primary mt-1"></i>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-dark text-white rounded-2xl border border-white/10 shadow-xl p-7">
+              <h3 className="text-2xl font-bold mb-3 font-heading">Limited Time Offers Available</h3>
+              <p className="text-white/80 leading-relaxed">
+                Due to high demand in Dwarka Expressway projects, prices are increasing rapidly. Connect with us today to secure the best deals and availability.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#0f0f1a] mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600">Common questions about contacting us</p>
-          </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {[
-              {
-                q: "What are your working hours?",
-                a: "We are available Monday to Sunday, 9:00 AM to 7:00 PM. For urgent queries, you can reach us on WhatsApp anytime.",
-              },
-              {
-                q: "How quickly will you respond to my enquiry?",
-                a: "We aim to respond to all enquiries within 2 hours during business hours. Most enquiries are addressed within 30 minutes.",
-              },
-              {
-                q: "Do you charge any consultation fee?",
-                a: "No, all our consultations are completely free. We provide unbiased advice to help you make the best decision.",
-              },
-              {
-                q: "Can I schedule a site visit?",
-                a: "Yes! We organize free site visits to all listed projects. Simply fill the contact form or call us to schedule.",
-              },
-            ].map((faq, index) => (
-              <details
-                key={index}
-                className="bg-gray-50 rounded-xl p-6 group"
-              >
-                <summary className="flex items-center justify-between cursor-pointer font-semibold text-[#0f0f1a]">
-                  {faq.q}
-                  <span className="text-[#c8a55d] transition-transform group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-4 text-gray-600">{faq.a}</p>
-              </details>
-            ))}
+      {/* STILL CONFUSED SECTION */}
+      <section className="py-16 px-6 bg-lightGrey border-t border-borderGrey">
+        <div className="max-w-7xl mx-auto bg-white rounded-3xl border border-borderGrey p-8 md:p-12 shadow-lg">
+          <h2 className="text-3xl md:text-4xl font-bold text-dark font-heading">Still Confused? Let Our Experts Help You</h2>
+          <p className="text-slate-600 mt-4 max-w-4xl">
+            Whether you are buying your first home or investing, our team will guide you at every step to make the right decision.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="tel:+919873702365"
+              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-all"
+            >
+              <i className="fa-solid fa-phone"></i>
+              Call Now
+            </a>
+            <a
+              href="https://wa.me/919873702365"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-all"
+            >
+              <i className="fa-brands fa-whatsapp"></i>
+              WhatsApp Now
+            </a>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

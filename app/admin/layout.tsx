@@ -25,22 +25,31 @@ export default function AdminLayout({
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [pathname]);
 
   const checkAuth = async () => {
+    // Skip auth check on login page
+    if (pathname === '/admin/login') {
+      setIsAuthenticated(false);
+      return;
+    }
+    
     try {
-      const res = await fetch('/api/admin/auth');
+      const res = await fetch('/api/admin/auth', { 
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
       const data = await res.json();
-      setIsAuthenticated(data.authenticated);
       
-      if (!data.authenticated && pathname !== '/admin/login') {
+      if (data.authenticated) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
         router.push('/admin/login');
       }
     } catch {
       setIsAuthenticated(false);
-      if (pathname !== '/admin/login') {
-        router.push('/admin/login');
-      }
+      router.push('/admin/login');
     }
   };
 

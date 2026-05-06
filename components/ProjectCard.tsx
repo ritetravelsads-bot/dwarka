@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
 
 interface ProjectCardProps {
   project: {
@@ -16,6 +15,8 @@ interface ProjectCardProps {
     type?: string;
     configurations?: string[];
     developer?: string;
+    occupancy?: number;
+    alt?: string;
   };
   variant?: "default" | "compact";
 }
@@ -25,68 +26,87 @@ export default function ProjectCard({ project, variant = "default" }: ProjectCar
   const projectUrl = `/projects/${project.slug || project._id}`;
   
   const statusBadge = project.badge || project.status?.replace(/-/g, " ");
+  const occupancy = project.occupancy || 0;
+  
+  // SVG Math for occupancy circle
+  const radius = 15.915;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (occupancy / 100) * circumference;
 
   return (
-    <Link href={projectUrl} className="group block">
-      <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
-        {/* Image Container */}
-        <div className="relative h-48 md:h-56 overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt={project.name}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-          {/* Status Badge */}
-          {statusBadge && (
-            <div className="absolute top-4 left-4">
-              <span className="bg-[#c8a55d] text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase">
-                {statusBadge}
-              </span>
+    <Link href={projectUrl} className="group bg-white rounded-2xl shadow-lg overflow-hidden project-card transition-transform hover:-translate-y-1 block">
+      {/* Image Container */}
+      <div className="relative">
+        <Image
+          src={imageUrl}
+          alt={project.alt || project.name}
+          width={400}
+          height={224}
+          className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        {/* Status Badge */}
+        {statusBadge && (
+          <span className="absolute top-3 left-3 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+            {statusBadge}
+          </span>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+        <div className="flex justify-between items-start gap-2">
+          <div className="space-y-1 flex-1">
+            <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
+              {project.name}
+            </h3>
+            <p className="text-xs text-gray-500 flex items-center">
+              <svg className="w-3 h-3 mr-1 text-gray-400" fill="currentColor" viewBox="0 0 384 512">
+                <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+              </svg>
+              {project.sector || project.location}
+            </p>
+            <p className="text-lg font-bold text-red-700 pt-1">
+              {project.price.startsWith("₹") ? project.price : `₹ ${project.price}`}*
+            </p>
+          </div>
+
+          {/* Occupancy Circle */}
+          {variant === "default" && (
+            <div className="flex flex-col items-center justify-center min-w-[60px]">
+              <div className="relative w-12 h-12">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
+                  <circle cx="20" cy="20" r={radius} fill="transparent" stroke="#e5e7eb" strokeWidth="4"/>
+                  <circle 
+                    cx="20" 
+                    cy="20" 
+                    r={radius} 
+                    fill="transparent" 
+                    stroke="#15803d" 
+                    strokeWidth="4" 
+                    strokeDasharray={circumference} 
+                    strokeDashoffset={offset} 
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-[10px] font-bold text-gray-700">{occupancy}%</span>
+                </div>
+              </div>
+              <span className="text-[9px] uppercase font-bold text-gray-400 mt-1">Occupancy</span>
             </div>
           )}
-          {/* Price Badge */}
-          <div className="absolute bottom-4 right-4">
-            <span className="bg-white/95 backdrop-blur text-[#0f0f1a] text-sm font-bold px-4 py-2 rounded-lg shadow">
-              {project.price.startsWith("₹") ? project.price : `₹${project.price}`}
-            </span>
-          </div>
         </div>
 
-        {/* Content */}
-        <div className="p-5">
-          <h3 className="text-lg font-semibold text-[#0f0f1a] mb-2 line-clamp-1 group-hover:text-[#c8a55d] transition-colors">
-            {project.name}
-          </h3>
-          
-          <div className="flex items-center gap-2 text-slate-600 mb-3">
-            <MapPin className="w-4 h-4 text-[#c8a55d]" />
-            <span className="text-sm">{project.sector || project.location}</span>
-          </div>
+        <hr className="my-3 border-gray-100" />
 
-          {variant === "default" && project.configurations && project.configurations.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-3">
-              {project.configurations.slice(0, 3).map((config, idx) => (
-                <span
-                  key={idx}
-                  className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
-                >
-                  {config}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {project.developer && (
-            <p className="text-xs text-slate-500">By {project.developer}</p>
-          )}
-
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <span className="text-[#c8a55d] font-medium text-sm group-hover:underline">
-              View Details →
-            </span>
-          </div>
+        <div className="flex justify-between items-center">
+          <span className="text-primary font-bold text-xs uppercase group-hover:underline">
+            View Details
+          </span>
+          <svg className="w-3 h-3 text-primary transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </div>
       </div>
     </Link>

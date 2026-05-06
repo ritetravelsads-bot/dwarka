@@ -14,7 +14,7 @@ export default function TrustSection() {
           {/* Stats Column */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#0f0f1a] mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-[dark] mb-4">
                 Built on Trust
               </h2>
               <p className="text-slate-600">
@@ -24,19 +24,19 @@ export default function TrustSection() {
 
             <div className="space-y-6">
               <div className="p-6 rounded-xl border border-gray-200 bg-white">
-                <div className="text-5xl font-light text-[#0f0f1a] mb-2">25+</div>
+                <div className="text-5xl font-light text-[dark] mb-2">25+</div>
                 <div className="text-slate-700 font-medium">Years of Experience</div>
                 <div className="text-slate-500 text-sm">In NCR real estate market</div>
               </div>
 
               <div className="p-6 rounded-xl border border-gray-200 bg-white">
-                <div className="text-5xl font-light text-[#0f0f1a] mb-2">15,000+</div>
+                <div className="text-5xl font-light text-[dark] mb-2">15,000+</div>
                 <div className="text-slate-700 font-medium">Happy Families</div>
                 <div className="text-slate-500 text-sm">Across 40 completed projects</div>
               </div>
 
               <div className="p-6 rounded-xl border border-gray-200 bg-white">
-                <div className="text-5xl font-light text-[#0f0f1a] mb-2">98%</div>
+                <div className="text-5xl font-light text-[dark] mb-2">98%</div>
                 <div className="text-slate-700 font-medium">On-Time Delivery</div>
                 <div className="text-slate-500 text-sm">Industry-leading track record</div>
               </div>
@@ -52,29 +52,29 @@ export default function TrustSection() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-xl border border-gray-200 bg-white hover:shadow-md transition-all">
-                <Shield className="w-8 h-8 text-[#c8a55d] mb-3" />
-                <h3 className="text-[#0f0f1a] font-semibold mb-2">ISO Certified</h3>
+              <div className="p-6 rounded-xl border border-borderGrey bg-white hover:shadow-md transition-all">
+                <Shield className="w-8 h-8 text-primary mb-3" />
+                <h3 className="text-dark font-semibold mb-2">ISO Certified</h3>
                 <p className="text-slate-500 text-sm">
                   International quality standards maintained
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl border border-gray-200 bg-white hover:shadow-md transition-all">
-                <CheckCircle className="w-8 h-8 text-[#c8a55d] mb-3" />
-                <h3 className="text-[#0f0f1a] font-semibold mb-2">RERA Compliant</h3>
+              <div className="p-6 rounded-xl border border-borderGrey bg-white hover:shadow-md transition-all">
+                <CheckCircle className="w-8 h-8 text-primary mb-3" />
+                <h3 className="text-dark font-semibold mb-2">RERA Compliant</h3>
                 <p className="text-slate-500 text-sm">
                   All projects registered and transparent
                 </p>
               </div>
             </div>
 
-            <div className="p-6 rounded-xl border border-[#c8a55d]/20 bg-[#c8a55d]/5">
-              <h4 className="text-[#0f0f1a] font-semibold mb-3">Notable Past Projects</h4>
+            <div className="p-6 rounded-xl border border-primary/20 bg-primary/5">
+              <h4 className="text-dark font-semibold mb-3">Notable Past Projects</h4>
               <ul className="space-y-2">
                 {pastProjects.map((project, index) => (
                   <li key={index} className="flex items-center gap-2 text-slate-600 text-sm">
-                    <CheckCircle className="w-4 h-4 text-[#c8a55d] flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                     <span>{project}</span>
                   </li>
                 ))}

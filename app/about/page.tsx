@@ -1,285 +1,270 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Award, Users, Building2, Clock, Shield, Target } from "lucide-react";
+import { BreadcrumbSchema, WebPageSchema, ServiceSchema } from "@/components/seo/SchemaMarkup";
+
+const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "About Us | Dwarka Expressway Real Estate",
+  title: "About Us | Dwarka Expressway Real Estate Advisory",
   description:
-    "Learn about Dwarka Expressway NCR - Your trusted partner for premium real estate properties on Dwarka Expressway, Gurgaon. 25+ years of experience.",
+    "Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram. RERA verified projects.",
+  keywords: "dwarka expressway real estate, gurugram property advisor, real estate consultant, dwarka expressway projects, trusted real estate",
+  alternates: {
+    canonical: `${BASE_URL}/about`,
+  },
+  openGraph: {
+    title: "About Us | Dwarka Expressway Real Estate Advisory",
+    description: "Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram.",
+    url: `${BASE_URL}/about`,
+    type: "website",
+  },
 };
 
-const stats = [
-  { value: "25+", label: "Years of Experience", description: "In NCR real estate" },
-  { value: "15,000+", label: "Happy Families", description: "Across 40+ projects" },
-  { value: "98%", label: "On-Time Delivery", description: "Industry leading" },
-  { value: "50+", label: "Projects Listed", description: "Premium properties" },
-];
-
-const values = [
+const whyChooseUs = [
   {
-    icon: Shield,
-    title: "Trust & Transparency",
-    description: "We believe in complete transparency in all our dealings. Every project we recommend is RERA approved.",
+    icon: "fa-location-crosshairs",
+    title: "Focused Expertise",
+    description: "Deep knowledge on Dwarka Expressway and nearby sectors.",
   },
   {
-    icon: Target,
-    title: "Customer First",
-    description: "Your dream home is our priority. We go above and beyond to match you with the perfect property.",
+    icon: "fa-indian-rupee-sign",
+    title: "Transparency",
+    description: "Clear explanations of real prices, not inflated quotes.",
   },
   {
-    icon: Award,
-    title: "Quality Assurance",
-    description: "We partner only with reputed developers who maintain the highest construction standards.",
+    icon: "fa-hard-hat",
+    title: "Honest Insights",
+    description: "Transparent details on construction progress and project quality.",
   },
   {
-    icon: Users,
-    title: "Expert Guidance",
-    description: "Our experienced team provides end-to-end support from property selection to possession.",
+    icon: "fa-scale-balanced",
+    title: "Market Reality",
+    description: "Guidance based on market reality, not builder promotions.",
   },
 ];
 
-const milestones = [
-  { year: "2000", event: "Founded with a vision to transform NCR real estate" },
-  { year: "2010", event: "Crossed 5,000 happy families milestone" },
-  { year: "2015", event: "Expanded operations to Dwarka Expressway corridor" },
-  { year: "2020", event: "Achieved 15,000+ satisfied customers" },
-  { year: "2024", event: "Became the leading consultancy on Dwarka Expressway" },
+const coreValues = [
+  {
+    icon: "fa-regular fa-eye",
+    title: "Clarity",
+    description: "We believe buyers should clearly understand pricing, timelines, and risks before making any decision.",
+  },
+  {
+    icon: "fa-solid fa-shield-halved",
+    title: "Trust",
+    description: "Every project we recommend is legally verified and RERA compliant.",
+  },
+  {
+    icon: "fa-solid fa-user-tie",
+    title: "Experience",
+    description: "Our advice is shaped by over two decades of real, on-ground experience in the Gurugram property market.",
+  },
+  {
+    icon: "fa-solid fa-users",
+    title: "Client-First",
+    description: "We focus on what is right for the buyer — not what is easy to sell.",
+  },
+];
+
+const expertise = [
+  "Dwarka Expressway residential and investment properties",
+  "Builder track records and delivery credibility",
+  "Sector-wise price trends and appreciation potential",
+  "Future infrastructure and connectivity developments",
 ];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e] overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <Image
-            src="/images/about-hero.jpg"
-            alt="About Hero"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              About <span className="text-[#c8a55d]">Dwarka Expressway NCR</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Your trusted partner in finding premium real estate properties on Dwarka
-              Expressway, Gurgaon. We bring dreams to reality with transparency, trust,
-              and expertise.
-            </p>
-          </div>
-        </div>
-      </section>
+    <main className="font-sans text-dark antialiased bg-white">
+      {/* Schema Markup for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: BASE_URL },
+          { name: "About Us", url: `${BASE_URL}/about` },
+        ]}
+      />
+      <WebPageSchema
+        title="About Us | Dwarka Expressway Real Estate Advisory"
+        description="Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram."
+        url={`${BASE_URL}/about`}
+      />
+      <ServiceSchema />
 
-      {/* Stats Section */}
-      <section className="py-16 -mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg text-center"
-              >
-                <div className="text-4xl font-bold text-[#c8a55d] mb-2">{stat.value}</div>
-                <div className="font-semibold text-[#0f0f1a] mb-1">{stat.label}</div>
-                <div className="text-sm text-gray-500">{stat.description}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Story */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0f0f1a] mb-6">
-                Our Story
-              </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  Dwarka Expressway NCR was founded with a singular vision: to make the
-                  home-buying journey seamless, transparent, and rewarding for every
-                  customer. Over the past 25 years, we have grown from a small consultancy
-                  to one of the most trusted names in NCR real estate.
-                </p>
-                <p>
-                  Our journey began in 2000 when we recognized the potential of the
-                  Delhi-NCR real estate market. Since then, we have helped over 15,000
-                  families find their dream homes across Gurgaon, Noida, and Greater Noida.
-                </p>
-                <p>
-                  With the inauguration of Dwarka Expressway, we identified this corridor
-                  as the next big hub for premium real estate. Today, we are proud to be
-                  the leading consultancy for properties on Dwarka Expressway, partnering
-                  with top developers like M3M, Godrej, Sobha, DLF, and more.
-                </p>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  href="/projects"
-                  className="bg-[#c8a55d] hover:bg-[#b8954d] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-                >
-                  Explore Projects
-                </Link>
-                <Link
-                  href="/contact"
-                  className="border border-[#c8a55d] text-[#c8a55d] hover:bg-[#c8a55d]/5 font-semibold px-6 py-3 rounded-lg transition-colors"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/about-story.jpg"
-                  alt="Our Story"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-[#c8a55d] text-white p-6 rounded-2xl">
-                <div className="text-4xl font-bold">25+</div>
-                <div className="text-sm">Years of Excellence</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Values */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0f0f1a] mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              These principles guide everything we do and define our commitment to you
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-2xl border border-gray-100 hover:border-[#c8a55d]/30 hover:shadow-lg transition-all group"
-              >
-                <div className="w-14 h-14 rounded-xl bg-[#c8a55d]/10 flex items-center justify-center mb-4 group-hover:bg-[#c8a55d] transition-colors">
-                  <value.icon className="w-7 h-7 text-[#c8a55d] group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-lg font-semibold text-[#0f0f1a] mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm">{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Milestones */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0f0f1a] mb-4">
-              Our Journey
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Key milestones that shaped our growth
-            </p>
-          </div>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#c8a55d]/20"></div>
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center gap-8 ${
-                    index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-                  }`}
-                >
-                  <div className={`flex-1 ${index % 2 === 0 ? "text-right" : "text-left"}`}>
-                    <div className="inline-block bg-white rounded-2xl p-6 shadow-lg">
-                      <div className="text-2xl font-bold text-[#c8a55d] mb-2">
-                        {milestone.year}
-                      </div>
-                      <p className="text-gray-600">{milestone.event}</p>
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="w-4 h-4 bg-[#c8a55d] rounded-full"></div>
-                  </div>
-                  <div className="flex-1"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-[#0f0f1a] to-[#1a1a2e]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Why Choose Us?
-            </h2>
-            <p className="text-white/60 max-w-2xl mx-auto">
-              Discover the advantages of partnering with Dwarka Expressway NCR
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              "RERA Approved Projects Only",
-              "Best Price Guarantee",
-              "Free Site Visits",
-              "Expert Legal Assistance",
-              "Home Loan Support",
-              "Post-Sale Service",
-              "Virtual Tour Options",
-              "Zero Brokerage on Select Projects",
-              "24/7 Customer Support",
-            ].map((feature, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#c8a55d]/20 flex items-center justify-center flex-shrink-0">
-                  <Check className="w-5 h-5 text-[#c8a55d]" />
-                </div>
-                <span className="text-white font-medium">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[#c8a55d]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Find Your Dream Home?
-          </h2>
-          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Let our experts guide you through the best properties on Dwarka Expressway.
-            Schedule a free consultation today.
+      {/* HEADER SECTION */}
+      <header className="w-full bg-white border-b border-borderGrey pt-20 pb-12 md:pt-32 md:pb-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+          <span className="inline-flex items-center gap-2 text-orange-700 font-bold tracking-wider uppercase mb-6 text-sm md:text-base bg-primary/10 px-4 py-2 rounded-full">
+            <i className="fa-solid fa-map-location-dot"></i> Dwarka Expressway Real Estate Advisory
+          </span>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-dark font-heading">
+            Trusted Local Expertise for <br className="hidden md:block" />
+            Confident Property Decisions
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
+            Dwarka Expressway is not just another real estate destination in Gurugram — it is a growth corridor that is shaping the future of the region.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contact"
-              className="bg-white text-[#c8a55d] hover:bg-gray-100 font-semibold px-8 py-4 rounded-lg transition-colors"
-            >
-              Contact Us
-            </Link>
-            <a
-              href="tel:+919354902932"
-              className="bg-[#0f0f1a] text-white hover:bg-[#1a1a2e] font-semibold px-8 py-4 rounded-lg transition-colors"
-            >
-              Call: +91 93549 02932
-            </a>
+        </div>
+      </header>
+
+      {/* OUR STORY SECTION */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-dark font-heading">Our Story</h2>
+              <p>
+                With over 6 years of real estate experience, our journey has been built on working closely with homebuyers and investors across the Gurugram real estate market.
+              </p>
+              <p>
+                Over the years, we noticed a consistent problem: people were being shown multiple properties, but very few were being guided with clarity and honesty. There was too much noise, too much sales-driven advice, and very little real understanding of pricing, construction quality, or long-term value.
+              </p>
+              <div className="flex items-start gap-4 p-6 bg-lightGrey rounded-xl border-l-4 border-primary">
+                <i className="fa-solid fa-quote-left text-primary text-2xl mt-1"></i>
+                <p className="font-medium text-dark italic">
+                  To bridge this gap, we created a platform dedicated exclusively to Dwarka Expressway property.
+                </p>
+              </div>
+              <p>
+                Today, we support families in finding homes that truly fit their future and help investors identify Dwarka Expressway real estate opportunities with strong long-term potential.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-4 bg-primary/20 rounded-2xl transform rotate-3"></div>
+              <Image
+                src="/assets/img/about.webp"
+                alt="Modern Building Architecture"
+                width={600}
+                height={500}
+                className="relative rounded-2xl shadow-xl w-full h-[500px] object-cover"
+              />
+              <div className="absolute bottom-8 left-8 bg-white p-6 rounded-lg shadow-lg max-w-xs hidden md:block">
+                <p className="text-primary font-bold text-lg mb-1">20+ Years</p>
+                <p className="text-gray-600 text-sm">Of experience in the Gurugram property market.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* WHY CHOOSE US SECTION */}
+      <section className="py-20 bg-dark text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(#f14201 1px, transparent 1px)", backgroundSize: "30px 30px" }}></div>
+        
+        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+          <div className="mb-16 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Why Choose Us</h2>
+            <p className="text-gray-400 text-lg">
+              We work closely with the Dwarka Expressway market to ensure that every client receives clear, practical guidance rather than sales pressure. Clients choose us because we offer:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {whyChooseUs.map((item, index) => (
+              <div
+                key={index}
+                className="bg-[#1a1a1a] p-8 rounded-xl border border-gray-800 hover:border-primary transition-all duration-300 hover:-translate-y-2 group"
+              >
+                <div className="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors text-primary group-hover:text-white">
+                  <i className={`fa-solid ${item.icon} text-2xl`}></i>
+                </div>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CORE VALUES SECTION */}
+      <section className="py-16 md:py-24 bg-lightGrey">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-dark font-heading">Core Values</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Our work is driven by a few simple principles that shape every interaction:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {coreValues.map((value, index) => (
+              <div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow border border-transparent hover:border-borderGrey flex gap-6"
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                  <i className={`${value.icon} text-xl`}></i>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-dark mb-2">{value.title}</h3>
+                  <p className="text-gray-600">{value.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* OUR EXPERTISE SECTION */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 font-heading">Our Expertise</h2>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                We specialize exclusively in Dwarka Expressway real estate, allowing us to provide deep, location-specific insights that general portals often miss.
+              </p>
+              
+              <div className="bg-lightGrey p-8 rounded-2xl border border-borderGrey">
+                <ul className="space-y-4">
+                  {expertise.map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <i className="fa-solid fa-circle-check text-primary mt-1 mr-3"></i>
+                      <span className="text-gray-700 font-medium">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            <div className="order-1 md:order-2">
+              <Image
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Gurugram Skyline"
+                width={600}
+                height={600}
+                className="rounded-2xl shadow-xl w-full h-full object-cover aspect-square"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="bg-primary text-white py-16 relative">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="container mx-auto px-6 text-center max-w-4xl relative z-10">
+          <i className="fa-solid fa-handshake text-5xl mb-6 text-white/80"></i>
+          <h2 className="text-2xl md:text-4xl font-bold mb-6 leading-tight font-heading">
+            Trusted Local Expertise. Verified Projects. Honest Guidance.
+          </h2>
+          <p className="text-white text-lg md:text-xl mb-8">
+            Whether you are looking for a home or exploring Gurugram real estate investment, we ensure your decision is safe, transparent, and future-ready.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center bg-dark text-primary font-bold py-4 px-10 rounded-full shadow-lg hover:bg-gray-100 transition-all hover:scale-105"
+          >
+            Contact Us <i className="fa-solid fa-arrow-right ml-2"></i>
+          </Link>
+          <p className="mt-8 text-sm text-white">
+            Helping you make confident property decisions on Dwarka Expressway, Gurugram.
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }

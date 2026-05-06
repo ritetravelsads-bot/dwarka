@@ -1,40 +1,67 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getDatabase } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
 import ProjectDetailClient from "./ProjectDetailClient";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+const API_BASE_URL = process.env.BACKEND_API_URL || "https://dwarkaexpresswayncr-backend.onrender.com";
+
 async function getProject(slug: string) {
-  const db = await getDatabase();
-  
-  // Try to find by slug first, then by ID
-  let project = await db.collection("projects").findOne({ slug });
-  
-  if (!project && ObjectId.isValid(slug)) {
-    project = await db.collection("projects").findOne({ _id: new ObjectId(slug) });
+  try {
+    // Fetch project from external API (same as PHP version)
+    const res = await fetch(`${API_BASE_URL}/api/projects/${encodeURIComponent(slug)}`, {
+      next: { revalidate: 300 }, // Revalidate every 5 minutes
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      return null;
+    }
+
+    const project = await res.json();
+    
+    if (!project || !project.name) {
+      return null;
+    }
+
+    // Auto-populate gallery if empty (similar to PHP version)
+    if (!project.gallery || project.gallery.length === 0) {
+      project.gallery = project.mainImage ? [project.mainImage] : [];
+    }
+
+    // Get related projects (fetch all and filter client-side)
+    let relatedProjects: typeof project[] = [];
+    try {
+      const relatedRes = await fetch(`${API_BASE_URL}/api/projects?limit=5`, {
+        next: { revalidate: 300 },
+        headers: { 'Accept': 'application/json' },
+      });
+      
+      if (relatedRes.ok) {
+        const relatedData = await relatedRes.json();
+        const allProjects = relatedData.data?.projects || relatedData.projects || relatedData || [];
+        relatedProjects = Array.isArray(allProjects) 
+          ? allProjects.filter((p: typeof project) => 
+              p.slug !== project.slug && p._id !== project._id
+            ).slice(0, 4)
+          : [];
+      }
+    } catch {
+      // Silently fail for related projects
+    }
+
+    return {
+      project,
+      relatedProjects,
+    };
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    return null;
   }
-
-  if (!project) return null;
-
-  // Get related projects
-  const relatedProjects = await db
-    .collection("projects")
-    .find({
-      _id: { $ne: project._id },
-      isActive: { $ne: false },
-      $or: [{ type: project.type }, { developer: project.developer }],
-    })
-    .limit(4)
-    .toArray();
-
-  return {
-    project: JSON.parse(JSON.stringify(project)),
-    relatedProjects: JSON.parse(JSON.stringify(relatedProjects)),
-  };
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

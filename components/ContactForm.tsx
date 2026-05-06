@@ -56,14 +56,21 @@ export default function ContactForm({
     }
 
     try {
-      const res = await fetch("/api/leads", {
+      // Try the new contact API first, fallback to leads API
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...formData,
-          projectId,
-          projectName,
-          source,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          project: projectName || projectId,
+          source: source,
+          // Get UTM parameters from URL if available
+          utm_source: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_source') : undefined,
+          utm_medium: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_medium') : undefined,
+          utm_campaign: typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('utm_campaign') : undefined,
         }),
       });
 
@@ -111,8 +118,8 @@ export default function ContactForm({
 
   const inputClasses =
     variant === "modal"
-      ? "w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] focus:border-transparent"
-      : "w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] focus:border-transparent";
+      ? "w-full border border-borderGrey rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      : "w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -178,7 +185,7 @@ export default function ContactForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#c8a55d] hover:bg-[#b8954d] text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {loading ? (
           <>

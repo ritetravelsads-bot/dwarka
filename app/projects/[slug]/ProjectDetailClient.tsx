@@ -3,25 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs, FreeMode } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import "swiper/css/free-mode";
-import {
-  MapPin,
-  Phone,
-  Download,
-  Play,
-  Check,
-  Building2,
-  Calendar,
-  Ruler,
-  Home,
-  ChevronRight,
-} from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import ProjectCard from "@/components/ProjectCard";
 import EmiCalculator from "@/components/EmiCalculator";
@@ -31,6 +12,11 @@ interface FloorPlan {
   size: string;
   price: string;
   image?: string;
+}
+
+interface GalleryImage {
+  url: string;
+  alt?: string;
 }
 
 interface Project {
@@ -46,6 +32,7 @@ interface Project {
   pricePerSqFt?: string;
   size?: string;
   sizeRange?: string;
+  landSize?: string;
   configurations?: string[];
   rera?: string;
   possession?: string;
@@ -54,13 +41,27 @@ interface Project {
   highlights?: string[];
   amenities?: string[];
   floorPlan?: FloorPlan[];
-  gallery?: string[];
+  gallery?: (string | GalleryImage)[];
   mainImage?: string;
   logo?: string;
   brochure?: string;
   masterPlan?: string;
   locationMap?: string;
   videoUrl?: string;
+  hero?: {
+    image?: string;
+    heading?: string;
+    subText?: string;
+    possession?: string;
+  };
+  about?: {
+    title?: string;
+    content?: string;
+    image?: string;
+  };
+  city?: string;
+  state?: string;
+  pincode?: string;
 }
 
 interface RelatedProject {
@@ -73,6 +74,8 @@ interface RelatedProject {
   mainImage?: string;
   status?: string;
   developer?: string;
+  badge?: string;
+  occupancy?: number;
 }
 
 interface Props {
@@ -81,342 +84,325 @@ interface Props {
 }
 
 export default function ProjectDetailClient({ project, relatedProjects }: Props) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
-  const [activeTab, setActiveTab] = useState<"overview" | "floor-plans" | "amenities" | "location">("overview");
   const [isEmiOpen, setIsEmiOpen] = useState(false);
-  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  const galleryImages = project.gallery?.length ? project.gallery : (project.mainImage ? [project.mainImage] : []);
+  // Process gallery images
+  const galleryImages: { url: string; alt: string }[] = [];
+  if (project.gallery && project.gallery.length > 0) {
+    project.gallery.forEach((img, idx) => {
+      if (typeof img === 'string') {
+        galleryImages.push({ url: img, alt: `${project.name} - Image ${idx + 1}` });
+      } else if (img && typeof img === 'object' && img.url) {
+        galleryImages.push({ url: img.url, alt: img.alt || `${project.name} - Image ${idx + 1}` });
+      }
+    });
+  } else if (project.mainImage) {
+    galleryImages.push({ url: project.mainImage, alt: project.name });
+  }
 
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case "new-launch":
-        return "bg-[#c8a55d] text-white";
-      case "under-construction":
-        return "bg-yellow-500/20 text-yellow-600 border border-yellow-500/30";
-      case "ready-to-move":
-        return "bg-green-500/20 text-green-600 border border-green-500/30";
-      default:
-        return "bg-gray-500/20 text-gray-600";
-    }
+  const heroImage = project.hero?.image || project.mainImage || "";
+
+  const defaultAmenities = [
+    { icon: "fa-person-swimming", name: "Swimming Pool" },
+    { icon: "fa-dumbbell", name: "Gymnasium" },
+    { icon: "fa-tree-city", name: "Landscaped Gardens" },
+    { icon: "fa-child-reaching", name: "Kids Play Area" },
+    { icon: "fa-square-parking", name: "Covered Parking" },
+    { icon: "fa-shield-halved", name: "24/7 Security" },
+    { icon: "fa-martini-glass", name: "Club House" },
+    { icon: "fa-person-running", name: "Jogging Track" },
+  ];
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-gray-500 hover:text-[#c8a55d]">
-              Home
-            </Link>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <Link href="/projects" className="text-gray-500 hover:text-[#c8a55d]">
-              Projects
-            </Link>
-            <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="text-[#0f0f1a] font-medium">{project.name}</span>
-          </nav>
+    <div className="min-h-screen bg-[rgba(241,66,1,0.05)]">
+      {/* HERO SECTION */}
+      <section className="relative w-full h-[750px] md:h-[650px] overflow-hidden bg-black pt-12">
+        {heroImage ? (
+          <Image
+            src={heroImage}
+            alt={project.name}
+            fill
+            className="absolute inset-0 w-full h-full object-cover opacity-80 scale-105"
+            style={{ animation: "slowZoom 20s infinite alternate linear" }}
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%)" }}></div>
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"></div>
+
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6 -mt-20">
+          <span className="px-4 py-1 rounded-full text-xs font-bold tracking-[0.4em] uppercase mb-4 border border-primary text-white bg-black/40 backdrop-blur-sm">
+            Premium Real Estate
+          </span>
+          <span className="px-4 py-1 rounded-full text-xs font-bold tracking-[0.4em] uppercase mb-4 border border-primary text-white bg-black/40 backdrop-blur-sm">
+            Rera Approved
+          </span>
+
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight font-heading">
+            {project.hero?.heading || project.name}
+          </h1>
+
+          <div className="w-24 h-1 mb-6 bg-primary"></div>
+
+          <p className="text-lg md:text-2xl max-w-2xl font-light leading-relaxed text-lightGrey">
+            {project.hero?.subText || project.shortDescription || "Experience the pinnacle of luxury living."}
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-4 my-2">
+            <button
+              onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-10 py-4 font-bold uppercase tracking-widest text-sm transition-all hover:scale-105 active:scale-95 shadow-lg bg-primary text-white rounded"
+            >
+              Schedule a Site Visit
+            </button>
+            <button
+              onClick={() => setIsEmiOpen(true)}
+              className="px-10 py-4 font-bold uppercase tracking-widest text-sm transition-all hover:bg-white hover:text-black border border-white text-white bg-transparent rounded"
+            >
+              Emi Calculator
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Gallery */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-              {galleryImages.length > 0 ? (
-                <>
-                  <Swiper
-                    modules={[Navigation, Thumbs]}
-                    navigation
-                    thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-                    className="aspect-video"
-                  >
-                    {galleryImages.map((img, idx) => (
-                      <SwiperSlide key={idx}>
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={img}
-                            alt={`${project.name} - Image ${idx + 1}`}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                  {galleryImages.length > 1 && (
-                    <Swiper
-                      modules={[FreeMode, Thumbs]}
-                      onSwiper={setThumbsSwiper}
-                      slidesPerView={6}
-                      spaceBetween={8}
-                      freeMode
-                      watchSlidesProgress
-                      className="p-2"
-                    >
-                      {galleryImages.map((img, idx) => (
-                        <SwiperSlide key={idx} className="cursor-pointer">
-                          <div className="relative aspect-video rounded-lg overflow-hidden">
-                            <Image
-                              src={img}
-                              alt={`Thumbnail ${idx + 1}`}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  )}
-                </>
-              ) : (
-                <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                  <Building2 className="w-20 h-20 text-gray-400" />
-                </div>
-              )}
-            </div>
-
-            {/* Project Info */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-                <div>
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase mb-3 ${getStatusBadgeClass(project.status)}`}
-                  >
-                    {project.status.replace(/-/g, " ")}
-                  </span>
-                  <h1 className="text-2xl md:text-3xl font-bold text-[#0f0f1a] mb-2">
-                    {project.name}
-                  </h1>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin className="w-4 h-4 text-[#c8a55d]" />
-                    <span>{project.sector || project.location}</span>
-                  </div>
-                </div>
-                {project.logo && (
-                  <Image
-                    src={project.logo}
-                    alt={project.developer}
-                    width={100}
-                    height={50}
-                    className="object-contain"
-                  />
-                )}
+        {/* Info Bar at Bottom */}
+        <div className="absolute md:bottom-8 bottom-5 left-0 right-0 z-20">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border overflow-hidden shadow-2xl bg-dark border-white/10">
+              <div className="py-6 border-r border-b md:border-b-0 border-white/10 text-center group hover:bg-black/40 transition-colors">
+                <p className="text-[10px] uppercase tracking-[0.2em] mb-1 text-primary">Land Area</p>
+                <p className="text-xl font-bold text-white uppercase">{project.landSize || project.size || "N/A"}</p>
               </div>
-
-              {/* Quick Info */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-gray-50 rounded-xl mb-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#c8a55d]">{project.price}</div>
-                  <div className="text-xs text-gray-500">Starting Price</div>
-                </div>
-                {project.configurations && (
-                  <div className="text-center">
-                    <div className="text-lg font-semibold text-[#0f0f1a]">
-                      {project.configurations.join(", ")}
-                    </div>
-                    <div className="text-xs text-gray-500">Configurations</div>
-                  </div>
-                )}
-                {project.sizeRange && (
-                  <div className="text-center">
-                    <div className="text-lg font-semibold text-[#0f0f1a]">{project.sizeRange}</div>
-                    <div className="text-xs text-gray-500">Size Range</div>
-                  </div>
-                )}
-                {project.possession && (
-                  <div className="text-center">
-                    <div className="text-lg font-semibold text-[#0f0f1a]">{project.possession}</div>
-                    <div className="text-xs text-gray-500">Possession</div>
-                  </div>
-                )}
+              <div className="py-6 border-r border-b md:border-b-0 border-white/10 text-center group hover:bg-black/40 transition-colors">
+                <p className="text-[10px] uppercase tracking-[0.2em] mb-1 text-primary">Possession</p>
+                <p className="text-xl font-bold text-white uppercase">{project.hero?.possession || project.possession || "N/A"}</p>
               </div>
-
-              {/* Tabs */}
-              <div className="border-b border-gray-200 mb-6">
-                <nav className="flex gap-6">
-                  {[
-                    { id: "overview", label: "Overview" },
-                    { id: "floor-plans", label: "Floor Plans" },
-                    { id: "amenities", label: "Amenities" },
-                    { id: "location", label: "Location" },
-                  ].map((tab) => (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                      className={`pb-3 font-medium transition-colors ${
-                        activeTab === tab.id
-                          ? "text-[#c8a55d] border-b-2 border-[#c8a55d]"
-                          : "text-gray-500 hover:text-gray-700"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Tab Content */}
-              <div>
-                {activeTab === "overview" && (
-                  <div className="space-y-6">
-                    {project.description && (
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#0f0f1a] mb-3">About {project.name}</h3>
-                        <p className="text-gray-600 leading-relaxed whitespace-pre-line">
-                          {project.description}
-                        </p>
-                      </div>
-                    )}
-                    {project.highlights && project.highlights.length > 0 && (
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#0f0f1a] mb-3">Project Highlights</h3>
-                        <ul className="grid md:grid-cols-2 gap-3">
-                          {project.highlights.map((highlight, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <Check className="w-5 h-5 text-[#c8a55d] flex-shrink-0 mt-0.5" />
-                              <span className="text-gray-600">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="p-4 bg-gray-50 rounded-xl">
-                        <div className="flex items-center gap-3 mb-2">
-                          <Building2 className="w-5 h-5 text-[#c8a55d]" />
-                          <span className="font-medium text-[#0f0f1a]">Developer</span>
-                        </div>
-                        <p className="text-gray-600">{project.developer}</p>
-                      </div>
-                      {project.rera && (
-                        <div className="p-4 bg-gray-50 rounded-xl">
-                          <div className="flex items-center gap-3 mb-2">
-                            <Home className="w-5 h-5 text-[#c8a55d]" />
-                            <span className="font-medium text-[#0f0f1a]">RERA No.</span>
-                          </div>
-                          <p className="text-gray-600">{project.rera}</p>
-                        </div>
-                      )}
-                      {project.pricePerSqFt && (
-                        <div className="p-4 bg-gray-50 rounded-xl">
-                          <div className="flex items-center gap-3 mb-2">
-                            <Ruler className="w-5 h-5 text-[#c8a55d]" />
-                            <span className="font-medium text-[#0f0f1a]">Price/Sq.Ft</span>
-                          </div>
-                          <p className="text-gray-600">{project.pricePerSqFt}</p>
-                        </div>
-                      )}
-                      {project.possession && (
-                        <div className="p-4 bg-gray-50 rounded-xl">
-                          <div className="flex items-center gap-3 mb-2">
-                            <Calendar className="w-5 h-5 text-[#c8a55d]" />
-                            <span className="font-medium text-[#0f0f1a]">Possession</span>
-                          </div>
-                          <p className="text-gray-600">{project.possession}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "floor-plans" && (
-                  <div>
-                    {project.floorPlan && project.floorPlan.length > 0 ? (
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {project.floorPlan.map((plan, idx) => (
-                          <div key={idx} className="p-4 border border-gray-200 rounded-xl">
-                            {plan.image && (
-                              <div className="relative aspect-square mb-4 rounded-lg overflow-hidden">
-                                <Image src={plan.image} alt={plan.title} fill className="object-contain" />
-                              </div>
-                            )}
-                            <h4 className="font-semibold text-[#0f0f1a] mb-2">{plan.title}</h4>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-500">Size: {plan.size}</span>
-                              <span className="text-[#c8a55d] font-semibold">{plan.price}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="text-gray-500 text-center py-8">
-                        Floor plans coming soon. Contact us for details.
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                {activeTab === "amenities" && (
-                  <div>
-                    {project.amenities && project.amenities.length > 0 ? (
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {project.amenities.map((amenity, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl"
-                          >
-                            <Check className="w-5 h-5 text-[#c8a55d]" />
-                            <span className="text-gray-700">{amenity}</span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="text-gray-500 text-center py-8">
-                        Amenities details coming soon.
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                {activeTab === "location" && (
-                  <div>
-                    <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
-                      {project.locationMap ? (
-                        <Image
-                          src={project.locationMap}
-                          alt="Location Map"
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <iframe
-                          src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(
-                            project.location + ", Gurgaon"
-                          )}`}
-                          width="100%"
-                          height="100%"
-                          style={{ border: 0 }}
-                          allowFullScreen
-                          loading="lazy"
-                        />
-                      )}
-                    </div>
-                    <div className="mt-4 p-4 bg-gray-50 rounded-xl">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-[#c8a55d] mt-1" />
-                        <div>
-                          <p className="font-medium text-[#0f0f1a]">{project.name}</p>
-                          <p className="text-gray-600">
-                            {project.sector}, {project.location}, Dwarka Expressway, Gurgaon
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+              <div className="py-6 border-r border-white/10 text-center group hover:bg-black/40 transition-colors">
+                <p className="text-[10px] uppercase tracking-[0.2em] mb-1 text-primary">Starting Price</p>
+                <p className="text-xl font-bold text-white uppercase">{project.price}</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Form */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg sticky top-24">
-              <h3 className="text-xl font-bold text-[#0f0f1a] mb-4">Get Best Quote</h3>
+      {/* MAIN CONTENT */}
+      <main className="max-w-6xl mx-auto px-4 py-12">
+        {/* ABOUT SECTION */}
+        {(project.about?.content || project.description) && (
+          <section className="rounded-2xl overflow-hidden my-12 shadow-2xl border bg-dark border-borderGrey">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+              <div className="p-8 md:p-16 flex flex-col justify-center relative">
+                <span className="text-xs uppercase tracking-[0.3em] font-bold mb-4 block text-primary">
+                  Discover More
+                </span>
+
+                <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight font-heading">
+                  {project.about?.title || `About ${project.name}`}
+                </h2>
+
+                <div className="pl-6 border-l-2 border-primary">
+                  <p className="text-base leading-relaxed mb-6 text-lightGrey">
+                    {project.about?.content || project.description}
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="inline-block px-8 py-3 rounded-full font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white"
+                  >
+                    Get More Details
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative overflow-hidden min-h-[400px]">
+                {(project.about?.image || project.mainImage) ? (
+                  <>
+                    <div className="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-dark to-transparent w-1/4"></div>
+                    <Image
+                      src={project.about?.image || project.mainImage || ""}
+                      alt={`${project.name} — About image`}
+                      fill
+                      className="w-full h-full object-cover transition duration-700 hover:scale-110"
+                    />
+                  </>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-dark">
+                    <p className="text-white text-lg font-semibold opacity-30 uppercase tracking-widest">No image available</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* AMENITIES SECTION */}
+        <section className="max-w-6xl mx-auto px-4 mb-16 py-12 rounded-2xl shadow-lg border bg-dark border-white/10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center uppercase tracking-tight text-primary font-heading">
+            <span className="text-white">Premium</span> Amenities
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {(project.amenities && project.amenities.length > 0 ? 
+              project.amenities.slice(0, 8).map((amenity, idx) => ({
+                icon: defaultAmenities[idx % defaultAmenities.length].icon,
+                name: amenity
+              })) : 
+              defaultAmenities
+            ).map((amenity, idx) => (
+              <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center hover:-translate-y-2 transition-transform duration-300 group">
+                <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 text-primary border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors">
+                  <i className={`fa-solid ${amenity.icon} text-2xl`}></i>
+                </div>
+                <h3 className="text-white font-medium text-sm">{amenity.name}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* GALLERY SECTION */}
+        {galleryImages.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center uppercase tracking-tight text-dark font-heading">
+              Project <span className="text-primary">Gallery</span>
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {galleryImages.slice(0, 8).map((img, idx) => (
+                <div
+                  key={idx}
+                  className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                  onClick={() => openLightbox(idx)}
+                >
+                  <Image
+                    src={img.url}
+                    alt={img.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                    <i className="fa-solid fa-expand text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* FLOOR PLANS SECTION */}
+        {project.floorPlan && project.floorPlan.length > 0 && (
+          <section className="mb-16 bg-white rounded-2xl p-8 shadow-lg">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center uppercase tracking-tight text-dark font-heading">
+              Floor <span className="text-primary">Plans</span>
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {project.floorPlan.map((plan, idx) => (
+                <div key={idx} className="border border-borderGrey rounded-xl p-6 hover:shadow-lg transition-shadow">
+                  {plan.image && (
+                    <div className="relative aspect-square mb-4 rounded-lg overflow-hidden">
+                      <Image src={plan.image} alt={plan.title} fill className="object-contain" />
+                    </div>
+                  )}
+                  <h4 className="font-semibold text-dark mb-2">{plan.title}</h4>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Size: {plan.size}</span>
+                    <span className="text-primary font-semibold">{plan.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* LOCATION SECTION */}
+        <section className="mb-16 bg-white rounded-2xl p-8 shadow-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center uppercase tracking-tight text-dark font-heading">
+            <span className="text-primary">Location</span> Map
+          </h2>
+          <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
+            {project.locationMap ? (
+              <Image
+                src={project.locationMap}
+                alt="Location Map"
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <iframe
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(
+                  (project.sector || project.location) + ", Gurgaon, Dwarka Expressway"
+                )}`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              />
+            )}
+          </div>
+          <div className="mt-4 p-4 bg-lightGrey rounded-xl">
+            <div className="flex items-start gap-3">
+              <i className="fa-solid fa-location-dot text-primary mt-1"></i>
+              <div>
+                <p className="font-medium text-dark">{project.name}</p>
+                <p className="text-gray-600">
+                  {project.sector && `${project.sector}, `}{project.location}, Dwarka Expressway, Gurgaon
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT SECTION */}
+        <section id="project-contact" className="bg-white rounded-2xl p-8 shadow-lg">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-dark font-heading">
+                Get <span className="text-primary">Best Quote</span>
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Fill in your details and our property experts will connect with you shortly.
+              </p>
+
+              <div className="space-y-4 mb-6">
+                <a
+                  href="tel:+919873702365"
+                  className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors"
+                >
+                  <i className="fa-solid fa-phone"></i>
+                  Call Now: +91 9873702365
+                </a>
+                <button
+                  onClick={() => setIsEmiOpen(true)}
+                  className="flex items-center justify-center gap-2 w-full border border-primary text-primary hover:bg-primary/5 font-semibold py-3 rounded-lg transition-colors"
+                >
+                  <i className="fa-solid fa-calculator"></i>
+                  EMI Calculator
+                </button>
+                {project.brochure && (
+                  <a
+                    href={project.brochure}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full border border-borderGrey text-dark hover:bg-lightGrey font-semibold py-3 rounded-lg transition-colors"
+                  >
+                    <i className="fa-solid fa-download"></i>
+                    Download Brochure
+                  </a>
+                )}
+              </div>
+            </div>
+            <div>
               <ContactForm
                 projectId={project._id}
                 projectName={project.name}
@@ -424,91 +410,65 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                 variant="modal"
               />
             </div>
-
-            {/* Quick Actions */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg space-y-4">
-              <a
-                href="tel:+919354902932"
-                className="flex items-center justify-center gap-2 w-full bg-[#c8a55d] hover:bg-[#b8954d] text-white font-semibold py-3 rounded-lg transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                Call Now
-              </a>
-              <button
-                onClick={() => setIsEmiOpen(true)}
-                className="flex items-center justify-center gap-2 w-full border border-[#c8a55d] text-[#c8a55d] hover:bg-[#c8a55d]/5 font-semibold py-3 rounded-lg transition-colors"
-              >
-                EMI Calculator
-              </button>
-              {project.brochure && (
-                <a
-                  href={project.brochure}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full border border-gray-200 text-gray-700 hover:bg-gray-50 font-semibold py-3 rounded-lg transition-colors"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Brochure
-                </a>
-              )}
-              {project.videoUrl && (
-                <a
-                  href={project.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full border border-gray-200 text-gray-700 hover:bg-gray-50 font-semibold py-3 rounded-lg transition-colors"
-                >
-                  <Play className="w-5 h-5" />
-                  Watch Video
-                </a>
-              )}
-            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Related Projects */}
+        {/* RELATED PROJECTS */}
         {relatedProjects.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-[#0f0f1a] mb-8">Similar Projects</h2>
+          <section className="mt-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 font-heading">
+              Similar <span className="text-primary">Projects</span>
+            </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProjects.map((rp) => (
                 <ProjectCard key={rp._id} project={rp} />
               ))}
             </div>
-          </div>
+          </section>
         )}
-      </div>
+      </main>
 
       {/* EMI Calculator Modal */}
       <EmiCalculator isOpen={isEmiOpen} onClose={() => setIsEmiOpen(false)} />
 
-      {/* Enquiry Modal */}
-      {showEnquiryModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div
-            className="absolute inset-0 bg-black/60"
-            onClick={() => setShowEnquiryModal(false)}
-          ></div>
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-            <button
-              onClick={() => setShowEnquiryModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              ×
-            </button>
-            <h3 className="text-xl font-bold text-[#0f0f1a] mb-4">
-              Enquire About {project.name}
-            </h3>
-            <ContactForm
-              projectId={project._id}
-              projectName={project.name}
-              source="project-modal"
-              variant="modal"
-              onSuccess={() => setShowEnquiryModal(false)}
+      {/* Lightbox Modal */}
+      {lightboxOpen && galleryImages.length > 0 && (
+        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 text-white text-3xl hover:text-primary transition-colors"
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+          <button
+            onClick={() => setLightboxIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))}
+            className="absolute left-4 text-white text-3xl hover:text-primary transition-colors"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <button
+            onClick={() => setLightboxIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))}
+            className="absolute right-4 text-white text-3xl hover:text-primary transition-colors"
+          >
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
+          <div className="relative w-full max-w-5xl aspect-video">
+            <Image
+              src={galleryImages[lightboxIndex].url}
+              alt={galleryImages[lightboxIndex].alt}
+              fill
+              className="object-contain"
             />
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes slowZoom {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+      `}</style>
     </div>
   );
 }

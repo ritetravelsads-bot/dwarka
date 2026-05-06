@@ -147,7 +147,7 @@ function ProjectsContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#0f0f1a] mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-[var(--dark)] mb-4">
             Projects on Dwarka Expressway
           </h1>
           <p className="text-gray-600 text-lg">
@@ -165,12 +165,12 @@ function ProjectsContent() {
                 placeholder="Search projects, developers, locations..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#c8a55d] focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent"
               />
             </div>
             <button
               type="submit"
-              className="bg-[#c8a55d] hover:bg-[#b8954d] text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-[var(--primary)] hover:bg-[#b8954d] text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Search
             </button>
@@ -194,7 +194,7 @@ function ProjectsContent() {
                 <select
                   value={status}
                   onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] bg-white"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-white"
                 >
                   {statusOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -206,7 +206,7 @@ function ProjectsContent() {
                 <select
                   value={type}
                   onChange={(e) => { setType(e.target.value); setPage(1); }}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] bg-white"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-white"
                 >
                   {typeOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -218,7 +218,7 @@ function ProjectsContent() {
                 <select
                   value={budget}
                   onChange={(e) => { setBudget(e.target.value); setPage(1); }}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] bg-white"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-white"
                 >
                   {budgetOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -230,7 +230,7 @@ function ProjectsContent() {
                 <select
                   value={developer}
                   onChange={(e) => { setDeveloper(e.target.value); setPage(1); }}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] bg-white"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-white"
                 >
                   <option value="">All Developers</option>
                   {developers.map((dev) => (
@@ -243,7 +243,7 @@ function ProjectsContent() {
                 <select
                   value={configuration}
                   onChange={(e) => { setConfiguration(e.target.value); setPage(1); }}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#c8a55d] bg-white"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-white"
                 >
                   {configOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -287,7 +287,7 @@ function ProjectsContent() {
             <p className="text-gray-500 mb-4">Try adjusting your filters or search term</p>
             <button
               onClick={clearFilters}
-              className="text-[#c8a55d] hover:underline font-medium"
+              className="text-[var(--primary)] hover:underline font-medium"
             >
               Clear all filters
             </button>
@@ -318,7 +318,7 @@ function ProjectsContent() {
                   onClick={() => setPage(pageNum)}
                   className={`w-10 h-10 rounded-lg font-medium transition-colors ${
                     page === pageNum
-                      ? "bg-[#c8a55d] text-white"
+                      ? "bg-[var(--primary)] text-white"
                       : "border border-gray-200 hover:bg-gray-50"
                   }`}
                 >

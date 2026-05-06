@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDatabase } from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
+
+const API_BASE_URL = process.env.BACKEND_API_URL || "https://dwarkaexpresswayncr-backend.onrender.com";
 
 export async function GET(
   request: NextRequest,
@@ -8,35 +8,47 @@ export async function GET(
 ) {
   try {
     const { slug } = await params;
-    const db = await getDatabase();
     
-    // Try to find by slug first, then by ID
-    let project = await db.collection("projects").findOne({ slug });
-    
-    if (!project && ObjectId.isValid(slug)) {
-      project = await db.collection("projects").findOne({ _id: new ObjectId(slug) });
-    }
+    // Fetch from external API
+    const res = await fetch(`${API_BASE_URL}/api/projects/${encodeURIComponent(slug)}`, {
+      headers: { 'Accept': 'application/json' },
+      next: { revalidate: 300 }, // Cache for 5 minutes
+    });
 
-    if (!project) {
+    if (!res.ok) {
       return NextResponse.json(
         { success: false, error: "Project not found" },
         { status: 404 }
       );
     }
 
-    // Get related projects (same type or developer)
-    const relatedProjects = await db
-      .collection("projects")
-      .find({
-        _id: { $ne: project._id },
-        isActive: { $ne: false },
-        $or: [
-          { type: project.type },
-          { developer: project.developer },
-        ],
-      })
-      .limit(4)
-      .toArray();
+    const project = await res.json();
+
+    if (!project || !project.name) {
+      return NextResponse.json(
+        { success: false, error: "Project not found" },
+        { status: 404 }
+      );
+    }
+
+    // Get related projects
+    let relatedProjects: typeof project[] = [];
+    try {
+      const relatedRes = await fetch(`${API_BASE_URL}/api/projects?limit=5`, {
+        headers: { 'Accept': 'application/json' },
+        next: { revalidate: 300 },
+      });
+      
+      if (relatedRes.ok) {
+        const relatedData = await relatedRes.json();
+        const allProjects = relatedData.data?.projects || relatedData.projects || relatedData || [];
+        relatedProjects = Array.isArray(allProjects)
+          ? allProjects.filter((p: typeof project) => p.slug !== project.slug && p._id !== project._id).slice(0, 4)
+          : [];
+      }
+    } catch {
+      // Silently fail for related projects
+    }
 
     return NextResponse.json({
       success: true,
