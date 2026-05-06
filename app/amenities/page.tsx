@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/SchemaMarkup";
+import { BreadcrumbSchema, WebPageSchema, FAQSchema } from "@/components/seo/SchemaMarkup";
 
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
@@ -106,6 +106,30 @@ const communityAdvantages = [
   "Beautifully lit common areas for evening strolls",
 ];
 
+// FAQs for amenities page
+const amenitiesFaqs = [
+  {
+    question: "What amenities are available in Dwarka Expressway projects?",
+    answer: "Projects offer swimming pools, gymnasiums, clubhouses, landscaped gardens, children's play areas, jogging tracks, sports facilities, and 24/7 security.",
+  },
+  {
+    question: "Do all projects have a swimming pool?",
+    answer: "Most premium projects on Dwarka Expressway include swimming pools as part of their amenity package.",
+  },
+  {
+    question: "Are there fitness facilities available?",
+    answer: "Yes, projects offer fully-equipped gymnasiums, yoga and meditation zones, jogging tracks, and sports courts.",
+  },
+  {
+    question: "What security features are provided?",
+    answer: "Projects feature 24/7 security with CCTV surveillance, trained personnel, and secure entry/exit points.",
+  },
+  {
+    question: "Are there recreational facilities for children?",
+    answer: "Yes, dedicated children's play areas with safe equipment and supervised spaces are available in most projects.",
+  },
+];
+
 export default function AmenitiesPage() {
   return (
     <main className="pt-20">
@@ -121,6 +145,7 @@ export default function AmenitiesPage() {
         description="Experience a lifestyle designed around comfort, convenience, and luxury at Dwarka Expressway NCR."
         url={`${BASE_URL}/amenities`}
       />
+      <FAQSchema faqs={amenitiesFaqs} />
 
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-24 md:pt-10 md:pb-40 overflow-hidden text-white">
