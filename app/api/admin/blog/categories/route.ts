@@ -1,7 +1,15 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "@/lib/mongodb"
 import { requireAdmin } from "@/lib/auth"
-import { slugify } from "@/lib/utils"
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+}
 
 export async function GET() {
   try {

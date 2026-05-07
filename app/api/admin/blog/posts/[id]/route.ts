@@ -1,7 +1,23 @@
 import { ObjectId } from "mongodb"
 import { connectToDatabase } from "@/lib/mongodb"
 import { requireAdmin } from "@/lib/auth"
-import { slugify, extractExcerpt } from "@/lib/utils"
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+}
+
+function extractExcerpt(html: string, maxLength = 200): string {
+  const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+  if (text.length <= maxLength) return text
+  const truncated = text.substring(0, maxLength)
+  const lastSpace = truncated.lastIndexOf(" ")
+  return (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + "..."
+}
 
 export async function GET(
   request: Request,
