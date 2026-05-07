@@ -1,34 +1,16 @@
 import { cookies } from "next/headers"
 
-const ADMIN_SESSION_COOKIE = "admin_session"
+const ADMIN_AUTH_COOKIE = "admin_auth"
 
 export async function requireAdmin() {
   const cookieStore = await cookies()
-  const session = cookieStore.get(ADMIN_SESSION_COOKIE)
+  const authCookie = cookieStore.get(ADMIN_AUTH_COOKIE)
   
-  if (!session || !session.value) {
+  if (!authCookie || authCookie.value !== "authenticated") {
     throw new Error("Unauthorized")
   }
   
-  // Validate session
-  try {
-    const sessionData = JSON.parse(session.value)
-    if (!sessionData.isAdmin || !sessionData.timestamp) {
-      throw new Error("Unauthorized")
-    }
-    
-    // Check if session is expired (24 hours)
-    const sessionAge = Date.now() - sessionData.timestamp
-    const maxAge = 24 * 60 * 60 * 1000 // 24 hours
-    
-    if (sessionAge > maxAge) {
-      throw new Error("Unauthorized")
-    }
-    
-    return sessionData
-  } catch {
-    throw new Error("Unauthorized")
-  }
+  return { isAdmin: true }
 }
 
 export async function isAuthenticated(): Promise<boolean> {
