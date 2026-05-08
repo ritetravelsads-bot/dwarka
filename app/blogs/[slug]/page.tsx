@@ -164,8 +164,8 @@ export default async function BlogPostPage({
     day: "numeric"
   })
 
-  const schemaMarkup = generateBlogSchema(post, post.author || "CountryRoof")
-  const canonicalUrl = `https://countryroof.in/blogs/${slug}`
+  const schemaMarkup = generateBlogSchema(post, { siteName: "Dwarka Expressway", siteUrl: "https://dwarkaexpressway.in" })
+  const canonicalUrl = `https://dwarkaexpressway.in/blogs/${slug}`
   const heroImage = post.banner_image || post.cover_image || post.og_image
 
   return (
