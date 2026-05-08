@@ -20,7 +20,6 @@ import {
   LayoutGrid,
 } from "lucide-react";
 import PopupForm from "@/components/PopupForm";
-import ProjectCard from "@/components/ProjectCard";
 import { projectsData, enrichProjectData } from "@/lib/project-data";
 
 interface QuickFact {
@@ -260,7 +259,7 @@ export default function CategoryPageTemplate({
           </div>
         </section>
 
-        {/* ─── MATCHING PROJECTS ────────────────────────────────────────────── */}
+        {/* ─── MATCHING PROJECTS — QUICK-FACTS TABLES ─────────────────────── */}
         <section className="py-16 border-b border-border">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
@@ -284,46 +283,232 @@ export default function CategoryPageTemplate({
             </div>
 
             {loadingProjects ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div className="grid md:grid-cols-2 gap-6">
+                {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
                     className="bg-card rounded-2xl border border-border overflow-hidden animate-pulse"
                   >
-                    <div className="h-56 bg-muted" />
-                    <div className="p-5 space-y-3">
-                      <div className="h-4 bg-muted rounded w-3/4" />
-                      <div className="h-3 bg-muted rounded w-1/2" />
-                      <div className="h-4 bg-muted rounded w-1/3" />
+                    <div className="px-6 py-4 bg-muted/40 border-b border-border">
+                      <div className="h-5 bg-muted rounded w-2/3" />
+                    </div>
+                    <div className="p-4 space-y-3">
+                      {[1, 2, 3, 4].map((j) => (
+                        <div key={j} className="flex justify-between">
+                          <div className="h-4 bg-muted rounded w-1/3" />
+                          <div className="h-4 bg-muted rounded w-1/3" />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
             ) : projects.length > 0 ? (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
+              <div className="grid md:grid-cols-2 gap-6">
+                {projects.map((project) => {
+                  const projectSlug = project.slug || project.name?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+                  return (
+                    <div
+                      key={project._id}
+                      className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
+                    >
+                      {/* Project Header */}
+                      <div className="px-6 py-4 border-b border-border bg-muted/40 flex items-center justify-between gap-4">
+                        <div>
+                          <Link
+                            href={`/${projectSlug}`}
+                            className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
+                          >
+                            {project.name}
+                          </Link>
+                          <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
+                            <MapPin className="w-3.5 h-3.5" />
+                            <span>{project.location}</span>
+                          </div>
+                        </div>
+                        {project.badge && (
+                          <span className="text-xs font-medium px-2.5 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
+                            {project.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Quick-Facts Table */}
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/2">
+                              Feature
+                            </th>
+                            <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                              Details
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-border">
+                            <td className="px-6 py-3">
+                              <span className="flex items-center gap-2 font-medium text-foreground">
+                                <Ruler className="w-4 h-4 text-primary flex-shrink-0" />
+                                Size Range
+                              </span>
+                            </td>
+                            <td className="px-6 py-3 font-semibold text-primary">
+                              {project.sizeRange || "1,200 – 4,000 sq.ft"}
+                            </td>
+                          </tr>
+                          <tr className="border-b border-border">
+                            <td className="px-6 py-3">
+                              <span className="flex items-center gap-2 font-medium text-foreground">
+                                <IndianRupee className="w-4 h-4 text-primary flex-shrink-0" />
+                                Price Starting
+                              </span>
+                            </td>
+                            <td className="px-6 py-3 font-semibold text-primary">
+                              {project.price ? `₹ ${project.price} onwards` : "Price on Request"}
+                            </td>
+                          </tr>
+                          <tr className="border-b border-border">
+                            <td className="px-6 py-3">
+                              <span className="flex items-center gap-2 font-medium text-foreground">
+                                <Home className="w-4 h-4 text-primary flex-shrink-0" />
+                                Configuration
+                              </span>
+                            </td>
+                            <td className="px-6 py-3 font-semibold text-primary">
+                              {project.configurations && project.configurations.length > 0
+                                ? project.configurations.join(" / ")
+                                : configurationFilter || "2 BHK / 3 BHK / 4 BHK"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="px-6 py-3">
+                              <span className="flex items-center gap-2 font-medium text-foreground">
+                                <Car className="w-4 h-4 text-primary flex-shrink-0" />
+                                Connectivity
+                              </span>
+                            </td>
+                            <td className="px-6 py-3 font-semibold text-primary">
+                              IGI Airport 15–20 min | Metro 10 min
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      {/* View Details Link */}
+                      <div className="px-6 py-3 border-t border-border bg-muted/20">
+                        <Link
+                          href={`/${projectSlug}`}
+                          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                        >
+                          View Full Details
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
-              // Fallback: show static local data cards
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              // Fallback: show static local data as Quick-Facts tables
+              <div className="grid md:grid-cols-2 gap-6">
                 {projectsData.slice(0, 6).map((p) => (
-                  <ProjectCard
+                  <div
                     key={p.slug}
-                    project={{
-                      _id: p.slug,
-                      name: p.name,
-                      slug: p.slug,
-                      location: p.location,
-                      sector: p.sector,
-                      price: p.price,
-                      mainImage: p.image,
-                      badge: p.badge,
-                      occupancy: p.occupancy,
-                      alt: p.alt,
-                    }}
-                  />
+                    className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
+                  >
+                    {/* Project Header */}
+                    <div className="px-6 py-4 border-b border-border bg-muted/40 flex items-center justify-between gap-4">
+                      <div>
+                        <Link
+                          href={`/${p.slug}`}
+                          className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
+                        >
+                          {p.name}
+                        </Link>
+                        <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>{p.location}</span>
+                        </div>
+                      </div>
+                      {p.badge && (
+                        <span className="text-xs font-medium px-2.5 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
+                          {p.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Quick-Facts Table */}
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border">
+                          <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/2">
+                            Feature
+                          </th>
+                          <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                            Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-border">
+                          <td className="px-6 py-3">
+                            <span className="flex items-center gap-2 font-medium text-foreground">
+                              <Ruler className="w-4 h-4 text-primary flex-shrink-0" />
+                              Size Range
+                            </span>
+                          </td>
+                          <td className="px-6 py-3 font-semibold text-primary">
+                            1,200 – 4,000 sq.ft
+                          </td>
+                        </tr>
+                        <tr className="border-b border-border">
+                          <td className="px-6 py-3">
+                            <span className="flex items-center gap-2 font-medium text-foreground">
+                              <IndianRupee className="w-4 h-4 text-primary flex-shrink-0" />
+                              Price Starting
+                            </span>
+                          </td>
+                          <td className="px-6 py-3 font-semibold text-primary">
+                            ₹ {p.price} onwards
+                          </td>
+                        </tr>
+                        <tr className="border-b border-border">
+                          <td className="px-6 py-3">
+                            <span className="flex items-center gap-2 font-medium text-foreground">
+                              <Home className="w-4 h-4 text-primary flex-shrink-0" />
+                              Configuration
+                            </span>
+                          </td>
+                          <td className="px-6 py-3 font-semibold text-primary">
+                            {configurationFilter || "2 BHK / 3 BHK / 4 BHK"}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="px-6 py-3">
+                            <span className="flex items-center gap-2 font-medium text-foreground">
+                              <Car className="w-4 h-4 text-primary flex-shrink-0" />
+                              Connectivity
+                            </span>
+                          </td>
+                          <td className="px-6 py-3 font-semibold text-primary">
+                            IGI Airport 15–20 min | Metro 10 min
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    {/* View Details Link */}
+                    <div className="px-6 py-3 border-t border-border bg-muted/20">
+                      <Link
+                        href={`/${p.slug}`}
+                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                      >
+                        View Full Details
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
