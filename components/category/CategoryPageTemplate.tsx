@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Building2,
@@ -13,11 +14,13 @@ import {
   Hospital,
   ShoppingBag,
   ChevronDown,
-  ChevronUp,
   ArrowRight,
   Phone,
   CheckCircle,
-  LayoutGrid,
+  Sparkles,
+  Shield,
+  TrendingUp,
+  Clock,
 } from "lucide-react";
 import PopupForm from "@/components/PopupForm";
 import { projectsData, enrichProjectData } from "@/lib/project-data";
@@ -40,38 +43,23 @@ interface RelatedLink {
 }
 
 interface CategoryPageProps {
-  // Hero Section
   heroTitle: string;
   heroSubtitle: string;
   heroDescription: string;
-
-  // Quick Facts (table format)
   quickFacts: QuickFact[];
-
-  // Layout Breakdown
   layoutTitle: string;
   layoutDescription: string;
   layoutFeatures: string[];
-
-  // Hidden Gems (Local Landmarks)
   localLandmarks: {
     schools: string[];
     hospitals: string[];
     malls: string[];
     connectivity: string[];
   };
-
-  // FAQs
   faqs: FAQ[];
-
-  // Related Links
   relatedLinks: RelatedLink[];
-
-  // SEO Keywords
   primaryKeyword: string;
   secondaryKeywords: string[];
-
-  // Configuration filter for matching projects (e.g. "2 BHK", "3 BHK", "4 BHK")
   configurationFilter?: string;
 }
 
@@ -93,6 +81,13 @@ interface ApiProject {
   sizeRange?: string;
 }
 
+const iconMap = {
+  size: Ruler,
+  price: IndianRupee,
+  config: Home,
+  connectivity: Car,
+};
+
 export default function CategoryPageTemplate({
   heroTitle,
   heroSubtitle,
@@ -112,19 +107,9 @@ export default function CategoryPageTemplate({
   const [projects, setProjects] = useState<ApiProject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
 
-  // Map label → icon
-  const iconMap = {
-    size: Ruler,
-    price: IndianRupee,
-    config: Home,
-    connectivity: Car,
-  };
-
-  // Fetch and filter projects by configuration
   useEffect(() => {
     async function fetchProjects() {
       try {
-        // Pass configuration as query param to let the backend filter too
         const params = new URLSearchParams({ limit: "50" });
         if (configurationFilter) {
           params.set("configuration", configurationFilter);
@@ -139,27 +124,18 @@ export default function CategoryPageTemplate({
           allProjects = json;
         }
 
-        // Client-side safety filter: if configurationFilter is set and backend
-        // did not filter, do it here so results are always correct
         if (configurationFilter && allProjects.length > 0) {
           const filter = configurationFilter.toLowerCase().trim();
           const filtered = allProjects.filter((p) => {
             if (!p.configurations || p.configurations.length === 0) return false;
-            return p.configurations.some((c) =>
-              c.toLowerCase().includes(filter)
-            );
+            return p.configurations.some((c) => c.toLowerCase().includes(filter));
           });
-          // Only apply client filter if it actually narrows results;
-          // if backend already filtered (returns only matching), keep as-is
           if (filtered.length > 0) allProjects = filtered;
         }
 
-        // Enrich with local data (images, occupancy)
         allProjects = allProjects.map((p) => enrichProjectData(p));
-
-        setProjects(allProjects.slice(0, 9));
+        setProjects(allProjects.slice(0, 8));
       } catch {
-        // Fallback: use local static data
         const fallback = projectsData.map((p) => ({
           _id: p.slug,
           name: p.name,
@@ -173,7 +149,7 @@ export default function CategoryPageTemplate({
           alt: p.alt,
           configurations: [] as string[],
         }));
-        setProjects(fallback.slice(0, 9));
+        setProjects(fallback.slice(0, 8));
       } finally {
         setLoadingProjects(false);
       }
@@ -184,90 +160,120 @@ export default function CategoryPageTemplate({
 
   return (
     <>
-      <main className="bg-background">
-        {/* ─── 1. LIFESTYLE-FIRST HERO ─────────────────────────────────────── */}
-        <section className="relative bg-gradient-to-br from-[hsl(var(--background))] to-[hsl(var(--muted))] pt-28 pb-12 md:pt-32 md:pb-16 border-b border-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Copy */}
-              <div>
-                <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4 tracking-wide">
+      <main className="bg-background min-h-screen">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 1: LIFESTYLE-FIRST HERO
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden">
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 to-background" />
+          <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+
+          <div className="relative max-w-7xl mx-auto px-6">
+            <div className="max-w-3xl">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span className="text-sm font-semibold text-primary tracking-wide">
                   {heroSubtitle}
                 </span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-5 text-balance">
-                  {heroTitle}
-                </h1>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  {heroDescription}
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    onClick={() => setIsPopupOpen(true)}
-                    className="cta-button-large"
-                  >
-                    <Phone className="w-5 h-5" />
-                    Get Expert Advice
-                  </button>
-                  <Link href="/projects" className="cta-button-secondary-light">
-                    Browse All Projects
-                  </Link>
-                </div>
               </div>
 
-              {/* ─── 2. QUICK-FACT TABLE ─────────────────────────────────────── */}
-              <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
-                <div className="px-6 py-4 border-b border-border bg-muted/40">
-                  <h2 className="text-sm font-semibold text-foreground uppercase tracking-wider">
-                    Quick Facts at a Glance
-                  </h2>
-                </div>
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-border">
-                      <th className="px-6 py-3 text-left font-semibold text-foreground w-1/2">
-                        Feature
-                      </th>
-                      <th className="px-6 py-3 text-left font-semibold text-foreground">
-                        Details
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {quickFacts.map((fact, idx) => {
-                      const Icon = iconMap[fact.icon];
-                      return (
-                        <tr
-                          key={idx}
-                          className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors"
-                        >
-                          <td className="px-6 py-4">
-                            <span className="flex items-center gap-2 font-medium text-foreground">
-                              <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                              {fact.label}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 font-semibold text-primary">
-                            {fact.value}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+              {/* H1 with primary keyword */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6 text-balance">
+                {heroTitle}
+              </h1>
+
+              {/* Scannable description — max 3 lines */}
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                {heroDescription}
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => setIsPopupOpen(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                >
+                  <Phone className="w-5 h-5" />
+                  Get Expert Advice
+                </button>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-card text-foreground font-semibold rounded-xl border border-border hover:border-primary/40 hover:bg-muted/50 transition-all"
+                >
+                  Browse All Projects
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ─── MATCHING PROJECTS — QUICK-FACTS TABLES ─────────────────────── */}
-        <section className="py-16 border-b border-border">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 2: QUICK-FACT TABLE (The Skimmer's Paradise)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-12 md:py-16 border-y border-border bg-card">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                Quick Facts at a Glance
+              </h2>
+              <p className="text-muted-foreground text-sm">
+                Key information for {primaryKeyword}
+              </p>
+            </div>
+
+            {/* Clean Feature / Details Table */}
+            <div className="bg-background rounded-2xl border border-border overflow-hidden shadow-sm">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border bg-muted/50">
+                    <th className="px-6 py-4 text-left text-sm font-bold text-foreground uppercase tracking-wider w-1/2">
+                      Feature
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-bold text-foreground uppercase tracking-wider">
+                      Details
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {quickFacts.map((fact, idx) => {
+                    const Icon = iconMap[fact.icon];
+                    return (
+                      <tr key={idx} className="hover:bg-muted/30 transition-colors">
+                        <td className="px-6 py-5">
+                          <span className="flex items-center gap-3 font-medium text-foreground">
+                            <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <Icon className="w-5 h-5 text-primary" />
+                            </span>
+                            {fact.label}
+                          </span>
+                        </td>
+                        <td className="px-6 py-5 text-lg font-semibold text-primary">
+                          {fact.value}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 3: PROJECTS — QUICK-FACTS TABLES PER PROJECT
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20">
           <div className="max-w-7xl mx-auto px-6">
+            {/* Section Header */}
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
                   {configurationFilter
                     ? `${configurationFilter} Projects on Dwarka Expressway`
-                    : `Projects on Dwarka Expressway`}
+                    : "Projects on Dwarka Expressway"}
                 </h2>
                 <p className="text-muted-foreground">
                   Verified listings with real pricing, RERA details, and expert guidance
@@ -275,30 +281,22 @@ export default function CategoryPageTemplate({
               </div>
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline flex-shrink-0"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline flex-shrink-0"
               >
                 View All Projects
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
+            {/* Projects Grid */}
             {loadingProjects ? (
               <div className="grid md:grid-cols-2 gap-6">
                 {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="bg-card rounded-2xl border border-border overflow-hidden animate-pulse"
-                  >
-                    <div className="px-6 py-4 bg-muted/40 border-b border-border">
+                  <div key={i} className="bg-card rounded-2xl border border-border overflow-hidden animate-pulse">
+                    <div className="h-48 bg-muted" />
+                    <div className="p-5 space-y-3">
                       <div className="h-5 bg-muted rounded w-2/3" />
-                    </div>
-                    <div className="p-4 space-y-3">
-                      {[1, 2, 3, 4].map((j) => (
-                        <div key={j} className="flex justify-between">
-                          <div className="h-4 bg-muted rounded w-1/3" />
-                          <div className="h-4 bg-muted rounded w-1/3" />
-                        </div>
-                      ))}
+                      <div className="h-4 bg-muted rounded w-1/2" />
                     </div>
                   </div>
                 ))}
@@ -306,229 +304,200 @@ export default function CategoryPageTemplate({
             ) : projects.length > 0 ? (
               <div className="grid md:grid-cols-2 gap-6">
                 {projects.map((project) => {
-                  const projectSlug = project.slug || project.name?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+                  const projectSlug =
+                    project.slug ||
+                    project.name
+                      ?.toLowerCase()
+                      .replace(/[^a-z0-9]+/g, "-")
+                      .replace(/-+/g, "-")
+                      .replace(/^-|-$/g, "");
                   return (
-                    <div
+                    <article
                       key={project._id}
-                      className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
+                      className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all"
                     >
-                      {/* Project Header */}
-                      <div className="px-6 py-4 border-b border-border bg-muted/40 flex items-center justify-between gap-4">
-                        <div>
-                          <Link
-                            href={`/${projectSlug}`}
-                            className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
-                          >
-                            {project.name}
-                          </Link>
-                          <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-                            <MapPin className="w-3.5 h-3.5" />
-                            <span>{project.location}</span>
-                          </div>
-                        </div>
+                      {/* Project Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={project.mainImage || "/assets/img/placeholder-project.webp"}
+                          alt={project.alt || project.name}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                         {project.badge && (
-                          <span className="text-xs font-medium px-2.5 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
+                          <span className="absolute top-4 left-4 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-bold rounded-full shadow-lg">
                             {project.badge}
                           </span>
                         )}
                       </div>
 
-                      {/* Quick-Facts Table */}
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-border">
-                            <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/2">
-                              Feature
-                            </th>
-                            <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                              Details
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="border-b border-border">
-                            <td className="px-6 py-3">
-                              <span className="flex items-center gap-2 font-medium text-foreground">
-                                <Ruler className="w-4 h-4 text-primary flex-shrink-0" />
-                                Size Range
-                              </span>
-                            </td>
-                            <td className="px-6 py-3 font-semibold text-primary">
-                              {project.sizeRange || "1,200 – 4,000 sq.ft"}
-                            </td>
-                          </tr>
-                          <tr className="border-b border-border">
-                            <td className="px-6 py-3">
-                              <span className="flex items-center gap-2 font-medium text-foreground">
-                                <IndianRupee className="w-4 h-4 text-primary flex-shrink-0" />
-                                Price Starting
-                              </span>
-                            </td>
-                            <td className="px-6 py-3 font-semibold text-primary">
-                              {project.price ? `₹ ${project.price} onwards` : "Price on Request"}
-                            </td>
-                          </tr>
-                          <tr className="border-b border-border">
-                            <td className="px-6 py-3">
-                              <span className="flex items-center gap-2 font-medium text-foreground">
-                                <Home className="w-4 h-4 text-primary flex-shrink-0" />
-                                Configuration
-                              </span>
-                            </td>
-                            <td className="px-6 py-3 font-semibold text-primary">
-                              {project.configurations && project.configurations.length > 0
-                                ? project.configurations.join(" / ")
-                                : configurationFilter || "2 BHK / 3 BHK / 4 BHK"}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="px-6 py-3">
-                              <span className="flex items-center gap-2 font-medium text-foreground">
-                                <Car className="w-4 h-4 text-primary flex-shrink-0" />
-                                Connectivity
-                              </span>
-                            </td>
-                            <td className="px-6 py-3 font-semibold text-primary">
-                              IGI Airport 15–20 min | Metro 10 min
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      {/* View Details Link */}
-                      <div className="px-6 py-3 border-t border-border bg-muted/20">
+                      {/* Project Header */}
+                      <div className="px-5 py-4 border-b border-border">
                         <Link
                           href={`/${projectSlug}`}
-                          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                          className="text-lg font-bold text-foreground hover:text-primary transition-colors block mb-1"
+                        >
+                          {project.name}
+                        </Link>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <MapPin className="w-4 h-4" />
+                          <span>{project.location}</span>
+                        </div>
+                      </div>
+
+                      {/* Quick-Facts Table */}
+                      <div className="divide-y divide-border text-sm">
+                        <div className="flex justify-between px-5 py-3 hover:bg-muted/30 transition-colors">
+                          <span className="flex items-center gap-2 text-muted-foreground">
+                            <Ruler className="w-4 h-4" />
+                            Size Range
+                          </span>
+                          <span className="font-semibold text-foreground">
+                            {project.sizeRange || "1,200 – 4,000 sq.ft"}
+                          </span>
+                        </div>
+                        <div className="flex justify-between px-5 py-3 hover:bg-muted/30 transition-colors">
+                          <span className="flex items-center gap-2 text-muted-foreground">
+                            <IndianRupee className="w-4 h-4" />
+                            Price Starting
+                          </span>
+                          <span className="font-semibold text-primary">
+                            {project.price ? `₹ ${project.price}` : "On Request"}
+                          </span>
+                        </div>
+                        <div className="flex justify-between px-5 py-3 hover:bg-muted/30 transition-colors">
+                          <span className="flex items-center gap-2 text-muted-foreground">
+                            <Home className="w-4 h-4" />
+                            Configuration
+                          </span>
+                          <span className="font-semibold text-foreground">
+                            {project.configurations?.length
+                              ? project.configurations.join(" / ")
+                              : configurationFilter || "2/3/4 BHK"}
+                          </span>
+                        </div>
+                        <div className="flex justify-between px-5 py-3 hover:bg-muted/30 transition-colors">
+                          <span className="flex items-center gap-2 text-muted-foreground">
+                            <Car className="w-4 h-4" />
+                            Connectivity
+                          </span>
+                          <span className="font-semibold text-foreground">
+                            Airport 15–20 min
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Footer CTA */}
+                      <div className="px-5 py-4 bg-muted/30">
+                        <Link
+                          href={`/${projectSlug}`}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                         >
                           View Full Details
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
-                    </div>
+                    </article>
                   );
                 })}
               </div>
             ) : (
-              // Fallback: show static local data as Quick-Facts tables
               <div className="grid md:grid-cols-2 gap-6">
                 {projectsData.slice(0, 6).map((p) => (
-                  <div
+                  <article
                     key={p.slug}
-                    className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
+                    className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all"
                   >
-                    {/* Project Header */}
-                    <div className="px-6 py-4 border-b border-border bg-muted/40 flex items-center justify-between gap-4">
-                      <div>
-                        <Link
-                          href={`/${p.slug}`}
-                          className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
-                        >
-                          {p.name}
-                        </Link>
-                        <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-                          <MapPin className="w-3.5 h-3.5" />
-                          <span>{p.location}</span>
-                        </div>
-                      </div>
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={p.image || "/assets/img/placeholder-project.webp"}
+                        alt={p.alt || p.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                       {p.badge && (
-                        <span className="text-xs font-medium px-2.5 py-1 bg-primary/10 text-primary rounded-full whitespace-nowrap">
+                        <span className="absolute top-4 left-4 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-bold rounded-full shadow-lg">
                           {p.badge}
                         </span>
                       )}
                     </div>
-
-                    {/* Quick-Facts Table */}
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-border">
-                          <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider w-1/2">
-                            Feature
-                          </th>
-                          <th className="px-6 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                            Details
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b border-border">
-                          <td className="px-6 py-3">
-                            <span className="flex items-center gap-2 font-medium text-foreground">
-                              <Ruler className="w-4 h-4 text-primary flex-shrink-0" />
-                              Size Range
-                            </span>
-                          </td>
-                          <td className="px-6 py-3 font-semibold text-primary">
-                            1,200 – 4,000 sq.ft
-                          </td>
-                        </tr>
-                        <tr className="border-b border-border">
-                          <td className="px-6 py-3">
-                            <span className="flex items-center gap-2 font-medium text-foreground">
-                              <IndianRupee className="w-4 h-4 text-primary flex-shrink-0" />
-                              Price Starting
-                            </span>
-                          </td>
-                          <td className="px-6 py-3 font-semibold text-primary">
-                            ₹ {p.price} onwards
-                          </td>
-                        </tr>
-                        <tr className="border-b border-border">
-                          <td className="px-6 py-3">
-                            <span className="flex items-center gap-2 font-medium text-foreground">
-                              <Home className="w-4 h-4 text-primary flex-shrink-0" />
-                              Configuration
-                            </span>
-                          </td>
-                          <td className="px-6 py-3 font-semibold text-primary">
-                            {configurationFilter || "2 BHK / 3 BHK / 4 BHK"}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="px-6 py-3">
-                            <span className="flex items-center gap-2 font-medium text-foreground">
-                              <Car className="w-4 h-4 text-primary flex-shrink-0" />
-                              Connectivity
-                            </span>
-                          </td>
-                          <td className="px-6 py-3 font-semibold text-primary">
-                            IGI Airport 15–20 min | Metro 10 min
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                    {/* View Details Link */}
-                    <div className="px-6 py-3 border-t border-border bg-muted/20">
+                    <div className="px-5 py-4 border-b border-border">
                       <Link
                         href={`/${p.slug}`}
-                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                        className="text-lg font-bold text-foreground hover:text-primary transition-colors block mb-1"
+                      >
+                        {p.name}
+                      </Link>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <MapPin className="w-4 h-4" />
+                        <span>{p.location}</span>
+                      </div>
+                    </div>
+                    <div className="divide-y divide-border text-sm">
+                      <div className="flex justify-between px-5 py-3">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <Ruler className="w-4 h-4" />
+                          Size Range
+                        </span>
+                        <span className="font-semibold text-foreground">1,200 – 4,000 sq.ft</span>
+                      </div>
+                      <div className="flex justify-between px-5 py-3">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <IndianRupee className="w-4 h-4" />
+                          Price Starting
+                        </span>
+                        <span className="font-semibold text-primary">₹ {p.price}</span>
+                      </div>
+                      <div className="flex justify-between px-5 py-3">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <Home className="w-4 h-4" />
+                          Configuration
+                        </span>
+                        <span className="font-semibold text-foreground">{configurationFilter || "2/3/4 BHK"}</span>
+                      </div>
+                      <div className="flex justify-between px-5 py-3">
+                        <span className="flex items-center gap-2 text-muted-foreground">
+                          <Car className="w-4 h-4" />
+                          Connectivity
+                        </span>
+                        <span className="font-semibold text-foreground">Airport 15–20 min</span>
+                      </div>
+                    </div>
+                    <div className="px-5 py-4 bg-muted/30">
+                      <Link
+                        href={`/${p.slug}`}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                       >
                         View Full Details
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             )}
           </div>
         </section>
 
-        {/* ─── 3. LAYOUT BREAKDOWN ─────────────────────────────────────────── */}
-        <section className="py-16 border-b border-border">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 4: LAYOUT BREAKDOWN (Educational Content)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20 bg-muted/30">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-balance">
+            <div className="grid lg:grid-cols-5 gap-12 items-start">
+              {/* Content — 3 cols */}
+              <div className="lg:col-span-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-5 text-balance">
                   {layoutTitle}
                 </h2>
-                <p className="text-muted-foreground leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-8">
                   {layoutDescription}
                 </p>
-                <ul className="space-y-3">
-                  {layoutFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
+
+                {/* Feature checklist */}
+                <ul className="space-y-4">
+                  {layoutFeatures.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                       <span className="text-foreground">{feature}</span>
                     </li>
@@ -536,43 +505,56 @@ export default function CategoryPageTemplate({
                 </ul>
               </div>
 
-              {/* Why Choose card */}
-              <div className="bg-card rounded-2xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-5 flex items-center gap-2">
-                  <LayoutGrid className="w-5 h-5 text-primary" />
-                  Why Choose {primaryKeyword}?
-                </h3>
-                <div className="space-y-5">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Building2 className="w-4 h-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">RERA Approved</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">
-                        All projects verified for full transparency and buyer protection
+              {/* Why Choose Card — 2 cols */}
+              <div className="lg:col-span-2">
+                <div className="bg-card rounded-2xl p-6 border border-border shadow-sm">
+                  <h3 className="text-lg font-bold text-foreground mb-6 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                    Why Choose {primaryKeyword}?
+                  </h3>
+                  <div className="space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Shield className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground">RERA Approved</div>
+                        <div className="text-sm text-muted-foreground mt-0.5">
+                          All projects verified for transparency and buyer protection
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-4 h-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">Prime Location</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">
-                        Direct access to Delhi, IGI Airport in 15 mins, and Cyber City
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground">Prime Location</div>
+                        <div className="text-sm text-muted-foreground mt-0.5">
+                          Direct access to Delhi, IGI Airport in 15 mins, and Cyber City
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <IndianRupee className="w-4 h-4 text-primary" />
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <TrendingUp className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground">Strong ROI</div>
+                        <div className="text-sm text-muted-foreground mt-0.5">
+                          8–12% annual capital appreciation on Dwarka Expressway
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-semibold text-foreground text-sm">Strong ROI</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">
-                        8–12% annual capital appreciation on Dwarka Expressway corridor
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Clock className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-foreground">Ready Infrastructure</div>
+                        <div className="text-sm text-muted-foreground mt-0.5">
+                          Expressway fully operational since June 2025
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -582,35 +564,34 @@ export default function CategoryPageTemplate({
           </div>
         </section>
 
-        {/* ─── 4. HIDDEN GEMS — HYPER-LOCAL KEYWORDS ───────────────────────── */}
-        <section className="py-16 bg-muted/30 border-b border-border">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 5: HIDDEN GEMS (Hyper-Local Keywords)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-10">
+            <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
                 Nearby Landmarks &amp; Connectivity
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Live within <strong>10 minutes</strong> of{" "}
-                <strong>Euro International School</strong> and{" "}
-                <strong>Manipal Hospital</strong> — ensuring your family&apos;s needs
-                are met without hitting the highway traffic.
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Live within <strong className="text-foreground">10 minutes</strong> of{" "}
+                <strong className="text-foreground">Euro International School</strong> and{" "}
+                <strong className="text-foreground">Manipal Hospital</strong> — ensuring your
+                family&apos;s needs are met without hitting highway traffic.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Schools */}
-              <div className="bg-card rounded-xl p-5 border border-border">
-                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-4">
-                  <GraduationCap className="w-5 h-5 text-blue-600" />
+              <div className="bg-card rounded-2xl p-6 border border-border hover:border-blue-200 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
+                  <GraduationCap className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-3">Schools</h3>
-                <ul className="space-y-2">
-                  {localLandmarks.schools.map((item, index) => (
-                    <li
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="text-primary font-bold leading-5">–</span>
+                <h3 className="font-bold text-foreground mb-4">Schools</h3>
+                <ul className="space-y-2.5">
+                  {localLandmarks.schools.map((item, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <span className="text-blue-600 font-bold">•</span>
                       {item}
                     </li>
                   ))}
@@ -618,37 +599,31 @@ export default function CategoryPageTemplate({
               </div>
 
               {/* Hospitals */}
-              <div className="bg-card rounded-xl p-5 border border-border">
-                <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center mb-4">
-                  <Hospital className="w-5 h-5 text-red-600" />
+              <div className="bg-card rounded-2xl p-6 border border-border hover:border-red-200 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-5">
+                  <Hospital className="w-6 h-6 text-red-600" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-3">Hospitals</h3>
-                <ul className="space-y-2">
-                  {localLandmarks.hospitals.map((item, index) => (
-                    <li
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="text-primary font-bold leading-5">–</span>
+                <h3 className="font-bold text-foreground mb-4">Hospitals</h3>
+                <ul className="space-y-2.5">
+                  {localLandmarks.hospitals.map((item, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <span className="text-red-600 font-bold">•</span>
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Malls */}
-              <div className="bg-card rounded-xl p-5 border border-border">
-                <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center mb-4">
-                  <ShoppingBag className="w-5 h-5 text-purple-600" />
+              {/* Shopping */}
+              <div className="bg-card rounded-2xl p-6 border border-border hover:border-purple-200 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
+                  <ShoppingBag className="w-6 h-6 text-purple-600" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-3">Shopping</h3>
-                <ul className="space-y-2">
-                  {localLandmarks.malls.map((item, index) => (
-                    <li
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="text-primary font-bold leading-5">–</span>
+                <h3 className="font-bold text-foreground mb-4">Shopping</h3>
+                <ul className="space-y-2.5">
+                  {localLandmarks.malls.map((item, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <span className="text-purple-600 font-bold">•</span>
                       {item}
                     </li>
                   ))}
@@ -656,18 +631,15 @@ export default function CategoryPageTemplate({
               </div>
 
               {/* Connectivity */}
-              <div className="bg-card rounded-xl p-5 border border-border">
-                <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center mb-4">
-                  <Car className="w-5 h-5 text-green-600" />
+              <div className="bg-card rounded-2xl p-6 border border-border hover:border-green-200 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center mb-5">
+                  <Car className="w-6 h-6 text-green-600" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-3">Connectivity</h3>
-                <ul className="space-y-2">
-                  {localLandmarks.connectivity.map((item, index) => (
-                    <li
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="text-primary font-bold leading-5">–</span>
+                <h3 className="font-bold text-foreground mb-4">Connectivity</h3>
+                <ul className="space-y-2.5">
+                  {localLandmarks.connectivity.map((item, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                      <span className="text-green-600 font-bold">•</span>
                       {item}
                     </li>
                   ))}
@@ -677,8 +649,10 @@ export default function CategoryPageTemplate({
           </div>
         </section>
 
-        {/* ─── 5. FAQ ACCORDION ────────────────────────────────────────────── */}
-        <section className="py-16 border-b border-border">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 6: FAQ ACCORDION (Keyword-Rich Toggle)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20 bg-muted/30">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
@@ -690,40 +664,42 @@ export default function CategoryPageTemplate({
             </div>
 
             <div className="space-y-3">
-              {faqs.map((faq, index) => (
+              {faqs.map((faq, idx) => (
                 <div
-                  key={index}
-                  className="border border-border rounded-xl overflow-hidden"
+                  key={idx}
+                  className="bg-card border border-border rounded-xl overflow-hidden"
                 >
                   <button
-                    onClick={() =>
-                      setOpenFaq(openFaq === index ? null : index)
-                    }
-                    className="w-full flex items-center justify-between p-5 text-left bg-card hover:bg-muted/30 transition-colors"
-                    aria-expanded={openFaq === index}
+                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                    className="w-full flex items-center justify-between p-5 text-left hover:bg-muted/50 transition-colors"
+                    aria-expanded={openFaq === idx}
                   >
-                    <span className="font-medium text-foreground pr-4">
-                      {faq.question}
-                    </span>
-                    {openFaq === index ? (
-                      <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                    )}
+                    <span className="font-semibold text-foreground pr-4">{faq.question}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform ${
+                        openFaq === idx ? "rotate-180" : ""
+                      }`}
+                    />
                   </button>
-                  {openFaq === index && (
-                    <div className="px-5 pb-5 text-muted-foreground leading-relaxed bg-card">
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      openFaq === idx ? "max-h-96" : "max-h-0"
+                    }`}
+                  >
+                    <div className="px-5 pb-5 text-muted-foreground leading-relaxed">
                       {faq.answer}
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ─── 6. INTERNAL LINKING ─────────────────────────────────────────── */}
-        <section className="py-16 bg-muted/30 border-b border-border">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 7: INTERNAL LINKING (Related Pages)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
@@ -735,49 +711,49 @@ export default function CategoryPageTemplate({
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedLinks.map((link, index) => (
+              {relatedLinks.map((link, idx) => (
                 <Link
-                  key={index}
+                  key={idx}
                   href={link.href}
-                  className="group bg-card rounded-xl p-6 border border-border hover:border-primary/40 hover:shadow-md transition-all"
+                  className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/40 hover:shadow-lg transition-all"
                 >
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                  <h3 className="font-bold text-foreground group-hover:text-primary transition-colors mb-2">
                     {link.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {link.description}
-                  </p>
-                  <div className="flex items-center text-sm text-primary font-medium">
-                    <span>View Properties</span>
+                  <p className="text-sm text-muted-foreground mb-4">{link.description}</p>
+                  <span className="inline-flex items-center text-sm font-semibold text-primary">
+                    View Properties
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  </span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ─── CTA ─────────────────────────────────────────────────────────── */}
-        <section className="py-16 bg-dark">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 8: FINAL CTA
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20 bg-foreground">
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 text-balance">
+            <h2 className="text-2xl md:text-3xl font-bold text-background mb-4 text-balance">
               Ready to Find Your Perfect Property?
             </h2>
-            <p className="text-slate-300 mb-8 max-w-xl mx-auto">
-              Get expert guidance from our property consultants and discover the
-              best options for your needs.
+            <p className="text-muted mb-8 max-w-xl mx-auto">
+              Get expert guidance from our property consultants and discover the best options
+              for your needs.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button
                 onClick={() => setIsPopupOpen(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-all"
               >
                 <Phone className="w-5 h-5" />
                 Request Callback
               </button>
               <a
                 href="tel:+919873702365"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-dark font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-background text-foreground font-semibold rounded-xl hover:bg-muted transition-all"
               >
                 Call +91 9873702365
               </a>
