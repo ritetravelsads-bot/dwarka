@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     const db = await getDatabase();
 
-    const lead: Lead = {
+    const lead = {
       name: name.trim(),
       email: email?.trim() || "",
       phone: phone.trim(),
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       projectName: projectName || null,
       source: source || "website",
       createdAt: new Date(),
-      status: "new",
+      status: "new" as const,
     };
 
     await db.collection("leads").insertOne(lead);

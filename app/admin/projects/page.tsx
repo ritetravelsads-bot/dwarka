@@ -56,13 +56,13 @@ export default function AdminProjectsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           _id: project._id, 
-          featured: !project.featured 
+          isFeatured: !project.isFeatured 
         }),
       });
       
       if (res.ok) {
         setProjects(projects.map((p) => 
-          p._id === project._id ? { ...p, featured: !p.featured } : p
+          p._id === project._id ? { ...p, isFeatured: !p.isFeatured } : p
         ));
       }
     } catch (error) {
@@ -129,13 +129,13 @@ export default function AdminProjectsPage() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {filteredProjects.map((project) => (
-                <tr key={project._id} className="hover:bg-gray-50">
+                <tr key={String(project._id)} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="relative w-16 h-12 rounded-lg overflow-hidden bg-gray-100">
-                        {project.image ? (
+                        {project.mainImage ? (
                           <Image
-                            src={project.image}
+                            src={project.mainImage}
                             alt={project.name}
                             fill
                             className="object-cover"
@@ -153,27 +153,29 @@ export default function AdminProjectsPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-gray-600">{project.developer || '-'}</td>
-                  <td className="px-6 py-4 text-gray-600">{project.property_type || '-'}</td>
+                  <td className="px-6 py-4 text-gray-600">{project.type || '-'}</td>
                   <td className="px-6 py-4 text-gray-600">{project.price || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'Active' 
+                      project.status === 'ready-to-move' 
                         ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
+                        : project.status === 'under-construction'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-blue-100 text-blue-800'
                     }`}>
-                      {project.status || 'Active'}
+                      {project.status?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'New Launch'}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     <button
                       onClick={() => toggleFeatured(project)}
                       className={`p-1 rounded ${
-                        project.featured 
-                          ? 'text-yellow-500 hover:text-yellow-600' 
-                          : 'text-gray-300 hover:text-gray-400'
-                      }`}
-                    >
-                      <Star className="w-5 h-5" fill={project.featured ? 'currentColor' : 'none'} />
+project.isFeatured
+                                        ? 'text-yellow-500 hover:text-yellow-600'
+                                        : 'text-gray-300 hover:text-gray-400'
+                                    }`}
+                                  >
+                                    <Star className="w-5 h-5" fill={project.isFeatured ? 'currentColor' : 'none'} />
                     </button>
                   </td>
                   <td className="px-6 py-4">
@@ -194,7 +196,7 @@ export default function AdminProjectsPage() {
                         <Pencil className="w-4 h-4" />
                       </Link>
                       <button
-                        onClick={() => handleDelete(project._id!)}
+                        onClick={() => handleDelete(String(project._id))}
                         className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg"
                         title="Delete"
                       >

@@ -32,3 +32,10 @@ export async function getDatabase(): Promise<Db> {
   const client = await clientPromise;
   return client.db("dwarka");
 }
+
+// Alternative connection method used by some components
+export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
+  const client = await clientPromise;
+  const db = client.db("countryroof");
+  return { client, db };
+}
