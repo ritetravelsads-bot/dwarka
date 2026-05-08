@@ -202,7 +202,7 @@ export function generateRealEstateAgentSchema(options: BlogSchemaOptions = {}) {
 export function generateCombinedBlogSchema(post: BlogPostData, options: BlogSchemaOptions = {}) {
   const opts = { ...defaultOptions, ...options };
   
-  const schemas = [
+  const schemas: object[] = [
     generateBlogSchema(post, opts),
     generateBreadcrumbSchema([
       { name: "Home", url: "/" },
