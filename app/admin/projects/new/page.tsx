@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save, Plus, X, Image as ImageIcon, Upload } from 'lucide-react';
+import { ArrowLeft, Save, Plus, X } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface FloorPlan {
   title: string;
@@ -485,44 +486,55 @@ export default function NewProjectPage() {
             <div className="space-y-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Images & Media</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className={labelClass}>Main Image URL</label>
-                  <input type="url" name="mainImage" value={formData.mainImage} onChange={handleChange} className={inputClass} />
-                  {formData.mainImage && <img src={formData.mainImage} alt="Preview" className="mt-2 h-24 object-cover rounded" />}
-                </div>
-                <div>
-                  <label className={labelClass}>Developer Logo URL</label>
-                  <input type="url" name="logo" value={formData.logo} onChange={handleChange} className={inputClass} />
-                </div>
+                <ImageUpload
+                  label="Main Image"
+                  value={formData.mainImage}
+                  onChange={(url) => setFormData({ ...formData, mainImage: url })}
+                  folder="projects/main"
+                  aspectRatio="video"
+                />
+                <ImageUpload
+                  label="Developer Logo"
+                  value={formData.logo}
+                  onChange={(url) => setFormData({ ...formData, logo: url })}
+                  folder="projects/logos"
+                  aspectRatio="square"
+                />
+                <ImageUpload
+                  label="Master Plan"
+                  value={formData.masterPlan}
+                  onChange={(url) => setFormData({ ...formData, masterPlan: url })}
+                  folder="projects/masterplans"
+                  aspectRatio="video"
+                />
+                <ImageUpload
+                  label="Location Map"
+                  value={formData.locationMap}
+                  onChange={(url) => setFormData({ ...formData, locationMap: url })}
+                  folder="projects/locationmaps"
+                  aspectRatio="video"
+                />
                 <div>
                   <label className={labelClass}>Brochure URL (PDF)</label>
-                  <input type="url" name="brochure" value={formData.brochure} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Master Plan Image URL</label>
-                  <input type="url" name="masterPlan" value={formData.masterPlan} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Location Map Image URL</label>
-                  <input type="url" name="locationMap" value={formData.locationMap} onChange={handleChange} className={inputClass} />
+                  <ImageUpload
+                    value={formData.brochure}
+                    onChange={(url) => setFormData({ ...formData, brochure: url })}
+                    folder="projects/brochures"
+                    accept="application/pdf,image/*"
+                    aspectRatio="auto"
+                  />
                 </div>
                 <div>
                   <label className={labelClass}>Video URL (YouTube/Vimeo)</label>
-                  <input type="url" name="videoUrl" value={formData.videoUrl} onChange={handleChange} className={inputClass} />
+                  <input type="url" name="videoUrl" value={formData.videoUrl} onChange={handleChange} className={inputClass} placeholder="https://youtube.com/watch?v=..." />
                 </div>
               </div>
 
               {/* Gallery */}
               <div>
                 <label className={labelClass}>Gallery Images</label>
-                <div className="flex gap-2 mb-3">
-                  <input type="url" value={newGalleryUrl} onChange={(e) => setNewGalleryUrl(e.target.value)} placeholder="Add image URL" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('gallery', newGalleryUrl, () => setNewGalleryUrl('')))} />
-                  <button type="button" onClick={() => addToArray('gallery', newGalleryUrl, () => setNewGalleryUrl(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                    <Plus className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-4 gap-3">
+                <p className="text-sm text-gray-500 mb-3">Upload or paste URLs for gallery images</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   {formData.gallery.map((url, index) => (
                     <div key={index} className="relative group">
                       <img src={url} alt={`Gallery ${index + 1}`} className="h-24 w-full object-cover rounded-lg" />
@@ -532,6 +544,17 @@ export default function NewProjectPage() {
                     </div>
                   ))}
                 </div>
+                <ImageUpload
+                  label="Add Gallery Image"
+                  value=""
+                  onChange={(url) => {
+                    if (url) {
+                      setFormData({ ...formData, gallery: [...formData.gallery, url] });
+                    }
+                  }}
+                  folder="projects/gallery"
+                  aspectRatio="video"
+                />
               </div>
             </div>
           )}

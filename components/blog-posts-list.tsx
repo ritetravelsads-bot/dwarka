@@ -141,7 +141,7 @@ export default function BlogPostsList() {
             <RefreshCw className="h-4 w-4" />
           </Button>
           <Button asChild size="sm">
-            <Link href="/admin/blogs/new">
+            <Link href="/admin/blog/new">
               <Plus className="h-4 w-4 mr-2" />
               New Post
             </Link>
@@ -158,7 +158,7 @@ export default function BlogPostsList() {
             <p className="text-xs text-muted-foreground">Create your first blog post to get started</p>
           </div>
           <Button asChild size="sm">
-            <Link href="/admin/blogs/new">
+            <Link href="/admin/blog/new">
               <Plus className="h-4 w-4 mr-2" />
               Create Post
             </Link>

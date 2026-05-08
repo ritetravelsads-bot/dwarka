@@ -33,9 +33,9 @@ export async function getDatabase(): Promise<Db> {
   return client.db("dwarka");
 }
 
-// For blog posts - uses "dwarka" database (unified with the rest of the project)
-export async function connectToDatabase() {
+// Alternative connection method used by some components
+export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
   const client = await clientPromise;
-  const db = client.db("dwarka");
+  const db = client.db("countryroof");
   return { client, db };
 }

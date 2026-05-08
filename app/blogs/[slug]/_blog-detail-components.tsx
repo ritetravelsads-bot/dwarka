@@ -1,16 +1,33 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import {
+  Clock,
+  Calendar,
+  ChevronRight,
   Share2,
-  Twitter,
-  Facebook,
   Link as LinkIcon,
   ArrowLeft,
   Check,
-  BookOpen
+  BookOpen,
+  Tag,
+  User
 } from "lucide-react"
+
+// Custom SVG icons for social media (lucide-react removed brand icons)
+const XIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+)
+
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+)
 
 // ---------------------------------------------------------------
 // Table of Contents
@@ -78,10 +95,10 @@ export function TableOfContents({ content }: { content: string }) {
   if (headings.length < 2) return null
 
   return (
-    <div className="rounded-lg border border-borderGrey bg-white p-5 max-h-[500px] overflow-y-auto">
+    <div className="rounded-xl border border-border bg-card p-5 max-h-[500px] overflow-y-auto">
       <div className="flex items-center gap-2 mb-4">
         <BookOpen className="h-4 w-4 text-primary" />
-        <span className="text-sm font-bold text-dark" style={{ fontFamily: "'Outfit', sans-serif" }}>Table of Contents</span>
+        <span className="text-sm font-semibold">Table of Contents</span>
       </div>
       <nav className="space-y-1">
         {headings.map((h) => (
@@ -100,8 +117,8 @@ export function TableOfContents({ content }: { content: string }) {
               h.level === 3 && "pl-5",
               h.level === 4 && "pl-8 text-xs",
               activeId === h.id
-                ? "text-primary bg-primary/10 font-semibold"
-                : "text-gray-600 hover:text-dark hover:bg-lightGrey"
+                ? "text-primary bg-primary/8 font-medium"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
             )}
           >
             {h.text}
@@ -125,34 +142,34 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
   }
 
   return (
-    <div className="rounded-lg border border-borderGrey bg-white p-5">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center gap-2 mb-4">
         <Share2 className="h-4 w-4 text-primary" />
-        <span className="text-sm font-bold text-dark" style={{ fontFamily: "'Outfit', sans-serif" }}>Share this article</span>
+        <span className="text-sm font-semibold">Share this article</span>
       </div>
       <div className="flex flex-col gap-2">
         <a
           href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-lightGrey hover:bg-primary/10 text-sm text-gray-700 hover:text-primary transition-colors"
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 text-sm transition-colors"
         >
-          <Twitter className="h-4 w-4 shrink-0" />
+          <XIcon className="h-4 w-4 shrink-0" />
           Share on X (Twitter)
         </a>
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-lightGrey hover:bg-primary/10 text-sm text-gray-700 hover:text-primary transition-colors"
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 text-sm transition-colors"
         >
-          <Facebook className="h-4 w-4 shrink-0" />
+          <FacebookIcon className="h-4 w-4 shrink-0" />
           Share on Facebook
         </a>
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-lightGrey hover:bg-primary/10 text-sm text-gray-700 hover:text-primary transition-colors"
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 text-sm transition-colors"
         >
           {copied ? <Check className="h-4 w-4 text-green-500 shrink-0" /> : <LinkIcon className="h-4 w-4 shrink-0" />}
           {copied ? "Copied!" : "Copy link"}
@@ -181,7 +198,7 @@ export function ReadingProgressBar() {
   }, [])
 
   return (
-    <div className="fixed top-20 left-0 right-0 h-1 z-[100] bg-borderGrey">
+    <div className="fixed top-0 left-0 right-0 h-1 z-[100] bg-border/30">
       <div
         className="h-full bg-primary transition-all duration-75 ease-out"
         style={{ width: `${progress}%` }}
@@ -208,7 +225,7 @@ export function BackToTop() {
     <button
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-24 right-6 z-50 p-3 rounded-full bg-primary text-white shadow-lg hover:bg-primary/90 transition-all"
+      className="fixed bottom-8 right-6 z-50 p-3 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
       aria-label="Back to top"
     >
       <ArrowLeft className="h-4 w-4 rotate-90" />
