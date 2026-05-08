@@ -122,6 +122,7 @@ const pageData = {
       description: "New launches with pre-launch pricing advantages",
     },
   ],
+  configurationFilter: "2 BHK",
   primaryKeyword: "2 BHK Flat in Gurgaon",
   secondaryKeywords: [
     "2bhk flat in gurgaon",

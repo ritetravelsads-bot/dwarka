@@ -122,6 +122,7 @@ const pageData = {
       description: "Immediate possession luxury homes",
     },
   ],
+  configurationFilter: "4 BHK",
   primaryKeyword: "4 BHK Flats in Gurgaon",
   secondaryKeywords: [
     "4bhk",

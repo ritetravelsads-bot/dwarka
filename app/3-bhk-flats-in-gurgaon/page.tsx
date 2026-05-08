@@ -122,6 +122,7 @@ const pageData = {
       description: "Immediate possession options across configurations",
     },
   ],
+  configurationFilter: "3 BHK",
   primaryKeyword: "3 BHK Flats in Gurgaon",
   secondaryKeywords: [
     "3bhk in gurgaon",
