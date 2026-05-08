@@ -129,7 +129,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.og_title || post.title,
       description: post.og_description || post.excerpt,
-      url: `https://countryroof.in/blogs/${slug}`,
+      url: `https://www.dwarkaexpresswayncr.com/blogs/${slug}`,
       type: "article",
       publishedTime: post.publication_date,
       authors: [post.author?.toString() || "CountryRoof"],
@@ -164,8 +164,8 @@ export default async function BlogPostPage({
     day: "numeric"
   })
 
-  const schemaMarkup = generateBlogSchema(post, { siteName: "Dwarka Expressway", siteUrl: "https://dwarkaexpressway.in" })
-  const canonicalUrl = `https://dwarkaexpressway.in/blogs/${slug}`
+  const schemaMarkup = generateBlogSchema(post, { siteName: "Dwarka Expressway NCR", siteUrl: "https://www.dwarkaexpresswayncr.com" })
+  const canonicalUrl = `https://www.dwarkaexpresswayncr.com/blogs/${slug}`
   const heroImage = post.banner_image || post.cover_image || post.og_image
 
   return (

@@ -7,16 +7,16 @@ import { Search, Clock, User, ChevronRight, ArrowRight, TrendingUp, Calendar } f
 import { connectToDatabase } from "@/lib/mongodb"
 
 export const metadata: Metadata = {
-  title: "Blogs | CountryRoof - Real Estate Insights & Property Tips",
+  title: "Blogs | Dwarka Expressway NCR - Real Estate Insights & Property Tips",
   description:
-    "Explore expert insights on real estate investments, property buying guides, market trends, and luxury living tips from CountryRoof professionals.",
+    "Explore expert insights on Dwarka Expressway real estate, property buying guides, market trends, and investment tips for Gurgaon and NCR.",
   alternates: {
-    canonical: "https://countryroof.in/blogs",
+    canonical: "https://www.dwarkaexpresswayncr.com/blogs",
   },
   openGraph: {
-    title: "Blogs | CountryRoof - Real Estate Insights",
-    description: "Expert real estate insights and property investment tips from CountryRoof professionals.",
-    url: "https://countryroof.in/blogs",
+    title: "Blogs | Dwarka Expressway NCR - Real Estate Insights",
+    description: "Expert real estate insights and property investment tips for Dwarka Expressway and Gurgaon.",
+    url: "https://www.dwarkaexpresswayncr.com/blogs",
   },
 }
 
