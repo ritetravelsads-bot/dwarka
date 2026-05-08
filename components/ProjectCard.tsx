@@ -33,7 +33,7 @@ export default function ProjectCard({ project, variant = "default" }: ProjectCar
   
   // Generate proper slug
   const projectSlug = project.slug || localData?.slug || makeSlug(project.name);
-  const projectUrl = `/projects/${projectSlug}`;
+  const projectUrl = `/${projectSlug}`;
   
   // Use local badge/status or API data
   const statusBadge = localData?.badge || project.badge || project.status?.replace(/-/g, " ");

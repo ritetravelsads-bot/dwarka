@@ -11,7 +11,8 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status") || "";
     const type = searchParams.get("type") || "";
     const developer = searchParams.get("developer") || "";
-    
+    const configuration = searchParams.get("configuration") || "";
+
     // Fetch from external API
     const apiUrl = new URL(`${API_BASE_URL}/api/projects`);
     apiUrl.searchParams.set("limit", limit);
@@ -20,6 +21,7 @@ export async function GET(request: NextRequest) {
     if (status) apiUrl.searchParams.set("status", status);
     if (type) apiUrl.searchParams.set("type", type);
     if (developer) apiUrl.searchParams.set("developer", developer);
+    if (configuration) apiUrl.searchParams.set("configuration", configuration);
 
     const res = await fetch(apiUrl.toString(), {
       headers: { 'Accept': 'application/json' },

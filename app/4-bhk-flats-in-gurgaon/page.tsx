@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Experience luxury living with our curated selection of 4 BHK flats in Gurgaon. Premium apartments and penthouses on Dwarka Expressway featuring expansive layouts, designer interiors, and world-class amenities for discerning families seeking the finest homes.",
   quickFacts: [
-    { label: "Size Range", value: "2,200 - 5,000 sq.ft", icon: "size" as const },
-    { label: "Price Starting", value: "1.5 Crore", icon: "price" as const },
-    { label: "Bedrooms", value: "4 BHK", icon: "config" as const },
-    { label: "Type", value: "Luxury", icon: "connectivity" as const },
+    { label: "Size Range", value: "2,200 – 5,000 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 1.5 Crore onwards", icon: "price" as const },
+    { label: "Configuration", value: "4 BHK (4 Bed + 4 Bath + Hall + Kitchen + Study)", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Golf Course Rd 15 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Why Choose 4 BHK Luxury Living in Gurgaon",
   layoutDescription:

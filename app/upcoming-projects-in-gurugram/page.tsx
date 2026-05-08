@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Get exclusive access to upcoming projects in Gurugram with pre-launch pricing advantages. Discover new residential and commercial developments on Dwarka Expressway and prime Gurgaon locations from top developers before general market release.",
   quickFacts: [
-    { label: "Launch Discount", value: "Up to 15%", icon: "price" as const },
-    { label: "Configurations", value: "2/3/4/5 BHK", icon: "config" as const },
-    { label: "Possession", value: "2027-2029", icon: "size" as const },
-    { label: "Payment Plans", value: "Flexible", icon: "connectivity" as const },
+    { label: "Size Range", value: "1,000 – 5,000 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 1 Crore onwards (pre-launch)", icon: "price" as const },
+    { label: "Configuration", value: "2 BHK / 3 BHK / 4 BHK / 5 BHK", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Metro Extension 2027", icon: "connectivity" as const },
   ],
   layoutTitle: "Why Invest in Upcoming Projects in Gurugram",
   layoutDescription:

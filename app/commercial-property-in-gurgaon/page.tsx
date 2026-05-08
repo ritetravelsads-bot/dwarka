@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Explore lucrative commercial property opportunities in Gurgaon including retail shops, office spaces, and commercial complexes. Prime locations near business hubs with excellent footfall and rental potential for smart investors.",
   quickFacts: [
-    { label: "Size Range", value: "200 - 10,000 sq.ft", icon: "size" as const },
-    { label: "Price Starting", value: "40 Lakh", icon: "price" as const },
-    { label: "Types", value: "Shops/Offices", icon: "config" as const },
-    { label: "Rental Yield", value: "6-9% p.a.", icon: "connectivity" as const },
+    { label: "Size Range", value: "200 – 10,000 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 40 Lakh onwards", icon: "price" as const },
+    { label: "Configuration", value: "Retail Shops / Office Spaces / SCO Plots", icon: "config" as const },
+    { label: "Connectivity", value: "Cyber City 10 min | IGI Airport 20–25 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Why Invest in Commercial Property in Gurgaon",
   layoutDescription:

@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Begin your homeownership journey with our selection of 2 BHK flats in Gurgaon. Ideal for young couples, professionals, and small families, these affordable apartments on Dwarka Expressway offer excellent value with modern amenities and great connectivity.",
   quickFacts: [
-    { label: "Size Range", value: "900 - 1,400 sq.ft", icon: "size" as const },
-    { label: "Price Starting", value: "45 Lakh", icon: "price" as const },
-    { label: "Bedrooms", value: "2 BHK", icon: "config" as const },
-    { label: "Best For", value: "First-time Buyers", icon: "connectivity" as const },
+    { label: "Size Range", value: "900 – 1,400 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 45 Lakh onwards", icon: "price" as const },
+    { label: "Configuration", value: "2 BHK (2 Bed + 2 Bath + Hall + Kitchen)", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Metro 15 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Why 2 BHK is Ideal for First-Time Buyers in Gurgaon",
   layoutDescription:

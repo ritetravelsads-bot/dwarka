@@ -125,7 +125,12 @@ export default function CategoryPageTemplate({
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const res = await fetch(`/api/projects?limit=50`);
+        // Pass configuration as query param to let the backend filter too
+        const params = new URLSearchParams({ limit: "50" });
+        if (configurationFilter) {
+          params.set("configuration", configurationFilter);
+        }
+        const res = await fetch(`/api/projects?${params.toString()}`);
         const json = await res.json();
         let allProjects: ApiProject[] = [];
 
@@ -135,15 +140,19 @@ export default function CategoryPageTemplate({
           allProjects = json;
         }
 
-        // If configurationFilter is set, filter projects that include that config
-        if (configurationFilter) {
+        // Client-side safety filter: if configurationFilter is set and backend
+        // did not filter, do it here so results are always correct
+        if (configurationFilter && allProjects.length > 0) {
           const filter = configurationFilter.toLowerCase().trim();
-          allProjects = allProjects.filter((p) => {
+          const filtered = allProjects.filter((p) => {
             if (!p.configurations || p.configurations.length === 0) return false;
             return p.configurations.some((c) =>
               c.toLowerCase().includes(filter)
             );
           });
+          // Only apply client filter if it actually narrows results;
+          // if backend already filtered (returns only matching), keep as-is
+          if (filtered.length > 0) allProjects = filtered;
         }
 
         // Enrich with local data (images, occupancy)
@@ -151,8 +160,8 @@ export default function CategoryPageTemplate({
 
         setProjects(allProjects.slice(0, 9));
       } catch {
-        // Fallback: use local static data filtered by config
-        let fallback = projectsData.map((p) => ({
+        // Fallback: use local static data
+        const fallback = projectsData.map((p) => ({
           _id: p.slug,
           name: p.name,
           slug: p.slug,
@@ -163,7 +172,7 @@ export default function CategoryPageTemplate({
           badge: p.badge,
           occupancy: p.occupancy,
           alt: p.alt,
-          configurations: [],
+          configurations: [] as string[],
         }));
         setProjects(fallback.slice(0, 9));
       } finally {

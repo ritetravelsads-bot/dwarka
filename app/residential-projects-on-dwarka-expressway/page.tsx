@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Discover exceptional residential projects on Dwarka Expressway offering modern living with world-class amenities. From luxury apartments to premium villas, find your perfect home in NCR's most sought-after corridor with excellent connectivity to Delhi and IGI Airport.",
   quickFacts: [
-    { label: "Size Range", value: "1,200 - 5,000 sq.ft", icon: "size" as const },
-    { label: "Price Starting", value: "50 Lakh", icon: "price" as const },
-    { label: "Configurations", value: "2/3/4 BHK", icon: "config" as const },
-    { label: "Airport Distance", value: "15-20 mins", icon: "connectivity" as const },
+    { label: "Size Range", value: "1,200 – 5,000 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 50 Lakh onwards", icon: "price" as const },
+    { label: "Configuration", value: "2 BHK / 3 BHK / 4 BHK", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Cyber City 18 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Why Dwarka Expressway is Perfect for Residential Living",
   layoutDescription:

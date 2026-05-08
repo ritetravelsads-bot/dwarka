@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Find your perfect ready to move flat in Gurgaon with immediate possession. Our curated selection of move-in ready apartments on Dwarka Expressway and prime locations comes with OC received, fully functional amenities, and established neighborhoods.",
   quickFacts: [
-    { label: "Possession", value: "Immediate", icon: "size" as const },
-    { label: "Price Starting", value: "60 Lakh", icon: "price" as const },
-    { label: "Configurations", value: "2/3/4 BHK", icon: "config" as const },
-    { label: "OC Status", value: "Received", icon: "connectivity" as const },
+    { label: "Size Range", value: "900 – 4,000 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 60 Lakh onwards", icon: "price" as const },
+    { label: "Configuration", value: "2 BHK / 3 BHK / 4 BHK | OC Received", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Cyber City 18 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Benefits of Ready to Move Flats in Gurgaon",
   layoutDescription:

@@ -36,10 +36,10 @@ const pageData = {
   heroDescription:
     "Discover spacious 3 BHK flats in Gurgaon designed for comfortable family living. From luxury apartments in gated communities to affordable builder floors, find the perfect 3 bedroom home on Dwarka Expressway and prime Gurgaon locations.",
   quickFacts: [
-    { label: "Size Range", value: "1,400 - 2,500 sq.ft", icon: "size" as const },
-    { label: "Price Starting", value: "80 Lakh", icon: "price" as const },
-    { label: "Bedrooms", value: "3 BHK", icon: "config" as const },
-    { label: "Possession", value: "Ready/2027", icon: "connectivity" as const },
+    { label: "Size Range", value: "1,400 – 2,500 sq.ft", icon: "size" as const },
+    { label: "Price Starting", value: "₹ 80 Lakh onwards", icon: "price" as const },
+    { label: "Configuration", value: "3 BHK (3 Bed + 3 Bath + Hall + Kitchen)", icon: "config" as const },
+    { label: "Connectivity", value: "IGI Airport 15–20 min | Cyber City 18 min", icon: "connectivity" as const },
   ],
   layoutTitle: "Why 3 BHK is Perfect for Families in Gurgaon",
   layoutDescription:
