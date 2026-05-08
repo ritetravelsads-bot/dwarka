@@ -28,7 +28,7 @@ export default function Header() {
               alt="Dwarka Expressway Logo"
               width={160}
               height={64}
-              className="h-10 md:h-16 w-auto"
+              className="h-auto w-[100px] md:w-[160px]"
               priority
             />
           </Link>
