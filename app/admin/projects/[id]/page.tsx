@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save, Plus, X, Trash2 } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface FloorPlan {
   title: string;
@@ -584,53 +585,74 @@ export default function EditProjectPage() {
             <div className="space-y-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Images & Media</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <ImageUpload
+                  label="Main Image"
+                  value={formData.mainImage}
+                  onChange={(url) => setFormData({ ...formData, mainImage: url })}
+                  folder="projects"
+                  previewHeight="h-32"
+                />
+                <ImageUpload
+                  label="Developer Logo"
+                  value={formData.logo}
+                  onChange={(url) => setFormData({ ...formData, logo: url })}
+                  folder="projects/logos"
+                  previewHeight="h-24"
+                />
+                <ImageUpload
+                  label="Brochure (PDF)"
+                  value={formData.brochure}
+                  onChange={(url) => setFormData({ ...formData, brochure: url })}
+                  folder="projects/brochures"
+                  accept=".pdf,application/pdf"
+                  previewHeight="h-24"
+                />
+                <ImageUpload
+                  label="Master Plan Image"
+                  value={formData.masterPlan}
+                  onChange={(url) => setFormData({ ...formData, masterPlan: url })}
+                  folder="projects/masterplans"
+                  previewHeight="h-24"
+                />
+                <ImageUpload
+                  label="Location Map Image"
+                  value={formData.locationMap}
+                  onChange={(url) => setFormData({ ...formData, locationMap: url })}
+                  folder="projects/maps"
+                  previewHeight="h-24"
+                />
                 <div>
-                  <label className={labelClass}>Main Image URL</label>
-                  <input type="url" name="mainImage" value={formData.mainImage} onChange={handleChange} className={inputClass} />
-                  {formData.mainImage && <img src={formData.mainImage} alt="Preview" className="mt-2 h-24 object-cover rounded" />}
-                </div>
-                <div>
-                  <label className={labelClass}>Developer Logo URL</label>
-                  <input type="url" name="logo" value={formData.logo} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Brochure URL (PDF)</label>
-                  <input type="url" name="brochure" value={formData.brochure} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Master Plan Image URL</label>
-                  <input type="url" name="masterPlan" value={formData.masterPlan} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Location Map Image URL</label>
-                  <input type="url" name="locationMap" value={formData.locationMap} onChange={handleChange} className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Video URL</label>
-                  <input type="url" name="videoUrl" value={formData.videoUrl} onChange={handleChange} className={inputClass} />
+                  <label className={labelClass}>Video URL (YouTube/Vimeo)</label>
+                  <input type="url" name="videoUrl" value={formData.videoUrl} onChange={handleChange} className={inputClass} placeholder="https://youtube.com/watch?v=..." />
                 </div>
               </div>
 
               {/* Gallery */}
               <div>
                 <label className={labelClass}>Gallery Images</label>
-                <div className="flex gap-2 mb-3">
-                  <input type="url" value={newGalleryUrl} onChange={(e) => setNewGalleryUrl(e.target.value)} placeholder="Add image URL" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('gallery', newGalleryUrl, () => setNewGalleryUrl('')))} />
-                  <button type="button" onClick={() => addToArray('gallery', newGalleryUrl, () => setNewGalleryUrl(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                    <Plus className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-4 gap-3">
-                  {formData.gallery.map((url, index) => (
-                    <div key={index} className="relative group">
-                      <img src={url} alt={`Gallery ${index + 1}`} className="h-24 w-full object-cover rounded-lg" />
-                      <button type="button" onClick={() => removeFromArray('gallery', index)} className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                <ImageUpload
+                  value=""
+                  onChange={(url) => {
+                    if (url) {
+                      setFormData({ ...formData, gallery: [...formData.gallery, url] });
+                    }
+                  }}
+                  folder="projects/gallery"
+                  previewHeight="h-24"
+                  placeholder="Upload gallery image"
+                />
+                {formData.gallery.length > 0 && (
+                  <div className="grid grid-cols-4 gap-3 mt-4">
+                    {formData.gallery.map((url, index) => (
+                      <div key={index} className="relative group">
+                        <img src={url} alt={`Gallery ${index + 1}`} className="h-24 w-full object-cover rounded-lg" />
+                        <button type="button" onClick={() => removeFromArray('gallery', index)} className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
