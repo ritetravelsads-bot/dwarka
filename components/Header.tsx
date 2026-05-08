@@ -9,6 +9,7 @@ const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Connectivity", href: "/connectivity" },
   { name: "Amenities", href: "/amenities" },
+  { name: "Blogs", href: "/blogs" },
   { name: "Contact", href: "/contact" },
   { name: "About Us", href: "/about" },
 ];
@@ -28,7 +29,7 @@ export default function Header() {
               alt="Dwarka Expressway Logo"
               width={160}
               height={64}
-              className="h-auto w-[100px] md:w-[160px]"
+              className="h-10 md:h-16 w-auto"
               priority
             />
           </Link>

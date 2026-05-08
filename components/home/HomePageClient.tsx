@@ -3,7 +3,6 @@
 import { useState } from "react";
 import HeroSlider from "@/components/home/HeroSlider";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
-import PopularSearchSection from "@/components/home/PopularSearchSection";
 import LocationSection from "@/components/home/LocationSection";
 import HighlightsSection from "@/components/home/HighlightsSection";
 import AmenitiesSection from "@/components/home/AmenitiesSection";
@@ -26,8 +25,6 @@ export default function HomePageClient() {
         />
 
         <FeaturedProjects />
-
-        <PopularSearchSection />
 
         <LocationSection />
 

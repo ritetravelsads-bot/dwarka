@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
+import { DM_Sans, Outfit, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { OrganizationSchema, WebsiteSearchSchema } from "@/components/seo/SchemaMarkup";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -95,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${outfit.variable}`}>
+    <html lang="en" className={cn(dmSans.variable, outfit.variable, "font-sans", geist.variable)}>
       <head>
         <link rel="icon" href="/assets/img/favicon.png" sizes="32x32" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
