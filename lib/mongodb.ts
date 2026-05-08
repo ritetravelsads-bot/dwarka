@@ -32,3 +32,10 @@ export async function getDatabase(): Promise<Db> {
   const client = await clientPromise;
   return client.db("dwarka");
 }
+
+// For blog posts - uses "dwarka" database (unified with the rest of the project)
+export async function connectToDatabase() {
+  const client = await clientPromise;
+  const db = client.db("dwarka");
+  return { client, db };
+}
