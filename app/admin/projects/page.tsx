@@ -55,14 +55,14 @@ export default function AdminProjectsPage() {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          _id: project._id, 
+          _id: project._id?.toString(), 
           featured: !project.isFeatured 
         }),
       });
       
       if (res.ok) {
         setProjects(projects.map((p) => 
-          p._id === project._id ? { ...p, featured: !p.isFeatured } : p
+          p._id === project._id?.toString() ? { ...p, featured: !p.isFeatured } : p
         ));
       }
     } catch (error) {
@@ -187,14 +187,14 @@ export default function AdminProjectsPage() {
                         <Eye className="w-4 h-4" />
                       </Link>
                       <Link
-                        href={`/admin/projects/${project._id}`}
+                        href={`/admin/projects/${project._id?.toString()}`}
                         className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-lg"
                         title="Edit"
                       >
                         <Pencil className="w-4 h-4" />
                       </Link>
                       <button
-                        onClick={() => handleDelete(project._id!)}
+                        onClick={() => handleDelete(project._id?.toString()!)}
                         className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg"
                         title="Delete"
                       >
