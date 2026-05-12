@@ -11,7 +11,7 @@ interface BlogPost {
   publication_date?: string
   createdAt?: string
   updatedAt?: string
-  category?: string
+  category?: string | string[]
   tags?: string[]
   readTime?: string | number
   read_time?: string | number
@@ -23,6 +23,7 @@ export function generateBlogSchema(post: BlogPost, authorName: string) {
   const modifiedDate = post.updatedAt || publishDate
   const imageUrl = post.banner_image || post.cover_image || post.og_image || `${BASE_URL}/assets/img/Og-Image.png`
   const readTime = post.readTime || post.read_time || 5
+  const categoryValue = Array.isArray(post.category) ? post.category[0] : post.category
   
   const schemas: object[] = []
   
@@ -55,7 +56,7 @@ export function generateBlogSchema(post: BlogPost, authorName: string) {
     "wordCount": post.content ? post.content.replace(/<[^>]*>/g, "").split(/\s+/).length : 0,
     "timeRequired": `PT${readTime}M`,
     "inLanguage": "en-IN",
-    ...(post.category && { "articleSection": post.category }),
+    ...(categoryValue && { "articleSection": categoryValue }),
     ...(post.tags && post.tags.length > 0 && { "keywords": post.tags.join(", ") })
   }
   schemas.push(articleSchema)
