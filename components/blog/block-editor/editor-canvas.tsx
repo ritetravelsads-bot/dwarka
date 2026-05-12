@@ -289,13 +289,17 @@ CustomImage.configure({
           const coords = editor.view.coordsAtPos(selectionFrom)
           const editorRect = editorContainerRef.current?.getBoundingClientRect()
           if (editorRect) {
-            setActiveBlock(prev => ({
-              ...prev,
-              pos: {
-                top: coords.top - editorRect.top,
-                left: coords.left - editorRect.left
-              }
-            }))
+            setActiveBlock(prev =>
+              prev
+                ? {
+                    ...prev,
+                    pos: {
+                      top: coords.top - editorRect.top,
+                      left: coords.left - editorRect.left
+                    }
+                  }
+                : null
+            )
           }
         } catch (e) {
           // Ignore coord errors
