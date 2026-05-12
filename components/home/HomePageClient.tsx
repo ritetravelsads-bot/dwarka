@@ -9,6 +9,7 @@ import AmenitiesSection from "@/components/home/AmenitiesSection";
 import TrustSection from "@/components/home/TrustSection";
 import FAQSection from "@/components/home/FAQSection";
 import ContactSection from "@/components/home/ContactSection";
+import PopularSearches from "@/components/home/PopularSearches";
 import EmiCalculator from "@/components/EmiCalculator";
 import PopupForm from "@/components/PopupForm";
 
@@ -25,6 +26,8 @@ export default function HomePageClient() {
         />
 
         <FeaturedProjects />
+
+        <PopularSearches />
 
         <LocationSection />
 
