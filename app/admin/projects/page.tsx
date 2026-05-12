@@ -168,12 +168,12 @@ export default function AdminProjectsPage() {
                     <button
                       onClick={() => toggleFeatured(project)}
                       className={`p-1 rounded ${
-                        project.featured 
+                        project.isFeatured 
                           ? 'text-yellow-500 hover:text-yellow-600' 
                           : 'text-gray-300 hover:text-gray-400'
                       }`}
                     >
-                      <Star className="w-5 h-5" fill={project.featured ? 'currentColor' : 'none'} />
+                      <Star className="w-5 h-5" fill={project.isFeatured ? 'currentColor' : 'none'} />
                     </button>
                   </td>
                   <td className="px-6 py-4">
