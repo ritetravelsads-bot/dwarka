@@ -157,7 +157,7 @@ export default function AdminProjectsPage() {
                   <td className="px-6 py-4 text-gray-600">{project.price || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'Active' 
+                      project.isActive 
                         ? 'bg-green-100 text-green-800'
                         : 'bg-gray-100 text-gray-800'
                     }`}>
