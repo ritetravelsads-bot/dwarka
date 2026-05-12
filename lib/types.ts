@@ -52,8 +52,8 @@ export interface Lead {
   email: string;
   phone: string;
   message?: string;
-  projectId?: string;
-  projectName?: string;
+  projectId?: string | null;
+  projectName?: string | null;
   source: string;
   createdAt: Date;
   status: "new" | "contacted" | "converted" | "closed";

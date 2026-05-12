@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     const db = await getDatabase();
 
-    const lead: Lead = {
+    const lead: Omit<Lead, "_id"> = {
       name: name.trim(),
       email: email?.trim() || "",
       phone: phone.trim(),
