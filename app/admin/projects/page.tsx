@@ -133,9 +133,9 @@ export default function AdminProjectsPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="relative w-16 h-12 rounded-lg overflow-hidden bg-gray-100">
-                        {project.image ? (
+                        {project.mainImage ? (
                           <Image
-                            src={project.image}
+                            src={project.mainImage}
                             alt={project.name}
                             fill
                             className="object-cover"
