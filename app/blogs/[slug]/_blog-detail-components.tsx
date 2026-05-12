@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import {
   Share2,
-  Twitter,
-  Facebook,
   Link as LinkIcon,
   ArrowLeft,
   Check,
@@ -137,7 +135,6 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-lightGrey hover:bg-primary/10 text-sm text-gray-700 hover:text-primary transition-colors"
         >
-          <Twitter className="h-4 w-4 shrink-0" />
           Share on X (Twitter)
         </a>
         <a
@@ -146,7 +143,6 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-lightGrey hover:bg-primary/10 text-sm text-gray-700 hover:text-primary transition-colors"
         >
-          <Facebook className="h-4 w-4 shrink-0" />
           Share on Facebook
         </a>
         <button
