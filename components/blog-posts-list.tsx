@@ -3,7 +3,8 @@
 import { useEffect, useState, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Eye, Pencil, Trash2, Plus, FileText, RefreshCw, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -140,12 +141,13 @@ export default function BlogPostsList() {
           <Button variant="outline" size="sm" onClick={fetchPosts}>
             <RefreshCw className="h-4 w-4" />
           </Button>
-          <Button asChild size="sm">
-            <Link href="/admin/blogs/new">
-              <Plus className="h-4 w-4 mr-2" />
-              New Post
-            </Link>
-          </Button>
+          <Link
+            href="/admin/blogs/new"
+            className={cn(buttonVariants({ size: "sm" }))}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            New Post
+          </Link>
         </div>
       </div>
 
@@ -157,12 +159,13 @@ export default function BlogPostsList() {
             <p className="text-sm font-medium">No blog posts yet</p>
             <p className="text-xs text-muted-foreground">Create your first blog post to get started</p>
           </div>
-          <Button asChild size="sm">
-            <Link href="/admin/blogs/new">
-              <Plus className="h-4 w-4 mr-2" />
-              Create Post
-            </Link>
-          </Button>
+          <Link
+            href="/admin/blogs/new"
+            className={cn(buttonVariants({ size: "sm" }))}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Create Post
+          </Link>
         </div>
       ) : (
         <div className="border border-border rounded-lg overflow-hidden">
