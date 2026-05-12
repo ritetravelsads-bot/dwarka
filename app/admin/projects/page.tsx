@@ -62,7 +62,7 @@ export default function AdminProjectsPage() {
       
       if (res.ok) {
         setProjects(projects.map((p) => 
-          p._id === project._id ? { ...p, featured: !p.featured } : p
+          p._id === project._id ? { ...p, featured: !p.isFeatured } : p
         ));
       }
     } catch (error) {
