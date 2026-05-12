@@ -153,7 +153,7 @@ export default function AdminProjectsPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-gray-600">{project.developer || '-'}</td>
-                  <td className="px-6 py-4 text-gray-600">{project.property_type || '-'}</td>
+                  <td className="px-6 py-4 text-gray-600">{project.type || '-'}</td>
                   <td className="px-6 py-4 text-gray-600">{project.price || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
