@@ -129,7 +129,7 @@ export default function AdminProjectsPage() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {filteredProjects.map((project) => (
-                <tr key={project._id} className="hover:bg-gray-50">
+                <tr key={project._id?.toString()} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="relative w-16 h-12 rounded-lg overflow-hidden bg-gray-100">
