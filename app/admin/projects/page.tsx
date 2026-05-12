@@ -56,7 +56,7 @@ export default function AdminProjectsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           _id: project._id, 
-          featured: !project.featured 
+          featured: !project.isFeatured 
         }),
       });
       
