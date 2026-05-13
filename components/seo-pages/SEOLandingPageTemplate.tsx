@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Plus, Minus, MapPin, Building, ArrowRight, CheckCircle2, Plane, Shield, Route, GraduationCap, Hospital, Train } from "lucide-react";
 import ContactSection from "@/components/home/ContactSection";
 
@@ -57,6 +58,7 @@ export interface SEOPageContent {
   heroTagline: string;
   heroTitle: string;
   heroSubtitle: string;
+  heroImage?: string;
   trustIndicators?: TrustIndicator[];
   
   // Quick Facts
@@ -175,13 +177,16 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
     }
   };
 
+  // Limit highlights to 4 items
+  const displayHighlights = content.layoutHighlights?.slice(0, 4) || [];
+
   return (
     <main>
       {/* Hero Section - Lifestyle-First */}
       <section className="relative bg-gradient-to-br from-dark to-gray-900 text-white pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('/assets/img/hero-bg.jpg')" }}
+          style={{ backgroundImage: `url('${content.heroImage || "/assets/img/hero-bg.jpg"}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 to-dark/40" />
         
@@ -249,11 +254,11 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
         )}
       </section>
 
-      {/* Quick Facts Grid */}
+      {/* Quick Benefits Grid */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-10">
           <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 text-center">
-            Quick Facts: <span className="text-primary">{primaryKeyword}</span>
+            Quick Benefits: <span className="text-primary">{primaryKeyword}</span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
             {content.quickFacts.map((fact, index) => (
@@ -359,15 +364,16 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
         </section>
       )}
 
-      {/* Layout Breakdown - Educational Content */}
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      {/* Layout Breakdown - Educational Content (Why Choose Section) */}
+      <section className="py-12 md:py-20 bg-white relative overflow-hidden">
         {/* Decorative blobs */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-amber-500/5 blur-3xl" />
         
         <div className="container mx-auto px-4 md:px-10 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="w-full lg:w-1/2">
+          <div className="flex flex-col lg:flex-row items-stretch gap-12 min-h-[500px]">
+            {/* Content Side */}
+            <div className="w-full lg:w-1/2 flex flex-col justify-center">
               <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">
                 Why Choose This Corridor?
               </span>
@@ -383,9 +389,9 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                 ))}
               </div>
               
-              {content.layoutHighlights && content.layoutHighlights.length > 0 && (
-                <div className="mt-8 space-y-3">
-                  {content.layoutHighlights.map((highlight, index) => (
+              {displayHighlights.length > 0 && (
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {displayHighlights.map((highlight, index) => (
                     <div
                       key={index}
                       className="flex items-start gap-3 bg-lightGrey rounded-lg p-4 border border-borderGrey"
@@ -398,18 +404,17 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
               )}
             </div>
             
-            {/* Image Section */}
-            <div className="w-full lg:w-1/2">
-              <div className="bg-white p-2 rounded-2xl shadow-xl border border-borderGrey relative group">
-                <div className="absolute inset-0 bg-primary/10 rounded-2xl transform rotate-3 -z-10 transition-transform group-hover:rotate-6" />
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-lightGrey">
-                  <img 
-                    src={content.layoutImage || "/assets/img/interior-layout.jpg"} 
-                    alt={`${primaryKeyword} Interior Layout`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "/assets/img/placeholder-property.jpg";
-                    }}
+            {/* Image Section - Full Height */}
+            <div className="w-full lg:w-1/2 flex">
+              <div className="w-full bg-white p-2 rounded-2xl shadow-xl border border-borderGrey relative group flex-1">
+                <div className="absolute inset-0 bg-primary/10 rounded-2xl transform rotate-2 -z-10 transition-transform group-hover:rotate-3" />
+                <div className="relative w-full h-full min-h-[400px] lg:min-h-full rounded-xl overflow-hidden bg-lightGrey">
+                  <Image 
+                    src={content.layoutImage || "/assets/img/3bhk-building.jpg"} 
+                    alt={`${primaryKeyword} Building`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               </div>
@@ -418,9 +423,149 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
         </div>
       </section>
 
-      {/* Life Beyond the Gates - Local Features */}
+      {/* Hidden Gems - Hyper-Local Section */}
+      <section className="py-12 md:py-16 bg-lightGrey">
+        <div className="container mx-auto px-4 md:px-10">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <MapPin className="w-6 h-6 text-primary" />
+              <h2 className="text-2xl md:text-3xl font-bold text-dark">
+                {content.localAreaTitle}
+              </h2>
+            </div>
+            <p className="text-gray-700 leading-relaxed mb-8">
+              {content.localAreaDescription}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {content.nearbyPlaces.map((place, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-lg p-4 border border-borderGrey flex items-center gap-3 hover:border-primary/20 transition-colors"
+                >
+                  <span className="w-10 h-10 rounded-lg bg-lightGrey flex items-center justify-center shadow-sm">
+                    {getPlaceIcon(place.type)}
+                  </span>
+                  <div>
+                    <div className="font-medium text-dark text-sm">{place.name}</div>
+                    <div className="text-xs text-gray-500">{place.distance}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects CTA Section (if no project cards) */}
+      {!content.projectCards && (
+        <section id="projects" className="py-12 md:py-16 bg-white">
+          <div className="container mx-auto px-4 md:px-10">
+            <div className="bg-dark rounded-2xl p-8 md:p-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Explore {primaryKeyword}
+              </h2>
+              <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+                Browse our curated selection of verified properties with transparent pricing, 
+                floor plans, and direct developer contacts.
+              </p>
+              <Link
+                href="/projects"
+                className="cta-button-large inline-flex items-center gap-2"
+              >
+                View All Projects <Building className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section with Accordions */}
+      <section className="py-12 md:py-16 bg-white border-t border-borderGrey">
+        <div className="container mx-auto px-4 md:px-10">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 text-center">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600 text-center mb-8">
+              Everything you need to know about investing in this corridor.
+            </p>
+            
+            <div className="space-y-3">
+              {content.faqs.map((faq, index) => (
+                <div
+                  key={index}
+                  className="bg-lightGrey border border-borderGrey rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-100 transition-colors"
+                    aria-expanded={openFaqIndex === index}
+                  >
+                    <span className="font-bold text-dark pr-4 text-base">
+                      {faq.question}
+                    </span>
+                    <span className="text-primary flex-shrink-0 transition-transform duration-300" style={{
+                      transform: openFaqIndex === index ? "rotate(180deg)" : "rotate(0deg)"
+                    }}>
+                      {openFaqIndex === index ? (
+                        <Minus className="w-5 h-5" />
+                      ) : (
+                        <Plus className="w-5 h-5" />
+                      )}
+                    </span>
+                  </button>
+                  <div
+                    className={`grid transition-all duration-300 ${
+                      openFaqIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="w-full h-px bg-borderGrey mx-6" style={{ width: "calc(100% - 3rem)" }} />
+                      <div className="px-6 py-4 text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Linking Section - Related Searches */}
+      <section className="py-12 md:py-16 bg-lightGrey">
+        <div className="container mx-auto px-4 md:px-10">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 text-center">
+              Related Searches
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {content.relatedLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="group bg-white rounded-lg p-5 border border-borderGrey hover:border-primary/30 hover:shadow-md transition-all"
+                >
+                  <h3 className="font-semibold text-dark group-hover:text-primary transition-colors mb-2">
+                    {link.title}
+                  </h3>
+                  {link.description && (
+                    <p className="text-sm text-gray-500">{link.description}</p>
+                  )}
+                  <div className="flex items-center gap-1 text-primary text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Explore <ArrowRight className="w-4 h-4" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Life Beyond the Gates - Local Features (Moved to after Related Searches) */}
       {content.localFeatures && content.localFeatures.length > 0 && (
-        <section className="py-12 md:py-16 bg-lightGrey">
+        <section className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4 md:px-10">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4">
@@ -435,7 +580,7 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
               {content.localFeatures.map((feature, index) => (
                 <div
                   key={index}
-                  className="bg-white p-8 rounded-2xl hover:shadow-lg transition-shadow border border-borderGrey"
+                  className="bg-lightGrey p-8 rounded-2xl hover:shadow-lg transition-shadow border border-borderGrey"
                 >
                   <div className={`w-14 h-14 rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6 ${
                     feature.icon === "school" ? "bg-primary/10 text-primary" :
@@ -465,146 +610,6 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
           </div>
         </section>
       )}
-
-      {/* Hidden Gems - Hyper-Local Section */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 mb-6">
-              <MapPin className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl md:text-3xl font-bold text-dark">
-                {content.localAreaTitle}
-              </h2>
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-8">
-              {content.localAreaDescription}
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {content.nearbyPlaces.map((place, index) => (
-                <div
-                  key={index}
-                  className="bg-lightGrey rounded-lg p-4 border border-borderGrey flex items-center gap-3 hover:border-primary/20 transition-colors"
-                >
-                  <span className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                    {getPlaceIcon(place.type)}
-                  </span>
-                  <div>
-                    <div className="font-medium text-dark text-sm">{place.name}</div>
-                    <div className="text-xs text-gray-500">{place.distance}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects CTA Section (if no project cards) */}
-      {!content.projectCards && (
-        <section id="projects" className="py-12 md:py-16 bg-lightGrey">
-          <div className="container mx-auto px-4 md:px-10">
-            <div className="bg-dark rounded-2xl p-8 md:p-12 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Explore {primaryKeyword}
-              </h2>
-              <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-                Browse our curated selection of verified properties with transparent pricing, 
-                floor plans, and direct developer contacts.
-              </p>
-              <Link
-                href="/projects"
-                className="cta-button-large inline-flex items-center gap-2"
-              >
-                View All Projects <Building className="w-5 h-5" />
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FAQ Section with Accordions */}
-      <section className="py-12 md:py-16 bg-lightGrey border-t border-borderGrey">
-        <div className="container mx-auto px-4 md:px-10">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 text-center">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600 text-center mb-8">
-              Everything you need to know about investing in this corridor.
-            </p>
-            
-            <div className="space-y-3">
-              {content.faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className="bg-white border border-borderGrey rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition-colors"
-                    aria-expanded={openFaqIndex === index}
-                  >
-                    <span className="font-bold text-dark pr-4 text-base">
-                      {faq.question}
-                    </span>
-                    <span className="text-primary flex-shrink-0 transition-transform duration-300" style={{
-                      transform: openFaqIndex === index ? "rotate(180deg)" : "rotate(0deg)"
-                    }}>
-                      {openFaqIndex === index ? (
-                        <Minus className="w-5 h-5" />
-                      ) : (
-                        <Plus className="w-5 h-5" />
-                      )}
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-all duration-300 ${
-                      openFaqIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="w-full h-px bg-gray-100 mx-6" style={{ width: "calc(100% - 3rem)" }} />
-                      <div className="px-6 py-4 text-gray-600 leading-relaxed">
-                        {faq.answer}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Internal Linking Section */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 text-center">
-              Related Searches
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {content.relatedLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  className="group bg-lightGrey rounded-lg p-5 border border-borderGrey hover:border-primary/30 hover:shadow-md transition-all"
-                >
-                  <h3 className="font-semibold text-dark group-hover:text-primary transition-colors mb-2">
-                    {link.title}
-                  </h3>
-                  {link.description && (
-                    <p className="text-sm text-gray-500">{link.description}</p>
-                  )}
-                  <div className="flex items-center gap-1 text-primary text-sm font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Explore <ArrowRight className="w-4 h-4" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <div id="contact">

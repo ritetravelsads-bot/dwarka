@@ -42,6 +42,7 @@ const pageContent: SEOPageContent = {
   heroTitle: "Elevate Your Lifestyle with Luxury 3BHK Flats in Gurgaon",
   heroSubtitle:
     "Experience seamless connectivity and world-class amenities. Step into a home designed for modern living, where every detail reflects your aspiration.",
+  heroImage: "/assets/img/3bhk-hero-bg.jpg",
 
   trustIndicators: [
     { icon: "route", value: "0 km", label: "From Expressway" },
@@ -50,10 +51,10 @@ const pageContent: SEOPageContent = {
   ],
 
   quickFacts: [
-    { label: "Price Range", value: "1.2-3.5 Cr" },
-    { label: "Size Range", value: "1500-2500 sq.ft" },
-    { label: "Top Developers", value: "15+" },
-    { label: "Available Units", value: "3,000+" },
+    { label: "Ideal Family Size", value: "4-5 Members" },
+    { label: "Investment Appreciation", value: "12-15% YoY" },
+    { label: "Rental Yield", value: "3-4%" },
+    { label: "Tax Benefits", value: "Up to 5L" },
   ],
 
   projectsSectionTitle: "Premium 3BHK Projects at a Glance",
@@ -107,11 +108,10 @@ const pageContent: SEOPageContent = {
   layoutHighlights: [
     "Expansive floor plans with wider deck balconies",
     "Cross-ventilated design with natural sunlight",
-    "Master-planned gated communities",
-    "Premium schools within 10-minute radius",
-    "Multi-specialty hospitals nearby",
-    "Safe, gated communities with 24/7 security",
+    "Master-planned gated communities with 24/7 security",
+    "Premium schools and hospitals within 10-minute radius",
   ],
+  layoutImage: "/assets/img/3bhk-building.jpg",
 
   localFeatures: [
     {
