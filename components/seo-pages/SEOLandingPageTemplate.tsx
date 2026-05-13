@@ -309,9 +309,13 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                       {project.status}
                     </div>
                     <h3 className="text-[10px] md:text-xl font-bold text-white mb-0.5 md:mb-1 md:pr-20">{project.name}</h3>
+                    {/* Mobile: Show only sector info, Desktop: Full location */}
                     <p className="text-[9px] md:text-sm text-white/80 flex items-center gap-1 md:gap-2">
                       <MapPin className="w-2 h-2 md:w-4 md:h-4 flex-shrink-0" /> 
-                      <span>{project.location}</span>
+                      <span className="md:hidden">
+                        {project.location.match(/Sector\s*\d+/i)?.[0] || project.location.split(',')[0]}
+                      </span>
+                      <span className="hidden md:inline">{project.location}</span>
                     </p>
                   </div>
                   
