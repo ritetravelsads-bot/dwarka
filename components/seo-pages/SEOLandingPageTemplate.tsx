@@ -297,25 +297,31 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                   key={index}
                   className="bg-white rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-borderGrey overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
+                  {/* Mobile: Status Badge Block */}
+                  <div className={`block md:hidden ${getStatusBgColor(project.statusColor)} text-white text-[8px] font-bold px-2 py-1 text-center`}>
+                    {project.status}
+                  </div>
+                  
                   {/* Card Header */}
-                  <div className={`${getHeaderBgColor(project.headerColor)} p-2.5 md:p-5 relative`}>
-                    <div className={`absolute top-2 right-2 md:top-4 md:right-4 z-10 ${getStatusBgColor(project.statusColor)} text-white text-[9px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-sm`}>
+                  <div className={`${getHeaderBgColor(project.headerColor)} p-2 md:p-5 relative`}>
+                    {/* Desktop: Absolute positioned badge */}
+                    <div className={`hidden md:block absolute top-4 right-4 z-10 ${getStatusBgColor(project.statusColor)} text-white text-xs font-bold px-2 py-1 rounded shadow-sm`}>
                       {project.status}
                     </div>
-                    <h3 className="text-xs md:text-xl font-bold text-white mb-0.5 md:mb-1 pr-14 md:pr-20 line-clamp-1">{project.name}</h3>
-                    <p className="text-[10px] md:text-sm text-white/80 flex items-center gap-1 md:gap-2">
-                      <MapPin className="w-2.5 h-2.5 md:w-4 md:h-4 flex-shrink-0" /> 
-                      <span className="line-clamp-1">{project.location}</span>
+                    <h3 className="text-[10px] md:text-xl font-bold text-white mb-0.5 md:mb-1 md:pr-20">{project.name}</h3>
+                    <p className="text-[9px] md:text-sm text-white/80 flex items-center gap-1 md:gap-2">
+                      <MapPin className="w-2 h-2 md:w-4 md:h-4 flex-shrink-0" /> 
+                      <span>{project.location}</span>
                     </p>
                   </div>
                   
                   {/* Mobile: Compact List View */}
-                  <div className="block md:hidden p-2 space-y-1">
-                    <div className="flex justify-between items-center text-[10px]">
+                  <div className="block md:hidden p-1.5 space-y-0.5">
+                    <div className="flex justify-between items-center text-[8px]">
                       <span className="text-gray-500">Size</span>
                       <span className="text-dark font-medium">{project.sizeRange}</span>
                     </div>
-                    <div className="flex justify-between items-center text-[11px]">
+                    <div className="flex justify-between items-center text-[9px]">
                       <span className="text-gray-500">Price</span>
                       <span className="text-primary font-bold">{project.startingPrice}</span>
                     </div>
@@ -352,10 +358,10 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                   </div>
                   
                   {/* Card Footer */}
-                  <div className="p-2 md:p-4 bg-white border-t border-gray-100 flex justify-center md:justify-end">
+                  <div className="p-1.5 md:p-4 bg-white border-t border-gray-100 flex justify-center md:justify-end">
                     <Link
                       href={project.href || "/projects"}
-                      className="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1.5 md:px-5 md:py-2 rounded-md md:rounded-lg font-medium text-[10px] md:text-sm transition-colors w-full md:w-auto text-center"
+                      className="bg-primary/10 text-primary hover:bg-primary hover:text-white px-2 py-1 md:px-5 md:py-2 rounded md:rounded-lg font-medium text-[8px] md:text-sm transition-colors w-full md:w-auto text-center"
                     >
                       View Details
                     </Link>
