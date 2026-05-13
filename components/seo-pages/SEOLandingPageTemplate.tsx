@@ -310,22 +310,14 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                   </div>
                   
                   {/* Mobile: Compact List View */}
-                  <div className="block md:hidden p-2.5 space-y-1.5 text-[10px]">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-500">Config</span>
-                      <span className="text-dark font-semibold">{project.configuration}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
+                  <div className="block md:hidden p-2 space-y-1">
+                    <div className="flex justify-between items-center text-[10px]">
                       <span className="text-gray-500">Size</span>
-                      <span className="text-dark">{project.sizeRange}</span>
+                      <span className="text-dark font-medium">{project.sizeRange}</span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center text-[11px]">
                       <span className="text-gray-500">Price</span>
                       <span className="text-primary font-bold">{project.startingPrice}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-500">Access</span>
-                      <span className="text-dark line-clamp-1 max-w-[60%] text-right">{project.connectivity}</span>
                     </div>
                   </div>
                   
