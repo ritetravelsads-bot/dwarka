@@ -291,25 +291,46 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-6">
               {content.projectCards.map((project, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-lg border border-borderGrey overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-borderGrey overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   {/* Card Header */}
-                  <div className={`${getHeaderBgColor(project.headerColor)} p-5 relative`}>
-                    <div className={`absolute top-4 right-4 z-10 ${getStatusBgColor(project.statusColor)} text-white text-xs font-bold px-2 py-1 rounded shadow-sm`}>
+                  <div className={`${getHeaderBgColor(project.headerColor)} p-2.5 md:p-5 relative`}>
+                    <div className={`absolute top-2 right-2 md:top-4 md:right-4 z-10 ${getStatusBgColor(project.statusColor)} text-white text-[9px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-sm`}>
                       {project.status}
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-1">{project.name}</h3>
-                    <p className="text-sm text-white/80 flex items-center gap-2">
-                      <MapPin className="w-4 h-4" /> {project.location}
+                    <h3 className="text-xs md:text-xl font-bold text-white mb-0.5 md:mb-1 pr-14 md:pr-20 line-clamp-1">{project.name}</h3>
+                    <p className="text-[10px] md:text-sm text-white/80 flex items-center gap-1 md:gap-2">
+                      <MapPin className="w-2.5 h-2.5 md:w-4 md:h-4 flex-shrink-0" /> 
+                      <span className="line-clamp-1">{project.location}</span>
                     </p>
                   </div>
                   
-                  {/* Data Table */}
-                  <div className="overflow-x-auto">
+                  {/* Mobile: Compact List View */}
+                  <div className="block md:hidden p-2.5 space-y-1.5 text-[10px]">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Config</span>
+                      <span className="text-dark font-semibold">{project.configuration}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Size</span>
+                      <span className="text-dark">{project.sizeRange}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Price</span>
+                      <span className="text-primary font-bold">{project.startingPrice}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Access</span>
+                      <span className="text-dark line-clamp-1 max-w-[60%] text-right">{project.connectivity}</span>
+                    </div>
+                  </div>
+                  
+                  {/* Desktop: Data Table */}
+                  <div className="hidden md:block overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-gray-50 border-b border-borderGrey text-gray-500 uppercase text-xs tracking-wider">
@@ -339,12 +360,12 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                   </div>
                   
                   {/* Card Footer */}
-                  <div className="p-4 bg-white border-t border-gray-100 flex justify-end">
+                  <div className="p-2 md:p-4 bg-white border-t border-gray-100 flex justify-center md:justify-end">
                     <Link
                       href={project.href || "/projects"}
-                      className="bg-primary/10 text-primary hover:bg-primary hover:text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors"
+                      className="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1.5 md:px-5 md:py-2 rounded-md md:rounded-lg font-medium text-[10px] md:text-sm transition-colors w-full md:w-auto text-center"
                     >
-                      View Floor Plan
+                      View Details
                     </Link>
                   </div>
                 </div>
