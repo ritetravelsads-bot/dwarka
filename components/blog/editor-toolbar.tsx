@@ -63,7 +63,7 @@ interface ToggleButtonProps {
 function ToggleButton({ tooltip, pressed, onToggle, disabled, children }: ToggleButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
         <Toggle
           size="sm"
           pressed={pressed}
@@ -90,7 +90,7 @@ interface ActionButtonProps {
 function ActionButton({ tooltip, onClick, disabled, children }: ActionButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
         <Button
           variant="ghost"
           size="sm"
@@ -140,8 +140,8 @@ function LinkPopover({ editor }: { editor: Editor }) {
   return (
     <Popover open={open} onOpenChange={handleOpen}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <PopoverTrigger asChild>
+        <TooltipTrigger>
+          <PopoverTrigger>
             <Toggle size="sm" pressed={hasLink} aria-label="Insert link" type="button">
               <Link2 size={15} />
             </Toggle>
@@ -230,8 +230,8 @@ function ImagePopover({ editor }: { editor: Editor }) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <PopoverTrigger asChild>
+        <TooltipTrigger>
+          <PopoverTrigger>
             <Button
               variant="ghost"
               size="sm"
@@ -317,8 +317,8 @@ function TableMenu({ editor }: { editor: Editor }) {
   return (
     <DropdownMenu>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownMenuTrigger asChild>
+        <TooltipTrigger>
+          <DropdownMenuTrigger>
             <Toggle size="sm" pressed={inTable} aria-label="Table options" type="button" className="gap-0.5">
               <TableIcon size={15} />
               <ChevronDown size={10} />
@@ -395,7 +395,7 @@ function ColorPickerButton({ editor }: { editor: Editor }) {
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <TooltipTrigger>
         <label
           className="relative inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-muted cursor-pointer transition-colors"
           aria-label="Text color"
