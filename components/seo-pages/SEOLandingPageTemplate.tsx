@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Minus, MapPin, Building, IndianRupee, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Plus, Minus, MapPin, Building, ArrowRight, CheckCircle2, Plane, Shield, Route, GraduationCap, Hospital, Train } from "lucide-react";
 import ContactSection from "@/components/home/ContactSection";
 
 export interface QuickFact {
@@ -27,19 +27,54 @@ export interface RelatedLink {
   description?: string;
 }
 
+export interface TrustIndicator {
+  icon: "route" | "plane" | "shield";
+  value: string;
+  label: string;
+}
+
+export interface ProjectCard {
+  name: string;
+  location: string;
+  status: "Ready to Move" | "Under Construction" | "New Launch";
+  statusColor: "green" | "blue" | "red";
+  headerColor: "primary" | "dark" | "amber";
+  configuration: string;
+  sizeRange: string;
+  startingPrice: string;
+  connectivity: string;
+  href?: string;
+}
+
+export interface LocalFeature {
+  icon: "school" | "hospital" | "connectivity";
+  title: string;
+  description: string;
+}
+
 export interface SEOPageContent {
   // Hero Section
   heroTagline: string;
   heroTitle: string;
   heroSubtitle: string;
+  trustIndicators?: TrustIndicator[];
   
   // Quick Facts
   quickFacts: QuickFact[];
+  
+  // Project Cards (optional - for comparison)
+  projectCards?: ProjectCard[];
+  projectsSectionTitle?: string;
+  projectsSectionSubtitle?: string;
   
   // Layout Breakdown
   layoutTitle: string;
   layoutContent: string[];
   layoutHighlights?: string[];
+  layoutImage?: string;
+  
+  // Local Features (enhanced Hidden Gems)
+  localFeatures?: LocalFeature[];
   
   // Hidden Gems / Local Info
   localAreaTitle: string;
@@ -72,54 +107,146 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
   const getPlaceIcon = (type: NearbyPlace["type"]) => {
     switch (type) {
       case "school":
-        return "🎓";
+        return <GraduationCap className="w-5 h-5 text-primary" />;
       case "hospital":
-        return "🏥";
+        return <Hospital className="w-5 h-5 text-red-500" />;
       case "mall":
-        return "🛒";
+        return <Building className="w-5 h-5 text-amber-500" />;
       case "metro":
-        return "🚇";
+        return <Train className="w-5 h-5 text-blue-500" />;
       case "airport":
-        return "✈️";
+        return <Plane className="w-5 h-5 text-primary" />;
       case "highway":
-        return "🛣️";
+        return <Route className="w-5 h-5 text-green-500" />;
       default:
-        return "📍";
+        return <MapPin className="w-5 h-5 text-gray-500" />;
+    }
+  };
+
+  const getTrustIcon = (icon: TrustIndicator["icon"]) => {
+    switch (icon) {
+      case "route":
+        return <Route className="w-6 h-6 text-primary" />;
+      case "plane":
+        return <Plane className="w-6 h-6 text-primary" />;
+      case "shield":
+        return <Shield className="w-6 h-6 text-primary" />;
+      default:
+        return <MapPin className="w-6 h-6 text-primary" />;
+    }
+  };
+
+  const getLocalFeatureIcon = (icon: LocalFeature["icon"]) => {
+    switch (icon) {
+      case "school":
+        return <GraduationCap className="w-7 h-7" />;
+      case "hospital":
+        return <Hospital className="w-7 h-7" />;
+      case "connectivity":
+        return <Train className="w-7 h-7" />;
+      default:
+        return <MapPin className="w-7 h-7" />;
+    }
+  };
+
+  const getStatusBgColor = (color: ProjectCard["statusColor"]) => {
+    switch (color) {
+      case "green":
+        return "bg-green-500";
+      case "blue":
+        return "bg-blue-500";
+      case "red":
+        return "bg-red-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
+  const getHeaderBgColor = (color: ProjectCard["headerColor"]) => {
+    switch (color) {
+      case "primary":
+        return "bg-primary";
+      case "dark":
+        return "bg-dark";
+      case "amber":
+        return "bg-amber-600";
+      default:
+        return "bg-primary";
     }
   };
 
   return (
     <main>
       {/* Hero Section - Lifestyle-First */}
-      <section className="relative bg-gradient-to-br from-dark to-gray-900 text-white py-16 md:py-24">
-        <div className="absolute inset-0 bg-[url('/assets/img/pattern-grid.png')] opacity-5" />
+      <section className="relative bg-gradient-to-br from-dark to-gray-900 text-white pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: "url('/assets/img/hero-bg.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 to-dark/40" />
+        
         <div className="container mx-auto px-4 md:px-10 relative z-10">
-          <div className="max-w-4xl">
-            <span className="inline-block bg-primary/20 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+          <div className="max-w-3xl">
+            {/* Benefit Driven Subheadline */}
+            <span className="inline-block py-1.5 px-4 rounded-full bg-primary/20 text-primary border border-primary/30 text-sm font-semibold tracking-wider mb-6 backdrop-blur-sm uppercase">
               {content.heroTagline}
             </span>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-balance">
-              {content.heroTitle}
+            
+            {/* SEO Optimized H1 */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-balance">
+              {content.heroTitle.split(" ").map((word, i) => {
+                // Highlight keywords like "Luxury", "Premium", numbers like "3BHK"
+                const isHighlight = /^(luxury|premium|3bhk|4bhk|2bhk|ready|move)/i.test(word);
+                return isHighlight ? (
+                  <span key={i} className="text-primary">{word} </span>
+                ) : (
+                  <span key={i}>{word} </span>
+                );
+              })}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+            
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed mb-8">
               {content.heroSubtitle}
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
+            
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="#projects"
-                className="cta-button-large inline-flex items-center gap-2"
+                className="cta-button-large inline-flex items-center justify-center gap-2"
               >
-                View Projects <ArrowRight className="w-5 h-5" />
+                Explore Floor Plans <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 href="#contact"
-                className="cta-button-secondary-light bg-white/10 border-white/20 text-white hover:bg-white/20 inline-flex items-center gap-2"
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white text-center px-6 py-3 rounded font-medium transition-all inline-flex items-center justify-center gap-2"
               >
-                Get Expert Advice
+                Download Brochure
               </Link>
             </div>
           </div>
         </div>
+        
+        {/* Trust Indicators Bar */}
+        {content.trustIndicators && content.trustIndicators.length > 0 && (
+          <div className="absolute bottom-0 left-0 w-full bg-white/10 backdrop-blur-md border-t border-white/20 py-4 hidden md:block">
+            <div className="container mx-auto px-4 md:px-10">
+              <div className="flex justify-around items-center">
+                {content.trustIndicators.map((indicator, index) => (
+                  <div key={index} className="flex items-center gap-3 text-white">
+                    {getTrustIcon(indicator.icon)}
+                    <div>
+                      <p className="font-bold">{indicator.value}</p>
+                      <p className="text-xs text-gray-300 uppercase">{indicator.label}</p>
+                    </div>
+                    {index < content.trustIndicators!.length - 1 && (
+                      <div className="h-8 w-px bg-white/30 ml-8" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Quick Facts Grid */}
@@ -146,60 +273,201 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
         </div>
       </section>
 
-      {/* Layout Breakdown - Educational Content */}
-      <section className="py-12 md:py-16 bg-lightGrey">
-        <div className="container mx-auto px-4 md:px-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8">
-              {content.layoutTitle}
-            </h2>
-            <div className="space-y-4">
-              {content.layoutContent.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 leading-relaxed">
-                  {paragraph}
-                </p>
+      {/* Project Comparison Cards - Interactive Quick-Fact Grid */}
+      {content.projectCards && content.projectCards.length > 0 && (
+        <section id="projects" className="py-12 md:py-16 bg-lightGrey">
+          <div className="container mx-auto px-4 md:px-10">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4">
+                {content.projectsSectionTitle || "Premium Projects at a Glance"}
+              </h2>
+              <p className="text-gray-600">
+                {content.projectsSectionSubtitle || `Compare the top ready-to-move and under-construction ${primaryKeyword}. Find the perfect fit for your budget and lifestyle.`}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {content.projectCards.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg border border-borderGrey overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  {/* Card Header */}
+                  <div className={`${getHeaderBgColor(project.headerColor)} p-5 relative`}>
+                    <div className={`absolute top-4 right-4 z-10 ${getStatusBgColor(project.statusColor)} text-white text-xs font-bold px-2 py-1 rounded shadow-sm`}>
+                      {project.status}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-1">{project.name}</h3>
+                    <p className="text-sm text-white/80 flex items-center gap-2">
+                      <MapPin className="w-4 h-4" /> {project.location}
+                    </p>
+                  </div>
+                  
+                  {/* Data Table */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-gray-50 border-b border-borderGrey text-gray-500 uppercase text-xs tracking-wider">
+                          <th className="p-4 font-semibold w-2/5">Feature</th>
+                          <th className="p-4 font-semibold w-3/5">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-sm">
+                        <tr className="border-b border-gray-100 hover:bg-primary/5 transition-colors">
+                          <td className="p-4 text-gray-600 font-medium">Configuration</td>
+                          <td className="p-4 text-dark font-bold">{project.configuration}</td>
+                        </tr>
+                        <tr className="border-b border-gray-100 bg-gray-50/50 hover:bg-primary/5 transition-colors">
+                          <td className="p-4 text-gray-600 font-medium">Size Range</td>
+                          <td className="p-4 text-dark">{project.sizeRange}</td>
+                        </tr>
+                        <tr className="border-b border-gray-100 hover:bg-primary/5 transition-colors">
+                          <td className="p-4 text-gray-600 font-medium">Starting Price</td>
+                          <td className="p-4 text-primary font-bold text-base">{project.startingPrice}</td>
+                        </tr>
+                        <tr className="border-b border-gray-100 bg-gray-50/50 hover:bg-primary/5 transition-colors">
+                          <td className="p-4 text-gray-600 font-medium">Connectivity</td>
+                          <td className="p-4 text-dark">{project.connectivity}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  {/* Card Footer */}
+                  <div className="p-4 bg-white border-t border-gray-100 flex justify-end">
+                    <Link
+                      href={project.href || "/projects"}
+                      className="bg-primary/10 text-primary hover:bg-primary hover:text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors"
+                    >
+                      View Floor Plan
+                    </Link>
+                  </div>
+                </div>
               ))}
             </div>
-            {content.layoutHighlights && content.layoutHighlights.length > 0 && (
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                {content.layoutHighlights.map((highlight, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 bg-white rounded-lg p-4 border border-borderGrey"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 text-sm">{highlight}</span>
-                  </div>
+
+            {/* Internal Link Suggestion */}
+            <div className="mt-10 text-center bg-primary/5 rounded-xl p-6 border border-primary/10">
+              <p className="text-gray-700 font-medium">
+                Looking for more options?{" "}
+                <Link href="/projects" className="text-primary hover:underline font-bold">
+                  Explore all projects on Dwarka Expressway here.
+                </Link>
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Layout Breakdown - Educational Content */}
+      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+        {/* Decorative blobs */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-amber-500/5 blur-3xl" />
+        
+        <div className="container mx-auto px-4 md:px-10 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="w-full lg:w-1/2">
+              <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">
+                Why Choose This Corridor?
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold text-dark mb-6 leading-tight">
+                {content.layoutTitle}
+              </h2>
+              
+              <div className="space-y-4">
+                {content.layoutContent.map((paragraph, index) => (
+                  <p key={index} className="text-gray-700 leading-relaxed">
+                    {paragraph}
+                  </p>
                 ))}
               </div>
-            )}
+              
+              {content.layoutHighlights && content.layoutHighlights.length > 0 && (
+                <div className="mt-8 space-y-3">
+                  {content.layoutHighlights.map((highlight, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 bg-lightGrey rounded-lg p-4 border border-borderGrey"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700 text-sm">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {/* Image Section */}
+            <div className="w-full lg:w-1/2">
+              <div className="bg-white p-2 rounded-2xl shadow-xl border border-borderGrey relative group">
+                <div className="absolute inset-0 bg-primary/10 rounded-2xl transform rotate-3 -z-10 transition-transform group-hover:rotate-6" />
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-lightGrey">
+                  <img 
+                    src={content.layoutImage || "/assets/img/interior-layout.jpg"} 
+                    alt={`${primaryKeyword} Interior Layout`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "/assets/img/placeholder-property.jpg";
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Projects CTA Section */}
-      <section id="projects" className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-10">
-          <div className="bg-dark rounded-2xl p-8 md:p-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Explore {primaryKeyword}
-            </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Browse our curated selection of verified properties with transparent pricing, 
-              floor plans, and direct developer contacts.
-            </p>
-            <Link
-              href="/projects"
-              className="cta-button-large inline-flex items-center gap-2"
-            >
-              View All Projects <Building className="w-5 h-5" />
-            </Link>
+      {/* Life Beyond the Gates - Local Features */}
+      {content.localFeatures && content.localFeatures.length > 0 && (
+        <section className="py-12 md:py-16 bg-lightGrey">
+          <div className="container mx-auto px-4 md:px-10">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4">
+                Life Beyond the Gates
+              </h2>
+              <p className="text-gray-600">
+                Discover the hyper-local infrastructure that makes living on the Expressway incredibly convenient.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {content.localFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-8 rounded-2xl hover:shadow-lg transition-shadow border border-borderGrey"
+                >
+                  <div className={`w-14 h-14 rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6 ${
+                    feature.icon === "school" ? "bg-primary/10 text-primary" :
+                    feature.icon === "hospital" ? "bg-red-50 text-red-500" :
+                    "bg-amber-50 text-amber-600"
+                  }`}>
+                    {getLocalFeatureIcon(feature.icon)}
+                  </div>
+                  <h3 className="text-xl font-bold text-dark mb-4">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Internal link to blog */}
+            <div className="mt-10 text-center">
+              <Link 
+                href="/blogs" 
+                className="inline-flex items-center gap-2 text-primary hover:underline font-medium transition-colors group"
+              >
+                Read our blog: Top Projects for 2026
+                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Hidden Gems - Hyper-Local Section */}
-      <section className="py-12 md:py-16 bg-lightGrey">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-10">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
@@ -215,9 +483,11 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
               {content.nearbyPlaces.map((place, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg p-4 border border-borderGrey flex items-center gap-3 hover:border-primary/20 transition-colors"
+                  className="bg-lightGrey rounded-lg p-4 border border-borderGrey flex items-center gap-3 hover:border-primary/20 transition-colors"
                 >
-                  <span className="text-2xl">{getPlaceIcon(place.type)}</span>
+                  <span className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
+                    {getPlaceIcon(place.type)}
+                  </span>
                   <div>
                     <div className="font-medium text-dark text-sm">{place.name}</div>
                     <div className="text-xs text-gray-500">{place.distance}</div>
@@ -229,27 +499,57 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
         </div>
       </section>
 
+      {/* Projects CTA Section (if no project cards) */}
+      {!content.projectCards && (
+        <section id="projects" className="py-12 md:py-16 bg-lightGrey">
+          <div className="container mx-auto px-4 md:px-10">
+            <div className="bg-dark rounded-2xl p-8 md:p-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Explore {primaryKeyword}
+              </h2>
+              <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+                Browse our curated selection of verified properties with transparent pricing, 
+                floor plans, and direct developer contacts.
+              </p>
+              <Link
+                href="/projects"
+                className="cta-button-large inline-flex items-center gap-2"
+              >
+                View All Projects <Building className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* FAQ Section with Accordions */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-lightGrey border-t border-borderGrey">
         <div className="container mx-auto px-4 md:px-10">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4 text-center">
               Frequently Asked Questions
             </h2>
+            <p className="text-gray-600 text-center mb-8">
+              Everything you need to know about investing in this corridor.
+            </p>
+            
             <div className="space-y-3">
               {content.faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className="bg-lightGrey rounded-lg overflow-hidden"
+                  className="bg-white border border-borderGrey rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full flex justify-between items-center px-5 py-4 text-left hover:bg-gray-100 transition-colors"
+                    className="w-full flex justify-between items-center px-6 py-5 text-left hover:bg-gray-50 transition-colors"
+                    aria-expanded={openFaqIndex === index}
                   >
-                    <span className="font-semibold text-dark pr-4">
+                    <span className="font-bold text-dark pr-4 text-base">
                       {faq.question}
                     </span>
-                    <span className="text-primary flex-shrink-0">
+                    <span className="text-primary flex-shrink-0 transition-transform duration-300" style={{
+                      transform: openFaqIndex === index ? "rotate(180deg)" : "rotate(0deg)"
+                    }}>
                       {openFaqIndex === index ? (
                         <Minus className="w-5 h-5" />
                       ) : (
@@ -263,7 +563,8 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-5 pb-4 text-gray-600 leading-relaxed">
+                      <div className="w-full h-px bg-gray-100 mx-6" style={{ width: "calc(100% - 3rem)" }} />
+                      <div className="px-6 py-4 text-gray-600 leading-relaxed">
                         {faq.answer}
                       </div>
                     </div>
@@ -276,7 +577,7 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
       </section>
 
       {/* Internal Linking Section */}
-      <section className="py-12 md:py-16 bg-lightGrey">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-dark mb-8 text-center">
@@ -287,7 +588,7 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
                 <Link
                   key={index}
                   href={link.href}
-                  className="group bg-white rounded-lg p-5 border border-borderGrey hover:border-primary/30 hover:shadow-md transition-all"
+                  className="group bg-lightGrey rounded-lg p-5 border border-borderGrey hover:border-primary/30 hover:shadow-md transition-all"
                 >
                   <h3 className="font-semibold text-dark group-hover:text-primary transition-colors mb-2">
                     {link.title}

@@ -39,9 +39,15 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Perfect for Growing Families",
-  heroTitle: "3 BHK Flats in Gurgaon",
+  heroTitle: "Elevate Your Lifestyle with Luxury 3BHK Flats in Gurgaon",
   heroSubtitle:
-    "Find your ideal family home with spacious 3 bedroom apartments featuring modern designs, premium amenities, and excellent connectivity to schools, hospitals, and workplaces.",
+    "Experience seamless connectivity and world-class amenities. Step into a home designed for modern living, where every detail reflects your aspiration.",
+
+  trustIndicators: [
+    { icon: "route", value: "0 km", label: "From Expressway" },
+    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
+    { icon: "shield", value: "RERA", label: "Approved Projects" },
+  ],
 
   quickFacts: [
     { label: "Price Range", value: "1.2-3.5 Cr" },
@@ -50,19 +56,79 @@ const pageContent: SEOPageContent = {
     { label: "Available Units", value: "3,000+" },
   ],
 
-  layoutTitle: "Why 3 BHK Flats in Gurgaon are Perfect for Families",
+  projectsSectionTitle: "Premium 3BHK Projects at a Glance",
+  projectsSectionSubtitle: "Compare the top ready-to-move and under-construction 3BHK projects. Find the perfect fit for your budget and lifestyle requirements.",
+  
+  projectCards: [
+    {
+      name: "Emaar DigiHomes",
+      location: "Sector 62 (Near Dwarka Exp)",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "3 BHK + Utility",
+      sizeRange: "2,538 - 2,588 Sq.Ft.",
+      startingPrice: "Rs. 5.5 Cr*",
+      connectivity: "0 Km from NH-8 Highway",
+      href: "/projects",
+    },
+    {
+      name: "Sobha City",
+      location: "Sector 108, Dwarka Exp",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "dark",
+      configuration: "3 BHK Premium",
+      sizeRange: "1,711 - 2,072 Sq.Ft.",
+      startingPrice: "Rs. 3.2 Cr*",
+      connectivity: "10 Mins to IGI Airport",
+      href: "/projects",
+    },
+    {
+      name: "M3M Capital",
+      location: "Sector 113, Dwarka Exp",
+      status: "New Launch",
+      statusColor: "red",
+      headerColor: "amber",
+      configuration: "3.5 BHK Golf Estate",
+      sizeRange: "1,665 - 2,055 Sq.Ft.",
+      startingPrice: "Rs. 2.8 Cr*",
+      connectivity: "Zero KM from Delhi",
+      href: "/projects",
+    },
+  ],
+
+  layoutTitle: "The Anatomy of a Dwarka Expressway 3BHK",
   layoutContent: [
     "A 3 BHK apartment in Gurgaon offers the ideal balance of space and affordability for growing families. With typical sizes ranging from 1500 to 2500 sq.ft, these homes provide dedicated spaces for parents, children, and guests or a home office.",
-    "3 BHK flats on Dwarka Expressway are particularly popular due to their spacious layouts, green surroundings, and proximity to premium schools like Euro International and GD Goenka. The 15-20 minute connectivity to IGI Airport makes it perfect for frequent travelers.",
+    "Unlike older sectors, a 3BHK on Dwarka Expressway offers wider deck balconies and dedicated utility rooms. You get more usable carpet area for your investment with modern architectural norms ensuring dual-aspect configurations.",
     "Top developers like Godrej, M3M, Sobha, and Experion offer 3 BHK apartments with thoughtful floor plans, premium specifications, and world-class amenities including swimming pools, gymnasiums, and landscaped gardens.",
   ],
   layoutHighlights: [
-    "Spacious layouts with 1500-2500 sq.ft carpet area",
-    "Dedicated servant room in most configurations",
-    "Modular kitchen with utility balcony",
+    "Expansive floor plans with wider deck balconies",
+    "Cross-ventilated design with natural sunlight",
+    "Master-planned gated communities",
     "Premium schools within 10-minute radius",
     "Multi-specialty hospitals nearby",
     "Safe, gated communities with 24/7 security",
+  ],
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Premium Education",
+      description: "Live within 10 minutes of Euro International School and DPS Sec 84. Ensure a zero-stress morning routine for your children without hitting highway traffic.",
+    },
+    {
+      icon: "hospital",
+      title: "World-Class Healthcare",
+      description: "Immediate access to Manipal Hospital and Aarvy Healthcare. Peace of mind knowing top-tier medical facilities are just a short drive away.",
+    },
+    {
+      icon: "connectivity",
+      title: "Global Connectivity",
+      description: "Signal-free drive to Yashobhoomi (IICC) and IGI Airport. Upcoming metro extension will further link your luxury 3BHK to the rest of NCR seamlessly.",
+    },
   ],
 
   localAreaTitle: "Family-Friendly Neighborhoods",
@@ -79,24 +145,24 @@ const pageContent: SEOPageContent = {
 
   faqs: [
     {
-      question: "What is the price of 3 BHK flats in Gurgaon?",
+      question: "What is the average price of a 3BHK on Dwarka Expressway?",
       answer:
-        "3 BHK flats in Gurgaon range from 1.2 Crore to 3.5 Crore depending on location, developer, and amenities. On Dwarka Expressway, prices start from 1.2-1.5 Crore for standard 3 BHK, going up to 3+ Crore for luxury apartments.",
+        "Currently, a premium 3BHK apartment on Dwarka Expressway ranges between Rs. 2.5 Cr to Rs. 4.5 Cr, depending on the sector, builder reputation, and construction status. Ready-to-move projects command a slight premium over new launches. This pricing reflects the significant infrastructure upgrades and proximity to Delhi.",
     },
     {
-      question: "Which is the best location for 3 BHK in Gurgaon?",
+      question: "Which are the best sectors for families to live in?",
       answer:
-        "Dwarka Expressway is the best location for 3 BHK flats due to its excellent connectivity, green environment, and presence of top developers. Golf Course Extension and Sohna Road are other popular options for premium 3 BHK apartments.",
+        "For end-users, Sectors 108, 109, and 113 are highly recommended due to their Zero KM to Delhi status. Alternatively, Sectors 83 to 88 offer excellent established social infrastructure, including operational schools and neighborhood markets, making them ideal for families moving in immediately.",
+    },
+    {
+      question: "Are these properties good for investment or end-use?",
+      answer:
+        "Both. As an end-user, you benefit from luxury amenities and uncluttered connectivity. From an investment perspective, luxury properties on Dwarka Expressway have seen consistent appreciation due to the opening of the NH-8 to Delhi stretch and upcoming developments like the Global City project.",
     },
     {
       question: "What is the average size of 3 BHK flats in Gurgaon?",
       answer:
         "3 BHK flats in Gurgaon typically range from 1500 to 2500 sq.ft super built-up area. Carpet area usually ranges from 1100-1800 sq.ft. Luxury 3 BHK apartments can go up to 3000+ sq.ft.",
-    },
-    {
-      question: "Are there ready to move 3 BHK flats in Gurgaon?",
-      answer:
-        "Yes, many ready to move 3 BHK flats are available in Gurgaon, especially on Dwarka Expressway where several projects have received OC. These offer immediate possession with zero GST benefits.",
     },
     {
       question: "What amenities come with 3 BHK flats in Gurgaon?",
