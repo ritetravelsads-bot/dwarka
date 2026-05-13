@@ -864,7 +864,9 @@ CustomImage.configure({
           <div className="relative">
             <button
               type="button"
-              ref={(el) => el && setTableBtnRef(el)}
+              ref={(el) => {
+                if (el) setTableBtnRef(el)
+              }}
               onClick={() => setShowTablePicker((v) => !v)}
               className={cn("p-1.5 rounded hover:bg-muted flex items-center gap-0.5", showTablePicker && "bg-muted text-primary")}
               title="Insert Table"
