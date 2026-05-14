@@ -620,16 +620,7 @@ export default function SEOLandingPageTemplate({ content, primaryKeyword }: SEOL
               ))}
             </div>
 
-            {/* Internal link to blog */}
-            <div className="mt-10 text-center">
-              <Link 
-                href="/blogs" 
-                className="inline-flex items-center gap-2 text-primary hover:underline font-medium transition-colors group"
-              >
-                Read our blog: Top Projects for 2026
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+
           </div>
         </section>
       )}

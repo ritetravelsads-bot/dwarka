@@ -10,8 +10,7 @@ import {
   Settings, 
   LogOut,
   Menu,
-  X,
-  FileText
+  X
 } from 'lucide-react';
 
 export default function AdminLayout({
@@ -79,7 +78,6 @@ export default function AdminLayout({
   const navItems = [
     { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { href: '/admin/projects', icon: Building2, label: 'Projects' },
-    { href: '/admin/blogs', icon: FileText, label: 'Blogs' },
     { href: '/admin/leads', icon: Users, label: 'Leads' },
     { href: '/admin/settings', icon: Settings, label: 'Settings' },
   ];

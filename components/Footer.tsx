@@ -9,7 +9,6 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Featured Projects", href: "#projects" },
   { name: "Location Map", href: "#location" },
-  { name: "Industry Insights (Blogs)", href: "/blogs" },
   { name: "About Us", href: "/about" },
 ];
 
