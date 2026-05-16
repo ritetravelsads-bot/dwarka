@@ -16,7 +16,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dwarkaexpressw
  * - CCBot (Common Crawl)
  */
 export default function robots(): MetadataRoute.Robots {
-  // Paths to disallow for all bots - admin, API, and thank-you pages
+  // Paths to disallow for all bots - admin, API, and thank-you pages.
+  // /blogs/ is intentionally excluded here — it is served by an external
+  // WordPress install and must remain crawlable by all bots.
   const disallowedPaths = ['/admin/', '/api/', '/thank-you'];
 
   return {

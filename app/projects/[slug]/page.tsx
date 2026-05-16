@@ -82,10 +82,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${project.name} | ${project.location} | Dwarka Expressway`,
     description: project.shortDescription || project.description?.slice(0, 160) || `${project.name} in ${project.location} - Starting from ${project.price}. Book your site visit today.`,
     keywords: `${project.name}, ${project.developer}, ${project.location}, dwarka expressway, gurgaon real estate`,
+    alternates: {
+      // Canonical points to root-level URL matching indexed GSC URLs
+      canonical: `${BASE_URL}/${slug}`,
+    },
     openGraph: {
       title: project.name,
       description: project.shortDescription || `${project.name} by ${project.developer}`,
       images: project.mainImage ? [project.mainImage] : [],
+      url: `${BASE_URL}/${slug}`,
     },
   };
 }
@@ -141,7 +146,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   }
 
   const { project } = data;
-  const projectUrl = `${BASE_URL}/projects/${slug}`;
+  // Canonical URL at root level matches current indexed GSC URLs
+  // e.g. https://www.dwarkaexpresswayncr.com/signature-global-sarvam
+  const projectUrl = `${BASE_URL}/${slug}`;
   const projectFaqs = generateProjectFaqs(project);
 
   // Extract price value for schema
@@ -152,7 +159,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Breadcrumb Schema for Navigation */}
       <BreadcrumbSchema
         items={[
-          { name: "Home", url: BASE_URL },
+          { name: "Home", url: `${BASE_URL}/` },
           { name: "Projects", url: `${BASE_URL}/projects` },
           { name: project.name, url: projectUrl },
         ]}
