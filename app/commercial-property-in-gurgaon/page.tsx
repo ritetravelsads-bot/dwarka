@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Smart Business Investment",
-  heroTitle: "Commercial Property in Gurgaon",
+  heroTitle: "High-ROI Commercial Property in Gurgaon",
   heroSubtitle:
     "Invest in Gurgaon's thriving commercial real estate market. Premium office spaces, high-street retail, and commercial showrooms in India's corporate capital.",
+  heroImage: "/assets/img/commercial-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "300+", label: "Fortune 500 HQs" },
+    { icon: "plane", value: "6-9%", label: "Annual Yield" },
+    { icon: "shield", value: "RERA", label: "Registered" },
+  ],
 
   quickFacts: [
-    { label: "Starting Price", value: "35 Lakh+" },
-    { label: "Property Types", value: "Office/Retail" },
     { label: "Rental Yield", value: "6-9% p.a." },
-    { label: "Prime Locations", value: "15+" },
+    { label: "Occupancy Rate", value: "92%+" },
+    { label: "Appreciation", value: "10-12% YoY" },
+    { label: "Pre-Lease", value: "Available" },
+  ],
+
+  projectsSectionTitle: "Premium Commercial Projects at a Glance",
+  projectsSectionSubtitle: "Compare top commercial properties across Gurgaon's prime business districts for maximum ROI.",
+
+  projectCards: [
+    {
+      name: "M3M Corner Walk",
+      location: "Sector 74, Gurgaon",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "Retail Shops",
+      sizeRange: "250 - 2,000 Sq.Ft.",
+      startingPrice: "Rs. 45 Lakh*",
+      connectivity: "High Street Retail",
+      href: "/projects",
+    },
+    {
+      name: "AIPL Business Club",
+      location: "Sector 62, Gurgaon",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "dark",
+      configuration: "Office Space",
+      sizeRange: "500 - 5,000 Sq.Ft.",
+      startingPrice: "Rs. 65 Lakh*",
+      connectivity: "Near Golf Course",
+      href: "/projects",
+    },
+    {
+      name: "Elan Epic",
+      location: "Sector 70, Gurgaon",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "amber",
+      configuration: "F&B + Retail",
+      sizeRange: "300 - 3,000 Sq.Ft.",
+      startingPrice: "Rs. 55 Lakh*",
+      connectivity: "SPR Road",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why Invest in Commercial Property in Gurgaon?",
@@ -60,9 +109,26 @@ const pageContent: SEOPageContent = {
     "Grade A office spaces with modern amenities",
     "High-street retail with maximum footfall",
     "6-9% rental yield on commercial properties",
-    "Proximity to MNCs and business hubs",
-    "RERA registered commercial projects",
     "Flexible payment plans and pre-lease options",
+  ],
+  layoutImage: "/assets/img/commercial-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Business Ecosystem",
+      description: "Surrounded by Fortune 500 companies, MNCs, and thriving startups. Built-in customer base for your business.",
+    },
+    {
+      icon: "hospital",
+      title: "Employee Amenities",
+      description: "Nearby healthcare facilities, food courts, and recreational options ensure employee satisfaction.",
+    },
+    {
+      icon: "connectivity",
+      title: "Transport Hub",
+      description: "Metro connectivity, expressway access, and proximity to airport make commuting easy for clients and staff.",
+    },
   ],
 
   localAreaTitle: "Prime Commercial Locations",

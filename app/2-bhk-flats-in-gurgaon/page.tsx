@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Perfect Start for Young Professionals",
-  heroTitle: "2 BHK Flats in Gurgaon",
+  heroTitle: "Smart & Affordable 2BHK Flats in Gurgaon",
   heroSubtitle:
     "Begin your homeownership journey with smart, affordable 2 bedroom apartments. Ideal for couples and young professionals seeking modern living without stretching the budget.",
+  heroImage: "/assets/img/2bhk-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "0 km", label: "From Expressway" },
+    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
+    { icon: "shield", value: "RERA", label: "Approved Projects" },
+  ],
 
   quickFacts: [
-    { label: "Starting Price", value: "50 Lakh" },
-    { label: "Size Range", value: "900-1400 sq.ft" },
-    { label: "EMI Starting", value: "35K/month" },
-    { label: "Available Units", value: "4,000+" },
+    { label: "Affordable Entry", value: "50 Lakh+" },
+    { label: "EMI Savings", value: "vs Rent" },
+    { label: "Rental Yield", value: "4-5%" },
+    { label: "Tax Benefits", value: "Up to 3.5L" },
+  ],
+
+  projectsSectionTitle: "Premium 2BHK Projects at a Glance",
+  projectsSectionSubtitle: "Compare the top affordable and premium 2BHK projects. Find the perfect fit for your budget and lifestyle.",
+
+  projectCards: [
+    {
+      name: "Godrej Summit",
+      location: "Sector 104, Dwarka Exp",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "2 BHK + Study",
+      sizeRange: "1,150 - 1,350 Sq.Ft.",
+      startingPrice: "Rs. 85 Lakh*",
+      connectivity: "5 Mins to NH-8",
+      href: "/projects",
+    },
+    {
+      name: "Signature Global",
+      location: "Sector 79B, Gurgaon",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "dark",
+      configuration: "2 BHK Compact",
+      sizeRange: "900 - 1,100 Sq.Ft.",
+      startingPrice: "Rs. 55 Lakh*",
+      connectivity: "Near SPR Road",
+      href: "/projects",
+    },
+    {
+      name: "M3M Antalya Hills",
+      location: "Sector 79, Gurgaon",
+      status: "New Launch",
+      statusColor: "red",
+      headerColor: "amber",
+      configuration: "2 BHK Premium",
+      sizeRange: "1,000 - 1,250 Sq.Ft.",
+      startingPrice: "Rs. 70 Lakh*",
+      connectivity: "Metro Proximity",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why 2 BHK Flats in Gurgaon are the Smart Choice",
@@ -60,9 +109,26 @@ const pageContent: SEOPageContent = {
     "Affordable entry point starting from 50 Lakh",
     "EMIs lower than equivalent rent in the area",
     "Full access to premium project amenities",
-    "Lower maintenance and utility costs",
     "Excellent rental potential for investment",
-    "Easy to maintain and manage",
+  ],
+  layoutImage: "/assets/img/2bhk-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Quality Education",
+      description: "Access to good schools and coaching centers within 15 minutes. Perfect for young couples planning a family.",
+    },
+    {
+      icon: "hospital",
+      title: "Healthcare Access",
+      description: "Multiple hospitals and clinics nearby. Emergency services available round the clock.",
+    },
+    {
+      icon: "connectivity",
+      title: "Work Connectivity",
+      description: "Quick commute to Cyber City and major IT hubs. Metro connectivity for hassle-free travel.",
+    },
   ],
 
   localAreaTitle: "Value-for-Money Locations",

@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Ultra-Luxury Living",
-  heroTitle: "4 BHK Flats in Gurgaon",
+  heroTitle: "Experience Ultra-Luxury 4BHK Flats in Gurgaon",
   heroSubtitle:
     "Experience the pinnacle of luxury living with expansive 4 bedroom residences featuring private terraces, premium specifications, and exclusive amenities designed for the discerning few.",
+  heroImage: "/assets/img/4bhk-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "Premium", label: "Locations Only" },
+    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
+    { icon: "shield", value: "Exclusive", label: "Limited Units" },
+  ],
 
   quickFacts: [
-    { label: "Price Range", value: "2.5-6+ Cr" },
-    { label: "Size Range", value: "2500-5000 sq.ft" },
-    { label: "Luxury Features", value: "Premium" },
-    { label: "Exclusive Units", value: "Limited" },
+    { label: "Prestige Address", value: "Top 1%" },
+    { label: "Space Freedom", value: "3000+ sqft" },
+    { label: "Appreciation", value: "15-18% YoY" },
+    { label: "Rental Premium", value: "1.5-3L/mo" },
+  ],
+
+  projectsSectionTitle: "Exclusive 4BHK Residences at a Glance",
+  projectsSectionSubtitle: "Discover limited-inventory luxury 4BHK apartments and penthouses from the most prestigious developers.",
+
+  projectCards: [
+    {
+      name: "M3M Mansion",
+      location: "Sector 113, Dwarka Exp",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "4.5 BHK Penthouse",
+      sizeRange: "4,500 - 5,500 Sq.Ft.",
+      startingPrice: "Rs. 6.5 Cr*",
+      connectivity: "Zero KM to Delhi",
+      href: "/projects",
+    },
+    {
+      name: "DLF Camellias",
+      location: "Golf Course Road",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "dark",
+      configuration: "4 BHK Ultra Luxury",
+      sizeRange: "5,000 - 7,000 Sq.Ft.",
+      startingPrice: "Rs. 12 Cr*",
+      connectivity: "Premium Location",
+      href: "/projects",
+    },
+    {
+      name: "Sobha City Penthouse",
+      location: "Sector 108, Dwarka Exp",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "amber",
+      configuration: "4 BHK + Terrace",
+      sizeRange: "3,500 - 4,200 Sq.Ft.",
+      startingPrice: "Rs. 4.5 Cr*",
+      connectivity: "Sports Lifestyle",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why 4 BHK Flats in Gurgaon Define Luxury Living",
@@ -59,10 +108,27 @@ const pageContent: SEOPageContent = {
   layoutHighlights: [
     "Expansive 2500-5000 sq.ft living spaces",
     "Private terraces and balconies with views",
-    "Premium Italian marble and wooden flooring",
     "Smart home automation systems",
     "Dedicated servant quarters with attached bath",
-    "Multiple car parking with EV charging",
+  ],
+  layoutImage: "/assets/img/4bhk-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Elite Education",
+      description: "Access to international schools like American Embassy School, Pathways, and GD Goenka within 15-20 minutes.",
+    },
+    {
+      icon: "hospital",
+      title: "Premium Healthcare",
+      description: "World-class hospitals including Medanta, Max, and Fortis with VIP services and concierge healthcare.",
+    },
+    {
+      icon: "connectivity",
+      title: "Executive Connectivity",
+      description: "Private car access to IGI Airport in 15 mins. Helicopter pad access in select properties.",
+    },
   ],
 
   localAreaTitle: "Premium Addresses",

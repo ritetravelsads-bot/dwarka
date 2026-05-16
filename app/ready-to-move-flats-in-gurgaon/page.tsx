@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Move In Today",
-  heroTitle: "Ready to Move Flats in Gurgaon",
+  heroTitle: "Zero-Wait Ready to Move Flats in Gurgaon",
   heroSubtitle:
     "Skip the waiting period and move into your new home immediately. Fully finished apartments with zero GST, actual site inspection, and instant possession.",
+  heroImage: "/assets/img/ready-to-move-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "Zero", label: "GST Applicable" },
+    { icon: "plane", value: "Instant", label: "Possession" },
+    { icon: "shield", value: "OC", label: "Received" },
+  ],
 
   quickFacts: [
-    { label: "Starting Price", value: "50 Lakh+" },
-    { label: "Possession", value: "Immediate" },
-    { label: "GST", value: "Zero" },
-    { label: "Ready Units", value: "5,000+" },
+    { label: "No GST", value: "5% Saved" },
+    { label: "See & Buy", value: "No Surprises" },
+    { label: "Rent Savings", value: "Immediate" },
+    { label: "Loan Easy", value: "Fast Approval" },
+  ],
+
+  projectsSectionTitle: "Ready Possession Projects at a Glance",
+  projectsSectionSubtitle: "Move into these fully completed projects with OC. What you see is what you get.",
+
+  projectCards: [
+    {
+      name: "Godrej Summit",
+      location: "Sector 104, Dwarka Exp",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "2/3/4 BHK",
+      sizeRange: "1,150 - 3,200 Sq.Ft.",
+      startingPrice: "Rs. 85 Lakh*",
+      connectivity: "OC Received",
+      href: "/projects",
+    },
+    {
+      name: "Emaar DigiHomes",
+      location: "Sector 62, Gurgaon",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "dark",
+      configuration: "3/4 BHK Premium",
+      sizeRange: "2,100 - 3,500 Sq.Ft.",
+      startingPrice: "Rs. 3.2 Cr*",
+      connectivity: "OC Received",
+      href: "/projects",
+    },
+    {
+      name: "Sobha City",
+      location: "Sector 108, Dwarka Exp",
+      status: "Partial Ready",
+      statusColor: "blue",
+      headerColor: "amber",
+      configuration: "2/3 BHK",
+      sizeRange: "1,400 - 2,100 Sq.Ft.",
+      startingPrice: "Rs. 1.8 Cr*",
+      connectivity: "Phase 1 Ready",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why Choose Ready to Move Flats in Gurgaon?",
@@ -60,9 +109,26 @@ const pageContent: SEOPageContent = {
     "Zero GST on ready inventory with OC",
     "What you see is what you get - actual site visit",
     "Start earning rent or save rent immediately",
-    "Established community and operational amenities",
-    "No construction delays or project risks",
     "Easier home loan approval with ready property",
+  ],
+  layoutImage: "/assets/img/ready-to-move-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Operational Schools",
+      description: "Move near established schools with admission cycles. No need to wait for new schools to open.",
+    },
+    {
+      icon: "hospital",
+      title: "Active Healthcare",
+      description: "Hospitals and clinics already serving the community. Emergency services fully functional.",
+    },
+    {
+      icon: "connectivity",
+      title: "Proven Commute",
+      description: "Test your actual commute time before buying. No surprises with traffic or route changes.",
+    },
   ],
 
   localAreaTitle: "Ready Possession Locations",
