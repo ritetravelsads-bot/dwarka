@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Be the First Investor",
-  heroTitle: "Upcoming Projects in Gurugram",
+  heroTitle: "Early-Bird Upcoming Projects in Gurugram",
   heroSubtitle:
     "Get exclusive access to pre-launch projects with early bird pricing. Maximize your returns by investing in Gurugram's most anticipated developments before they hit the market.",
+  heroImage: "/assets/img/upcoming-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "10-15%", label: "Pre-Launch Discount" },
+    { icon: "plane", value: "50+", label: "New Launches" },
+    { icon: "shield", value: "RERA", label: "Pre-Registered" },
+  ],
 
   quickFacts: [
-    { label: "New Launches", value: "50+" },
-    { label: "Pre-Launch Discount", value: "10-15%" },
-    { label: "Expected Returns", value: "15-20%" },
-    { label: "Launch Year", value: "2026" },
+    { label: "Early Discount", value: "10-15%" },
+    { label: "Best Units", value: "First Choice" },
+    { label: "Appreciation", value: "15-20%" },
+    { label: "Flex Payment", value: "CLP Plans" },
+  ],
+
+  projectsSectionTitle: "Upcoming New Launches at a Glance",
+  projectsSectionSubtitle: "Be among the first to invest in these upcoming projects with pre-launch pricing.",
+
+  projectCards: [
+    {
+      name: "Godrej Zenith",
+      location: "Sector 89, Gurgaon",
+      status: "New Launch",
+      statusColor: "red",
+      headerColor: "primary",
+      configuration: "3/4 BHK Premium",
+      sizeRange: "1,800 - 3,200 Sq.Ft.",
+      startingPrice: "Rs. 2.2 Cr*",
+      connectivity: "Pre-Launch Price",
+      href: "/projects",
+    },
+    {
+      name: "M3M Altitude",
+      location: "Sector 65, Gurgaon",
+      status: "Pre-Launch",
+      statusColor: "red",
+      headerColor: "dark",
+      configuration: "2/3 BHK",
+      sizeRange: "1,200 - 2,100 Sq.Ft.",
+      startingPrice: "Rs. 1.4 Cr*",
+      connectivity: "Golf Course Ext",
+      href: "/projects",
+    },
+    {
+      name: "Tata Primanti",
+      location: "Sector 72, Gurgaon",
+      status: "New Phase",
+      statusColor: "blue",
+      headerColor: "amber",
+      configuration: "3/4/5 BHK Villas",
+      sizeRange: "2,500 - 5,000 Sq.Ft.",
+      startingPrice: "Rs. 3.5 Cr*",
+      connectivity: "Villa Township",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why Invest in Upcoming Projects in Gurugram?",
@@ -61,8 +110,25 @@ const pageContent: SEOPageContent = {
     "Priority booking for best unit selection",
     "Flexible payment plans during construction",
     "Maximum appreciation potential from early investment",
-    "RERA pre-registration ensures project credibility",
-    "Zero GST on ready inventory for some projects",
+  ],
+  layoutImage: "/assets/img/upcoming-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Future Infrastructure",
+      description: "Upcoming projects are planned around future schools, metros, and commercial hubs for maximum appreciation.",
+    },
+    {
+      icon: "hospital",
+      title: "Planned Amenities",
+      description: "World-class hospitals and healthcare facilities planned in the project vicinity as part of township development.",
+    },
+    {
+      icon: "connectivity",
+      title: "Growth Corridors",
+      description: "Located along upcoming metro lines, expressways, and commercial zones for long-term value appreciation.",
+    },
   ],
 
   localAreaTitle: "Emerging Investment Zones",

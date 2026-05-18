@@ -39,15 +39,64 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Premium Living Awaits",
-  heroTitle: "Residential Projects on Dwarka Expressway",
+  heroTitle: "Premium Residential Projects on Dwarka Expressway",
   heroSubtitle:
     "Discover your dream home along India's most sought-after urban corridor. From luxury penthouses to smart apartments, find residences that match your lifestyle.",
+  heroImage: "/assets/img/residential-hero-bg.jpg",
+
+  trustIndicators: [
+    { icon: "route", value: "27.6 km", label: "16-Lane Highway" },
+    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
+    { icon: "shield", value: "20+", label: "Top Developers" },
+  ],
 
   quickFacts: [
-    { label: "Starting Price", value: "50 Lakh+" },
-    { label: "Property Types", value: "2/3/4 BHK" },
-    { label: "Top Developers", value: "20+" },
-    { label: "Ready Units", value: "25,000+" },
+    { label: "Appreciation", value: "8-12% YoY" },
+    { label: "Green Living", value: "Low Density" },
+    { label: "Metro Coming", value: "2027" },
+    { label: "Delhi Access", value: "Zero KM" },
+  ],
+
+  projectsSectionTitle: "Top Residential Projects at a Glance",
+  projectsSectionSubtitle: "Compare the best residential projects on Dwarka Expressway from top developers.",
+
+  projectCards: [
+    {
+      name: "Sobha City",
+      location: "Sector 108, Dwarka Exp",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "primary",
+      configuration: "2/3/4 BHK",
+      sizeRange: "1,400 - 3,500 Sq.Ft.",
+      startingPrice: "Rs. 1.8 Cr*",
+      connectivity: "Sports Lifestyle",
+      href: "/projects",
+    },
+    {
+      name: "M3M Capital",
+      location: "Sector 113, Dwarka Exp",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "dark",
+      configuration: "3/4 BHK Golf Estate",
+      sizeRange: "1,665 - 3,500 Sq.Ft.",
+      startingPrice: "Rs. 2.5 Cr*",
+      connectivity: "Zero KM Delhi",
+      href: "/projects",
+    },
+    {
+      name: "Godrej Summit",
+      location: "Sector 104, Dwarka Exp",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "amber",
+      configuration: "2/3/4 BHK",
+      sizeRange: "1,150 - 3,200 Sq.Ft.",
+      startingPrice: "Rs. 85 Lakh*",
+      connectivity: "Family Living",
+      href: "/projects",
+    },
   ],
 
   layoutTitle: "Why Choose Residential Projects on Dwarka Expressway?",
@@ -59,10 +108,27 @@ const pageContent: SEOPageContent = {
   layoutHighlights: [
     "Direct connectivity to IGI Airport in just 15-20 minutes",
     "Metro extension planned for enhanced accessibility",
-    "Proximity to Cyber City and major business hubs",
-    "RERA registered projects with transparent pricing",
     "Green belt development with low-density living",
     "Premium schools and hospitals within 10 minutes",
+  ],
+  layoutImage: "/assets/img/residential-building.jpg",
+
+  localFeatures: [
+    {
+      icon: "school",
+      title: "Premium Education",
+      description: "Euro International School, GD Goenka, and DPS within 10 minutes. Zero-stress school commute.",
+    },
+    {
+      icon: "hospital",
+      title: "World-Class Healthcare",
+      description: "Manipal Hospital, Medanta, and Aarvy Healthcare nearby. Top-tier medical care at your doorstep.",
+    },
+    {
+      icon: "connectivity",
+      title: "Seamless Connectivity",
+      description: "16-lane expressway to Delhi, upcoming metro, and proximity to IGI Airport and Cyber City.",
+    },
   ],
 
   localAreaTitle: "Neighborhood Highlights",
