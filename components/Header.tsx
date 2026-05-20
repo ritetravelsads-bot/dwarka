@@ -26,8 +26,8 @@ const projectsDropdown = {
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "New Launch", href: "/new-launch", highlight: true },
-  { name: "Projects", href: "/projects", hasDropdown: true },
+  { name: "New Launch", href: "/new-launch" },
+  { name: "PROJECTS", href: "/projects", hasDropdown: true },
   { name: "Connectivity", href: "/connectivity" },
   { name: "About Us", href: "/about" },
 ];

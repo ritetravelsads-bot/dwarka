@@ -146,9 +146,8 @@ export default function FAQContactSection() {
                   className="w-full flex items-start justify-between gap-4 py-5 text-left group"
                 >
                   <span
-                    className={`text-[15px] font-medium leading-snug transition-colors ${
-                      openIndex === index ? "text-primary" : "text-dark group-hover:text-primary"
-                    }`}
+                    className={`text-[15px] font-medium leading-snug transition-colors ${openIndex === index ? "text-primary" : "text-dark group-hover:text-primary"
+                      }`}
                   >
                     {faq.question}
                   </span>
@@ -161,9 +160,8 @@ export default function FAQContactSection() {
                   </span>
                 </button>
                 <div
-                  className={`grid transition-all duration-300 ${
-                    openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
+                  className={`grid transition-all duration-300 ${openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
                 >
                   <div className="overflow-hidden">
                     <p className="pb-5 text-sm text-slate-500 leading-relaxed">
@@ -274,6 +272,34 @@ export default function FAQContactSection() {
                     </p>
                   </form>
                 )}
+              </div>
+            </div>
+            {/* Dark form card */}
+            <div className="w-full rounded-xl overflow-hidden shadow-lg mt-2" style={{ backgroundColor: "#000" }}>
+              <div className="px-8 py-8">
+                <h3 className="text-white text-xl font-semibold tracking-tight mb-6">
+                  Connect With Us On Social Media
+                </h3>
+                <div className="flex gap-4">
+                  <a
+                    href="https://www.instagram.com/dwarkaexpresswayncr"
+                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i className="fa-brands fa-instagram text-xl"></i>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61589058328159"
+                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i className="fa-brands fa-facebook-f text-xl"></i>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@DwarkaExpressWayncr"
+                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
+                  >
+                    <i className="fa-brands fa-youtube text-xl"></i>
+                  </a>
+                </div>
               </div>
             </div>
 
