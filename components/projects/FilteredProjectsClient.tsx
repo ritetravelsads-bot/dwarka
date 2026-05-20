@@ -66,21 +66,50 @@ export default function FilteredProjectsClient({
   function filterProjects(projectsList: Project[]): Project[] {
     const keywords = filterKeywords[filterValue] || [];
     
+    // For BHK filters, we need to use local data as source of truth since API may not have configurations
+    if (filterType === "bhk") {
+      // Filter local data by BHK
+      const matchingLocalProjects = projectsData.filter(localProject => {
+        const configurations = (localProject.configurations || []).map(c => c.toLowerCase());
+        return configurations.some(config => 
+          keywords.some(kw => config.includes(kw.replace("-", " ")))
+        );
+      });
+      
+      // Return matching projects from API list or create from local data
+      return matchingLocalProjects.map((localProject, index) => {
+        // Try to find corresponding API project
+        const apiProject = projectsList.find(
+          (p) => p.slug === localProject.slug || makeSlug(p.name) === makeSlug(localProject.name)
+        );
+        
+        if (apiProject) {
+          return apiProject;
+        }
+        
+        // If no API match, create from local data
+        return {
+          _id: `local-${index}`,
+          name: localProject.name,
+          slug: localProject.slug,
+          location: localProject.location,
+          sector: localProject.sector,
+          price: localProject.price,
+          mainImage: localProject.image,
+          badge: localProject.badge,
+          type: localProject.type || "residential",
+          configurations: localProject.configurations || [],
+        };
+      });
+    }
+    
     return projectsList.filter((project) => {
-      // Get the badge from local data or API
+      // Get the local data for this project
       const localProject = projectsData.find(
         (p) => p.slug === project.slug || makeSlug(p.name) === makeSlug(project.name)
       );
       const badge = (localProject?.badge || project.badge || project.status || "").toLowerCase();
-      const projectType = (project.type || "residential").toLowerCase();
-      const configurations = (project.configurations || []).map(c => c.toLowerCase());
-      
-      if (filterType === "bhk") {
-        // For BHK filters, check configurations array
-        return configurations.some(config => 
-          keywords.some(kw => config.includes(kw.replace("-", " ")))
-        );
-      }
+      const projectType = (localProject?.type || project.type || "residential").toLowerCase();
       
       if (filterType === "type") {
         // For type filters, check the type field and badge
@@ -129,7 +158,8 @@ export default function FilteredProjectsClient({
           badge: p.badge,
           status: p.badge?.toLowerCase().includes("ready") ? "ready-to-move" : 
                   p.badge?.toLowerCase().includes("new") || p.badge?.toLowerCase().includes("launch") ? "new-launch" : "under-construction",
-          type: "residential",
+          type: p.type || "residential",
+          configurations: p.configurations || [],
         }));
       }
 
@@ -151,7 +181,8 @@ export default function FilteredProjectsClient({
         badge: p.badge,
         status: p.badge?.toLowerCase().includes("ready") ? "ready-to-move" : 
                 p.badge?.toLowerCase().includes("new") || p.badge?.toLowerCase().includes("launch") ? "new-launch" : "under-construction",
-        type: "residential",
+        type: p.type || "residential",
+        configurations: p.configurations || [],
       }));
       const filtered = filterProjects(localProjects);
       setAllProjects(filtered);
