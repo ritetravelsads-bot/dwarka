@@ -7,8 +7,7 @@ import PriceIndexSection from "@/components/home/PriceIndexSection";
 import HighlightsSection from "@/components/home/HighlightsSection";
 import AmenitiesSection from "@/components/home/AmenitiesSection";
 import TrustSection from "@/components/home/TrustSection";
-import FAQSection from "@/components/home/FAQSection";
-import ContactSection from "@/components/home/ContactSection";
+import FAQContactSection from "@/components/home/FAQContactSection";
 import PopularSearches from "@/components/home/PopularSearches";
 import EmiCalculator from "@/components/EmiCalculator";
 import PopupForm from "@/components/PopupForm";
@@ -37,9 +36,7 @@ export default function HomePageClient() {
 
         <TrustSection />
 
-        <FAQSection />
-
-        <ContactSection />
+        <FAQContactSection />
       </main>
 
       {/* EMI Calculator Modal */}
