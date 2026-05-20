@@ -1,58 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus, Loader2 } from "lucide-react";
+import { 
+  Plus, 
+  Minus, 
+  Loader2, 
+  PhoneCall, 
+  ArrowRight,
+  MessageSquare,
+  ShieldCheck,
+  Clock,
+  MapPin
+} from "lucide-react";
 
 const faqs = [
   {
     question: "What is Dwarka Expressway?",
-    answer:
-      "Dwarka Expressway is a 27.6 km, 16-lane operational highway linking Delhi's IGI Airport area to Gurgaon, offering signal-free connectivity across the corridor.",
+    answer: "Dwarka Expressway is a 27.6 km, 16-lane operational highway linking Delhi's IGI Airport area to Gurgaon, offering signal-free connectivity across the corridor.",
   },
   {
     question: "Is it worth investing in Dwarka Expressway?",
-    answer:
-      "Yes — the corridor has seen 8–12% annual appreciation backed by completed infrastructure, rising rental demand, and strong developer activity in 2025–26.",
+    answer: "Yes — the corridor has seen 8–12% annual appreciation backed by completed infrastructure, rising rental demand, and strong developer activity in 2025–26.",
   },
   {
     question: "What is the construction status of Dwarka Expressway?",
-    answer:
-      "The expressway has been fully operational since early 2024, with the metro extension to Sector 111 planned for 2026.",
+    answer: "The expressway has been fully operational since early 2024, with the metro extension to Sector 111 planned for 2026.",
   },
   {
     question: "Is Dwarka Expressway good to live in?",
-    answer:
-      "Absolutely. Projects here offer signal-free access to IGI Airport (15–20 mins), Cyber City, and Delhi — along with top schools, hospitals, and retail hubs within the corridor.",
+    answer: "Absolutely. Projects here offer signal-free access to IGI Airport (15–20 mins), Cyber City, and Delhi — along with top schools, hospitals, and retail hubs within the corridor.",
   },
   {
     question: "Which projects are best on Dwarka Expressway?",
-    answer:
-      "Sobha City, M3M Capital, Godrej Summit, Elan The Presidential, and Experion Windchants are among the most sought-after projects for lifestyle and investment.",
+    answer: "Sobha City, M3M Capital, Godrej Summit, Elan The Presidential, and Experion Windchants are among the most sought-after projects for lifestyle and investment.",
   },
   {
     question: "What are the best sectors on Dwarka Expressway?",
-    answer:
-      "Sectors 113, 112, 111, 106, and 99 are the most sought-after for luxury living and metro proximity.",
+    answer: "Sectors 113, 112, 111, 106, and 99 are the most sought-after for luxury living and metro proximity.",
   },
   {
     question: "What BHK configurations are available here?",
-    answer:
-      "Projects range from 2 BHK to ultra-luxury 5 BHK penthouses. Most premium launches in 2025–26 offer 3 BHK and 4 BHK configurations.",
+    answer: "Projects range from 2 BHK to ultra-luxury 5 BHK penthouses. Most premium launches in 2025–26 offer 3 BHK and 4 BHK configurations.",
   },
   {
     question: "How do I schedule a site visit?",
-    answer:
-      "Simply fill in the enquiry form on this page or call us directly. Our relationship manager will coordinate a free, hassle-free site visit at your preferred time.",
+    answer: "Simply fill in the enquiry form on this page or call us directly. Our relationship manager will coordinate a free, hassle-free site visit at your preferred time.",
   },
   {
     question: "Are there RERA-approved projects on Dwarka Expressway?",
-    answer:
-      "Yes, all projects listed on our platform are RERA-approved under the Haryana RERA (Gurugram) jurisdiction. RERA numbers are available on each project detail page.",
+    answer: "Yes, all projects listed on our platform are RERA-approved under the Haryana RERA (Gurugram) jurisdiction. RERA numbers are available on each project detail page.",
   },
   {
     question: "Where does Dwarka Expressway run from and to?",
-    answer:
-      "It runs from Shiv Murti interchange (Mahipalpur, Delhi) to Kherki Daula Toll Plaza in Gurgaon, spanning approximately 27.6 km.",
+    answer: "It runs from Shiv Murti interchange (Mahipalpur, Delhi) to Kherki Daula Toll Plaza in Gurgaon, spanning approximately 27.6 km.",
   },
 ];
 
@@ -121,185 +121,233 @@ export default function FAQContactSection() {
   };
 
   return (
-    <section className="py-16 bg-[#f0f2f5]">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative py-12 bg-slate-50 overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl" />
+      </div>
 
-        {/* Header */}
-        <div className="text-center mb-12">
-          <span className="uppercase tracking-[0.22em] text-xs text-primary font-semibold">
-            Concierge Support
-          </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-light text-dark tracking-tight">
-            Everything You Need to Know
+      <div className="relative max-w-7xl mx-auto px-4 md:px-6">
+        
+        {/* Header - Tighter margins */}
+        <div className="text-center mb-10 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary mb-4">
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span className="uppercase tracking-[0.2em] text-[10px] font-bold">
+              Concierge Support
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-light text-slate-900 tracking-tight leading-tight">
+            Everything You Need <br className="hidden md:block" />
+            <span className="font-semibold text-primary">To Know</span>
           </h2>
         </div>
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
-          {/* Left — FAQ accordion */}
-          <div className="divide-y divide-gray-200">
-            {faqs.map((faq, index) => (
-              <div key={index}>
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full flex items-start justify-between gap-4 py-5 text-left group"
+        {/* Two-column layout - Tighter gaps */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          {/* Left — FAQ accordion (Takes 7 columns) */}
+          <div className="lg:col-span-7 space-y-2">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div 
+                  key={index} 
+                  className={`group bg-white rounded-xl border transition-all duration-300 ${
+                    isOpen 
+                      ? "border-primary/30 shadow-[0_4px_20px_rgb(0,0,0,0.03)]" 
+                      : "border-slate-200 hover:border-primary/20 shadow-sm"
+                  }`}
                 >
-                  <span
-                    className={`text-[15px] font-medium leading-snug transition-colors ${openIndex === index ? "text-primary" : "text-dark group-hover:text-primary"
-                      }`}
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full flex items-center justify-between gap-4 p-4 text-left"
                   >
-                    {faq.question}
-                  </span>
-                  <span className="flex-shrink-0 mt-0.5">
-                    {openIndex === index ? (
-                      <Minus className="w-4 h-4 text-primary" />
-                    ) : (
-                      <Plus className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
-                    )}
-                  </span>
-                </button>
-                <div
-                  className={`grid transition-all duration-300 ${openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    <span className={`text-[14px] md:text-[15px] font-medium leading-snug transition-colors ${
+                      isOpen ? "text-primary" : "text-slate-800 group-hover:text-primary"
+                    }`}>
+                      {faq.question}
+                    </span>
+                    <span className={`flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full transition-colors ${
+                      isOpen ? "bg-primary/10 text-primary" : "bg-slate-50 text-slate-400 group-hover:bg-primary/5 group-hover:text-primary"
+                    }`}>
+                      {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                    </span>
+                  </button>
+                  
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="pb-5 text-sm text-slate-500 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-4 pb-4 text-[13px] md:text-sm text-slate-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Right — phone + enquiry form */}
-          <div className="flex flex-col items-center lg:items-start">
+          {/* Right — Floating Flex Column (Takes 5 columns) */}
+          <div className="lg:col-span-5 sticky top-6 flex flex-col gap-4">
+            
+            {/* Main Contact Card */}
+            <div className="bg-[#0B0F19] rounded-2xl overflow-hidden shadow-xl relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+              
+              <div className="p-6 relative z-10">
+                {/* Phone Banner - Tighter margins */}
+                <div className="mb-6 text-center">
+                  <a
+                    href="tel:+919599107676"
+                    className="group inline-flex flex-col items-center gap-1.5 text-white hover:text-primary transition-colors"
+                  >
+                    <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all mb-1">
+                      <PhoneCall className="w-4 h-4" />
+                    </span>
+                    <span className="text-xl md:text-2xl font-light tracking-tight">
+                      Request A Site Visit Today
+                    </span>
+                  </a>
+                </div>
 
-            {/* Phone number display */}
-            <div className="text-center mb-8 w-full">
-              <a
-                href="tel:+919599107676"
-                className="text-3xl md:text-4xl font-light text-dark tracking-tight hover:text-primary transition-colors"
-              >
-                REQUEST A SITE VISIT TODAY
-              </a>
-              <div className="mt-2 flex items-center justify-center gap-2">
-                <div className="h-px w-8 bg-primary" />
-                <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-semibold">
-                  Enquiry Now
-                </span>
-                <div className="h-px w-8 bg-primary" />
-              </div>
-            </div>
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
 
-            {/* Dark form card */}
-            <div className="w-full rounded-xl overflow-hidden shadow-lg" style={{ backgroundColor: "#000" }}>
-              <div className="px-8 py-8">
-
+                {/* Form Section */}
                 {success ? (
-                  <div className="text-center py-10">
-                    <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="text-center py-6">
+                    <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-white font-semibold text-lg">Thank You!</p>
-                    <p className="text-white/60 text-sm mt-1">Our team will contact you shortly.</p>
+                    <p className="text-white font-semibold text-lg">Request Received!</p>
+                    <p className="text-white/50 text-xs mt-1.5">Our concierge team will reach out to you shortly.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <h3 className="text-white text-xl font-semibold tracking-tight mb-6">
-                      Personalized Inquiry
-                    </h3>
-
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-[0.15em] text-white/50 font-semibold mb-2">
-                        Full Name
-                      </label>
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase tracking-wider text-white/50 font-medium ml-1">Full Name</label>
                       <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full bg-transparent border-b border-white/20 focus:border-white/60 outline-none text-white placeholder:text-white/30 text-sm py-2 transition-colors"
-                        placeholder="Enter your full name"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        placeholder="John Doe"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-[0.15em] text-white/50 font-semibold mb-2">
-                        Phone Number
-                      </label>
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase tracking-wider text-white/50 font-medium ml-1">Phone Number</label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full bg-transparent border-b border-white/20 focus:border-white/60 outline-none text-white placeholder:text-white/30 text-sm py-2 transition-colors"
-                        placeholder="+91 XXXXX XXXXX"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        placeholder="+91 99999 99999"
                       />
                     </div>
 
                     {error && (
-                      <p className="text-red-400 text-xs">{error}</p>
+                      <p className="text-red-400 text-[11px] mt-1 ml-1">{error}</p>
                     )}
 
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full mt-4 bg-white text-[#1b2a4a] font-bold text-xs uppercase tracking-[0.18em] py-4 rounded-lg hover:bg-white/90 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                      className="w-full mt-4 bg-primary text-white font-bold text-sm py-3.5 rounded-xl hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all disabled:opacity-60 flex items-center justify-center gap-2 group"
                     >
                       {loading ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          Submitting...
+                          Processing...
                         </>
                       ) : (
                         <>
                           Request Callback
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                          </svg>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
                     </button>
-
-                    <p className="text-center text-white/30 text-[11px] mt-2">
-                      No spam. We respect your privacy.
-                    </p>
                   </form>
                 )}
+
+                {/* Social Media Footer - Tighter spacing */}
+                <div className="mt-6 pt-5 border-t border-white/5">
+                  <div className="flex justify-center gap-3">
+                    <a
+                      href="https://www.instagram.com/dwarkaexpresswayncr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-primary hover:text-white hover:border-primary transition-all hover:-translate-y-1"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61589058328159"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-primary hover:text-white hover:border-primary transition-all hover:-translate-y-1"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@DwarkaExpressWayncr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-primary hover:text-white hover:border-primary transition-all hover:-translate-y-1"
+                    >
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            {/* Dark form card */}
-            <div className="w-full rounded-xl overflow-hidden shadow-lg mt-2" style={{ backgroundColor: "#000" }}>
-              <div className="px-8 py-8">
-                <h3 className="text-white text-xl font-semibold tracking-tight mb-6">
-                  Connect With Us On Social Media
-                </h3>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.instagram.com/dwarkaexpresswayncr"
-                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
-                  >
-                    <i className="fa-brands fa-instagram text-xl"></i>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61589058328159"
-                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
-                  >
-                    <i className="fa-brands fa-facebook-f text-xl"></i>
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@DwarkaExpressWayncr"
-                    className="w-[30%] h-[80px] flex items-center justify-center rounded-xl bg-primary text-white hover:bg-primary hover:text-white transition-all"
-                  >
-                    <i className="fa-brands fa-youtube text-xl"></i>
-                  </a>
+
+            {/* Added Divs to balance height: Trust Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
+                <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-1">
+                  <ShieldCheck className="w-4 h-4" />
                 </div>
+                <span className="text-sm font-semibold text-slate-900">RERA Approved</span>
+                <span className="text-[11px] text-slate-500 leading-tight">100% verified & secure project listings.</span>
+              </div>
+              
+              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
+                <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-1">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <span className="text-sm font-semibold text-slate-900">24/7 Support</span>
+                <span className="text-[11px] text-slate-500 leading-tight">Dedicated relationship manager for you.</span>
+              </div>
+            </div>
+
+            {/* Added Divs to balance height: Office Location */}
+            <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0 text-slate-600">
+                <MapPin className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-[13px] font-semibold text-slate-900">Corporate Office</h4>
+                <p className="text-[11px] text-slate-500 mt-0.5">Gurugram, Haryana, India</p>
               </div>
             </div>
 
