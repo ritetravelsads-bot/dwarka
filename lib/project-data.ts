@@ -15,6 +15,8 @@ export interface ProjectData {
   occupancy: number;
   alt: string;
   slug: string;
+  configurations?: string[];
+  type?: "residential" | "commercial";
 }
 
 // Generate slug from name
@@ -41,6 +43,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 70,
     alt: 'Signature Global Sarvam Sector 37D',
     slug: 'signature-global-sarvam',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Whiteland Westin Residences',
@@ -53,6 +57,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 65,
     alt: 'Whiteland Westin Residences in Sector 103',
     slug: 'whiteland-westin-residences',
+    configurations: ['3 BHK', '4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'Godrej Vrikshya',
@@ -65,6 +71,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 82,
     alt: 'Godrej Vrikshya in Sector 103',
     slug: 'godrej-vrikshya',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Signature Global De Luxe DXP',
@@ -77,6 +85,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 98,
     alt: 'Signature Global De Luxe DXP in Sector 37D',
     slug: 'signature-global-de-luxe-dxp',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Hero Homes The Palatial',
@@ -89,6 +99,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 92,
     alt: 'Hero Homes in Sector 104',
     slug: 'hero-homes-the-palatial',
+    configurations: ['3 BHK'],
+    type: 'residential',
   },
   {
     name: 'M3M Capital',
@@ -101,6 +113,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 88,
     alt: 'M3M Capital in Sector 113',
     slug: 'm3m-capital',
+    configurations: ['3 BHK', '4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'Elan The Presidential',
@@ -113,6 +127,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 78,
     alt: 'Elan The Presidential in Sector 106',
     slug: 'elan-the-presidential',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'M3M Crown',
@@ -125,6 +141,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 85,
     alt: 'M3M Crown in Sector 111',
     slug: 'm3m-crown',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Smartworld One DXP',
@@ -137,6 +155,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 90,
     alt: 'Smartworld One DXP in Sector 113',
     slug: 'smartworld-one-dxp',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Puri Diplomatic Residences',
@@ -149,6 +169,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 60,
     alt: 'Puri Diplomatic Residences in Sector 111',
     slug: 'puri-diplomatic-residences',
+    configurations: ['3 BHK', '4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'Sobha Altus',
@@ -161,6 +183,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 55,
     alt: 'Sobha Altus in Sector 106',
     slug: 'sobha-altus',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'BPTP Amstoria Verti Greens',
@@ -173,6 +197,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 12,
     alt: 'BPTP Verti Greens in Sector 102',
     slug: 'bptp-amstoria-verti-greens',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'M3M Elie Saab',
@@ -185,6 +211,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 15,
     alt: 'M3M Elie Saab Luxury Apartments in Sector 111',
     slug: 'm3m-elie-saab',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'BPTP Gaia',
@@ -197,6 +225,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 10,
     alt: 'BPTP Gaia Residences in Sector 102',
     slug: 'bptp-gaia',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Landmark The Residency',
@@ -209,6 +239,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 90,
     alt: 'Landmark The Residency in Sector 103',
     slug: 'landmark-the-residency',
+    configurations: ['3 BHK'],
+    type: 'residential',
   },
   {
     name: 'Adani Realty Iconic Towers',
@@ -221,6 +253,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 88,
     alt: 'Adani Oyster Grande Luxury Penthouse Sector 102',
     slug: 'adani-realty-iconic-towers',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'HCBS Twin Horizon',
@@ -233,6 +267,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 22,
     alt: 'HCBS Twin Horizon Sector 102',
     slug: 'hcbs-twin-horizon',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Central Park Delphine',
@@ -245,6 +281,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 8,
     alt: 'Central Park Delphine in Sector 104',
     slug: 'central-park-delphine',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'AIPL Riviera Lake City',
@@ -257,6 +295,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 5,
     alt: 'AIPL Riviera Lake City Sector 103',
     slug: 'aipl-riviera-lake-city',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Tata Raisina Residency',
@@ -269,6 +309,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 95,
     alt: 'Tata Raisina Residency Sector 59',
     slug: 'tata-raisina-residency',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Mahindra Luminare',
@@ -281,6 +323,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 85,
     alt: 'Mahindra Luminare Sector 59',
     slug: 'mahindra-luminare',
+    configurations: ['3 BHK', '4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'Shapoorji Pallonji Joyville',
@@ -293,6 +337,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 92,
     alt: 'Joyville by Shapoorji Pallonji Sector 102',
     slug: 'shapoorji-pallonji-joyville',
+    configurations: ['3 BHK'],
+    type: 'residential',
   },
   {
     name: 'Omaxe New Heights',
@@ -305,6 +351,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 94,
     alt: 'Omaxe New Heights Sector 78',
     slug: 'omaxe-new-heights',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Sobha City',
@@ -317,6 +365,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 96,
     alt: 'Sobha City Sector 108 Dwarka Expressway',
     slug: 'sobha-city',
+    configurations: ['3 BHK'],
+    type: 'residential',
   },
   {
     name: 'Emaar Palm Hills',
@@ -329,6 +379,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 90,
     alt: 'Emaar Palm Hills Sector 77',
     slug: 'emaar-palm-hills',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Godrej Meridien',
@@ -341,6 +393,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 88,
     alt: 'Godrej Meridien Sector 106',
     slug: 'godrej-meridien',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Godrej Summit',
@@ -353,6 +407,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 98,
     alt: 'Godrej Summit Sector 104',
     slug: 'godrej-summit',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'DLF The Ultima',
@@ -365,6 +421,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 94,
     alt: 'DLF The Ultima Sector 81',
     slug: 'dlf-the-ultima',
+    configurations: ['4 BHK', '5 BHK'],
+    type: 'residential',
   },
   {
     name: 'DLF The Sky Court',
@@ -377,6 +435,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 92,
     alt: 'DLF The Sky Court Sector 86',
     slug: 'dlf-the-sky-court',
+    configurations: ['3 BHK', '4 BHK'],
+    type: 'residential',
   },
   {
     name: 'Omaxe Dwarka Heights',
@@ -389,6 +449,8 @@ export const projectsData: ProjectData[] = [
     occupancy: 40,
     alt: 'Omaxe Dwarka Heights Sector 19B',
     slug: 'omaxe-dwarka-heights',
+    configurations: ['3 BHK'],
+    type: 'residential',
   },
 ];
 

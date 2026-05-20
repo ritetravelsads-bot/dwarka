@@ -4,31 +4,43 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
-const projectsDropdown = [
-  { name: "All Projects", href: "/projects" },
-  { name: "Residential", href: "/residential" },
-  { name: "Commercial", href: "/commercial" },
-  { name: "Ready to Move", href: "/ready-to-move" },
-];
+// Nested dropdown structure for Projects
+const projectsDropdown = {
+  items: [
+    { name: "All Projects", href: "/projects" },
+    { 
+      name: "Residential", 
+      href: "/residential",
+      subItems: [
+        { name: "3 BHK", href: "/3bhk" },
+        { name: "4 BHK", href: "/4bhk" },
+        { name: "5 BHK", href: "/5bhk" },
+      ]
+    },
+    { name: "Commercial", href: "/commercial" },
+    { name: "Ready to Move", href: "/ready-to-move" },
+  ],
+};
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "New Launch", href: "/new-launch", highlight: true },
-  { name: "Projects", href: "/projects", hasDropdown: true },
+  { name: "New Launch", href: "/new-launch" },
+  { name: "PROJECTS", href: "/projects", hasDropdown: true },
   { name: "Connectivity", href: "/connectivity" },
-  { name: "Contact", href: "/contact" },
   { name: "About Us", href: "/about" },
 ];
 
 // Paths that should highlight the Projects nav item
-const projectRelatedPaths = ["/projects", "/residential", "/commercial", "/ready-to-move"];
+const projectRelatedPaths = ["/projects", "/residential", "/commercial", "/ready-to-move", "/3bhk", "/4bhk", "/5bhk"];
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
+  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
+  const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -50,6 +62,7 @@ export default function Header() {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsProjectsDropdownOpen(false);
+        setActiveSubMenu(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -60,6 +73,7 @@ export default function Header() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsMobileProjectsOpen(false);
+    setMobileSubMenuOpen(null);
   }, [pathname]);
 
   return (
@@ -96,25 +110,73 @@ export default function Header() {
                     <ChevronDown className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* Dropdown Menu */}
+                  {/* Dropdown Menu with Nested Structure */}
                   {isProjectsDropdownOpen && (
                     <div 
-                      className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-borderGrey py-2 z-50"
-                      onMouseLeave={() => setIsProjectsDropdownOpen(false)}
+                      className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg border border-borderGrey py-2 z-50"
+                      onMouseLeave={() => {
+                        setIsProjectsDropdownOpen(false);
+                        setActiveSubMenu(null);
+                      }}
                     >
-                      {projectsDropdown.map((dropItem) => (
-                        <Link
-                          key={dropItem.name}
-                          href={dropItem.href}
-                          className={`block px-4 py-2.5 text-sm transition-colors normal-case font-medium ${
-                            isActive(dropItem.href)
-                              ? "text-primary bg-primary/5"
-                              : "text-dark hover:bg-gray-50 hover:text-primary"
-                          }`}
-                          onClick={() => setIsProjectsDropdownOpen(false)}
-                        >
-                          {dropItem.name}
-                        </Link>
+                      {projectsDropdown.items.map((dropItem) => (
+                        <div key={dropItem.name} className="relative">
+                          {dropItem.subItems ? (
+                            <div
+                              className="relative"
+                              onMouseEnter={() => setActiveSubMenu(dropItem.name)}
+                              onMouseLeave={() => setActiveSubMenu(null)}
+                            >
+                              <div
+                                className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors normal-case font-medium cursor-pointer ${
+                                  isActive(dropItem.href)
+                                    ? "text-primary bg-primary/5"
+                                    : "text-dark hover:bg-gray-50 hover:text-primary"
+                                }`}
+                              >
+                                <Link href={dropItem.href} onClick={() => setIsProjectsDropdownOpen(false)}>
+                                  {dropItem.name}
+                                </Link>
+                                <ChevronRight className="w-4 h-4" />
+                              </div>
+                              
+                              {/* Sub-dropdown */}
+                              {activeSubMenu === dropItem.name && (
+                                <div className="absolute left-full top-0 ml-1 w-40 bg-white rounded-lg shadow-lg border border-borderGrey py-2 z-50">
+                                  {dropItem.subItems.map((subItem) => (
+                                    <Link
+                                      key={subItem.name}
+                                      href={subItem.href}
+                                      className={`block px-4 py-2.5 text-sm transition-colors normal-case font-medium ${
+                                        isActive(subItem.href)
+                                          ? "text-primary bg-primary/5"
+                                          : "text-dark hover:bg-gray-50 hover:text-primary"
+                                      }`}
+                                      onClick={() => {
+                                        setIsProjectsDropdownOpen(false);
+                                        setActiveSubMenu(null);
+                                      }}
+                                    >
+                                      {subItem.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <Link
+                              href={dropItem.href}
+                              className={`block px-4 py-2.5 text-sm transition-colors normal-case font-medium ${
+                                isActive(dropItem.href)
+                                  ? "text-primary bg-primary/5"
+                                  : "text-dark hover:bg-gray-50 hover:text-primary"
+                              }`}
+                              onClick={() => setIsProjectsDropdownOpen(false)}
+                            >
+                              {dropItem.name}
+                            </Link>
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}
@@ -177,25 +239,83 @@ export default function Header() {
                       <ChevronDown className={`w-4 h-4 transition-transform ${isMobileProjectsOpen ? 'rotate-180' : ''}`} />
                     </button>
                     
-                    {/* Mobile Dropdown */}
+                    {/* Mobile Dropdown with Nested Structure */}
                     {isMobileProjectsOpen && (
                       <div className="pl-4 border-l-2 border-primary/20 ml-2 space-y-1">
-                        {projectsDropdown.map((dropItem) => (
-                          <Link
-                            key={dropItem.name}
-                            href={dropItem.href}
-                            onClick={() => {
-                              setIsMobileMenuOpen(false);
-                              setIsMobileProjectsOpen(false);
-                            }}
-                            className={`block py-2.5 transition normal-case font-medium ${
-                              isActive(dropItem.href)
-                                ? "text-primary"
-                                : "text-dark hover:text-primary"
-                            }`}
-                          >
-                            {dropItem.name}
-                          </Link>
+                        {projectsDropdown.items.map((dropItem) => (
+                          <div key={dropItem.name}>
+                            {dropItem.subItems ? (
+                              <>
+                                <button
+                                  onClick={() => setMobileSubMenuOpen(
+                                    mobileSubMenuOpen === dropItem.name ? null : dropItem.name
+                                  )}
+                                  className={`w-full flex items-center justify-between py-2.5 transition normal-case font-medium ${
+                                    isActive(dropItem.href)
+                                      ? "text-primary"
+                                      : "text-dark hover:text-primary"
+                                  }`}
+                                >
+                                  {dropItem.name}
+                                  <ChevronDown className={`w-3 h-3 transition-transform ${
+                                    mobileSubMenuOpen === dropItem.name ? 'rotate-180' : ''
+                                  }`} />
+                                </button>
+                                
+                                {/* Mobile Sub Items */}
+                                {mobileSubMenuOpen === dropItem.name && (
+                                  <div className="pl-4 border-l border-primary/10 ml-2 space-y-1">
+                                    <Link
+                                      href={dropItem.href}
+                                      onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setIsMobileProjectsOpen(false);
+                                      }}
+                                      className={`block py-2 text-sm transition normal-case font-medium ${
+                                        pathname === dropItem.href
+                                          ? "text-primary"
+                                          : "text-dark hover:text-primary"
+                                      }`}
+                                    >
+                                      All {dropItem.name}
+                                    </Link>
+                                    {dropItem.subItems.map((subItem) => (
+                                      <Link
+                                        key={subItem.name}
+                                        href={subItem.href}
+                                        onClick={() => {
+                                          setIsMobileMenuOpen(false);
+                                          setIsMobileProjectsOpen(false);
+                                        }}
+                                        className={`block py-2 text-sm transition normal-case font-medium ${
+                                          isActive(subItem.href)
+                                            ? "text-primary"
+                                            : "text-dark hover:text-primary"
+                                        }`}
+                                      >
+                                        {subItem.name}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </>
+                            ) : (
+                              <Link
+                                href={dropItem.href}
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setIsMobileProjectsOpen(false);
+                                }}
+                                className={`block py-2.5 transition normal-case font-medium ${
+                                  isActive(dropItem.href)
+                                    ? "text-primary"
+                                    : "text-dark hover:text-primary"
+                                }`}
+                              >
+                                {dropItem.name}
+                              </Link>
+                            )}
+                          </div>
                         ))}
                       </div>
                     )}

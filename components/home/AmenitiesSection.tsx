@@ -15,9 +15,9 @@ const amenities = [
 
 export default function AmenitiesSection() {
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-12 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center">
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-dark mb-4">
             Lifestyle Amenities
           </h2>

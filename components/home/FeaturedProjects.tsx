@@ -169,7 +169,7 @@ export default function FeaturedProjects() {
   }
 
   return (
-    <section id="residential-project" className="py-20 md:px-10 bg-lightGrey">
+    <section id="residential-project" className="py-12 md:px-10 bg-lightGrey">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
