@@ -23,7 +23,7 @@ interface Project {
 }
 
 interface FilteredProjectsClientProps {
-  filterType: "status" | "type";
+  filterType: "status" | "type" | "bhk";
   filterValue: string;
   title: string;
   subtitle: string;
@@ -38,6 +38,10 @@ const filterKeywords: Record<string, string[]> = {
   // Type filters
   "residential": ["residential", "apartments", "flats", "homes", "living", "residences", "villas", "high-rise"],
   "commercial": ["commercial", "sco", "office", "retail", "shop", "business"],
+  // BHK filters - these match against configurations array
+  "3bhk": ["3 bhk", "3bhk", "3-bhk"],
+  "4bhk": ["4 bhk", "4bhk", "4-bhk"],
+  "5bhk": ["5 bhk", "5bhk", "5-bhk", "penthouse"],
 };
 
 export default function FilteredProjectsClient({
@@ -69,6 +73,14 @@ export default function FilteredProjectsClient({
       );
       const badge = (localProject?.badge || project.badge || project.status || "").toLowerCase();
       const projectType = (project.type || "residential").toLowerCase();
+      const configurations = (project.configurations || []).map(c => c.toLowerCase());
+      
+      if (filterType === "bhk") {
+        // For BHK filters, check configurations array
+        return configurations.some(config => 
+          keywords.some(kw => config.includes(kw.replace("-", " ")))
+        );
+      }
       
       if (filterType === "type") {
         // For type filters, check the type field and badge
