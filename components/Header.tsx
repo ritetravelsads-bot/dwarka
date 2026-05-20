@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
 const projectsDropdown = [
@@ -21,11 +22,28 @@ const navigation = [
   { name: "About Us", href: "/about" },
 ];
 
+// Paths that should highlight the Projects nav item
+const projectRelatedPaths = ["/projects", "/residential", "/commercial", "/ready-to-move"];
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  // Check if a nav item is active
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname === href || pathname.startsWith(href + "/");
+  };
+
+  // Check if Projects dropdown should be highlighted
+  const isProjectsActive = projectRelatedPaths.some(
+    (path) => pathname === path || pathname.startsWith(path + "/")
+  );
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -37,6 +55,12 @@ export default function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsMobileProjectsOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -62,7 +86,11 @@ export default function Header() {
                   <button
                     onClick={() => setIsProjectsDropdownOpen(!isProjectsDropdownOpen)}
                     onMouseEnter={() => setIsProjectsDropdownOpen(true)}
-                    className="flex items-center gap-1 text-dark hover:text-primary transition"
+                    className={`flex items-center gap-1 transition ${
+                      isProjectsActive
+                        ? "text-primary"
+                        : "text-dark hover:text-primary"
+                    }`}
                   >
                     {item.name}
                     <ChevronDown className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? 'rotate-180' : ''}`} />
@@ -78,7 +106,11 @@ export default function Header() {
                         <Link
                           key={dropItem.name}
                           href={dropItem.href}
-                          className="block px-4 py-2.5 text-sm text-dark hover:bg-gray-50 hover:text-primary transition-colors normal-case font-medium"
+                          className={`block px-4 py-2.5 text-sm transition-colors normal-case font-medium ${
+                            isActive(dropItem.href)
+                              ? "text-primary bg-primary/5"
+                              : "text-dark hover:bg-gray-50 hover:text-primary"
+                          }`}
                           onClick={() => setIsProjectsDropdownOpen(false)}
                         >
                           {dropItem.name}
@@ -93,8 +125,12 @@ export default function Header() {
                   href={item.href}
                   className={`transition ${
                     item.highlight 
-                      ? 'text-primary font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary' 
-                      : 'text-dark hover:text-primary'
+                      ? `text-primary font-bold relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary ${
+                          isActive(item.href) ? "after:opacity-100" : "after:opacity-100"
+                        }`
+                      : isActive(item.href)
+                        ? "text-primary"
+                        : "text-dark hover:text-primary"
                   }`}
                 >
                   {item.name}
@@ -131,7 +167,11 @@ export default function Header() {
                   <div key={item.name}>
                     <button
                       onClick={() => setIsMobileProjectsOpen(!isMobileProjectsOpen)}
-                      className="w-full flex items-center justify-between py-3 text-dark hover:text-primary transition"
+                      className={`w-full flex items-center justify-between py-3 transition ${
+                        isProjectsActive
+                          ? "text-primary"
+                          : "text-dark hover:text-primary"
+                      }`}
                     >
                       {item.name}
                       <ChevronDown className={`w-4 h-4 transition-transform ${isMobileProjectsOpen ? 'rotate-180' : ''}`} />
@@ -148,7 +188,11 @@ export default function Header() {
                               setIsMobileMenuOpen(false);
                               setIsMobileProjectsOpen(false);
                             }}
-                            className="block py-2.5 text-dark hover:text-primary transition normal-case font-medium"
+                            className={`block py-2.5 transition normal-case font-medium ${
+                              isActive(dropItem.href)
+                                ? "text-primary"
+                                : "text-dark hover:text-primary"
+                            }`}
                           >
                             {dropItem.name}
                           </Link>
@@ -164,7 +208,9 @@ export default function Header() {
                     className={`py-3 transition ${
                       item.highlight 
                         ? 'text-primary font-bold' 
-                        : 'text-dark hover:text-primary'
+                        : isActive(item.href)
+                          ? "text-primary"
+                          : "text-dark hover:text-primary"
                     }`}
                   >
                     {item.name}

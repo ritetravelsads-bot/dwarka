@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { projectsData, makeSlug } from "@/lib/project-data";
 
 interface Project {
   _id: string;
@@ -21,13 +22,6 @@ interface Project {
   developer?: string;
 }
 
-interface Pagination {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
 interface FilteredProjectsClientProps {
   filterType: "status" | "type";
   filterValue: string;
@@ -35,6 +29,16 @@ interface FilteredProjectsClientProps {
   subtitle: string;
   breadcrumbLabel: string;
 }
+
+// Keywords for filtering based on badges/status
+const filterKeywords: Record<string, string[]> = {
+  // Status filters
+  "new-launch": ["new launch", "new", "launch", "pre-launch", "upcoming", "exclusive launch"],
+  "ready-to-move": ["ready to move", "ready", "possession", "established", "completed"],
+  // Type filters
+  "residential": ["residential", "apartments", "flats", "homes", "living", "residences", "villas", "high-rise"],
+  "commercial": ["commercial", "sco", "office", "retail", "shop", "business"],
+};
 
 export default function FilteredProjectsClient({
   filterType,
@@ -44,46 +48,146 @@ export default function FilteredProjectsClient({
   breadcrumbLabel,
 }: FilteredProjectsClientProps) {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const projectsPerPage = 12;
 
   useEffect(() => {
-    fetchProjects();
-  }, [filterValue, page]);
+    fetchAndFilterProjects();
+  }, [filterValue]);
 
-  async function fetchProjects() {
+  // Filter projects based on filter type and value
+  function filterProjects(projectsList: Project[]): Project[] {
+    const keywords = filterKeywords[filterValue] || [];
+    
+    return projectsList.filter((project) => {
+      // Get the badge from local data or API
+      const localProject = projectsData.find(
+        (p) => p.slug === project.slug || makeSlug(p.name) === makeSlug(project.name)
+      );
+      const badge = (localProject?.badge || project.badge || project.status || "").toLowerCase();
+      const projectType = (project.type || "residential").toLowerCase();
+      
+      if (filterType === "type") {
+        // For type filters, check the type field and badge
+        if (filterValue === "residential") {
+          return projectType === "residential" || 
+                 projectType !== "commercial" ||
+                 keywords.some(kw => badge.includes(kw));
+        }
+        if (filterValue === "commercial") {
+          return projectType === "commercial" || 
+                 keywords.some(kw => badge.includes(kw));
+        }
+      }
+      
+      if (filterType === "status") {
+        // For status filters, check badge/status for keywords
+        return keywords.some((kw) => badge.includes(kw));
+      }
+      
+      return true;
+    });
+  }
+
+  async function fetchAndFilterProjects() {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (filterType === "status") {
-        params.set("status", filterValue);
-      } else {
-        params.set("type", filterValue);
-      }
-      if (search) params.set("search", search);
-      params.set("page", page.toString());
-      params.set("limit", "12");
-
-      const res = await fetch(`/api/projects?${params.toString()}`);
+      // Fetch all projects first
+      const res = await fetch(`/api/projects?limit=100`);
       const data = await res.json();
+      
+      let fetchedProjects: Project[] = [];
       if (data.success) {
-        setProjects(data.data.projects);
-        setPagination(data.data.pagination);
+        fetchedProjects = data.data.projects;
       }
+
+      // If API returned no projects, use local data as fallback
+      if (fetchedProjects.length === 0) {
+        fetchedProjects = projectsData.map((p, index) => ({
+          _id: `local-${index}`,
+          name: p.name,
+          slug: p.slug,
+          location: p.location,
+          sector: p.sector,
+          price: p.price,
+          mainImage: p.image,
+          badge: p.badge,
+          status: p.badge?.toLowerCase().includes("ready") ? "ready-to-move" : 
+                  p.badge?.toLowerCase().includes("new") || p.badge?.toLowerCase().includes("launch") ? "new-launch" : "under-construction",
+          type: "residential",
+        }));
+      }
+
+      // Apply client-side filtering
+      const filtered = filterProjects(fetchedProjects);
+      setAllProjects(filtered);
+      setProjects(filtered.slice(0, projectsPerPage));
     } catch (error) {
       console.error("Error fetching projects:", error);
+      // Fallback to local data on error
+      const localProjects = projectsData.map((p, index) => ({
+        _id: `local-${index}`,
+        name: p.name,
+        slug: p.slug,
+        location: p.location,
+        sector: p.sector,
+        price: p.price,
+        mainImage: p.image,
+        badge: p.badge,
+        status: p.badge?.toLowerCase().includes("ready") ? "ready-to-move" : 
+                p.badge?.toLowerCase().includes("new") || p.badge?.toLowerCase().includes("launch") ? "new-launch" : "under-construction",
+        type: "residential",
+      }));
+      const filtered = filterProjects(localProjects);
+      setAllProjects(filtered);
+      setProjects(filtered.slice(0, projectsPerPage));
     } finally {
       setLoading(false);
     }
   }
 
+  // Handle pagination
+  useEffect(() => {
+    const startIndex = (page - 1) * projectsPerPage;
+    const endIndex = startIndex + projectsPerPage;
+    
+    // Apply search filter if present
+    let filteredProjects = allProjects;
+    if (search.trim()) {
+      const searchLower = search.toLowerCase();
+      filteredProjects = allProjects.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchLower) ||
+          p.location.toLowerCase().includes(searchLower) ||
+          (p.developer?.toLowerCase().includes(searchLower))
+      );
+    }
+    
+    setProjects(filteredProjects.slice(startIndex, endIndex));
+  }, [page, allProjects, search]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
-    fetchProjects();
   };
+
+  // Calculate total pages
+  const getFilteredProjects = () => {
+    if (!search.trim()) return allProjects;
+    const searchLower = search.toLowerCase();
+    return allProjects.filter(
+      (p) =>
+        p.name.toLowerCase().includes(searchLower) ||
+        p.location.toLowerCase().includes(searchLower) ||
+        (p.developer?.toLowerCase().includes(searchLower))
+    );
+  };
+  
+  const totalProjects = getFilteredProjects().length;
+  const totalPages = Math.ceil(totalProjects / projectsPerPage);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-16">
@@ -118,7 +222,10 @@ export default function FilteredProjectsClient({
                 type="text"
                 placeholder="Search projects, developers, locations..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
                 className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
@@ -132,11 +239,9 @@ export default function FilteredProjectsClient({
         </div>
 
         {/* Results Count */}
-        {pagination && (
-          <div className="mb-6 text-gray-600">
-            Showing {projects.length} of {pagination.total} projects
-          </div>
-        )}
+        <div className="mb-6 text-gray-600">
+          Showing {projects.length} of {totalProjects} projects
+        </div>
 
         {/* Projects Grid */}
         {loading ? (
@@ -170,7 +275,7 @@ export default function FilteredProjectsClient({
         )}
 
         {/* Pagination */}
-        {pagination && pagination.totalPages > 1 && (
+        {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-12">
             <button
               onClick={() => setPage(Math.max(1, page - 1))}
@@ -181,7 +286,7 @@ export default function FilteredProjectsClient({
               Previous
             </button>
             {Array.from(
-              { length: Math.min(5, pagination.totalPages) },
+              { length: Math.min(5, totalPages) },
               (_, i) => {
                 const pageNum = i + 1;
                 return (
@@ -199,12 +304,12 @@ export default function FilteredProjectsClient({
                 );
               }
             )}
-            {pagination.totalPages > 5 && (
+            {totalPages > 5 && (
               <span className="px-2">...</span>
             )}
             <button
-              onClick={() => setPage(Math.min(pagination.totalPages, page + 1))}
-              disabled={page === pagination.totalPages}
+              onClick={() => setPage(Math.min(totalPages, page + 1))}
+              disabled={page === totalPages}
               className="flex items-center gap-1 px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
