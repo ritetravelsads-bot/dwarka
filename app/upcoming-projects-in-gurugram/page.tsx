@@ -76,7 +76,7 @@ const pageContent: SEOPageContent = {
     {
       name: "M3M Altitude",
       location: "Sector 65, Gurgaon",
-      status: "Pre-Launch",
+      status: "New Launch",
       statusColor: "red",
       headerColor: "dark",
       configuration: "2/3 BHK",
@@ -88,7 +88,7 @@ const pageContent: SEOPageContent = {
     {
       name: "Tata Primanti",
       location: "Sector 72, Gurgaon",
-      status: "New Phase",
+      status: "New Launch",
       statusColor: "blue",
       headerColor: "amber",
       configuration: "3/4/5 BHK Villas",

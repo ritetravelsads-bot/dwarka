@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Featured Projects", href: "#projects" },
   { name: "Location Map", href: "#location" },
+  { name: "Blogs", href: "/blogs" },
   { name: "About Us", href: "/about" },
 ];
 
@@ -61,10 +62,16 @@ export default function Footer() {
                   <i className="fa-brands fa-instagram text-lg"></i>
                 </a>
                 <a
-                  href="https://www.facebook.com/profile.php?id=61586373907850"
+                  href="https://www.facebook.com/profile.php?id=61589058328159"
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-primary text-white hover:bg-primary hover:text-white transition-all"
                 >
                   <i className="fa-brands fa-facebook-f text-lg"></i>
+                </a>
+                <a
+                  href="https://www.youtube.com/@DwarkaExpressWayncr"
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-primary text-white hover:bg-primary hover:text-white transition-all"
+                >
+                  <i className="fa-brands fa-youtube text-lg"></i>
                 </a>
               </div>
             </div>

@@ -85,18 +85,6 @@ const pageContent: SEOPageContent = {
       connectivity: "OC Received",
       href: "/projects",
     },
-    {
-      name: "Sobha City",
-      location: "Sector 108, Dwarka Exp",
-      status: "Partial Ready",
-      statusColor: "blue",
-      headerColor: "amber",
-      configuration: "2/3 BHK",
-      sizeRange: "1,400 - 2,100 Sq.Ft.",
-      startingPrice: "Rs. 1.8 Cr*",
-      connectivity: "Phase 1 Ready",
-      href: "/projects",
-    },
   ],
 
   layoutTitle: "Why Choose Ready to Move Flats in Gurgaon?",
