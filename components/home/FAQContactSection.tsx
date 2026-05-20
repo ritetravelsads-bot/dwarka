@@ -184,7 +184,7 @@ export default function FAQContactSection() {
                 href="tel:+919599107676"
                 className="text-3xl md:text-4xl font-light text-dark tracking-tight hover:text-primary transition-colors"
               >
-                +91 9873702365
+                REQUEST A SITE VISIT TODAY
               </a>
               <div className="mt-2 flex items-center justify-center gap-2">
                 <div className="h-px w-8 bg-primary" />
