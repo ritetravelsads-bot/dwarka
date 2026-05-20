@@ -400,10 +400,44 @@ export function getProjectBySlug(slug: string): ProjectData | undefined {
 // Get project data by name (fuzzy match for enriching API data)
 export function getProjectByName(name: string): ProjectData | undefined {
   const normalizedName = name.toLowerCase().trim();
-  return projectsData.find(p => 
+  
+  // Try exact match first
+  const exactMatch = projectsData.find(p => 
     p.name.toLowerCase().trim() === normalizedName ||
     makeSlug(p.name) === makeSlug(name)
   );
+  if (exactMatch) return exactMatch;
+  
+  // Try partial matching for cases like API returning slightly different names
+  // e.g., "Shapoorji Pallonji Joyville Gurugram" vs "Shapoorji Pallonji Joyville"
+  const partialMatch = projectsData.find(p => {
+    const localName = p.name.toLowerCase();
+    return (
+      localName.includes(normalizedName) ||
+      normalizedName.includes(localName) ||
+      // Check if key words match (first 2-3 significant words)
+      matchKeyWords(localName, normalizedName)
+    );
+  });
+  
+  return partialMatch;
+}
+
+// Helper function to match key words between two names
+function matchKeyWords(name1: string, name2: string): boolean {
+  const stopWords = ['the', 'in', 'at', 'by', 'on', 'of', 'and', 'sector', 'gurugram', 'gurgaon'];
+  
+  const getKeyWords = (name: string) => 
+    name.split(/[\s-]+/)
+      .filter(word => word.length > 2 && !stopWords.includes(word))
+      .slice(0, 3);
+  
+  const words1 = getKeyWords(name1);
+  const words2 = getKeyWords(name2);
+  
+  // If at least 2 key words match, consider it a match
+  const matchCount = words1.filter(w => words2.some(w2 => w.includes(w2) || w2.includes(w))).length;
+  return matchCount >= 2;
 }
 
 // Enrich API project data with local data (images, occupancy, etc.)
