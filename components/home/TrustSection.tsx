@@ -8,7 +8,7 @@ const pastProjects = [
 
 export default function TrustSection() {
   return (
-    <section className="py-24 bg-gray-50 border-t border-gray-200">
+    <section className="py-12 bg-gray-50 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Stats Column */}
