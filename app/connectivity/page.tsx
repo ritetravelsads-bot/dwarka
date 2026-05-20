@@ -63,7 +63,7 @@ const connectivityFaqs = [
 // Generate project list for schema
 const projectListForSchema = projects.map((project) => ({
   name: project.name,
-  url: `${BASE_URL}/projects/${makeSlug(project.name)}`,
+  url: `${BASE_URL}/${makeSlug(project.name)}`,
   image: `${BASE_URL}/assets/img/default-project.webp`,
   price: project.price,
 }));
@@ -116,6 +116,87 @@ export default function ConnectivityPage() {
               View Connectivity Map
               <i className="fa-solid fa-arrow-down"></i>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* PRIME LOCATION SECTION */}
+      <section className="py-24 bg-white border-b border-borderGrey">
+        <div className="max-w-7xl mx-auto px-6 mb-16">
+          <div className="text-center md:text-left">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary uppercase tracking-[0.2em] text-xs font-bold mb-4 border border-primary/20">
+              Strategic Advantage
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-dark mb-4 tracking-tight">
+              Prime Location <span className="font-light">Benefits</span>
+            </h2>
+            <p className="text-slate-600 mb-6 max-w-2xl">
+              Strategically positioned at the heart of NCR&apos;s most promising corridor
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+          {/* Location Map Visual */}
+          <div className="relative overflow-hidden rounded-2xl border border-borderGrey">
+            <Image
+              src="/assets/img/prime-Connectivity.webp"
+              alt="Aerial view of Dwarka Expressway showing modern infrastructure and connectivity to Delhi-NCR"
+              width={800}
+              height={600}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Connectivity Benefits */}
+          <div className="space-y-6">
+            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-dark mb-1">15 minutes to IGI Airport</h3>
+                <p className="text-sm text-slate-600">Direct expressway access for seamless international travel</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-dark mb-1">Direct Gurugram Access</h3>
+                <p className="text-sm text-slate-600">20-minute drive to Cyber City and DLF Phase offices</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-dark mb-1">5 km from Diplomatic Enclave</h3>
+                <p className="text-sm text-slate-600">Proximity to embassies and international schools</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-dark mb-1">Adjacent Metro Station (2026)</h3>
+                <p className="text-sm text-slate-600">Upcoming metro connectivity for daily commute convenience</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -200,7 +281,7 @@ export default function ConnectivityPage() {
                   </div>
                   <div className="p-4 bg-lightGrey border-t border-borderGrey/50 text-center">
                     <Link
-                      href={`/projects/${urlSlug}`}
+                      href={`/${urlSlug}`}
                       className="text-sm font-bold text-primary hover:text-dark transition-colors uppercase tracking-wide flex items-center justify-center gap-2"
                     >
                       View Details <i className="fa-solid fa-arrow-right"></i>

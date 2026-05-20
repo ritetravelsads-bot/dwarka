@@ -179,7 +179,7 @@ export default function AdminProjectsPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-2">
                       <Link
-                        href={`/projects/${project.slug}`}
+                        href={`/${project.slug}`}
                         target="_blank"
                         className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
                         title="View"
