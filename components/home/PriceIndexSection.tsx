@@ -4,49 +4,49 @@ import { TrendingUp, TrendingDown, Minus, Flame, Shield, Gem } from "lucide-reac
 
 const priceData = [
   {
-    sector: "Sector 112-113",
+    sector: "Sector 112–113",
     developers: "M3M / Smartworld",
-    avgPrice: "₹14,500",
-    monthlyChange: "+3.2%",
+    avgPrice: "₹16,800",
+    monthlyChange: "+3.1%",
     changeType: "up" as const,
     status: "High Demand",
     statusType: "hot" as const,
   },
   {
-    sector: "Sector 106-109",
-    developers: "Sobha / Elan",
-    avgPrice: "₹11,500",
-    monthlyChange: "+2.8%",
-    changeType: "up" as const,
-    status: "Best Value",
-    statusType: "value" as const,
-  },
-  {
-    sector: "Sector 102-103",
+    sector: "Sector 102–103",
     developers: "Godrej / Whiteland",
-    avgPrice: "₹15,200",
-    monthlyChange: "+1.5%",
-    changeType: "up" as const,
-    status: "Stable",
-    statusType: "stable" as const,
-  },
-  {
-    sector: "Sector 104",
-    developers: "Hero / Puri",
-    avgPrice: "₹16,800",
-    monthlyChange: "+0.8%",
+    avgPrice: "₹15,500",
+    monthlyChange: "+1.8%",
     changeType: "up" as const,
     status: "Premium",
     statusType: "premium" as const,
   },
   {
-    sector: "Sector 110-111",
+    sector: "Sector 106",
+    developers: "Sobha / Elan",
+    avgPrice: "₹16,400",
+    monthlyChange: "+2.5%",
+    changeType: "up" as const,
+    status: "Best Value",
+    statusType: "value" as const,
+  },
+  {
+    sector: "Sector 110–111",
     developers: "Puri / M3M",
-    avgPrice: "₹10,500",
-    monthlyChange: "+2.1%",
+    avgPrice: "₹14,400",
+    monthlyChange: "+1.9%",
     changeType: "up" as const,
     status: "Emerging",
     statusType: "value" as const,
+  },
+  {
+    sector: "Sector 104–105",
+    developers: "Hero / ATS",
+    avgPrice: "₹12,100",
+    monthlyChange: "+2.2%",
+    changeType: "up" as const,
+    status: "Stable",
+    statusType: "stable" as const,
   },
 ];
 
@@ -201,9 +201,10 @@ export default function PriceIndexSection() {
           <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
           <p className="text-sm text-slate-700 leading-relaxed">
             <strong className="text-dark">Expert Verdict:</strong>{" "}
-            Sectors 112–113 are seeing a spike due to proximity to the Delhi border and upcoming metro connectivity.
-            Sectors 106–109 offer the best value for 2026 with 15–20% appreciation potential. Circle rates rose up to
-            67% in April 2026, signalling strong government confidence.
+            Sector 112–113 (M3M, Smartworld) leads at ₹16,800/sq.ft. driven by Delhi-border proximity and metro
+            connectivity. Sector 106 (Sobha Altus) stands out at ₹16,400/sq.ft. — best value for the quality offered.
+            Sector 102–103 (Whiteland, Godrej) remains the premium zone at ₹15,500/sq.ft. Circle rates rose 30–75%
+            in April 2026, signalling strong government confidence in the corridor.
           </p>
         </div>
 
