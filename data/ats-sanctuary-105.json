@@ -1,4 +1,7 @@
 {
+  "_id": {
+    "$oid": "6a0e975cc3be0eabb9addc54"
+  },
   "name": "ATS Sanctuary 105",
   "location": "Sector 105, Dwarka Expressway",
   "price": "₹ 2.50 Cr*",
