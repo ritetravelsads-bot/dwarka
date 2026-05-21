@@ -8,9 +8,10 @@ import {
   PhoneCall, 
   ArrowRight,
   MessageSquare,
-  ShieldCheck,
-  Clock,
-  MapPin
+  Target,
+  Eye,
+  Lightbulb,
+  TrendingUp
 } from "lucide-react";
 
 const faqs = [
@@ -321,33 +322,41 @@ export default function FAQContactSection() {
               </div>
             </div>
 
-            {/* Added Divs to balance height: Trust Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
-                <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-1">
-                  <ShieldCheck className="w-4 h-4" />
+            {/* Why Choose Us */}
+            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-primary font-bold mb-1">Why Choose Us</p>
+              <h3 className="text-[14px] font-semibold text-slate-900 leading-snug mb-4">
+                We work closely with the Dwarka Expressway market every day.
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col gap-1.5">
+                  <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <Target className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-semibold text-slate-900 leading-tight">Focused Expertise</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Deep knowledge on Dwarka Expressway and nearby sectors.</span>
                 </div>
-                <span className="text-sm font-semibold text-slate-900">RERA Approved</span>
-                <span className="text-[11px] text-slate-500 leading-tight">100% verified & secure project listings.</span>
-              </div>
-              
-              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
-                <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-1">
-                  <Clock className="w-4 h-4" />
+                <div className="flex flex-col gap-1.5">
+                  <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
+                    <Eye className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-semibold text-slate-900 leading-tight">Transparency</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Clear explanations of real prices, not inflated quotes.</span>
                 </div>
-                <span className="text-sm font-semibold text-slate-900">24/7 Support</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Dedicated relationship manager for you.</span>
-              </div>
-            </div>
-
-            {/* Added Divs to balance height: Office Location */}
-            <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0 text-slate-600">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <div>
-                <h4 className="text-[13px] font-semibold text-slate-900">Corporate Office</h4>
-                <p className="text-[11px] text-slate-500 mt-0.5">Gurugram, Haryana, India</p>
+                <div className="flex flex-col gap-1.5">
+                  <div className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
+                    <Lightbulb className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-semibold text-slate-900 leading-tight">Honest Insights</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Transparent details on construction progress and project quality.</span>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <div className="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
+                    <TrendingUp className="w-4 h-4" />
+                  </div>
+                  <span className="text-[13px] font-semibold text-slate-900 leading-tight">Market Reality</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Guidance based on market reality, not builder promotions.</span>
+                </div>
               </div>
             </div>
 
