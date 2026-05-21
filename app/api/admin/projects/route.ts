@@ -9,16 +9,35 @@ async function isAuthenticated() {
   return authCookie?.value === 'authenticated';
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
     const client = await clientPromise;
     const db = client.db('dwarka');
+
+    // Single-project fetch by ID (used by edit page)
+    if (id) {
+      let project = null;
+      try {
+        project = await db.collection('projects').findOne({ _id: new ObjectId(id) });
+      } catch {
+        // id was not a valid ObjectId — try matching as string
+        project = await db.collection('projects').findOne({ _id: id as unknown as ObjectId });
+      }
+      if (!project) {
+        return NextResponse.json({ error: 'Project not found' }, { status: 404 });
+      }
+      return NextResponse.json(project);
+    }
+
+    // List all projects
     const projects = await db.collection('projects').find({}).sort({ createdAt: -1 }).toArray();
-    
     return NextResponse.json(projects);
   } catch (error) {
     console.error('Error fetching projects:', error);

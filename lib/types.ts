@@ -1,42 +1,8 @@
 import { ObjectId } from "mongodb";
 
-export interface Project {
-  _id: ObjectId | string;
-  name: string;
-  slug: string;
-  status: "new-launch" | "under-construction" | "ready-to-move";
-  type: "residential" | "commercial" | "sco" | "plots";
-  developer: string;
-  location: string;
-  sector: string;
-  price: string;
-  priceValue: number;
-  pricePerSqFt?: string;
-  size?: string;
-  sizeRange?: string;
-  configurations: string[];
-  rera?: string;
-  possession?: string;
-  description?: string;
-  shortDescription?: string;
-  highlights?: string[];
-  amenities?: string[];
-  floorPlan?: FloorPlan[];
-  gallery?: string[];
-  mainImage?: string;
-  logo?: string;
-  brochure?: string;
-  masterPlan?: string;
-  locationMap?: string;
-  videoUrl?: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  metaKeywords?: string;
-  isPopular?: boolean;
-  isFeatured?: boolean;
-  isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+export interface GalleryImage {
+  url: string;
+  alt?: string;
 }
 
 export interface FloorPlan {
@@ -44,6 +10,76 @@ export interface FloorPlan {
   size: string;
   price: string;
   image?: string;
+}
+
+export interface Project {
+  _id: ObjectId | string;
+  name: string;
+  slug: string;
+  status: "new-launch" | "under-construction" | "ready-to-move" | string;
+  type: "residential" | "commercial" | "sco" | "plots" | string;
+  developer: string;
+  location: string;
+  sector?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+  price: string;
+  priceValue?: number;
+  pricePerSqFt?: string;
+  size?: string;
+  sizeRange?: string;
+  landSize?: string;
+  configurations?: string[];
+  rera?: string;
+  possession?: string;
+  description?: string;
+  shortDescription?: string;
+  highlights?: string[];
+  amenities?: string[];
+  floorPlan?: FloorPlan[];
+  // gallery can be plain URL strings OR objects with url+alt (mixed in MongoDB)
+  gallery?: (string | GalleryImage)[];
+  mainImage?: string;
+  logo?: string;
+  brochure?: string;
+  masterPlan?: string;
+  locationMap?: string;
+  connectivityMap?: string;
+  connectivityMapAlt?: string;
+  videoUrl?: string;
+  // Hero section (stored as nested object in MongoDB)
+  hero?: {
+    image?: string;
+    heading?: string;
+    subText?: string;
+    possession?: string;
+    rera?: string;
+    imageAlt?: string;
+  };
+  // About section (stored as nested object in MongoDB)
+  about?: {
+    title?: string;
+    content?: string;
+    image?: string;
+  };
+  // Project stats
+  totalTowers?: number;
+  totalUnits?: number;
+  occupancy?: number;
+  badge?: string;
+  ogImage?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
+  isPopular?: boolean;
+  // Normalized boolean — use `featured` everywhere. `isFeatured` kept for
+  // backwards-compat with any documents that still have the old field name.
+  featured?: boolean;
+  isFeatured?: boolean;
+  isActive?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface Lead {

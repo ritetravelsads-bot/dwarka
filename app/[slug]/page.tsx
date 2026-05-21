@@ -9,6 +9,10 @@ interface PageProps {
 
 const API_BASE_URL = process.env.BACKEND_API_URL || "https://dwarkaexpresswayncr-backend.onrender.com";
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
+// Internal origin used for SSR self-calls (falls back gracefully in Edge)
+const INTERNAL_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
 // List of static routes that should NOT be treated as project slugs
 const STATIC_ROUTES = [
@@ -42,54 +46,31 @@ async function getProject(slug: string) {
   }
 
   try {
-    // Fetch project from external API (same as PHP version)
-    const res = await fetch(`${API_BASE_URL}/api/projects/${encodeURIComponent(slug)}`, {
-      next: { revalidate: 300 }, // Revalidate every 5 minutes
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
+    // Call our own /api/projects/[slug] route which checks MongoDB first,
+    // then falls back to the external API.  We must use an absolute URL
+    // for server-side fetch from a Next.js RSC.
+    const res = await fetch(
+      `${INTERNAL_ORIGIN}/api/projects/${encodeURIComponent(slug)}`,
+      {
+        next: { revalidate: 300 },
+        headers: { Accept: "application/json" },
+      }
+    );
 
-    if (!res.ok) {
-      return null;
-    }
+    if (!res.ok) return null;
 
-    const project = await res.json();
-    
-    if (!project || !project.name) {
-      return null;
-    }
+    const json = await res.json();
 
-    // Auto-populate gallery if empty (similar to PHP version)
+    if (!json.success || !json.data?.project) return null;
+
+    const { project, relatedProjects = [] } = json.data;
+
+    // Auto-populate gallery if empty
     if (!project.gallery || project.gallery.length === 0) {
       project.gallery = project.mainImage ? [project.mainImage] : [];
     }
 
-    // Get related projects (fetch all and filter client-side)
-    let relatedProjects: typeof project[] = [];
-    try {
-      const relatedRes = await fetch(`${API_BASE_URL}/api/projects?limit=5`, {
-        next: { revalidate: 300 },
-        headers: { 'Accept': 'application/json' },
-      });
-      
-      if (relatedRes.ok) {
-        const relatedData = await relatedRes.json();
-        const allProjects = relatedData.data?.projects || relatedData.projects || relatedData || [];
-        relatedProjects = Array.isArray(allProjects) 
-          ? allProjects.filter((p: typeof project) => 
-              p.slug !== project.slug && p._id !== project._id
-            ).slice(0, 4)
-          : [];
-      }
-    } catch {
-      // Silently fail for related projects
-    }
-
-    return {
-      project,
-      relatedProjects,
-    };
+    return { project, relatedProjects };
   } catch (error) {
     console.error("Error fetching project:", error);
     return null;

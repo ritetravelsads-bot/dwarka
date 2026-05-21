@@ -452,6 +452,20 @@ export const projectsData: ProjectData[] = [
     configurations: ['3 BHK'],
     type: 'residential',
   },
+  {
+    name: 'ATS Sanctuary 105',
+    location: 'Sector 105',
+    sector: 'Sector 105',
+    price: '2.50 Cr',
+    image: '/assets/img/p-30.jpg',
+    badge: 'New Launch',
+    badgeColor: 'bg-primary',
+    occupancy: 12,
+    alt: 'ATS Sanctuary 105 Sector 105 Gurgaon',
+    slug: 'ats-sanctuary-105',
+    configurations: ['3.5 BHK', '4 BHK'],
+    type: 'residential',
+  },
 ];
 
 // Get project data by slug (for enriching API data)

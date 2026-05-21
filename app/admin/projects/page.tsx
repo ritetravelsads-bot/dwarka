@@ -50,19 +50,27 @@ export default function AdminProjectsPage() {
   };
 
   const toggleFeatured = async (project: Project) => {
+    // Read from whichever field the document actually has
+    const currentFeatured = project.featured ?? project.isFeatured ?? false;
+    const newFeatured = !currentFeatured;
+
     try {
       const res = await fetch('/api/admin/projects', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          _id: project._id?.toString(), 
-          featured: !project.isFeatured 
+        body: JSON.stringify({
+          _id: project._id?.toString(),
+          featured: newFeatured,
+          // Also write isFeatured so legacy consumers still work
+          isFeatured: newFeatured,
         }),
       });
-      
+
       if (res.ok) {
-        setProjects(projects.map((p) => 
-          p._id === project._id?.toString() ? { ...p, featured: !p.isFeatured } : p
+        setProjects(projects.map((p) =>
+          p._id?.toString() === project._id?.toString()
+            ? { ...p, featured: newFeatured, isFeatured: newFeatured }
+            : p
         ));
       }
     } catch (error) {
@@ -168,12 +176,12 @@ export default function AdminProjectsPage() {
                     <button
                       onClick={() => toggleFeatured(project)}
                       className={`p-1 rounded ${
-                        project.isFeatured 
-                          ? 'text-yellow-500 hover:text-yellow-600' 
+                        (project.featured ?? project.isFeatured)
+                          ? 'text-yellow-500 hover:text-yellow-600'
                           : 'text-gray-300 hover:text-gray-400'
                       }`}
                     >
-                      <Star className="w-5 h-5" fill={project.isFeatured ? 'currentColor' : 'none'} />
+                      <Star className="w-5 h-5" fill={(project.featured ?? project.isFeatured) ? 'currentColor' : 'none'} />
                     </button>
                   </td>
                   <td className="px-6 py-4">

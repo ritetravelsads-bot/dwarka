@@ -114,65 +114,72 @@ export default function EditProjectPage() {
 
   const fetchProject = async () => {
     try {
-      const res = await fetch('/api/admin/projects');
-      const projects = await res.json();
-      const project = projects.find((p: { _id: string }) => p._id === projectId);
-      
-      if (project) {
-        // Map the project data to form fields
-        setFormData({
-          _id: project._id,
-          name: project.name || '',
-          slug: project.slug || '',
-          developer: project.developer || '',
-          status: project.status || 'Active',
-          type: project.type || 'Residential',
-          featured: project.featured || false,
-          location: project.location || '',
-          sector: project.sector || '',
-          city: project.city || 'Gurugram',
-          state: project.state || 'Haryana',
-          pincode: project.pincode || '',
-          price: project.price || '',
-          priceValue: project.priceValue || 0,
-          pricePerSqFt: project.pricePerSqFt || '',
-          size: project.size || '',
-          sizeRange: project.sizeRange || '',
-          landSize: project.landSize || '',
-          rera: project.rera || '',
-          possession: project.possession || '',
-          configurations: project.configurations || [],
-          occupancy: project.occupancy || 0,
-          badge: project.badge || '',
-          description: project.description || '',
-          shortDescription: project.shortDescription || '',
-          highlights: project.highlights || [],
-          amenities: project.amenities || [],
-          mainImage: project.mainImage || '',
-          logo: project.logo || '',
-          brochure: project.brochure || '',
-          masterPlan: project.masterPlan || '',
-          locationMap: project.locationMap || '',
-          videoUrl: project.videoUrl || '',
-          gallery: Array.isArray(project.gallery) 
-            ? project.gallery.map((g: string | { url: string }) => typeof g === 'string' ? g : g.url) 
-            : [],
-          heroImage: project.hero?.image || '',
-          heroHeading: project.hero?.heading || '',
-          heroSubText: project.hero?.subText || '',
-          heroPossession: project.hero?.possession || '',
-          aboutTitle: project.about?.title || '',
-          aboutContent: project.about?.content || '',
-          aboutImage: project.about?.image || '',
-          floorPlans: project.floorPlan || [],
-          metaTitle: project.metaTitle || '',
-          metaDescription: project.metaDescription || '',
-          ogImage: project.ogImage || '',
-        });
-      } else {
+      // Use the single-project endpoint to avoid fetching ALL projects
+      const res = await fetch(`/api/admin/projects?id=${encodeURIComponent(projectId)}`);
+
+      if (!res.ok) {
         alert('Project not found');
         router.push('/admin/projects');
+        return;
       }
+
+      const project = await res.json();
+
+      if (!project || project.error) {
+        alert('Project not found');
+        router.push('/admin/projects');
+        return;
+      }
+      // Map the project data to form fields
+      setFormData({
+        _id: String(project._id),
+        name: project.name || '',
+        slug: project.slug || '',
+        developer: project.developer || '',
+        status: project.status || 'Active',
+        type: project.type || 'Residential',
+        featured: project.featured ?? project.isFeatured ?? false,
+        location: project.location || '',
+        sector: project.sector || '',
+        city: project.city || 'Gurugram',
+        state: project.state || 'Haryana',
+        pincode: project.pincode || '',
+        price: project.price || '',
+        priceValue: project.priceValue || 0,
+        pricePerSqFt: project.pricePerSqFt || '',
+        size: project.size || '',
+        sizeRange: project.sizeRange || '',
+        landSize: project.landSize || '',
+        rera: project.rera || '',
+        possession: project.possession || '',
+        configurations: project.configurations || [],
+        occupancy: project.occupancy || 0,
+        badge: project.badge || '',
+        description: project.description || '',
+        shortDescription: project.shortDescription || '',
+        highlights: project.highlights || [],
+        amenities: project.amenities || [],
+        mainImage: project.mainImage || '',
+        logo: project.logo || '',
+        brochure: project.brochure || '',
+        masterPlan: project.masterPlan || '',
+        locationMap: project.locationMap || '',
+        videoUrl: project.videoUrl || '',
+        gallery: Array.isArray(project.gallery)
+          ? project.gallery.map((g: string | { url: string }) => typeof g === 'string' ? g : g.url)
+          : [],
+        heroImage: project.hero?.image || '',
+        heroHeading: project.hero?.heading || '',
+        heroSubText: project.hero?.subText || '',
+        heroPossession: project.hero?.possession || '',
+        aboutTitle: project.about?.title || '',
+        aboutContent: project.about?.content || '',
+        aboutImage: project.about?.image || '',
+        floorPlans: project.floorPlan || [],
+        metaTitle: project.metaTitle || '',
+        metaDescription: project.metaDescription || '',
+        ogImage: project.ogImage || '',
+      });
     } catch (error) {
       console.error('Error fetching project:', error);
     } finally {
