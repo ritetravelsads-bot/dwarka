@@ -331,7 +331,7 @@ export const projectsData: ProjectData[] = [
     location: 'Sector 102',
     sector: 'Sector 102',
     price: '2.1 Cr',
-    image: '/assets/img/p-21.webp',
+    image: '/assets/img/shapoorji-pallonji-joyville/shapoorji-pallonji-joyville.png',
     badge: 'Ready to Move',
     badgeColor: 'bg-primary',
     occupancy: 92,
