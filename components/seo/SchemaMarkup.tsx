@@ -173,6 +173,12 @@ interface ProjectSchemaProps {
   rera?: string;
   landArea?: string;
   amenities?: string[];
+  slug?: string;
+  latitude?: string;
+  longitude?: string;
+  floorSize?: number;
+  sector?: string;
+  postalCode?: string;
 }
 
 export function ProjectSchema({
@@ -189,42 +195,19 @@ export function ProjectSchema({
   possession,
   rera,
   landArea,
-  amenities
+  amenities,
+  slug,
+  latitude = "28.4851",
+  longitude = "77.0116",
+  floorSize = 2800,
+  sector = "105",
+  postalCode = "122051"
 }: ProjectSchemaProps) {
-  // RealEstateListing Schema
-  const listingSchema = {
-    "@context": "https://schema.org",
-    "@type": "RealEstateListing",
-    "name": name,
-    "description": description,
-    "url": url,
-    "image": image,
-    "datePosted": new Date().toISOString(),
-    "validThrough": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-    "offers": {
-      "@type": "Offer",
-      "price": priceValue || 0,
-      "priceCurrency": "INR",
-      "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "RealEstateAgent",
-        "name": "Dwarka Expressway NCR",
-        "telephone": "+91-9873702365"
-      }
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": location,
-      "addressRegion": "Haryana",
-      "addressCountry": "IN"
-    }
-  };
-
-  // Product Schema for better visibility
+  // Product Schema - Enhanced with more fields
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${url}#product`,
     "name": name,
     "description": description,
     "image": image,
@@ -232,12 +215,13 @@ export function ProjectSchema({
       "@type": "Brand",
       "name": developer
     },
+    "mainEntityOfPage": `${url}#listing`,
     "offers": {
       "@type": "Offer",
       "url": url,
       "priceCurrency": "INR",
       "price": priceValue || 0,
-      "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
       "availability": "https://schema.org/InStock"
     },
     "additionalProperty": [
@@ -274,7 +258,49 @@ export function ProjectSchema({
     ]
   };
 
-  // Residence Schema
+  // RealEstateListing Schema - Enhanced with House details
+  const listingSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "@id": `${url}#listing`,
+    "name": name,
+    "description": description,
+    "url": url,
+    "image": image,
+    "datePosted": new Date().toISOString(),
+    "validThrough": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+    "offers": {
+      "@type": "Offer",
+      "price": priceValue || 0,
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    },
+    "about": {
+      "@type": "House",
+      "name": `${name}, ${sector ? `Sector ${sector}, ` : ""}${location}, Haryana`,
+      "numberOfRooms": configurations?.length || 4,
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": floorSize,
+        "unitCode": "FTK"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": `${sector ? `Sector ${sector}, ` : ""}Near Dwarka Expressway`,
+        "addressLocality": location,
+        "addressRegion": "Haryana",
+        "postalCode": postalCode,
+        "addressCountry": "India"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": latitude,
+        "longitude": longitude
+      }
+    }
+  };
+
+  // Residence Schema with amenity features
   const residenceSchema = {
     "@context": "https://schema.org",
     "@type": "Residence",
@@ -286,7 +312,12 @@ export function ProjectSchema({
       "@type": "PostalAddress",
       "addressLocality": location,
       "addressRegion": "Haryana",
-      "addressCountry": "IN"
+      "addressCountry": "India"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": latitude,
+      "longitude": longitude
     },
     ...(amenities ? {
       "amenityFeature": amenities.map(amenity => ({
@@ -301,11 +332,11 @@ export function ProjectSchema({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(listingSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listingSchema) }}
       />
       <script
         type="application/ld+json"

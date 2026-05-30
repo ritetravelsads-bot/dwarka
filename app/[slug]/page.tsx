@@ -230,6 +230,12 @@ export default async function ProjectPage({ params }: PageProps) {
         rera={project.rera}
         landArea={project.landSize || project.size}
         amenities={project.amenities}
+        slug={project.slug}
+        latitude={project.latitude || "28.4851"}
+        longitude={project.longitude || "77.0116"}
+        floorSize={project.floorSize || 2800}
+        sector={project.sector || "105"}
+        postalCode={project.postalCode || "122051"}
       />
 
       {/* FAQ Schema for Rich Snippets */}
