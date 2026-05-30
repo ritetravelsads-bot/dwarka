@@ -203,146 +203,130 @@ export function ProjectSchema({
   sector = "105",
   postalCode = "122051"
 }: ProjectSchemaProps) {
-  // Product Schema - Enhanced with more fields
-  const productSchema = {
+  // Combined @graph structure with Product, RealEstateListing, and BreadcrumbList
+  const graphSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `${url}#product`,
-    "name": name,
-    "description": description,
-    "image": image,
-    "brand": {
-      "@type": "Brand",
-      "name": developer
-    },
-    "mainEntityOfPage": `${url}#listing`,
-    "offers": {
-      "@type": "Offer",
-      "url": url,
-      "priceCurrency": "INR",
-      "price": priceValue || 0,
-      "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-      "availability": "https://schema.org/InStock"
-    },
-    "additionalProperty": [
-      ...(configurations ? [{
-        "@type": "PropertyValue",
-        "name": "Configurations",
-        "value": configurations.join(", ")
-      }] : []),
-      ...(status ? [{
-        "@type": "PropertyValue",
-        "name": "Status",
-        "value": status
-      }] : []),
-      ...(possession ? [{
-        "@type": "PropertyValue",
-        "name": "Possession",
-        "value": possession
-      }] : []),
-      ...(rera ? [{
-        "@type": "PropertyValue",
-        "name": "RERA Number",
-        "value": rera
-      }] : []),
-      ...(landArea ? [{
-        "@type": "PropertyValue",
-        "name": "Land Area",
-        "value": landArea
-      }] : []),
-      ...(amenities ? [{
-        "@type": "PropertyValue",
-        "name": "Amenities",
-        "value": amenities.join(", ")
-      }] : [])
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${url}#product`,
+        "name": name,
+        "description": description,
+        "image": image,
+        "brand": {
+          "@type": "Brand",
+          "name": developer
+        },
+        "mainEntityOfPage": `${url}#listing`,
+        "offers": {
+          "@type": "Offer",
+          "url": url,
+          "priceCurrency": "INR",
+          "price": priceValue || 0,
+          "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+          "availability": "https://schema.org/InStock"
+        },
+        "additionalProperty": [
+          ...(configurations ? [{
+            "@type": "PropertyValue",
+            "name": "Configurations",
+            "value": Array.isArray(configurations) ? configurations.join(", ") : configurations
+          }] : []),
+          ...(status ? [{
+            "@type": "PropertyValue",
+            "name": "Status",
+            "value": status
+          }] : []),
+          ...(possession ? [{
+            "@type": "PropertyValue",
+            "name": "Possession",
+            "value": possession
+          }] : []),
+          ...(rera ? [{
+            "@type": "PropertyValue",
+            "name": "RERA Number",
+            "value": rera
+          }] : []),
+          ...(landArea ? [{
+            "@type": "PropertyValue",
+            "name": "Land Area",
+            "value": landArea
+          }] : []),
+          ...(amenities ? [{
+            "@type": "PropertyValue",
+            "name": "Amenities",
+            "value": Array.isArray(amenities) ? amenities.join(", ") : amenities
+          }] : [])
+        ]
+      },
+      {
+        "@type": "RealEstateListing",
+        "@id": `${url}#listing`,
+        "name": `${name}, Dwarka Expressway`,
+        "description": description,
+        "url": url,
+        "image": image,
+        "offers": {
+          "@type": "Offer",
+          "price": priceValue || 0,
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock"
+        },
+        "about": {
+          "@type": "House",
+          "name": `${name}, ${sector ? `Sector ${sector}, ` : ""}${location}, Haryana`,
+          "numberOfRooms": Array.isArray(configurations) ? configurations.length : 4,
+          "floorSize": {
+            "@type": "QuantitativeValue",
+            "value": floorSize,
+            "unitCode": "FTK"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": `${sector ? `Sector ${sector}, ` : ""}Near Dwarka Expressway`,
+            "addressLocality": location,
+            "addressRegion": "Haryana",
+            "postalCode": postalCode,
+            "addressCountry": "India"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": latitude,
+            "longitude": longitude
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": BASE_URL
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": `${BASE_URL}/projects`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": name,
+            "item": url
+          }
+        ]
+      }
     ]
   };
 
-  // RealEstateListing Schema - Enhanced with House details
-  const listingSchema = {
-    "@context": "https://schema.org",
-    "@type": "RealEstateListing",
-    "@id": `${url}#listing`,
-    "name": name,
-    "description": description,
-    "url": url,
-    "image": image,
-    "datePosted": new Date().toISOString(),
-    "validThrough": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-    "offers": {
-      "@type": "Offer",
-      "price": priceValue || 0,
-      "priceCurrency": "INR",
-      "availability": "https://schema.org/InStock"
-    },
-    "about": {
-      "@type": "House",
-      "name": `${name}, ${sector ? `Sector ${sector}, ` : ""}${location}, Haryana`,
-      "numberOfRooms": configurations?.length || 4,
-      "floorSize": {
-        "@type": "QuantitativeValue",
-        "value": floorSize,
-        "unitCode": "FTK"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": `${sector ? `Sector ${sector}, ` : ""}Near Dwarka Expressway`,
-        "addressLocality": location,
-        "addressRegion": "Haryana",
-        "postalCode": postalCode,
-        "addressCountry": "India"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": latitude,
-        "longitude": longitude
-      }
-    }
-  };
-
-  // Residence Schema with amenity features
-  const residenceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Residence",
-    "name": name,
-    "description": description,
-    "image": image,
-    "url": url,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": location,
-      "addressRegion": "Haryana",
-      "addressCountry": "India"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": latitude,
-      "longitude": longitude
-    },
-    ...(amenities ? {
-      "amenityFeature": amenities.map(amenity => ({
-        "@type": "LocationFeatureSpecification",
-        "name": amenity,
-        "value": true
-      }))
-    } : {})
-  };
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(listingSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(residenceSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graphSchema) }}
+    />
   );
 }
 
