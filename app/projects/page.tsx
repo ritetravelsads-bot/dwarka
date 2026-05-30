@@ -30,9 +30,9 @@ const projectsFaqs = [
 
 // Server-side metadata - This is what Google will index
 export const metadata: Metadata = {
-  title: "All Projects on Dwarka Expressway | Residential & Commercial Properties",
+  title: "Best Affordable Projects on Dwarka Expressway- High ROI 18%",
   description:
-    "Explore 50+ premium residential and commercial projects on Dwarka Expressway, Gurgaon. Compare prices, view floor plans, and book site visits. RERA verified projects from top developers.",
+    "Top Affordable Projects on Dwarka Expressway Ready-to-Move Flats starting 1.25 Cr. High appreciation, and strong rental yields. Book your free site visit today!",
   keywords:
     "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway",
   alternates: {

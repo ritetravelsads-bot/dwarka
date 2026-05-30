@@ -6,9 +6,9 @@ import { BreadcrumbSchema, WebPageSchema, LocalBusinessSchema } from "@/componen
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Dwarka Expressway NCR",
+  title: "Trusted Dwarka Expressway Property Dealers -RERA Verified",
   description:
-    "Book a site visit, request pricing details, and connect with Dwarka Expressway property experts. Call +91 9873702365 for instant assistance.",
+    "Best deals on Dwarka Expressway Properties with our Trusted Property Dealers. Expert Advice & Massive 2026 Appreciation. Contact us Today for Free Site Visit!",
   keywords: "contact dwarka expressway, book site visit, real estate consultation, dwarka expressway helpline, property enquiry gurugram",
   alternates: {
     canonical: `${BASE_URL}/contact`,

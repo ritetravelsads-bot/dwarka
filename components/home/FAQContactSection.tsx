@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { 
   Plus, 
@@ -8,9 +7,14 @@ import {
   PhoneCall, 
   ArrowRight,
   MessageSquare,
-  ShieldCheck,
-  Clock,
-  MapPin
+  ShieldCheck,     // Used in the new section
+  Clock,           // Keep if you're still using the old "24/7 Support" or similar blocks elsewhere
+  MapPin,          // Keep if you're still using the "Corporate Office" block elsewhere
+  Briefcase,       // New
+  BadgePercent,    // New
+  TrendingUp,      // New
+  ClipboardCheck,  // New
+  Headphones       // New
 } from "lucide-react";
 
 const faqs = [
@@ -320,34 +324,71 @@ export default function FAQContactSection() {
                 </div>
               </div>
             </div>
-
-            {/* Added Divs to balance height: Trust Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
-                <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-1">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <span className="text-sm font-semibold text-slate-900">RERA Approved</span>
-                <span className="text-[11px] text-slate-500 leading-tight">100% verified & secure project listings.</span>
-              </div>
+            
+            {/* Why Consult With Us Section */}
+            <div className="flex flex-col gap-3">
+              <h3 className="text-sm font-bold text-slate-900 px-1">Why Consult With Us</h3>
               
-              <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-1.5">
-                <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-1">
-                  <Clock className="w-4 h-4" />
+              <div className="grid grid-cols-2 gap-3">
+                {/* Point 1 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    100% RERA-Approved Listings
+                  </span>
                 </div>
-                <span className="text-sm font-semibold text-slate-900">24/7 Support</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Dedicated relationship manager for you.</span>
-              </div>
-            </div>
-
-            {/* Added Divs to balance height: Office Location */}
-            <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center flex-shrink-0 text-slate-600">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <div>
-                <h4 className="text-[13px] font-semibold text-slate-900">Corporate Office</h4>
-                <p className="text-[11px] text-slate-500 mt-0.5">Gurugram, Haryana, India</p>
+            
+                {/* Point 2 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                    <Briefcase className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    End-to-End Deal Closure
+                  </span>
+                </div>
+            
+                {/* Point 3 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0">
+                    <BadgePercent className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    Zero Brokerage on New Launches
+                  </span>
+                </div>
+            
+                {/* Point 4 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
+                    <TrendingUp className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    Maximized ROI
+                  </span>
+                </div>
+            
+                {/* Point 5 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                    <ClipboardCheck className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    Verified Inventory
+                  </span>
+                </div>
+            
+                {/* Point 6 */}
+                <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                    <Headphones className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-800 leading-snug">
+                    Dedicated Support
+                  </span>
+                </div>
               </div>
             </div>
 

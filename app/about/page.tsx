@@ -6,9 +6,9 @@ import { BreadcrumbSchema, WebPageSchema, ServiceSchema } from "@/components/seo
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "About Us | Dwarka Expressway Real Estate Advisory",
+  title: "Best Top Real Estate Agents – Residential, Commercial & SCO",
   description:
-    "Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram. RERA verified projects.",
+    "Get Expert Guidance from Award-Winning Top Real Estate Agents offering only RERA-approved Projects on Dwarka Expressway.  Contact us for a VIP tour!",
   keywords: "dwarka expressway real estate, gurugram property advisor, real estate consultant, dwarka expressway projects, trusted real estate",
   alternates: {
     canonical: `${BASE_URL}/about`,

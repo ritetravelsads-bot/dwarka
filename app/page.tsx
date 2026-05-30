@@ -60,9 +60,9 @@ const homeFaqs = [
 
 // Server-side metadata - This is what Google will use, not page content
 export const metadata: Metadata = {
-  title: "Projects in Dwarka Expressway NCR - Residential | Commercial",
+  title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
   description:
-    "2026 Rapid Infrastructure makes Dwarka Expressway Real estate Top Investment Destinations in NCR. Get Latest Price Trends, EMI Calculator.",
+    "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly!  Dwarka Expressway Top 2026 Investment Hotspot.",
   keywords:
     "dwarka expressway, gurgaon real estate, premium apartments, luxury homes, commercial projects, new launch projects, gurugram property, dwarka expressway projects",
   alternates: {

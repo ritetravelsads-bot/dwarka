@@ -122,34 +122,37 @@ export default function ConnectivityPage() {
 
       {/* PRIME LOCATION SECTION */}
       <section className="py-24 bg-white border-b border-borderGrey">
-        <div className="max-w-7xl mx-auto px-6 mb-16">
-          <div className="text-center md:text-left">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary uppercase tracking-[0.2em] text-xs font-bold mb-4 border border-primary/20">
-              Strategic Advantage
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-dark mb-4 tracking-tight">
-              Prime Location <span className="font-light">Benefits</span>
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+         
+        </div>
+      </section>
+
+      {/* MAP SECTION */}
+      <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold text-dark mb-6 tracking-tight font-heading">
+              Dwarka Expressway Map <span className="font-light">With Projects</span>
             </h2>
-            <p className="text-slate-600 mb-6 max-w-2xl">
-              Strategically positioned at the heart of NCR&apos;s most promising corridor
+            <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
+            <p className="text-lg text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
+              Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the <strong>sector 103 gurgaon map</strong> or <strong>sector 102 gurgaon map</strong> highlights the immense potential of this <strong>Gurgaon smart city</strong> corridor connecting straight to the Delhi border.
             </p>
           </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          {/* Location Map Visual */}
-          <div className="relative overflow-hidden rounded-2xl border border-borderGrey">
+          
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-borderGrey bg-lightGrey p-2 md:p-4">
             <Image
-              src="/assets/img/prime-Connectivity.webp"
-              alt="Aerial view of Dwarka Expressway showing modern infrastructure and connectivity to Delhi-NCR"
-              width={800}
-              height={600}
-              className="w-full h-full object-cover"
+              src="/assets/img/dxp-conn-map.png"
+              alt="Dwarka Expressway route map showcasing luxury apartments on Dwarka Expressway"
+              width={1400}
+              height={800}
+              className="w-full h-auto rounded-xl hover:scale-[1.02] transition-transform duration-700"
             />
           </div>
-
-          {/* Connectivity Benefits */}
-          <div className="space-y-6">
+        </div>
+        
+         {/* Connectivity Benefits */}
+          <div className="">
             <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,32 +201,6 @@ export default function ConnectivityPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* MAP SECTION */}
-      <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-dark mb-6 tracking-tight font-heading">
-              Dwarka Expressway Map <span className="font-light">With Projects</span>
-            </h2>
-            <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-lg text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
-              Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the <strong>sector 103 gurgaon map</strong> or <strong>sector 102 gurgaon map</strong> highlights the immense potential of this <strong>Gurgaon smart city</strong> corridor connecting straight to the Delhi border.
-            </p>
-          </div>
-          
-          <div className="rounded-2xl overflow-hidden shadow-2xl border border-borderGrey bg-lightGrey p-2 md:p-4">
-            <Image
-              src="/assets/img/dxp-conn-map.png"
-              alt="Dwarka Expressway route map showcasing luxury apartments on Dwarka Expressway"
-              width={1400}
-              height={800}
-              className="w-full h-auto rounded-xl hover:scale-[1.02] transition-transform duration-700"
-            />
-          </div>
-        </div>
       </section>
 
       {/* PROJECTS SECTION */}
@@ -234,7 +211,7 @@ export default function ConnectivityPage() {
               Project Portfolio
             </span>
             <h2 className="text-3xl md:text-5xl font-bold text-dark mb-6 tracking-tight font-heading">
-              Top 10 Residential Projects in Gurgaon <span className="font-light">& Beyond</span>
+              Top 10 Residential Projects in Gurgaon
             </h2>
             <p className="text-lg text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
               Browse the finest <strong>residential apartments on Dwarka Expressway</strong>. Every project is uniquely connected to the highway, offering distinct advantages for commuters and investors alike. Discover <strong>Dwarka express highway projects</strong>, pricing, and exact connectivity details below.
@@ -295,7 +272,7 @@ export default function ConnectivityPage() {
       </section>
 
       {/* QUICK NAVIGATION SECTION */}
-      <section className="py-16 bg-slate-50 border-t border-borderGrey">
+      <section className="py-16 bg-slate-50 border-t border-borderGrey hidden">
         <div className="max-w-5xl mx-auto px-6">
           <h3 className="text-2xl font-bold text-center mb-10 text-dark font-heading">Quick Navigation & Neighborhood Insights</h3>
           <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600">

@@ -93,7 +93,7 @@ export default function PriceIndexSection() {
               Market Intelligence
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-dark leading-tight">
-              Dwarka Expressway Price Index
+              Dwarka Expressway Live Price Index
               <span className="ml-2 text-sm font-normal text-slate-400 align-middle">— Trending 5</span>
             </h2>
           </div>
