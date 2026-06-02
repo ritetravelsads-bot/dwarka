@@ -4,8 +4,8 @@ import ProjectsPageClient from "@/components/projects/ProjectsPageClient";
 import { BreadcrumbSchema, WebPageSchema, FAQSchema } from "@/components/seo/SchemaMarkup";
 
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
+const API_BASE_URL = process.env.BACKEND_API_URL || "https://dwarkaexpresswayncr-backend.onrender.com";
 
-// FAQs for projects listing page
 const projectsFaqs = [
   {
     question: "What types of projects are available on Dwarka Expressway?",
@@ -29,7 +29,6 @@ const projectsFaqs = [
   },
 ];
 
-// Server-side metadata - This is what Google will index
 export const metadata: Metadata = {
   title: "All Projects on Dwarka Expressway | Residential & Commercial | 50+ Properties",
   description:
@@ -76,28 +75,43 @@ export const metadata: Metadata = {
   },
 };
 
-// Loading fallback for better UX
-function ProjectsLoadingFallback() {
-  return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="animate-pulse space-y-8">
-          <div className="h-10 bg-gray-200 rounded w-1/3"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-64 bg-gray-200 rounded-lg"></div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </main>
-  );
+// Server-side fetch — runs at request time so Googlebot gets real HTML
+async function getInitialProjects() {
+  try {
+    const apiUrl = new URL(`${API_BASE_URL}/api/projects`);
+    apiUrl.searchParams.set("limit", "12");
+    apiUrl.searchParams.set("page", "1");
+
+    const res = await fetch(apiUrl.toString(), {
+      headers: { Accept: "application/json" },
+      next: { revalidate: 300 }, // cache for 5 minutes
+    });
+
+    if (!res.ok) return { projects: [], pagination: null };
+
+    const data = await res.json();
+
+    if (Array.isArray(data)) {
+      return {
+        projects: data,
+        pagination: { total: data.length, page: 1, limit: 12, totalPages: Math.ceil(data.length / 12) },
+      };
+    }
+    if (data.data?.projects) return { projects: data.data.projects, pagination: data.data.pagination };
+    if (data.projects) return { projects: data.projects, pagination: data.pagination };
+
+    return { projects: [], pagination: null };
+  } catch {
+    return { projects: [], pagination: null };
+  }
 }
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  // Fetch on the server so the initial HTML contains real project cards
+  const { projects: initialProjects, pagination: initialPagination } = await getInitialProjects();
+
   return (
     <>
-      {/* Schema Markup for SEO */}
       <BreadcrumbSchema
         items={[
           { name: "Home", url: BASE_URL },
@@ -110,12 +124,13 @@ export default function ProjectsPage() {
         url={`${BASE_URL}/projects`}
       />
       <FAQSchema faqs={projectsFaqs} />
-      
-      {/* Semantic HTML for search engines */}
+
       <main className="w-full">
-        <Suspense fallback={<ProjectsLoadingFallback />}>
-          {/* Client-side interactive component */}
-          <ProjectsPageClient />
+        <Suspense fallback={null}>
+          <ProjectsPageClient
+            initialProjects={initialProjects}
+            initialPagination={initialPagination}
+          />
         </Suspense>
       </main>
     </>
