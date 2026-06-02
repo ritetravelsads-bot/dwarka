@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import ProjectsPageClient from "@/components/projects/ProjectsPageClient";
 import { BreadcrumbSchema, WebPageSchema, FAQSchema } from "@/components/seo/SchemaMarkup";
 
@@ -30,18 +31,18 @@ const projectsFaqs = [
 
 // Server-side metadata - This is what Google will index
 export const metadata: Metadata = {
-  title: "Best Affordable Projects on Dwarka Expressway- High ROI 18%",
+  title: "All Projects on Dwarka Expressway | Residential & Commercial | 50+ Properties",
   description:
-    "Top Affordable Projects on Dwarka Expressway Ready-to-Move Flats starting 1.25 Cr. High appreciation, and strong rental yields. Book your free site visit today!",
+    "Browse 50+ verified residential and commercial projects on Dwarka Expressway. Compare prices, floor plans, amenities, and book site visits. RERA registered properties from top developers.",
   keywords:
-    "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway",
+    "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway, property near dwarka expressway",
   alternates: {
     canonical: `${BASE_URL}/projects`,
   },
   openGraph: {
-    title: "All Projects on Dwarka Expressway | Residential & Commercial",
+    title: "All Projects on Dwarka Expressway | 50+ Properties Available",
     description:
-      "Explore 50+ premium residential and commercial projects on Dwarka Expressway. Compare prices and book site visits.",
+      "Explore 50+ premium residential and commercial projects on Dwarka Expressway. Compare prices, views, and book site visits today.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -51,19 +52,20 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/assets/img/Og-Image.png`,
         width: 1200,
         height: 630,
-        alt: "Dwarka Expressway Projects",
+        alt: "Dwarka Expressway Projects - Residential & Commercial Properties",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects on Dwarka Expressway | Premium Properties",
-    description: "Explore 50+ premium projects on Dwarka Expressway. RERA verified.",
+    title: "Projects on Dwarka Expressway | Gurgaon Real Estate",
+    description: "Browse 50+ verified projects on Dwarka Expressway. Compare prices and amenities.",
     images: [`${BASE_URL}/assets/img/Og-Image.png`],
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -73,6 +75,24 @@ export const metadata: Metadata = {
     },
   },
 };
+
+// Loading fallback for better UX
+function ProjectsLoadingFallback() {
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="animate-pulse space-y-8">
+          <div className="h-10 bg-gray-200 rounded w-1/3"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-64 bg-gray-200 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
 
 export default function ProjectsPage() {
   return (
@@ -91,8 +111,13 @@ export default function ProjectsPage() {
       />
       <FAQSchema faqs={projectsFaqs} />
       
-      {/* Client-side interactive component */}
-      <ProjectsPageClient />
+      {/* Semantic HTML for search engines */}
+      <main className="w-full">
+        <Suspense fallback={<ProjectsLoadingFallback />}>
+          {/* Client-side interactive component */}
+          <ProjectsPageClient />
+        </Suspense>
+      </main>
     </>
   );
 }
