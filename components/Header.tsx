@@ -78,7 +78,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed w-full z-50 bg-white backdrop-blur-md border-b border-borderGrey">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white backdrop-blur-md border-b border-borderGrey">
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
