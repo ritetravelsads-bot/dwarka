@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     canonical: `${BASE_URL}/about`,
   },
   openGraph: {
-    title: "About Us | Dwarka Expressway Real Estate Advisory",
-    description: "Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram.",
+    title: "Best Top Real Estate Agents – Residential, Commercial & SCO",
+    description: "Get Expert Guidance from Award-Winning Top Real Estate Agents offering only RERA-approved Projects on Dwarka Expressway.  Contact us for a VIP tour!",
     url: `${BASE_URL}/about`,
     type: "website",
   },

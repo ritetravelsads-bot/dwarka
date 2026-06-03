@@ -1,304 +1,302 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function CinematicDealersTable() {
+export default function VipMatcherWizard() {
   const [step, setStep] = useState(1);
-  const [animatingCardId, setAnimatingCardId] = useState<string | null>(null);
+  const [animating, setAnimating] = useState(false);
   const [selections, setSelections] = useState({
-    budget: null as any,
-    motive: null as any,
-    location: null as any,
+    budget: "",
+    motive: "",
+    location: "",
   });
 
-  // Cinematic Intro State
-  // 'hidden' -> 'deck-enter' -> 'dealing' -> 'deck-exit' -> 'ready'
-  const [introPhase, setIntroPhase] = useState('hidden');
-
-  const playIntro = () => {
-    setIntroPhase('hidden');
-    setTimeout(() => setIntroPhase('deck-enter'), 100);
-    setTimeout(() => setIntroPhase('dealing'), 800);
-    setTimeout(() => setIntroPhase('deck-exit'), 1400);
-    setTimeout(() => setIntroPhase('ready'), 1900);
-  };
-
-  useEffect(() => {
-    playIntro();
-  }, []);
-
-  const cardDecks = {
-    1: {
-      key: "budget",
-      cards: [
-        { id: "b1", title: "₹1.5-3 Cr", subtitle: "Premium", stats: { Class: "A", Yield: "7/10", Risk: "Low" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=400" },
-        { id: "b2", title: "₹3-5 Cr", subtitle: "Luxury", stats: { Class: "S", Yield: "8/10", Risk: "Med" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" },
-        { id: "b3", title: "₹5 Cr +", subtitle: "Ultra", stats: { Class: "SS", Yield: "9/10", Risk: "High" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=400" }
-      ]
-    },
-    2: {
-      key: "motive",
-      cards: [
-        { id: "m1", title: "Self Use", subtitle: "Move-In", stats: { Utility: "Max", ROI: "Steady", Time: "Now" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" },
-        { id: "m2", title: "Investment", subtitle: "High ROI", stats: { Utility: "Low", ROI: "Max", Time: "3 Yrs" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" }
-      ]
-    },
-    3: {
-      key: "location",
-      cards: [
-        { id: "l1", title: "Delhi Border", subtitle: "Sec 102-113", stats: { Access: "10/10", Growth: "Fast", Vibe: "Urban" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=400" },
-        { id: "l2", title: "Central", subtitle: "Sec 81-99", stats: { Access: "8/10", Growth: "Steady", Vibe: "Subtle" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=400" }
-      ]
+  const handleSelect = (key: string, value: string) => {
+    if (animating) return;
+    setSelections((prev) => ({ ...prev, [key]: value }));
+    
+    if (step < 4) {
+      setAnimating(true);
+      setTimeout(() => {
+        setStep((prev) => prev + 1);
+        setAnimating(false);
+      }, 350); // Slightly faster transition to match tighter layout
     }
   };
 
-  const handleDraw = (stepKey: string, cardData: any) => {
-    if (animatingCardId || introPhase !== 'ready') return;
-    setAnimatingCardId(cardData.id);
-    
-    setTimeout(() => {
-      setSelections(prev => ({ ...prev, [stepKey]: cardData }));
-      setStep(prev => prev + 1);
-      setAnimatingCardId(null);
-    }, 500); 
-  };
-
-  const resetGame = () => {
-    setStep(1);
-    setSelections({ budget: null, motive: null, location: null });
-    setAnimatingCardId(null);
-    playIntro(); // Replay cinematic intro
+  // Tighter transition translations (translate-y-8 instead of 16)
+  const getStepClass = (stepNumber: number) => {
+    if (step === stepNumber) return "opacity-100 translate-y-0 pointer-events-auto scale-100 z-10";
+    if (step > stepNumber) return "opacity-0 -translate-y-8 pointer-events-none scale-95 z-0 absolute inset-0";
+    return "opacity-0 translate-y-8 pointer-events-none scale-95 z-0 absolute inset-0";
   };
 
   return (
-    <section className="relative w-full h-[600px] flex flex-col items-center font-sans overflow-hidden border-y border-gray-200 bg-[#FAFAFA]">
+    <section className="py-10 md:py-14 px-4 bg-[#050505] flex items-center relative overflow-hidden font-sans">
       
-      {/* ================= BACKGROUND LAYERS ================= */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" 
-          alt="Dwarka Expressway Estate" 
-          className="w-full h-full object-cover object-center opacity-30 grayscale-[50%]" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAFAFA]/95 via-[#FAFAFA]/85 to-[#FAFAFA]/95" />
-      </div>
+      {/* Background ambient glows - slightly reduced size */}
+      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-orange-600/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-orange-500/10 blur-[80px] rounded-full pointer-events-none" />
 
-      {/* Floating Animated Icons in Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <svg className="absolute top-[15%] left-[10%] w-16 h-16 text-black/5 animate-[float_6s_ease-in-out_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1v1H9V7zm5 0h1v1h-1V7zm-5 4h1v1H9v-1zm5 0h1v1h-1v-1zm-5 4h1v1H9v-1zm5 0h1v1h-1v-1z" /></svg>
-        <svg className="absolute bottom-[20%] right-[12%] w-20 h-20 text-orange-500/10 animate-[float_8s_ease-in-out_infinite_reverse]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-black/5 rounded-full" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-orange-500/5 rounded-full" />
-      </div>
-
-      {/* ================= HEADER ================= */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 w-full px-4 text-center z-20 flex flex-col items-center">
-        <span className="inline-block py-1 px-3 bg-orange-100 text-orange-600 font-black uppercase tracking-[0.2em] text-[8px] rounded-full border border-orange-200 mb-2 shadow-sm">
-          Deal Your Future
-        </span>
-        <h2 className="text-2xl md:text-3xl font-black text-black uppercase tracking-tight leading-none">
-          Build Your <span className="text-orange-500">Portfolio.</span>
-        </h2>
-      </div>
-
-      {/* ================= THE PLAYER'S HAND (TOP SLOTS) ================= */}
-      <div className="absolute top-[90px] md:top-[100px] z-30 flex gap-3 md:gap-4 perspective-[1000px]">
-        {[
-          { key: 'budget', label: "CAPITAL" },
-          { key: 'motive', label: "TACTIC" },
-          { key: 'location', label: "ZONE" }
-        ].map((slot, index) => {
-          const card = selections[slot.key as keyof typeof selections];
-          const isCurrentSlot = step === index + 1 && introPhase === 'ready';
-          
-          return (
-            <div 
-              key={slot.key} 
-              className={`w-20 h-28 md:w-24 md:h-32 rounded-lg flex flex-col items-center justify-center transition-all duration-500 transform-style-3d relative overflow-hidden
-                ${card ? 'bg-white border-[1.5px] border-black shadow-[2px_2px_0px_#000] translate-y-0' : 
-                  isCurrentSlot ? 'bg-orange-50 border-[1.5px] border-dashed border-orange-400 scale-105 shadow-inner' : 
-                  'bg-white/50 backdrop-blur-sm border-[1.5px] border-dashed border-gray-400'
-                }
-              `}
-            >
-              {!card && (
-                <div className={`text-[8px] font-black tracking-[0.2em] uppercase transition-colors ${isCurrentSlot ? 'text-orange-500 animate-pulse' : 'text-gray-400'}`}>
-                  {slot.label}
-                </div>
-              )}
-              
-              {/* Slotted Card Data */}
-              {card && (
-                <div className="absolute inset-0 p-2 flex flex-col justify-between animate-[slot-in_0.4s_ease-out_forwards] bg-white z-10">
-                  <div className="text-[7px] font-black uppercase text-gray-400 tracking-widest">{slot.label}</div>
-                  <div className="w-full h-8 md:h-10 rounded overflow-hidden relative">
-                    <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/10" />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-xs md:text-sm font-black text-black leading-none mb-0.5 truncate">{card.title}</div>
-                    <div className={`text-[6px] font-bold uppercase tracking-widest ${card.accent}`}>{card.subtitle}</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* ================= THE DRAW DECK (BOTTOM) ================= */}
-      {/* This physical deck enters, dispenses cards, and rests at the bottom */}
-      <div 
-        className={`absolute left-1/2 -translate-x-1/2 w-28 h-44 md:w-36 md:h-56 z-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] transform-style-3d
-          ${introPhase === 'hidden' ? 'top-[120%] opacity-0' : 
-            introPhase === 'deck-enter' ? 'top-[230px] md:top-[250px] opacity-100 scale-105' : 
-            introPhase === 'dealing' ? 'top-[230px] md:top-[250px] opacity-100 scale-95' : 
-            'top-[530px] opacity-30 scale-75 blur-[1px]' // Resting state at bottom
-          }
-        `}
-      >
-        {/* Visual stack of cards */}
-        <div className="absolute inset-0 bg-white border-2 border-black rounded-xl shadow-[0_4px_0_#d1d5db]" />
-        <div className="absolute inset-0 bg-white border-2 border-black rounded-xl -translate-y-1 translate-x-1 shadow-[0_4px_0_#d1d5db]" />
-        <div className="absolute inset-0 bg-black border-2 border-black rounded-xl -translate-y-2 translate-x-2 flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]" />
-          <svg className="w-8 h-8 text-orange-500 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-        </div>
-      </div>
-
-      {/* ================= THE DEALER'S TABLE (CENTER STAGE) ================= */}
-      <div className="absolute top-[230px] md:top-[250px] w-full max-w-4xl flex justify-center perspective-[1200px] z-20">
+      {/* Reduced gap-12 to gap-8 for tighter column spacing */}
+      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-8 items-center relative z-10">
         
-        {[1, 2, 3].map((deckStep) => {
-          const deckData = (cardDecks as any)[deckStep];
-          if (!deckData) return null;
-
-          // Intro Animation states for Step 1 cards
-          const isStep1 = deckStep === 1;
-          const hideStep1 = isStep1 && (introPhase === 'hidden' || introPhase === 'deck-enter');
+        {/* ================= LEFT SIDE: THE COMMAND CENTER ================= */}
+        <div className="lg:col-span-7 flex flex-col justify-center min-h-[380px] relative">
           
-          return (
-            <div 
-              key={deckStep} 
-              className={`absolute flex justify-center items-center gap-3 md:gap-5 transition-all duration-500 
-                ${hideStep1 ? 'opacity-0 scale-50 translate-y-0 z-0' :
-                  step === deckStep ? 'opacity-100 z-30 pointer-events-auto scale-100 translate-y-0' : 
-                  step > deckStep ? 'opacity-0 z-10 pointer-events-none scale-110 -translate-y-12 blur-sm' : 
-                  'opacity-0 z-0 pointer-events-none scale-90 translate-y-24 blur-sm'
-                }
-              `}
-            >
-              {deckData.cards.map((card: any, idx: number) => {
-                const isSelected = animatingCardId === card.id;
-                const isDiscarded = animatingCardId !== null && animatingCardId !== card.id;
-                
-                // Pop animation delays for sequence
-                const popDelay = idx === 0 ? 'delay-0' : idx === 1 ? 'delay-[100ms]' : 'delay-[200ms]';
-                const applyPop = isStep1 && introPhase === 'ready' && !animatingCardId;
+          {/* Header & Progress - tighter margins */}
+          <div className="mb-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-[1px] w-8 bg-orange-500"></div>
+              <span className="text-orange-500 uppercase tracking-[0.2em] text-[9px] font-bold">
+                Project Matcher V2.0
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
+              Design Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Perfect Match.</span>
+            </h2>
+            
+            {/* Minimalist Progress Indicators */}
+            <div className="flex gap-2 w-full max-w-sm">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden relative">
+                  <div 
+                    className={`absolute inset-y-0 left-0 bg-orange-500 transition-all duration-500 ease-out ${
+                      step > i ? 'w-full' : step === i ? 'w-1/2 animate-pulse' : 'w-0'
+                    }`} 
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-                return (
+          {/* Dynamic Steps Container */}
+          <div className="relative w-full">
+            
+            {/* STEP 1: BUDGET */}
+            <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${getStepClass(1)}`}>
+              <h3 className="text-xl text-white/90 font-medium mb-4">01. Select investment bracket</h3>
+              <div className="space-y-2.5">
+                {[
+                  { id: "b1", label: "₹1.5 Cr - ₹3 Cr", desc: "Premium 3 BHK segment" },
+                  { id: "b2", label: "₹3 Cr - ₹5 Cr", desc: "Luxury 3 & 4 BHKs" },
+                  { id: "b3", label: "₹5 Cr+", desc: "Ultra-luxury & Penthouses" }
+                ].map((opt) => (
                   <button
-                    key={card.id}
-                    onClick={() => handleDraw(deckData.key, card)}
-                    disabled={animatingCardId !== null || introPhase !== 'ready'}
-                    className={`relative w-28 h-44 md:w-36 md:h-56 bg-white rounded-xl p-2.5 flex flex-col text-left transition-all duration-400 transform-style-3d shadow-xl border-2 ${card.border} group
-                      hover:-translate-y-4 hover:shadow-[0_15px_30px_rgba(249,115,22,0.2)] hover:rotate-[-2deg]
-                      ${isSelected ? '!scale-50 !-translate-y-[150px] !opacity-0 z-50 shadow-none' : ''}
-                      ${isDiscarded ? '!translate-y-[100px] !rotate-[20deg] !opacity-0 z-10 shadow-none' : ''}
-                      ${applyPop ? `animate-[card-pop_0.5s_ease-out_forwards] ${popDelay}` : ''}
-                    `}
+                    key={opt.id}
+                    onClick={() => handleSelect('budget', opt.label)}
+                    className="group w-full relative bg-white/[0.03] border border-white/10 hover:border-orange-500/50 p-3.5 rounded-xl flex items-center justify-between overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(249,115,22,0.2)] hover:-translate-y-0.5 text-left"
                   >
-                    {/* Card Graphic with Image */}
-                    <div className="w-full h-12 md:h-16 bg-gray-100 rounded-lg mb-2 flex items-center justify-center relative overflow-hidden border border-gray-200">
-                      <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-orange-500/20 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/0 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative z-10">
+                      <div className="text-base font-bold text-white mb-0.5 group-hover:text-orange-400 transition-colors">{opt.label}</div>
+                      <div className="text-[11px] text-white/40">{opt.desc}</div>
                     </div>
-
-                    <div className="mb-auto px-1">
-                      <h3 className="text-[13px] md:text-sm font-black text-black uppercase leading-none mb-0.5">{card.title}</h3>
-                      <p className={`text-[7px] md:text-[8px] font-bold uppercase tracking-widest ${card.accent}`}>{card.subtitle}</p>
-                    </div>
-
-                    {/* Stats Grid */}
-                    <div className="mt-2 pt-2 border-t-2 border-dashed border-gray-200 grid grid-cols-3 gap-1 px-0.5">
-                      {Object.entries(card.stats).map(([statName, statValue]) => (
-                        <div key={statName} className="text-center">
-                          <div className="text-[6px] md:text-[7px] font-black text-gray-400 uppercase tracking-widest mb-0.5">{statName}</div>
-                          <div className="text-[8px] md:text-[9px] font-black text-black bg-gray-100 rounded border border-gray-200 py-0.5">{statValue as string}</div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* Action Button */}
-                    <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 bg-black text-white text-[8px] font-black tracking-[0.2em] uppercase py-1.5 px-5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg group-hover:-translate-y-1">
-                      DRAW
+                    <div className="relative z-10 w-6 h-6 rounded-full border border-white/20 group-hover:border-orange-500 flex items-center justify-center transition-colors">
+                      <div className="w-2 h-2 rounded-full bg-orange-500 scale-0 group-hover:scale-100 transition-transform duration-300" />
                     </div>
                   </button>
-                );
-              })}
-            </div>
-          );
-        })}
-
-        {/* ================= STATE 4: THE MASTER CARD (LEAD CAPTURE) ================= */}
-        <div className={`absolute top-0 flex justify-center items-center transition-all duration-700 
-          ${step === 4 ? 'opacity-100 z-50 pointer-events-auto delay-200' : 'opacity-0 scale-50 pointer-events-none'}`}
-        >
-          <div className="relative w-[300px] h-[360px] md:h-[380px] bg-[#050505] rounded-3xl p-1 shadow-[0_15px_40px_rgba(249,115,22,0.3)] animate-[flip-in_0.6s_ease-out_forwards]">
-            <div className="w-full h-full border-[1.5px] border-orange-500 rounded-[22px] p-5 flex flex-col justify-between relative overflow-hidden bg-[#050505]">
-              
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-50" />
-
-              <div className="text-center relative z-10 pt-2">
-                <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-[0_0_15px_rgba(249,115,22,0.5)]">
-                  <svg className="w-5 h-5 text-black ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                </div>
-                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-1.5">Deck Complete</h3>
-                <p className="text-[10px] text-gray-400 font-medium leading-relaxed px-4">
-                  Unlocked <span className="text-orange-500 font-bold">14 Off-Market</span> properties. Verify identity to claim.
-                </p>
+                ))}
               </div>
+            </div>
 
-              <div className="space-y-3 mt-4 relative z-10 px-2">
-                <div className="bg-white rounded-lg overflow-hidden flex items-center focus-within:ring-[1.5px] focus-within:ring-orange-500 transition-all">
-                  <span className="bg-gray-100 text-gray-500 font-black text-[10px] px-3 py-3 border-r border-gray-200">+91</span>
-                  <input type="tel" placeholder="Mobile Number" className="w-full bg-transparent px-3 py-3 text-black font-bold outline-none placeholder-gray-400 text-xs" />
+            {/* STEP 2: MOTIVE */}
+            <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${getStepClass(2)}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl text-white/90 font-medium">02. Primary Objective</h3>
+                <button onClick={() => setStep(1)} className="text-xs text-white/40 hover:text-orange-500 transition-colors uppercase tracking-widest text-[9px]">← Back</button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {[
+                  { id: 'move', label: "Self Use", desc: "Immediate move-in", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /> },
+                  { id: 'roi', label: "Investment", desc: "High ROI focus", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /> },
+                  { id: 'luxury', label: "Upgrade", desc: "Lifestyle luxury", icon: <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /> }
+                ].map((opt) => (
+                  <button
+                    key={opt.id}
+                    onClick={() => handleSelect('motive', opt.label)}
+                    className="group relative bg-white/[0.03] border border-white/10 hover:border-orange-500/50 p-4 rounded-xl flex flex-col items-center text-center transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(249,115,22,0.2)] hover:-translate-y-0.5"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-3 group-hover:bg-orange-500/10 group-hover:border-orange-500/50 transition-colors">
+                      <svg className="w-5 h-5 text-white/50 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {opt.icon}
+                      </svg>
+                    </div>
+                    <div className="font-bold text-white text-sm mb-0.5">{opt.label}</div>
+                    <div className="text-[10px] text-white/40">{opt.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* STEP 3: LOCATION */}
+            <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${getStepClass(3)}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl text-white/90 font-medium">03. Preferred Zone</h3>
+                <button onClick={() => setStep(2)} className="text-xs text-white/40 hover:text-orange-500 transition-colors uppercase tracking-widest text-[9px]">← Back</button>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { label: "Delhi Border (Sec 102-113)", desc: "0-5 mins from Delhi, highest future appreciation." },
+                  { label: "Central E-way (Sec 81-99)", desc: "Closer to NH-8, Cyberhub, and existing social infrastructure." }
+                ].map((opt) => (
+                  <button
+                    key={opt.label}
+                    onClick={() => handleSelect('location', opt.label)}
+                    className="group w-full bg-white/[0.03] border border-white/10 hover:border-orange-500/50 p-4 rounded-xl flex items-start gap-3 transition-all duration-300 hover:shadow-[0_0_20px_-5px_rgba(249,115,22,0.2)] text-left hover:-translate-y-0.5"
+                  >
+                    <div className="mt-0.5 w-5 h-5 rounded bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-orange-500/20 group-hover:text-orange-500 transition-colors">
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <div>
+                      <div className="font-bold text-white text-base mb-0.5">{opt.label}</div>
+                      <div className="text-xs text-white/40">{opt.desc}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* STEP 4: LEAD CAPTURE */}
+            <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${getStepClass(4)}`}>
+              <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6 md:p-8 text-center relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-50"></div>
+                
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(249,115,22,0.4)] relative">
+                  <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7z" /></svg>
                 </div>
                 
-                <button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black uppercase tracking-[0.2em] py-3 rounded-lg transition-all shadow-[2px_2px_0px_#fff] active:shadow-none active:translate-y-0.5 active:translate-x-0.5 text-[10px]">
-                  Reveal Hand
-                </button>
+                <h3 className="text-2xl font-bold text-white mb-2">Ticket Generated.</h3>
+                <p className="text-white/60 mb-6 text-xs max-w-[280px] mx-auto leading-relaxed">
+                  Criteria locked. Enter your number to unlock matching floorplans & pricing.
+                </p>
+                
+                <div className="max-w-xs mx-auto space-y-3">
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-white/50 text-sm font-bold">+91</div>
+                    <input 
+                      type="tel" 
+                      placeholder="Mobile Number" 
+                      className="w-full bg-black/50 border border-white/20 focus:border-orange-500 rounded-lg py-3 pl-12 pr-4 text-white text-sm placeholder-white/20 outline-none transition-colors"
+                    />
+                  </div>
+                  <button className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded-lg transition-all hover:shadow-[0_0_20px_-5px_rgba(249,115,22,0.5)] transform hover:-translate-y-0.5 uppercase tracking-wide text-xs">
+                    Unlock Matches Now
+                  </button>
+                  <button onClick={() => setStep(1)} className="text-[10px] text-white/30 hover:text-white mt-3 uppercase tracking-widest transition-colors">
+                    Restart Process
+                  </button>
+                </div>
               </div>
-
-              <button onClick={resetGame} className="relative z-10 text-[9px] text-gray-500 hover:text-white uppercase tracking-widest font-bold mt-4 transition-colors text-center w-full">
-                Shuffle & Restart
-              </button>
             </div>
+
           </div>
         </div>
 
+        {/* ================= RIGHT SIDE: THE DYNAMIC TICKET ================= */}
+        <div className="lg:col-span-5 hidden lg:block">
+          {/* Compressed Ticket Container height to 420px */}
+          <div className="relative w-full max-w-[320px] mx-auto transform perspective-1000 rotate-y-[-5deg] rotate-x-[5deg] transition-transform duration-700 hover:rotate-y-0 hover:rotate-x-0">
+            
+            <div className="bg-[#111] border border-white/10 rounded-3xl overflow-hidden relative shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col min-h-[420px]">
+              
+              {/* Top Section */}
+              <div className="p-6 relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/10 to-transparent h-16 -translate-y-full animate-[scan_3s_ease-in-out_infinite]" />
+                
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <div className="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1">Status</div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
+                      <span className="text-orange-500 font-bold text-xs tracking-wider uppercase">Live Sync</span>
+                    </div>
+                  </div>
+                  <svg className="w-6 h-6 text-white/10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 22h20L12 2zm0 6l6 12H6l6-12z" />
+                  </svg>
+                </div>
+
+                {/* Dynamic Fields - smaller text & spacing */}
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1">Capital Config</div>
+                    <div className="h-6 flex items-end border-b border-white/5 pb-1">
+                      {selections.budget ? (
+                        <span className="text-lg font-bold text-white font-mono animate-[fade-in_0.3s_ease-out]">{selections.budget}</span>
+                      ) : (
+                        <span className="text-lg text-white/10 font-mono">_ _ _ _</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1">Primary Motive</div>
+                    <div className="h-6 flex items-end border-b border-white/5 pb-1">
+                      {selections.motive ? (
+                        <span className="text-base font-bold text-orange-400 font-mono animate-[fade-in_0.3s_ease-out]">{selections.motive}</span>
+                      ) : (
+                        <span className="text-base text-white/10 font-mono">_ _ _ _</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-1">Target Zone</div>
+                    <div className="h-6 flex items-end border-b border-white/5 pb-1">
+                      {selections.location ? (
+                        <span className="text-sm font-bold text-white font-mono truncate animate-[fade-in_0.3s_ease-out]">{selections.location}</span>
+                      ) : (
+                        <span className="text-sm text-white/10 font-mono">_ _ _ _</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Ticket Divider with cutouts */}
+              <div className="relative h-6 w-full flex items-center">
+                <div className="absolute left-[-12px] w-6 h-6 bg-[#050505] rounded-full border-r border-white/10"></div>
+                <div className="absolute right-[-12px] w-6 h-6 bg-[#050505] rounded-full border-l border-white/10"></div>
+                <div className="w-full border-t-2 border-dashed border-white/10 mx-5"></div>
+              </div>
+
+              {/* Bottom Barcode Section */}
+              <div className="p-6 pt-3 flex-1 flex flex-col justify-end bg-gradient-to-t from-black/50 to-transparent">
+                <div className="flex justify-between items-end mb-4">
+                  <div>
+                    <div className="text-[9px] text-white/30 uppercase tracking-[0.2em] mb-0.5">Entry Code</div>
+                    <div className="text-xs font-mono text-white/50">
+                      {step === 4 ? "VALID-2026-DXP" : "PENDING..."}
+                    </div>
+                  </div>
+                  <div className={`w-8 h-8 border border-white/20 rounded p-0.5 transition-all duration-700 ${step === 4 ? 'opacity-100 border-orange-500/50' : 'opacity-20'}`}>
+                    <div className="w-full h-full bg-white/20" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.5) 2px, rgba(255,255,255,0.5) 4px)' }}></div>
+                  </div>
+                </div>
+                
+                {/* Simulated Barcode */}
+                <div className={`h-8 w-full flex gap-[2px] transition-opacity duration-1000 ${step === 4 ? 'opacity-100' : 'opacity-30'}`}>
+                  {[...Array(28)].map((_, i) => (
+                    <div key={i} className={`h-full bg-white ${Math.random() > 0.5 ? 'w-1.5' : 'w-[2px]'}`}></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Absolute Glow behind ticket */}
+            <div className={`absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl blur-xl transition-opacity duration-1000 -z-10 ${step === 4 ? 'opacity-30' : 'opacity-0'}`}></div>
+          </div>
+        </div>
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float {
-          0% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(5deg); }
-          100% { transform: translateY(0px) rotate(0deg); }
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(400%); }
         }
-        @keyframes slot-in {
-          0% { opacity: 0; transform: scale(1.5) translateY(20px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes fade-in {
+          0% { opacity: 0; transform: translateY(5px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes flip-in {
-          0% { opacity: 0; transform: rotateY(-90deg) scale(0.8); }
-          100% { opacity: 1; transform: rotateY(0deg) scale(1); }
-        }
-        @keyframes card-pop {
-          0% { transform: scale(1) translateY(0); }
-          50% { transform: scale(1.08) translateY(-10px); border-color: #f97316; box-shadow: 0 15px 30px rgba(249,115,22,0.3); }
-          100% { transform: scale(1) translateY(0); }
-        }
-        .perspective-[1000px] { perspective: 1000px; }
-        .perspective-[1200px] { perspective: 1200px; }
-        .transform-style-3d { transform-style: preserve-3d; }
       `}} />
     </section>
   );

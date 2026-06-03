@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/upcoming-projects-in-gurugram`;
 
 export const metadata: Metadata = {
-  title: "Upcoming Projects in Gurugram 2026 | New Launches & Pre-Launch",
+  title: "New Upcoming Projects in Gurgaon 2026: RERA-Certified",
   description:
-    "Discover upcoming projects in Gurugram - new launches, pre-launch offers & best investment opportunities. Latest residential & commercial projects in Gurgaon.",
+    "Find your perfect Flat on Dwarka Expressway —  Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a free Callback today.",
   keywords:
     "upcoming projects in gurugram, new launch in gurgaon, new upcoming projects in gurgaon, upcoming projects on dwarka expressway, pre launch residential projects in gurgaon, properties on dwarka expressway, new commercial projects in gurgaon, affordable housing dwarka expressway, Best Projects on Dwarka Expressway, flat in dwarka expressway",
   alternates: {
@@ -220,8 +220,8 @@ export default function UpcomingProjectsPage() {
         ]}
       />
       <WebPageSchema
-        title="Upcoming Projects in Gurugram"
-        description="Discover upcoming projects in Gurugram - new launches, pre-launch offers & best investment opportunities."
+        title="New Upcoming Projects in Gurgaon 2026: RERA-Certified"
+        description="Find your perfect Flat on Dwarka Expressway —  Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a free Callback today."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

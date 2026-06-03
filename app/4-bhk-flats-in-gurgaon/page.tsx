@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/4-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "4 BHK Flats in Gurgaon | Luxury Penthouses & Premium Apartments",
+  title: "4 BHK Flats in Dwarka: Verified Top-Rated Gated Societies",
   description:
-    "Buy 4 BHK luxury flats in Gurgaon. Premium penthouses, spacious apartments on Dwarka Expressway & Golf Course Road. Experience ultra-luxury living.",
+    "Buy 4 BHK luxury Apartments in Gurgaon. Our Experts rank the Best Projects by Connectivity, Builder reputation & Value. Get the free list & a callback today.",
   keywords:
     "4bhk, 4 bhk luxury apartments in gurgaon, 4 bhk flats in gurgaon, 4 bhk flats in dwarka, 4bhk in gurgaon, 4 bhk apartment in gurgaon, 4 bhk builder floor in gurgaon, 4 bhk home, 4 bhk layout",
   alternates: {
@@ -220,8 +220,8 @@ export default function FourBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="4 BHK Flats in Gurgaon"
-        description="Buy 4 BHK luxury flats in Gurgaon. Premium penthouses and spacious apartments on Dwarka Expressway and Golf Course Road."
+        title="4 BHK Flats in Dwarka: Verified Top-Rated Gated Societies"
+        description="Buy 4 BHK luxury Apartments in Gurgaon. Our Experts rank the Best Projects by Connectivity, Builder reputation & Value. Get the free list & a callback today"
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Residential Projects on Dwarka Expressway | Gurgaon 2026",
+    title: "New Residential Projects in Gurgaon 2026 – Top Picks",
     description:
-      "Discover premium residential projects on Dwarka Expressway. Verified properties with modern amenities, excellent connectivity, and expert buying guidance.",
+      "Invest wisely in Dwarka Expressway real estate — Fast appreciation, seamless Delhi connectivity & Top builders. Explore New launches. Get expert advice now.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -236,8 +236,8 @@ export default function ResidentialProjectsPage() {
         ]}
       />
       <WebPageSchema
-        title="Residential Projects on Dwarka Expressway"
-        description="Discover premium residential projects on Dwarka Expressway, Gurgaon. Verified properties with modern amenities, excellent connectivity, trusted developers, and expert buying guidance."
+        title="New Residential Projects in Gurgaon 2026 – Top Picks	"
+        description="Invest wisely in Dwarka Expressway real estate — Fast appreciation, seamless Delhi connectivity & Top builders. Explore New launches. Get expert advice now."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     canonical: `${BASE_URL}/contact`,
   },
   openGraph: {
-    title: "Contact Us | Dwarka Expressway NCR",
-    description: "Book a site visit, request pricing details, and connect with Dwarka Expressway property experts.",
+    title: "Trusted Dwarka Expressway Property Dealers -RERA Verified",
+    description: "Best deals on Dwarka Expressway Properties with our Trusted Property Dealers. Expert Advice & Massive 2026 Appreciation. Contact us Today for Free Site Visit!",
     url: `${BASE_URL}/contact`,
     type: "website",
   },

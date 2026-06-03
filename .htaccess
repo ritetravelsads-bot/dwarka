@@ -28,6 +28,9 @@ RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
 # CRITICAL FIX: Ignore anything starting with /blogs (with or without slash)
 RewriteCond %{REQUEST_URI} !^/blogs [NC]
 
+RewriteCond %{REQUEST_URI} !^/google80cd23f38f1157c9.html [NC]
+RewriteCond %{REQUEST_URI} !^/google4889cdfabab3b4a9.html [NC]
+
 # Ignore cPanel directories
 RewriteCond %{REQUEST_URI} !^/cgi-bin/ [NC]
 RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
@@ -53,6 +56,7 @@ RewriteRule ^(.*)$ http://127.0.0.1:5000%{REQUEST_URI} [P,L]
     ExpiresByType application/font-woff "access plus 1 year"
     ExpiresByType application/font-woff2 "access plus 1 year"
 </IfModule>
+
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php82” package as the default “PHP” programming language.
 <IfModule mime_module>

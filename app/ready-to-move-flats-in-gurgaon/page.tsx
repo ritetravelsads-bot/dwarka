@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/ready-to-move-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "Ready to Move Flats in Gurgaon | Immediate Possession 2026",
+  title: "Buy Ready to Move Flats in Gurgaon – Trusted, Verified Homes",
   description:
-    "Find ready to move flats in Gurgaon with immediate possession. Move-in ready apartments on Dwarka Expressway, Golf Course Road & prime locations. Zero GST benefits.",
+    "Tired of delays? Browse fully completed Ready to move Apartments — 2BHK & 3BHK options, No hidden charges & Bank-approved projects. Get Expert guidance now.",
   keywords:
     "ready to move flats in gurgaon, ready to move apartments, ready to move flats, ready to move flats in dwarka expressway, ready to move flats in gurgaon under 1 crore, dwarka expressway flats, dwarka expressway property, affordable housing gurgaon",
   alternates: {
@@ -208,8 +208,8 @@ export default function ReadyToMovePage() {
         ]}
       />
       <WebPageSchema
-        title="Ready to Move Flats in Gurgaon"
-        description="Find ready to move flats in Gurgaon with immediate possession. Move-in ready apartments on Dwarka Expressway and prime locations."
+        title="Buy Ready to Move Flats in Gurgaon – Trusted, Verified Homes"
+        description="Tired of delays? Browse fully completed Ready to move Apartments — 2BHK & 3BHK options, No hidden charges & Bank-approved projects. Get Expert guidance now"
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/commercial-property-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "Commercial Property in Gurgaon | Office Space & Retail Shops 2026",
+  title: "Buy Commercial Property Gurgaon 2025 – Trusted Builders",
   description:
-    "Buy commercial property in Gurgaon - office spaces, retail shops, commercial showrooms. Prime locations in Cyber City, Golf Course Road & Dwarka Expressway.",
+    "Find verified Commercial spaces for sale in Gurgaon — Offices & showrooms by India's most Trusted developers. Limited Inventory. Schedule your site visit now.",
   keywords:
     "commercial projects in gurgaon, commercial property for sale in gurgaon, commercial shops in gurgaon, buy commercial property in gurgaon, commercial space for sale in gurgaon, commercial office space in gurgaon",
   alternates: {
@@ -220,8 +220,8 @@ export default function CommercialPropertyPage() {
         ]}
       />
       <WebPageSchema
-        title="Commercial Property in Gurgaon"
-        description="Buy commercial property in Gurgaon - office spaces, retail shops, commercial showrooms in prime business locations."
+        title="Buy Commercial Property Gurgaon 2025 – Trusted Builders"
+        description="Find verified Commercial spaces for sale in Gurgaon — Offices & showrooms by India's most Trusted developers. Limited Inventory. Schedule your site visit now."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

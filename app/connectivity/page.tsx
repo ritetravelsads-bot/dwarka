@@ -6,16 +6,16 @@ import { BreadcrumbSchema, WebPageSchema, FAQSchema, ItemListSchema } from "@/co
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Dwarka Expressway Map & Connectivity | Prime Real Estate in Delhi NCR",
+  title: "Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link",
   description:
-    "Explore the Dwarka Expressway map with projects, seamless connectivity to IGI Airport, NH-48, and luxury apartments on Dwarka Expressway. Discover ready to move flats and upcoming commercial projects in Gurgaon.",
+    "Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!",
   keywords: "dwarka expressway map, connectivity, IGI airport access, NH-48, metro connectivity, gurugram projects, delhi ncr real estate",
   alternates: {
     canonical: `${BASE_URL}/connectivity`,
   },
   openGraph: {
-    title: "Dwarka Expressway Map & Connectivity | Prime Real Estate in Delhi NCR",
-    description: "Explore the Dwarka Expressway map with projects, seamless connectivity to IGI Airport, NH-48.",
+    title: "Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link",
+    description: "Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!",
     url: `${BASE_URL}/connectivity`,
     type: "website",
   },
@@ -83,8 +83,8 @@ export default function ConnectivityPage() {
         ]}
       />
       <WebPageSchema
-        title="Dwarka Expressway Map & Connectivity | Prime Real Estate in Delhi NCR"
-        description="Explore the Dwarka Expressway map with projects, seamless connectivity to IGI Airport, NH-48."
+        title="Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link"
+        description="Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!"
         url={`${BASE_URL}/connectivity`}
       />
       <FAQSchema faqs={connectivityFaqs} />

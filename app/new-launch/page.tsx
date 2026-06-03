@@ -24,9 +24,9 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "New Launch Projects on Dwarka Expressway | Latest Property Launches 2026",
+  title: "Hot New Launch Projects on Dwarka Expressway– Limited Units",
   description:
-    "Discover the latest new launch projects on Dwarka Expressway. Premium residential developments from top builders with early bird pricing and best unit selection. Book now!",
+    "Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location .Get the Honest Expert Guidance.",
   keywords:
     "new launch projects dwarka expressway, upcoming projects gurgaon, new residential projects, pre-launch properties, under construction flats dwarka expressway",
   alternates: {
@@ -73,8 +73,8 @@ export default function NewLaunchPage() {
         ]}
       />
       <WebPageSchema
-        title="New Launch Projects on Dwarka Expressway"
-        description="Discover the latest new launch projects on Dwarka Expressway from top developers."
+        title="Hot New Launch Projects on Dwarka Expressway– Limited Units"
+        description="Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location .Get the Honest Expert Guidance."
         url={`${BASE_URL}/new-launch`}
       />
       <FAQSchema faqs={faqs} />

@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/2-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "2 BHK Flats in Gurgaon | Affordable Apartments for Couples 2026",
+  title: "2 BHK Flat in Dwarka – Modern Homes, Unbeatable Value	",
   description:
-    "Find 2 BHK flats in Gurgaon starting from 50 Lakh. Perfect for young professionals & couples. Affordable apartments on Dwarka Expressway with modern amenities.",
+    "Which 2 BHK in Gurgaon Sector gives you the Best value ? Our Experts break it down by Price, Connectivity & Builder trust. Get a Callback today for Guidance.",
   keywords:
     "2 bhk flat for rent in gurgaon, 2bhk flat in gurgaon, 2 bhk in gurgaon, 2bhk flat in dwarka, 2 bhk for sale in gurgaon, buy 2 bhk in gurgaon, 2bhk in dwarka, 2 bhk flats in dwarka price, 2 bhk flats in gurugram, 2 bhk apartment in gurgaon, 2 bhk flats in gurgaon ready to move, 2 bhk affordable flats in gurgaon, 2 bhk in gurgaon ready to move, 2 bhk society flats in dwarka for sale, 2 bhk flats in dwarka expressway for sale, 2 bhk flat for sale in dwarka expressway, 2 bhk for sale in dwarka expressway, 2 bhk flats in dwarka expressway",
   alternates: {
@@ -220,8 +220,8 @@ export default function TwoBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="2 BHK Flats in Gurgaon"
-        description="Find 2 BHK flats in Gurgaon starting from 50 Lakh. Perfect for young professionals and couples looking for affordable apartments."
+        title="2 BHK Flat in Dwarka – Modern Homes, Unbeatable Value"
+        description="Which 2 BHK in Gurgaon Sector gives you the Best value ? Our Experts break it down by Price, Connectivity & Builder trust. Get a Callback today for Guidance."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />
