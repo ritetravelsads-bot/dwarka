@@ -1,10 +1,11 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import ProjectsPageClient from "@/components/projects/ProjectsPageClient";
 import { BreadcrumbSchema, WebPageSchema, FAQSchema } from "@/components/seo/SchemaMarkup";
 
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
+const API_BASE_URL = process.env.BACKEND_API_URL || "https://dwarkaexpresswayncr-backend.onrender.com";
 
-// FAQs for projects listing page
 const projectsFaqs = [
   {
     question: "What types of projects are available on Dwarka Expressway?",
@@ -28,20 +29,19 @@ const projectsFaqs = [
   },
 ];
 
-// Server-side metadata - This is what Google will index
 export const metadata: Metadata = {
-  title: "Best Affordable Projects on Dwarka Expressway- High ROI 18%",
+  title: "All Projects on Dwarka Expressway | Residential & Commercial | 50+ Properties",
   description:
-    "Top Affordable Projects on Dwarka Expressway Ready-to-Move Flats starting 1.25 Cr. High appreciation, and strong rental yields. Book your free site visit today!",
+    "Browse 50+ verified residential and commercial projects on Dwarka Expressway. Compare prices, floor plans, amenities, and book site visits. RERA registered properties from top developers.",
   keywords:
-    "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway",
+    "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway, property near dwarka expressway",
   alternates: {
     canonical: `${BASE_URL}/projects`,
   },
   openGraph: {
-    title: "All Projects on Dwarka Expressway | Residential & Commercial",
+    title: "All Projects on Dwarka Expressway | 50+ Properties Available",
     description:
-      "Explore 50+ premium residential and commercial projects on Dwarka Expressway. Compare prices and book site visits.",
+      "Explore 50+ premium residential and commercial projects on Dwarka Expressway. Compare prices, views, and book site visits today.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -51,19 +51,20 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/assets/img/Og-Image.png`,
         width: 1200,
         height: 630,
-        alt: "Dwarka Expressway Projects",
+        alt: "Dwarka Expressway Projects - Residential & Commercial Properties",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects on Dwarka Expressway | Premium Properties",
-    description: "Explore 50+ premium projects on Dwarka Expressway. RERA verified.",
+    title: "Projects on Dwarka Expressway | Gurgaon Real Estate",
+    description: "Browse 50+ verified projects on Dwarka Expressway. Compare prices and amenities.",
     images: [`${BASE_URL}/assets/img/Og-Image.png`],
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -74,10 +75,43 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+// Server-side fetch — runs at request time so Googlebot gets real HTML
+async function getInitialProjects() {
+  try {
+    const apiUrl = new URL(`${API_BASE_URL}/api/projects`);
+    apiUrl.searchParams.set("limit", "12");
+    apiUrl.searchParams.set("page", "1");
+
+    const res = await fetch(apiUrl.toString(), {
+      headers: { Accept: "application/json" },
+      next: { revalidate: 300 }, // cache for 5 minutes
+    });
+
+    if (!res.ok) return { projects: [], pagination: null };
+
+    const data = await res.json();
+
+    if (Array.isArray(data)) {
+      return {
+        projects: data,
+        pagination: { total: data.length, page: 1, limit: 12, totalPages: Math.ceil(data.length / 12) },
+      };
+    }
+    if (data.data?.projects) return { projects: data.data.projects, pagination: data.data.pagination };
+    if (data.projects) return { projects: data.projects, pagination: data.pagination };
+
+    return { projects: [], pagination: null };
+  } catch {
+    return { projects: [], pagination: null };
+  }
+}
+
+export default async function ProjectsPage() {
+  // Fetch on the server so the initial HTML contains real project cards
+  const { projects: initialProjects, pagination: initialPagination } = await getInitialProjects();
+
   return (
     <>
-      {/* Schema Markup for SEO */}
       <BreadcrumbSchema
         items={[
           { name: "Home", url: BASE_URL },
@@ -90,9 +124,15 @@ export default function ProjectsPage() {
         url={`${BASE_URL}/projects`}
       />
       <FAQSchema faqs={projectsFaqs} />
-      
-      {/* Client-side interactive component */}
-      <ProjectsPageClient />
+
+      <main className="w-full">
+        <Suspense fallback={null}>
+          <ProjectsPageClient
+            initialProjects={initialProjects}
+            initialPagination={initialPagination}
+          />
+        </Suspense>
+      </main>
     </>
   );
 }

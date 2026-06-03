@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/residential-projects-on-dwarka-expressway`;
 
 export const metadata: Metadata = {
-  title: "Residential Projects on Dwarka Expressway | New Launches 2026",
+  title: "Residential Projects on Dwarka Expressway | Gurgaon 2026",
   description:
-    "Explore premium residential projects on Dwarka Expressway. Find luxury apartments, ready-to-move flats & new launches from top developers. RERA verified properties.",
+    "Discover premium residential projects on Dwarka Expressway, Gurgaon. Verified properties with modern amenities, excellent connectivity, trusted developers, and expert buying guidance.",
   keywords:
-    "residential projects on dwarka expressway, dwarka expressway residential projects, property in dwarka expressway, new residential projects in gurgaon, dwarka expressway flats",
+    "residential projects on dwarka expressway, dwarka expressway residential projects, property in dwarka expressway, new residential projects in gurgaon, dwarka expressway flats, luxury apartments dwarka expressway, ready to move flats gurgaon, residential property gurgaon 2026",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Residential Projects on Dwarka Expressway | Premium Living",
+    title: "Residential Projects on Dwarka Expressway | Gurgaon 2026",
     description:
-      "Discover luxury residential projects on Dwarka Expressway. 2/3/4 BHK apartments from top developers with world-class amenities.",
+      "Discover premium residential projects on Dwarka Expressway. Verified properties with modern amenities, excellent connectivity, and expert buying guidance.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -38,169 +38,185 @@ export const metadata: Metadata = {
 };
 
 const pageContent: SEOPageContent = {
-  heroTagline: "Premium Living Awaits",
-  heroTitle: "Premium Residential Projects on Dwarka Expressway",
+  heroTagline: "Live Connected. Invest Smarter.",
+  heroTitle: "Discover Premium Residential Projects on Dwarka Expressway, Gurgaon Today",
   heroSubtitle:
-    "Discover your dream home along India's most sought-after urban corridor. From luxury penthouses to smart apartments, find residences that match your lifestyle.",
+    "Explore verified residential projects on Dwarka Expressway with modern amenities, excellent connectivity, trusted developers, and expert buying guidance.",
   heroImage: "/assets/img/residential-hero-bg.jpg",
 
   trustIndicators: [
-    { icon: "route", value: "27.6 km", label: "16-Lane Highway" },
-    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
-    { icon: "shield", value: "20+", label: "Top Developers" },
+    { icon: "route", value: "Dwarka Expressway", label: "Direct Access" },
+    { icon: "plane", value: "Approx. 15 Mins", label: "Dwarka Sector 21 Metro" },
+    { icon: "shield", value: "RERA Status", label: "Verify Project-Wise Before Booking" },
   ],
 
   quickFacts: [
-    { label: "Appreciation", value: "8-12% YoY" },
-    { label: "Green Living", value: "Low Density" },
-    { label: "Metro Coming", value: "2027" },
-    { label: "Delhi Access", value: "Zero KM" },
+    { label: "Airport Connectivity", value: "15-25 Mins" },
+    { label: "Residential Projects", value: "50+" },
+    { label: "Price Per Sq. Ft.", value: "Rs.13K-28K" },
+    { label: "Top Sectors", value: "102, 106, 108 & 113" },
   ],
 
-  projectsSectionTitle: "Top Residential Projects at a Glance",
-  projectsSectionSubtitle: "Compare the best residential projects on Dwarka Expressway from top developers.",
+  projectsSectionTitle: "Dwarka Expressway Residential Projects at a Glance",
+  projectsSectionSubtitle:
+    "Find the right property in Dwarka Expressway based on budget, location, lifestyle, and investment goals.",
 
   projectCards: [
     {
-      name: "Sobha City",
-      location: "Sector 108, Dwarka Exp",
+      name: "Ready-to-Move Projects",
+      location: "Near Dwarka Expressway",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
+      configuration: "Apartments & Penthouses",
+      sizeRange: "Immediate Possession",
+      startingPrice: "Rs. 1.8 Cr*",
+      connectivity: "Near Dwarka Expressway",
+      href: "/ready-to-move-flats-in-gurgaon",
+    },
+    {
+      name: "Under-Construction Projects",
+      location: "Airport & Metro Access",
       status: "Under Construction",
       statusColor: "blue",
-      headerColor: "primary",
-      configuration: "2/3/4 BHK",
-      sizeRange: "1,400 - 3,500 Sq.Ft.",
-      startingPrice: "Rs. 1.8 Cr*",
-      connectivity: "Sports Lifestyle",
-      href: "/projects",
-    },
-    {
-      name: "M3M Capital",
-      location: "Sector 113, Dwarka Exp",
-      status: "Ready to Move",
-      statusColor: "green",
       headerColor: "dark",
-      configuration: "3/4 BHK Golf Estate",
-      sizeRange: "1,665 - 3,500 Sq.Ft.",
-      startingPrice: "Rs. 2.5 Cr*",
-      connectivity: "Zero KM Delhi",
-      href: "/projects",
+      configuration: "Luxury Residences",
+      sizeRange: "Future Appreciation",
+      startingPrice: "Rs. 2.2 Cr*",
+      connectivity: "Airport & Metro Access",
+      href: "/residential-projects-on-dwarka-expressway",
     },
     {
-      name: "Godrej Summit",
-      location: "Sector 104, Dwarka Exp",
-      status: "Ready to Move",
-      statusColor: "green",
+      name: "New Residential Projects in Gurgaon",
+      location: "Delhi Border Advantage",
+      status: "New Launch",
+      statusColor: "red",
       headerColor: "amber",
-      configuration: "2/3/4 BHK",
-      sizeRange: "1,150 - 3,200 Sq.Ft.",
-      startingPrice: "Rs. 85 Lakh*",
-      connectivity: "Family Living",
-      href: "/projects",
+      configuration: "Premium Communities",
+      sizeRange: "Latest Opportunities",
+      startingPrice: "Rs. 1.5 Cr*",
+      connectivity: "Delhi Border Advantage",
+      href: "/upcoming-projects-in-gurugram",
     },
   ],
 
   layoutTitle: "Why Choose Residential Projects on Dwarka Expressway?",
   layoutContent: [
-    "Dwarka Expressway has emerged as the most promising residential destination in Delhi-NCR. The 27.6 km, 16-lane highway connects Delhi's IGI Airport to Gurgaon, offering seamless connectivity and a pollution-free environment.",
-    "Residential projects on Dwarka Expressway offer a unique blend of luxury, convenience, and investment potential. With the expressway now fully operational, property values have witnessed steady appreciation of 8-12% annually.",
-    "Top developers like Godrej, M3M, Sobha, and Experion have launched premium residential projects here, featuring world-class amenities including clubhouses, swimming pools, landscaped gardens, and smart home technology.",
+    "Residential projects on Dwarka Expressway have emerged as one of the most preferred choices for homebuyers and investors in Gurgaon. With seamless connectivity to Delhi, IGI Airport, Cyber City, and upcoming metro infrastructure, this corridor offers the perfect blend of modern living and long-term growth potential.",
+    "Unlike many older residential zones, property in Dwarka Expressway benefits from wide roads, master-planned sectors, premium social infrastructure, and thoughtfully designed gated communities. Buyers can choose from ready-to-move homes, luxury apartments, and new residential projects in Gurgaon developed by some of India's most trusted real estate brands.",
+    "Leading developers including Sobha, M3M, Godrej, Smart World, ATS, Elan, and Experion are shaping the skyline with world-class residential communities featuring landscaped greens, clubhouses, sports facilities, and smart living amenities. Whether you are looking for a dream home or an investment opportunity, Dwarka Expressway residential projects offer excellent value and future potential.",
   ],
   layoutHighlights: [
-    "Direct connectivity to IGI Airport in just 15-20 minutes",
-    "Metro extension planned for enhanced accessibility",
-    "Green belt development with low-density living",
-    "Premium schools and hospitals within 10 minutes",
+    "Direct connectivity to Delhi, IGI Airport, and Cyber City",
+    "Premium residential communities by leading developers",
+    "Upcoming metro connectivity and growing commercial hubs",
+    "Top schools, hospitals, malls, and business districts nearby",
+    "Wide roads, planned infrastructure, and modern urban development",
+    "Strong end-user demand and long-term investment prospects",
   ],
   layoutImage: "/assets/img/residential-building.jpg",
 
   localFeatures: [
     {
       icon: "school",
-      title: "Premium Education",
-      description: "Euro International School, GD Goenka, and DPS within 10 minutes. Zero-stress school commute.",
+      title: "Family-Friendly Education",
+      description:
+        "Top schools including DPS, Euro International School, and GEMS Education are located within 5-15 minutes of residential projects on Dwarka Expressway.",
     },
     {
       icon: "hospital",
-      title: "World-Class Healthcare",
-      description: "Manipal Hospital, Medanta, and Aarvy Healthcare nearby. Top-tier medical care at your doorstep.",
+      title: "Premium Healthcare Access",
+      description:
+        "Medanta, Manipal, Fortis, and Max hospitals provide quality healthcare within a 10-20 minute radius of your home.",
     },
     {
       icon: "connectivity",
-      title: "Seamless Connectivity",
-      description: "16-lane expressway to Delhi, upcoming metro, and proximity to IGI Airport and Cyber City.",
+      title: "Excellent Connectivity",
+      description:
+        "Direct connectivity to Delhi, IGI Airport (15-25 mins), Cyber City (20 mins), and Dwarka Metro (10-15 mins).",
     },
   ],
 
-  localAreaTitle: "Neighborhood Highlights",
+  localAreaTitle: "Prime Connectivity & Lifestyle Infrastructure",
   localAreaDescription:
-    "Live within minutes of premium schools, multi-specialty hospitals, and shopping destinations. The Dwarka Expressway corridor offers an integrated township experience with everything you need nearby.",
+    "Residential projects on Dwarka Expressway are located in well-planned neighborhoods with excellent schools, healthcare facilities, shopping destinations, and seamless connectivity within easy reach.",
   nearbyPlaces: [
-    { name: "Euro International School", distance: "5 min drive", type: "school" },
-    { name: "Manipal Hospital", distance: "8 min drive", type: "hospital" },
-    { name: "Ambience Mall", distance: "12 min drive", type: "mall" },
-    { name: "Sector 21 Metro Station", distance: "10 min drive", type: "metro" },
-    { name: "IGI Airport", distance: "15-20 min drive", type: "airport" },
-    { name: "NH-48 Highway", distance: "5 min drive", type: "highway" },
+    { name: "Delhi Public School", distance: "5-10 min", type: "school" },
+    { name: "Euro International School", distance: "5-10 min", type: "school" },
+    { name: "Medanta Medicity", distance: "15-20 min", type: "hospital" },
+    { name: "Manipal Hospital", distance: "10-15 min", type: "hospital" },
+    { name: "Ambience Mall Gurgaon", distance: "15-20 min", type: "mall" },
+    { name: "Dwarka Sector 21 Metro", distance: "10-15 min", type: "metro" },
   ],
 
   faqs: [
     {
-      question: "What is the average price of residential projects on Dwarka Expressway?",
+      question: "What are the best residential projects on Dwarka Expressway?",
       answer:
-        "Residential projects on Dwarka Expressway range from 50 Lakh to 6+ Crore depending on the configuration, developer, and amenities. 2 BHK apartments start around 50-80 Lakh, 3 BHK from 1.2-3 Crore, and 4 BHK luxury units from 2.5-6+ Crore.",
+        "The best residential projects on Dwarka Expressway include developments in Sectors 102, 106, 108, 113, and 114 by reputed developers such as Sobha, Godrej, M3M, Smart World, ATS, Elan, and Experion. These projects offer modern amenities, excellent connectivity, and strong long-term appreciation potential. Popular sectors include Sector 108 for established residential communities, Sector 106 for luxury developments, Sector 113 for close proximity to Delhi, and Sector 102 for competitive pricing and connectivity.",
     },
     {
-      question: "Which are the best residential projects on Dwarka Expressway?",
+      question: "What is the average property price on Dwarka Expressway?",
       answer:
-        "Top residential projects include Sobha City (sports lifestyle), M3M Capital (ultra-luxury), Godrej Summit (family-focused), and Experion Windchants (green living). Each offers unique features catering to different lifestyle preferences.",
+        "The average property price on Dwarka Expressway ranges from Rs. 13,000 to Rs. 28,000 per sq. ft. in 2026, depending on the sector, developer reputation, project specifications, and construction stage. Sector 102 averages Rs. 13,000-16,000 (value buyers), Sector 106 Rs. 15,000-20,000 (luxury living), Sector 108 Rs. 16,000-22,000 (family homes), Sector 113 Rs. 18,000-28,000 (Delhi connectivity), and Sector 114 Rs. 16,000-24,000 (long-term investment). Prices are indicative and buyers should verify project-wise details before booking.",
     },
     {
-      question: "Is Dwarka Expressway good for residential investment?",
+      question: "Is property in Dwarka Expressway a good investment in 2026?",
       answer:
-        "Yes, Dwarka Expressway is excellent for residential investment with 8-12% annual appreciation. The completed infrastructure, upcoming metro extension, and proximity to business hubs make it a prime investment destination.",
+        "Yes. Property in Dwarka Expressway is considered one of Gurgaon's strongest real estate investment corridors due to direct Delhi connectivity, airport accessibility, infrastructure upgrades, and increasing commercial activity. Key investment drivers include direct connectivity to Delhi, 15-25 minutes from IGI Airport, upcoming metro connectivity, growing office and retail developments, premium residential communities, and strong end-user demand. The market is transitioning from an emerging corridor into a mature residential destination.",
     },
     {
-      question: "What amenities do residential projects on Dwarka Expressway offer?",
+      question: "Which sector is best on Dwarka Expressway?",
       answer:
-        "Most residential projects offer clubhouses, swimming pools, gymnasiums, landscaped gardens, kids play areas, jogging tracks, sports facilities, 24/7 security, power backup, and smart home features.",
+        "The best sector depends on your goals, budget, and lifestyle requirements. Sector 108 is recommended for family living, Sector 106 for luxury housing, Sector 113 for Delhi connectivity, Sector 114 for long-term investment, and Sector 102 for value for money.",
     },
     {
-      question: "Are there ready-to-move residential projects on Dwarka Expressway?",
+      question: "Is Dwarka Expressway better than Golf Course Extension Road?",
       answer:
-        "Yes, several residential projects are ready for possession including units in Godrej Summit, M3M Merlin, and Sobha City. About 25,000 units are expected to be ready by 2027.",
+        "Dwarka Expressway generally offers better value for money, while Golf Course Extension Road provides a more mature luxury market. Buyers seeking larger homes and newer developments often prefer Dwarka Expressway. Dwarka Expressway offers excellent value for money, excellent Delhi connectivity, a growing luxury segment, high new launch inventory, and high investment potential. Golf Course Extension offers moderate value, moderate Delhi connectivity, a mature luxury segment, moderate new launches, and stable investment potential.",
+    },
+    {
+      question: "What are the pros and cons of residential projects on Dwarka Expressway?",
+      answer:
+        "Pros: Direct Delhi and Gurgaon connectivity, 15-25 minutes to IGI Airport, premium developers and gated communities, strong infrastructure growth, and multiple options across Sectors 102, 106, 108, 113, and 114. Cons: Premium sectors have higher entry prices, some pockets still have ongoing construction, metro connectivity is still developing, and maintenance charges may be higher in luxury projects.",
+    },
+    {
+      question: "What schools, hospitals, and lifestyle facilities are near Dwarka Expressway residential projects?",
+      answer:
+        "Schools nearby include Delhi Public School (5-10 min), Euro International School (5-10 min), GEMS Education (10-15 min), and Mount Olympus School (10-15 min). Hospitals include Medanta Medicity (15-20 min), Manipal Hospital (10-15 min), Fortis Hospital (15-20 min), and Max Hospital (15-20 min). Lifestyle destinations include Ambience Mall (15-20 min), Cyber City (20 min), Dwarka Sector 21 Metro (10-15 min), and IGI Airport (15-25 min).",
     },
   ],
 
   relatedLinks: [
     {
-      title: "3 BHK Flats in Gurgaon",
-      href: "/3-bhk-flats-in-gurgaon",
-      description: "Spacious 3 bedroom apartments for families",
+      title: "Best Property on Dwarka Expressway",
+      href: "/projects",
+      description: "Handpicked projects for homebuyers",
     },
     {
-      title: "4 BHK Flats in Gurgaon",
-      href: "/4-bhk-flats-in-gurgaon",
-      description: "Luxury 4 bedroom penthouses & apartments",
+      title: "Dwarka Expressway Residential Projects",
+      href: "/residential-projects-on-dwarka-expressway",
+      description: "Compare top-rated residential communities",
     },
     {
-      title: "Ready to Move Flats",
-      href: "/ready-to-move-flats-in-gurgaon",
-      description: "Move-in ready apartments with possession",
-    },
-    {
-      title: "Upcoming Projects",
+      title: "New Residential Projects in Gurgaon",
       href: "/upcoming-projects-in-gurugram",
-      description: "New launches & pre-launch opportunities",
+      description: "Discover the latest project launches",
     },
     {
-      title: "Commercial Property",
+      title: "Ready to Move Properties",
+      href: "/ready-to-move-flats-in-gurgaon",
+      description: "Move in without waiting for possession",
+    },
+    {
+      title: "Luxury Property in Gurgaon",
+      href: "/4-bhk-flats-in-gurgaon",
+      description: "Premium homes by leading developers",
+    },
+    {
+      title: "Gurgaon Investment Opportunities",
       href: "/commercial-property-in-gurgaon",
-      description: "Office spaces & retail shops",
-    },
-    {
-      title: "2 BHK Flats",
-      href: "/2-bhk-flats-in-gurgaon",
-      description: "Affordable options for couples",
+      description: "Explore high-potential growth corridors",
     },
   ],
 };
@@ -221,7 +237,7 @@ export default function ResidentialProjectsPage() {
       />
       <WebPageSchema
         title="Residential Projects on Dwarka Expressway"
-        description="Explore premium residential projects on Dwarka Expressway. Find luxury apartments, ready-to-move flats & new launches from top developers."
+        description="Discover premium residential projects on Dwarka Expressway, Gurgaon. Verified properties with modern amenities, excellent connectivity, trusted developers, and expert buying guidance."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

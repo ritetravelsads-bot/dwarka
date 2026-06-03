@@ -28,6 +28,11 @@ interface Pagination {
   totalPages: number;
 }
 
+interface ProjectsPageClientProps {
+  initialProjects?: Project[];
+  initialPagination?: Pagination | null;
+}
+
 const statusOptions = [
   { value: "", label: "All Status" },
   { value: "new-launch", label: "New Launch" },
@@ -61,11 +66,11 @@ const configOptions = [
   { value: "Penthouse", label: "Penthouse" },
 ];
 
-function ProjectsContent() {
+function ProjectsContent({ initialProjects = [], initialPagination = null }: ProjectsPageClientProps) {
   const searchParams = useSearchParams();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [pagination, setPagination] = useState<Pagination | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [pagination, setPagination] = useState<Pagination | null>(initialPagination);
+  const [loading, setLoading] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [developers, setDevelopers] = useState<string[]>([]);
 
@@ -78,11 +83,19 @@ function ProjectsContent() {
   const [configuration, setConfiguration] = useState(searchParams.get("configuration") || "");
   const [page, setPage] = useState(1);
 
+  const isFirstMount = useState(true);
+
   useEffect(() => {
     fetchDevelopers();
   }, []);
 
   useEffect(() => {
+    // Skip the very first render — we already have server-rendered data
+    if (isFirstMount[0] && initialProjects.length > 0) {
+      isFirstMount[1](false);
+      return;
+    }
+    isFirstMount[1](false);
     fetchProjects();
   }, [status, type, budget, developer, configuration, page]);
 
@@ -341,10 +354,10 @@ function ProjectsContent() {
   );
 }
 
-export default function ProjectsPageClient() {
+export default function ProjectsPageClient({ initialProjects = [], initialPagination = null }: ProjectsPageClientProps) {
   return (
     <Suspense fallback={<div className="min-h-screen bg-gray-50 pt-24 flex items-center justify-center"><div className="spinner"></div></div>}>
-      <ProjectsContent />
+      <ProjectsContent initialProjects={initialProjects} initialPagination={initialPagination} />
     </Suspense>
   );
 }

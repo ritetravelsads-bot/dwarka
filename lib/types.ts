@@ -14,6 +14,7 @@ export interface Project {
   pricePerSqFt?: string;
   size?: string;
   sizeRange?: string;
+  landSize?: string;
   configurations: string[];
   rera?: string;
   possession?: string;
@@ -35,6 +36,10 @@ export interface Project {
   isPopular?: boolean;
   isFeatured?: boolean;
   isActive: boolean;
+  latitude?: string;
+  longitude?: string;
+  floorSize?: number;
+  postalCode?: string;
   createdAt: Date;
   updatedAt: Date;
 }
