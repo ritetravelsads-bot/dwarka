@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function CompactDealersTable() {
+export default function CinematicDealersTable() {
   const [step, setStep] = useState(1);
   const [animatingCardId, setAnimatingCardId] = useState<string | null>(null);
   const [selections, setSelections] = useState({
@@ -9,56 +9,84 @@ export default function CompactDealersTable() {
     location: null as any,
   });
 
+  // Cinematic Intro State
+  // 'hidden' -> 'deck-enter' -> 'dealing' -> 'deck-exit' -> 'ready'
+  const [introPhase, setIntroPhase] = useState('hidden');
+
+  const playIntro = () => {
+    setIntroPhase('hidden');
+    setTimeout(() => setIntroPhase('deck-enter'), 100);
+    setTimeout(() => setIntroPhase('dealing'), 800);
+    setTimeout(() => setIntroPhase('deck-exit'), 1400);
+    setTimeout(() => setIntroPhase('ready'), 1900);
+  };
+
+  useEffect(() => {
+    playIntro();
+  }, []);
+
   const cardDecks = {
     1: {
       key: "budget",
       cards: [
-        { id: "b1", title: "₹1.5-3 Cr", subtitle: "Premium", stats: { Class: "A", Yield: "7/10", Risk: "Low" }, border: "border-orange-500", accent: "text-orange-500" },
-        { id: "b2", title: "₹3-5 Cr", subtitle: "Luxury", stats: { Class: "S", Yield: "8/10", Risk: "Med" }, border: "border-black", accent: "text-black" },
-        { id: "b3", title: "₹5 Cr +", subtitle: "Ultra", stats: { Class: "SS", Yield: "9/10", Risk: "High" }, border: "border-orange-500", accent: "text-orange-500" }
+        { id: "b1", title: "₹1.5-3 Cr", subtitle: "Premium", stats: { Class: "A", Yield: "7/10", Risk: "Low" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=400" },
+        { id: "b2", title: "₹3-5 Cr", subtitle: "Luxury", stats: { Class: "S", Yield: "8/10", Risk: "Med" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" },
+        { id: "b3", title: "₹5 Cr +", subtitle: "Ultra", stats: { Class: "SS", Yield: "9/10", Risk: "High" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=400" }
       ]
     },
     2: {
       key: "motive",
       cards: [
-        { id: "m1", title: "Self Use", subtitle: "Move-In", stats: { Utility: "Max", ROI: "Steady", Time: "Now" }, border: "border-black", accent: "text-black" },
-        { id: "m2", title: "Investment", subtitle: "High ROI", stats: { Utility: "Low", ROI: "Max", Time: "3 Yrs" }, border: "border-orange-500", accent: "text-orange-500" }
+        { id: "m1", title: "Self Use", subtitle: "Move-In", stats: { Utility: "Max", ROI: "Steady", Time: "Now" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" },
+        { id: "m2", title: "Investment", subtitle: "High ROI", stats: { Utility: "Low", ROI: "Max", Time: "3 Yrs" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" }
       ]
     },
     3: {
       key: "location",
       cards: [
-        { id: "l1", title: "Delhi Border", subtitle: "Sec 102-113", stats: { Access: "10/10", Growth: "Fast", Vibe: "Urban" }, border: "border-orange-500", accent: "text-orange-500" },
-        { id: "l2", title: "Central", subtitle: "Sec 81-99", stats: { Access: "8/10", Growth: "Steady", Vibe: "Subtle" }, border: "border-black", accent: "text-black" }
+        { id: "l1", title: "Delhi Border", subtitle: "Sec 102-113", stats: { Access: "10/10", Growth: "Fast", Vibe: "Urban" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=400" },
+        { id: "l2", title: "Central", subtitle: "Sec 81-99", stats: { Access: "8/10", Growth: "Steady", Vibe: "Subtle" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=400" }
       ]
     }
   };
 
   const handleDraw = (stepKey: string, cardData: any) => {
-    if (animatingCardId) return;
+    if (animatingCardId || introPhase !== 'ready') return;
     setAnimatingCardId(cardData.id);
     
     setTimeout(() => {
       setSelections(prev => ({ ...prev, [stepKey]: cardData }));
       setStep(prev => prev + 1);
       setAnimatingCardId(null);
-    }, 500); // Faster 500ms animation for the compact layout
+    }, 500); 
   };
 
   const resetGame = () => {
     setStep(1);
     setSelections({ budget: null, motive: null, location: null });
     setAnimatingCardId(null);
+    playIntro(); // Replay cinematic intro
   };
 
   return (
-    <section className="relative w-full h-[600px] bg-[#FAFAFA] flex flex-col items-center font-sans overflow-hidden border-y border-gray-200">
+    <section className="relative w-full h-[600px] flex flex-col items-center font-sans overflow-hidden border-y border-gray-200 bg-[#FAFAFA]">
       
-      {/* Background Graphic */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-0 flex items-center justify-center">
-        <div className="absolute w-[600px] h-[600px] border border-black rounded-full" />
-        <div className="absolute w-[400px] h-[400px] border border-black rounded-full" />
-        <div className="absolute h-full w-px bg-black" />
+      {/* ================= BACKGROUND LAYERS ================= */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" 
+          alt="Dwarka Expressway Estate" 
+          className="w-full h-full object-cover object-center opacity-30 grayscale-[50%]" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAFAFA]/95 via-[#FAFAFA]/85 to-[#FAFAFA]/95" />
+      </div>
+
+      {/* Floating Animated Icons in Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <svg className="absolute top-[15%] left-[10%] w-16 h-16 text-black/5 animate-[float_6s_ease-in-out_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1v1H9V7zm5 0h1v1h-1V7zm-5 4h1v1H9v-1zm5 0h1v1h-1v-1zm-5 4h1v1H9v-1zm5 0h1v1h-1v-1z" /></svg>
+        <svg className="absolute bottom-[20%] right-[12%] w-20 h-20 text-orange-500/10 animate-[float_8s_ease-in-out_infinite_reverse]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-black/5 rounded-full" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-orange-500/5 rounded-full" />
       </div>
 
       {/* ================= HEADER ================= */}
@@ -72,42 +100,42 @@ export default function CompactDealersTable() {
       </div>
 
       {/* ================= THE PLAYER'S HAND (TOP SLOTS) ================= */}
-      <div className="absolute top-[100px] z-30 flex gap-3 md:gap-4 perspective-[1000px]">
+      <div className="absolute top-[90px] md:top-[100px] z-30 flex gap-3 md:gap-4 perspective-[1000px]">
         {[
           { key: 'budget', label: "CAPITAL" },
           { key: 'motive', label: "TACTIC" },
           { key: 'location', label: "ZONE" }
         ].map((slot, index) => {
           const card = selections[slot.key as keyof typeof selections];
-          const isCurrentSlot = step === index + 1;
+          const isCurrentSlot = step === index + 1 && introPhase === 'ready';
           
           return (
             <div 
               key={slot.key} 
-              className={`w-20 h-28 md:w-24 md:h-32 rounded-lg flex flex-col items-center justify-center transition-all duration-500 transform-style-3d relative
+              className={`w-20 h-28 md:w-24 md:h-32 rounded-lg flex flex-col items-center justify-center transition-all duration-500 transform-style-3d relative overflow-hidden
                 ${card ? 'bg-white border-[1.5px] border-black shadow-[2px_2px_0px_#000] translate-y-0' : 
                   isCurrentSlot ? 'bg-orange-50 border-[1.5px] border-dashed border-orange-400 scale-105 shadow-inner' : 
-                  'bg-gray-50 border-[1.5px] border-dashed border-gray-300'
+                  'bg-white/50 backdrop-blur-sm border-[1.5px] border-dashed border-gray-400'
                 }
               `}
             >
               {!card && (
-                <div className={`text-[8px] font-black tracking-[0.2em] uppercase ${isCurrentSlot ? 'text-orange-500 animate-pulse' : 'text-gray-400'}`}>
+                <div className={`text-[8px] font-black tracking-[0.2em] uppercase transition-colors ${isCurrentSlot ? 'text-orange-500 animate-pulse' : 'text-gray-400'}`}>
                   {slot.label}
                 </div>
               )}
               
               {/* Slotted Card Data */}
               {card && (
-                <div className="absolute inset-0 p-2 flex flex-col justify-between animate-[slot-in_0.4s_ease-out_forwards]">
+                <div className="absolute inset-0 p-2 flex flex-col justify-between animate-[slot-in_0.4s_ease-out_forwards] bg-white z-10">
                   <div className="text-[7px] font-black uppercase text-gray-400 tracking-widest">{slot.label}</div>
-                  <div className="text-center">
-                    <div className="text-xs md:text-sm font-black text-black leading-none mb-0.5">{card.title}</div>
-                    <div className={`text-[7px] font-bold uppercase tracking-widest ${card.accent}`}>{card.subtitle}</div>
+                  <div className="w-full h-8 md:h-10 rounded overflow-hidden relative">
+                    <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/10" />
                   </div>
-                  <div className="w-full flex gap-1">
-                    <div className="h-0.5 flex-1 bg-black rounded-full" />
-                    <div className="h-0.5 w-1.5 bg-orange-500 rounded-full" />
+                  <div className="text-center">
+                    <div className="text-xs md:text-sm font-black text-black leading-none mb-0.5 truncate">{card.title}</div>
+                    <div className={`text-[6px] font-bold uppercase tracking-widest ${card.accent}`}>{card.subtitle}</div>
                   </div>
                 </div>
               )}
@@ -116,53 +144,81 @@ export default function CompactDealersTable() {
         })}
       </div>
 
+      {/* ================= THE DRAW DECK (BOTTOM) ================= */}
+      {/* This physical deck enters, dispenses cards, and rests at the bottom */}
+      <div 
+        className={`absolute left-1/2 -translate-x-1/2 w-28 h-44 md:w-36 md:h-56 z-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] transform-style-3d
+          ${introPhase === 'hidden' ? 'top-[120%] opacity-0' : 
+            introPhase === 'deck-enter' ? 'top-[230px] md:top-[250px] opacity-100 scale-105' : 
+            introPhase === 'dealing' ? 'top-[230px] md:top-[250px] opacity-100 scale-95' : 
+            'top-[530px] opacity-30 scale-75 blur-[1px]' // Resting state at bottom
+          }
+        `}
+      >
+        {/* Visual stack of cards */}
+        <div className="absolute inset-0 bg-white border-2 border-black rounded-xl shadow-[0_4px_0_#d1d5db]" />
+        <div className="absolute inset-0 bg-white border-2 border-black rounded-xl -translate-y-1 translate-x-1 shadow-[0_4px_0_#d1d5db]" />
+        <div className="absolute inset-0 bg-black border-2 border-black rounded-xl -translate-y-2 translate-x-2 flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]" />
+          <svg className="w-8 h-8 text-orange-500 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        </div>
+      </div>
+
       {/* ================= THE DEALER'S TABLE (CENTER STAGE) ================= */}
-      <div className="absolute top-[240px] md:top-[250px] w-full max-w-4xl flex justify-center perspective-[1200px] z-20">
+      <div className="absolute top-[230px] md:top-[250px] w-full max-w-4xl flex justify-center perspective-[1200px] z-20">
         
         {[1, 2, 3].map((deckStep) => {
           const deckData = (cardDecks as any)[deckStep];
           if (!deckData) return null;
 
+          // Intro Animation states for Step 1 cards
+          const isStep1 = deckStep === 1;
+          const hideStep1 = isStep1 && (introPhase === 'hidden' || introPhase === 'deck-enter');
+          
           return (
             <div 
               key={deckStep} 
               className={`absolute flex justify-center items-center gap-3 md:gap-5 transition-all duration-500 
-                ${step === deckStep ? 'opacity-100 z-30 pointer-events-auto scale-100 translate-y-0' : 
+                ${hideStep1 ? 'opacity-0 scale-50 translate-y-0 z-0' :
+                  step === deckStep ? 'opacity-100 z-30 pointer-events-auto scale-100 translate-y-0' : 
                   step > deckStep ? 'opacity-0 z-10 pointer-events-none scale-110 -translate-y-12 blur-sm' : 
                   'opacity-0 z-0 pointer-events-none scale-90 translate-y-24 blur-sm'
                 }
               `}
             >
-              {deckData.cards.map((card: any) => {
+              {deckData.cards.map((card: any, idx: number) => {
                 const isSelected = animatingCardId === card.id;
                 const isDiscarded = animatingCardId !== null && animatingCardId !== card.id;
+                
+                // Pop animation delays for sequence
+                const popDelay = idx === 0 ? 'delay-0' : idx === 1 ? 'delay-[100ms]' : 'delay-[200ms]';
+                const applyPop = isStep1 && introPhase === 'ready' && !animatingCardId;
 
                 return (
                   <button
                     key={card.id}
                     onClick={() => handleDraw(deckData.key, card)}
-                    disabled={animatingCardId !== null}
-                    className={`relative w-28 h-44 md:w-36 md:h-56 bg-white rounded-xl p-3 flex flex-col text-left transition-all duration-400 transform-style-3d shadow-xl border-2 ${card.border} group
+                    disabled={animatingCardId !== null || introPhase !== 'ready'}
+                    className={`relative w-28 h-44 md:w-36 md:h-56 bg-white rounded-xl p-2.5 flex flex-col text-left transition-all duration-400 transform-style-3d shadow-xl border-2 ${card.border} group
                       hover:-translate-y-4 hover:shadow-[0_15px_30px_rgba(249,115,22,0.2)] hover:rotate-[-2deg]
                       ${isSelected ? '!scale-50 !-translate-y-[150px] !opacity-0 z-50 shadow-none' : ''}
                       ${isDiscarded ? '!translate-y-[100px] !rotate-[20deg] !opacity-0 z-10 shadow-none' : ''}
+                      ${applyPop ? `animate-[card-pop_0.5s_ease-out_forwards] ${popDelay}` : ''}
                     `}
                   >
-                    {/* Card Graphic */}
-                    <div className="w-full h-12 md:h-16 bg-gray-50 border border-gray-200 rounded-lg mb-2 md:mb-3 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/10 transition-colors duration-300" />
-                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 border-black flex items-center justify-center bg-white relative z-10 group-hover:scale-110 transition-transform">
-                        <svg className="w-3 h-3 md:w-4 md:h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                      </div>
+                    {/* Card Graphic with Image */}
+                    <div className="w-full h-12 md:h-16 bg-gray-100 rounded-lg mb-2 flex items-center justify-center relative overflow-hidden border border-gray-200">
+                      <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-orange-500/20 transition-colors duration-300" />
                     </div>
 
-                    <div className="mb-auto">
-                      <h3 className="text-sm md:text-base font-black text-black uppercase leading-none mb-0.5">{card.title}</h3>
+                    <div className="mb-auto px-1">
+                      <h3 className="text-[13px] md:text-sm font-black text-black uppercase leading-none mb-0.5">{card.title}</h3>
                       <p className={`text-[7px] md:text-[8px] font-bold uppercase tracking-widest ${card.accent}`}>{card.subtitle}</p>
                     </div>
 
                     {/* Stats Grid */}
-                    <div className="mt-2 pt-2 border-t-2 border-dashed border-gray-200 grid grid-cols-3 gap-1">
+                    <div className="mt-2 pt-2 border-t-2 border-dashed border-gray-200 grid grid-cols-3 gap-1 px-0.5">
                       {Object.entries(card.stats).map(([statName, statValue]) => (
                         <div key={statName} className="text-center">
                           <div className="text-[6px] md:text-[7px] font-black text-gray-400 uppercase tracking-widest mb-0.5">{statName}</div>
@@ -222,6 +278,11 @@ export default function CompactDealersTable() {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(5deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
         @keyframes slot-in {
           0% { opacity: 0; transform: scale(1.5) translateY(20px); }
           100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -229,6 +290,11 @@ export default function CompactDealersTable() {
         @keyframes flip-in {
           0% { opacity: 0; transform: rotateY(-90deg) scale(0.8); }
           100% { opacity: 1; transform: rotateY(0deg) scale(1); }
+        }
+        @keyframes card-pop {
+          0% { transform: scale(1) translateY(0); }
+          50% { transform: scale(1.08) translateY(-10px); border-color: #f97316; box-shadow: 0 15px 30px rgba(249,115,22,0.3); }
+          100% { transform: scale(1) translateY(0); }
         }
         .perspective-[1000px] { perspective: 1000px; }
         .perspective-[1200px] { perspective: 1200px; }
