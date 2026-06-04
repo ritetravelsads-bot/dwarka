@@ -8,6 +8,8 @@ export default function CinematicDealersTable() {
     motive: null as any,
     location: null as any,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
   // Cinematic Intro State
   const [introPhase, setIntroPhase] = useState('hidden');
@@ -22,6 +24,48 @@ export default function CinematicDealersTable() {
   useEffect(() => {
     playIntro();
   }, []);
+
+  const handleRevealHand = async () => {
+    const phoneInput = document.getElementById('heroPhone') as HTMLInputElement;
+    const phone = phoneInput?.value.replace(/\D/g, '').slice(-10);
+
+    if (!phone || phone.length !== 10) {
+      setSubmitMessage('Please enter a valid 10-digit phone number');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Slider User',
+          phone: phone,
+          email: '',
+          message: `Budget: ${selections.budget?.title || 'N/A'} | Motive: ${selections.motive?.title || 'N/A'} | Location: ${selections.location?.title || 'N/A'}`,
+          source: 'hero_slider',
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        console.log('[v0] Slider data submitted successfully:', { phone, selections });
+        setSubmitMessage('Success! Our team will contact you shortly.');
+        setTimeout(() => {
+          setSubmitMessage(null);
+          resetGame();
+        }, 3000);
+      } else {
+        setSubmitMessage(result.error || 'Failed to submit. Please try again.');
+      }
+    } catch (error) {
+      console.error('[v0] Error submitting slider data:', error);
+      setSubmitMessage('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const cardDecks = {
     1: {
@@ -270,12 +314,30 @@ export default function CinematicDealersTable() {
             <div className="space-y-3 mt-3 relative z-10">
               <div className="bg-white rounded-lg overflow-hidden flex items-center focus-within:ring-[1.5px] focus-within:ring-orange-500 transition-all">
                 <span className="bg-gray-100 text-gray-500 font-black text-[10px] px-3 py-3 border-r border-gray-200">+91</span>
-                <input type="tel" placeholder="Mobile Number" className="w-full bg-transparent px-3 py-3 text-black font-bold outline-none placeholder-gray-400 text-xs" />
+                <input 
+                  type="tel" 
+                  placeholder="Mobile Number" 
+                  id="heroPhone"
+                  className="w-full bg-transparent px-3 py-3 text-black font-bold outline-none placeholder-gray-400 text-xs" 
+                />
               </div>
 
-              <button className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black uppercase tracking-[0.2em] py-3 rounded-lg transition-all shadow-[2px_2px_0px_#fff] active:shadow-none active:translate-y-0.5 active:translate-x-0.5 text-[10px]">
-                Reveal Hand
+              <button 
+                type="button"
+                onClick={() => handleRevealHand()}
+                disabled={isSubmitting || step !== 4}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black uppercase tracking-[0.2em] py-3 rounded-lg transition-all shadow-[2px_2px_0px_#fff] active:shadow-none active:translate-y-0.5 active:translate-x-0.5 text-[10px] disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Submitting...' : 'Reveal Hand'}
               </button>
+
+              {submitMessage && (
+                <div className={`p-2 rounded-lg text-center text-[9px] font-bold ${
+                  submitMessage.includes('Success') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                }`}>
+                  {submitMessage}
+                </div>
+              )}
             </div>
 
             <button onClick={resetGame} className="relative z-10 text-[9px] text-gray-500 hover:text-white uppercase tracking-widest font-bold mt-2 transition-colors text-center w-full">
