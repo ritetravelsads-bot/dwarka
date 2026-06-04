@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-export default function CinematicDealersTable() {
+interface HeroSliderProps {
+  onOpenEmi?: () => void;
+  onOpenFloorPlan?: () => void;
+}
+
+export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: HeroSliderProps) {
   const [step, setStep] = useState(1);
   const [animatingCardId, setAnimatingCardId] = useState<string | null>(null);
   const [selections, setSelections] = useState({
