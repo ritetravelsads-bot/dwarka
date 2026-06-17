@@ -38,169 +38,173 @@ export const metadata: Metadata = {
 };
 
 const pageContent: SEOPageContent = {
-  heroTagline: "Be the First Investor",
-  heroTitle: "Early-Bird Upcoming Projects in Gurugram",
+  heroTagline: "Step into a New Launch in Gurgaon",
+  heroTitle: "Upcoming Projects in Gurugram",
   heroSubtitle:
-    "Get exclusive access to pre-launch projects with early bird pricing. Maximize your returns by investing in Gurugram's most anticipated developments before they hit the market.",
+    "Affordable housing on Dwarka Expressway. Discover the best upcoming projects in Gurugram offering modern design, strategic locations, and attractive pricing.",
   heroImage: "/assets/img/upcoming-hero-bg.jpg",
 
   trustIndicators: [
-    { icon: "route", value: "10-15%", label: "Pre-Launch Discount" },
-    { icon: "plane", value: "50+", label: "New Launches" },
-    { icon: "shield", value: "RERA", label: "Pre-Registered" },
+    { icon: "route", value: "0–15 mins", label: "To Delhi Border" },
+    { icon: "plane", value: "12 mins", label: "To IGI Airport" },
+    { icon: "shield", value: "RERA", label: "Certified Projects" },
   ],
 
   quickFacts: [
-    { label: "Early Discount", value: "10-15%" },
-    { label: "Best Units", value: "First Choice" },
-    { label: "Appreciation", value: "15-20%" },
-    { label: "Flex Payment", value: "CLP Plans" },
+    { label: "Family Size", value: "4–5 Members" },
+    { label: "Investment Growth", value: "12–15%" },
+    { label: "Rental Yield", value: "3–4%" },
+    { label: "Tax Benefits", value: "Up to ₹5L" },
   ],
 
-  projectsSectionTitle: "Upcoming New Launches at a Glance",
-  projectsSectionSubtitle: "Be among the first to invest in these upcoming projects with pre-launch pricing.",
+  projectsSectionTitle: "Upcoming Projects in Gurugram – Best Flats & Commercial Spaces on Dwarka Expressway",
+  projectsSectionSubtitle:
+    "Perfect start for young professionals, couples, and investors seeking new upcoming projects in Gurugram. Enjoy affordable housing on Dwarka Expressway with modern layouts, prime connectivity, and lifestyle-rich amenities.",
 
   projectCards: [
     {
-      name: "Godrej Zenith",
-      location: "Sector 89, Gurgaon",
-      status: "New Launch",
+      name: "Skyline Heights",
+      location: "Sector 64, Dwarka Expressway",
+      status: "Ready to Move",
       statusColor: "red",
       headerColor: "primary",
-      configuration: "3/4 BHK Premium",
-      sizeRange: "1,800 - 3,200 Sq.Ft.",
-      startingPrice: "Rs. 2.2 Cr*",
-      connectivity: "Pre-Launch Price",
+      configuration: "3 BHK + Study",
+      sizeRange: "2,200 – 2,500 Sq.Ft.",
+      startingPrice: "₹4.9 Cr*",
+      connectivity: "5 mins to NH-8 Highway",
       href: "/projects",
     },
     {
-      name: "M3M Altitude",
-      location: "Sector 65, Gurgaon",
+      name: "Urban Oasis",
+      location: "Sector 110, Dwarka Expressway",
+      status: "Under Construction",
+      statusColor: "blue",
+      headerColor: "dark",
+      configuration: "3 BHK Premium",
+      sizeRange: "1,750 – 2,050 Sq.Ft.",
+      startingPrice: "₹3.5 Cr*",
+      connectivity: "12 mins to IGI Airport",
+      href: "/projects",
+    },
+    {
+      name: "Vista Residences",
+      location: "Sector 115, Dwarka Expressway",
       status: "New Launch",
       statusColor: "red",
-      headerColor: "dark",
-      configuration: "2/3 BHK",
-      sizeRange: "1,200 - 2,100 Sq.Ft.",
-      startingPrice: "Rs. 1.4 Cr*",
-      connectivity: "Golf Course Ext",
-      href: "/projects",
-    },
-    {
-      name: "Tata Primanti",
-      location: "Sector 72, Gurgaon",
-      status: "New Launch",
-      statusColor: "blue",
       headerColor: "amber",
-      configuration: "3/4/5 BHK Villas",
-      sizeRange: "2,500 - 5,000 Sq.Ft.",
-      startingPrice: "Rs. 3.5 Cr*",
-      connectivity: "Villa Township",
+      configuration: "3.5 BHK",
+      sizeRange: "1,680 – 2,100 Sq.Ft.",
+      startingPrice: "₹3.0 Cr*",
+      connectivity: "Metro & Delhi Border Advantage",
       href: "/projects",
     },
   ],
 
-  layoutTitle: "Why Invest in Upcoming Projects in Gurugram?",
+  layoutTitle: "The Anatomy of Upcoming Projects in Gurugram",
   layoutContent: [
-    "Investing in upcoming projects in Gurugram offers the advantage of pre-launch pricing, typically 10-15% lower than market rates. Early investors also get priority in unit selection, choosing the best floors, views, and configurations.",
-    "Gurugram's real estate market continues to expand with new residential and commercial projects across Dwarka Expressway, Golf Course Extension Road, and emerging sectors. Top developers are launching premium projects with innovative designs and amenities.",
-    "The city's infrastructure development, including metro extensions, road improvements, and upcoming commercial hubs, makes upcoming projects attractive for both end-users and investors seeking long-term appreciation.",
+    "Perfect start for young professionals, couples, and investors seeking new upcoming projects in Gurugram or affordable housing on Dwarka Expressway. These flats and commercial spaces offer modern layouts, premium amenities, and strategic locations for both living and investment.",
+    "Expansive, flexible floor plans are designed for both flats and commercial spaces, with cross-ventilated layouts that bring in natural light and create bright, airy interiors. Every project is part of a master-planned gated community with 24/7 security.",
+    "Looking for more opportunities? Explore commercial projects in Gurgaon on Dwarka Expressway. Prime connectivity to Metro, IGI Airport, and Delhi Border makes these projects ideal for investors and NRIs seeking high appreciation and rental yield.",
   ],
   layoutHighlights: [
-    "Pre-launch prices 10-15% below market rates",
-    "Priority booking for best unit selection",
-    "Flexible payment plans during construction",
-    "Maximum appreciation potential from early investment",
+    "Expansive layouts: flexible floor plans for flats or commercial spaces",
+    "Natural light: cross-ventilated design for bright, airy interiors",
+    "Secure communities: master-planned gated projects with 24/7 security",
+    "Nearby essentials: premium schools, hospitals, and retail within 10–15 mins",
   ],
   layoutImage: "/assets/img/upcoming-building.jpg",
 
   localFeatures: [
     {
       icon: "school",
-      title: "Future Infrastructure",
-      description: "Upcoming projects are planned around future schools, metros, and commercial hubs for maximum appreciation.",
+      title: "Smart Education",
+      description:
+        "Access premium international schools such as Pathways, GD Goenka, and Heritage within 10–20 minutes. Euro International School is 5–10 mins away.",
     },
     {
       icon: "hospital",
-      title: "Planned Amenities",
-      description: "World-class hospitals and healthcare facilities planned in the project vicinity as part of township development.",
+      title: "Advanced Healthcare",
+      description:
+        "World-class hospitals including Medanta (10–15 mins), Fortis (12–18 mins), Max, and Artemis with VIP services and comprehensive care.",
     },
     {
       icon: "connectivity",
-      title: "Growth Corridors",
-      description: "Located along upcoming metro lines, expressways, and commercial zones for long-term value appreciation.",
+      title: "Seamless Connectivity",
+      description:
+        "Metro stations, IGI Airport, and retail hubs within 10–15 minutes. Ambience Mall is 15–20 mins away. Select projects include helicopter pad access.",
     },
   ],
 
-  localAreaTitle: "Emerging Investment Zones",
+  localAreaTitle: "Family-Friendly Neighborhoods – Upcoming Projects in Gurugram",
   localAreaDescription:
-    "Gurugram's upcoming projects are concentrated in high-growth corridors with excellent infrastructure and connectivity to major business districts.",
+    "The neighborhoods combine convenience, safety, and lifestyle benefits while staying close to essential amenities — ideal for families, professionals, and investors.",
   nearbyPlaces: [
-    { name: "Dwarka Expressway", distance: "Prime Corridor", type: "highway" },
-    { name: "Golf Course Extension", distance: "Luxury Zone", type: "highway" },
-    { name: "SPR (Southern Peripheral)", distance: "Emerging Hub", type: "highway" },
-    { name: "New Gurgaon", distance: "Affordable Zone", type: "highway" },
-    { name: "Sector 102-115", distance: "High Growth", type: "metro" },
-    { name: "Pataudi Road", distance: "Value Corridor", type: "highway" },
+    { name: "Euro International School", distance: "5–10 mins", type: "school" },
+    { name: "GD Goenka School", distance: "8–12 mins", type: "school" },
+    { name: "Medanta Hospital", distance: "10–15 mins", type: "hospital" },
+    { name: "Fortis Hospital", distance: "12–18 mins", type: "hospital" },
+    { name: "Ambience Mall", distance: "15–20 mins", type: "highway" },
+    { name: "Metro Connectivity", distance: "10–15 mins", type: "metro" },
   ],
 
   faqs: [
     {
-      question: "What are the best upcoming projects in Gurugram for 2026?",
+      question: "What is the average price of flats in upcoming projects in Gurugram?",
       answer:
-        "Top upcoming projects in Gurugram include new launches from Godrej, M3M, Sobha, DLF, and Tata Housing along Dwarka Expressway and Golf Course Extension Road. These projects offer luxury amenities and excellent appreciation potential.",
+        "Prices typically range from ₹2.8 Cr to ₹5.5 Cr depending on the sector, project type, and developer. New launch in Gurgaon and affordable housing on Dwarka Expressway offer competitive options for both end-users and investors.",
     },
     {
-      question: "How can I book an upcoming project in Gurugram?",
+      question: "Which are the best sectors for families or investors?",
       answer:
-        "To book an upcoming project, you can register for pre-launch alerts, pay a token amount (typically 5-10% of property value), and complete KYC formalities. We help you navigate the booking process and secure the best units.",
+        "Sectors 62, 108, and 113 on Dwarka Expressway are highly preferred. Sector 62 offers ready-to-move with prime connectivity, Sector 108 has under-construction premium amenities, and Sector 113 features new launches with strategic investment potential.",
     },
     {
-      question: "What is the advantage of buying in pre-launch phase?",
+      question: "Are these properties better for investment or end-use?",
       answer:
-        "Pre-launch buyers get prices 10-15% below market rates, first choice of units, flexible payment plans spread over construction period, and maximum appreciation as the project nears completion.",
+        "Both. Flats in upcoming projects on Dwarka Expressway provide modern living for families and high rental or capital appreciation for investors. New commercial projects in Gurgaon nearby enhance the investment value.",
     },
     {
-      question: "Are upcoming projects in Gurugram RERA registered?",
+      question: "What is the average size of flats in Gurugram upcoming projects?",
       answer:
-        "Yes, all upcoming projects must obtain RERA registration before marketing. We only recommend RERA registered projects ensuring transparency, timely delivery, and legal protection for buyers.",
+        "Sizes typically range from 1,650 to 2,588 sq. ft., ideal for families, home offices, or small commercial uses in mixed-use developments.",
     },
     {
-      question: "What is the expected appreciation on upcoming projects?",
+      question: "What amenities come with these projects?",
       answer:
-        "Upcoming projects in prime locations like Dwarka Expressway typically see 15-20% appreciation from launch to possession. Early investors benefit from both pre-launch discounts and post-launch price increases.",
+        "Amenities include gated communities, landscaped gardens, clubhouses, gyms, swimming pools, and 24/7 security. Nearby essentials include schools, hospitals, metro connectivity, and retail hubs, making them ideal for both residential and commercial investment.",
     },
   ],
 
   relatedLinks: [
     {
+      title: "4 BHK Flats in Gurugram",
+      href: "/4-bhk-flats-in-gurgaon",
+      description: "More space and premium amenities for growing families",
+    },
+    {
+      title: "2 BHK Flats in Gurugram",
+      href: "/2-bhk-flats-in-gurgaon",
+      description: "Compact and affordable options for couples or small families",
+    },
+    {
+      title: "Ready-to-Move Flats",
+      href: "/ready-to-move-flats-in-gurgaon",
+      description: "Immediate possession units in strategic locations",
+    },
+    {
       title: "Residential Projects",
       href: "/residential-projects-on-dwarka-expressway",
-      description: "Premium homes on Dwarka Expressway",
+      description: "Browse all pre-launch residential projects on Dwarka Expressway",
+    },
+    {
+      title: "Upcoming Projects",
+      href: "/upcoming-projects-in-gurugram",
+      description: "Discover new launch in Gurgaon with pre-launch pricing",
     },
     {
       title: "Commercial Property",
       href: "/commercial-property-in-gurgaon",
-      description: "Office spaces & retail shops",
-    },
-    {
-      title: "Ready to Move",
-      href: "/ready-to-move-flats-in-gurgaon",
-      description: "Immediate possession properties",
-    },
-    {
-      title: "3 BHK Flats",
-      href: "/3-bhk-flats-in-gurgaon",
-      description: "Spacious apartments for families",
-    },
-    {
-      title: "4 BHK Flats",
-      href: "/4-bhk-flats-in-gurgaon",
-      description: "Luxury penthouses & apartments",
-    },
-    {
-      title: "2 BHK Flats",
-      href: "/2-bhk-flats-in-gurgaon",
-      description: "Compact living options",
+      description: "Explore flats on Dwarka Expressway and affordable housing options",
     },
   ],
 };

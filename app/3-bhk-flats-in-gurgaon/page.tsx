@@ -38,136 +38,140 @@ export const metadata: Metadata = {
 };
 
 const pageContent: SEOPageContent = {
-  heroTagline: "Perfect for Growing Families",
-  heroTitle: "Elevate Your Lifestyle with Luxury 3BHK Flats in Gurgaon",
+  heroTagline: "Luxury 3BHK Flats in Gurgaon – Elevate Your Lifestyle",
+  heroTitle: "Luxury 3BHK Flats in Gurgaon – Elevate Your Lifestyle",
   heroSubtitle:
-    "Experience seamless connectivity and world-class amenities. Step into a home designed for modern living, where every detail reflects your aspiration.",
+    "Enjoy gated communities, smart security systems, and high-quality finishes. Step into a home that blends seamless connectivity, world-class amenities, and modern design. Every corner reflects comfort, style, and aspiration.",
   heroImage: "/assets/img/3bhk-hero-bg.jpg",
 
   trustIndicators: [
-    { icon: "route", value: "0 km", label: "From Expressway" },
-    { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
+    { icon: "route", value: "0 km", label: "From Dwarka Expressway" },
+    { icon: "plane", value: "15 mins", label: "To IGI Airport" },
     { icon: "shield", value: "RERA", label: "Approved Projects" },
   ],
 
   quickFacts: [
-    { label: "Ideal Family Size", value: "4-5 Members" },
-    { label: "Investment Appreciation", value: "12-15% YoY" },
-    { label: "Rental Yield", value: "3-4%" },
-    { label: "Tax Benefits", value: "Up to 5L" },
+    { label: "Ideal Family Size", value: "4–5 Members" },
+    { label: "Investment Appreciation", value: "12–15% YoY" },
+    { label: "Rental Yield", value: "3–4%" },
+    { label: "Tax Benefits", value: "Up to ₹5L" },
   ],
 
-  projectsSectionTitle: "Premium 3BHK Projects at a Glance",
-  projectsSectionSubtitle: "Compare the top ready-to-move and under-construction 3BHK projects. Find the perfect fit for your budget and lifestyle requirements.",
-  
+  projectsSectionTitle: "Premium 3BHK Projects at a Glance – Gurgaon",
+  projectsSectionSubtitle:
+    "Compare the top ready-to-move, under-construction, and new-launch 3BHK projects in Gurgaon. Find the perfect home for your budget, lifestyle, and investment goals.",
+
   projectCards: [
     {
       name: "Emaar DigiHomes",
-      location: "Sector 62 (Near Dwarka Exp)",
+      location: "Sector 62 (Near Dwarka Expressway)",
       status: "Ready to Move",
       statusColor: "green",
       headerColor: "primary",
       configuration: "3 BHK + Utility",
-      sizeRange: "2,538 - 2,588 Sq.Ft.",
-      startingPrice: "Rs. 5.5 Cr*",
-      connectivity: "0 Km from NH-8 Highway",
+      sizeRange: "2,538 – 2,588 Sq.Ft.",
+      startingPrice: "₹5.5 Cr*",
+      connectivity: "0 km from NH-8 Highway",
       href: "/projects",
     },
     {
       name: "Sobha City",
-      location: "Sector 108, Dwarka Exp",
+      location: "Sector 108, Dwarka Expressway",
       status: "Under Construction",
       statusColor: "blue",
       headerColor: "dark",
       configuration: "3 BHK Premium",
-      sizeRange: "1,711 - 2,072 Sq.Ft.",
-      startingPrice: "Rs. 3.2 Cr*",
-      connectivity: "10 Mins to IGI Airport",
+      sizeRange: "1,711 – 2,072 Sq.Ft.",
+      startingPrice: "₹3.2 Cr*",
+      connectivity: "10 mins to IGI Airport",
       href: "/projects",
     },
     {
       name: "M3M Capital",
-      location: "Sector 113, Dwarka Exp",
+      location: "Sector 113, Dwarka Expressway",
       status: "New Launch",
       statusColor: "red",
       headerColor: "amber",
-      configuration: "3.5 BHK Golf Estate",
-      sizeRange: "1,665 - 2,055 Sq.Ft.",
-      startingPrice: "Rs. 2.8 Cr*",
-      connectivity: "Zero KM from Delhi",
+      configuration: "3.5 BHK",
+      sizeRange: "1,665 – 2,055 Sq.Ft.",
+      startingPrice: "₹2.8 Cr*",
+      connectivity: "Zero km from Delhi Border",
       href: "/projects",
     },
   ],
 
-  layoutTitle: "The Anatomy of a Dwarka Expressway 3BHK",
+  layoutTitle: "The Anatomy of a Dwarka Expressway 3BHK Investment",
   layoutContent: [
-    "A 3 BHK apartment in Gurgaon offers the ideal balance of space and affordability for growing families. With typical sizes ranging from 1500 to 2500 sq.ft, these homes provide dedicated spaces for parents, children, and guests or a home office.",
-    "Unlike older sectors, a 3BHK on Dwarka Expressway offers wider deck balconies and dedicated utility rooms. You get more usable carpet area for your investment with modern architectural norms ensuring dual-aspect configurations.",
-    "Top developers like Godrej, M3M, Sobha, and Experion offer 3 BHK apartments with thoughtful floor plans, premium specifications, and world-class amenities including swimming pools, gymnasiums, and landscaped gardens.",
+    "A property on Dwarka Expressway offers the perfect blend of space, affordability, and strategic location. Whether you are considering a commercial property in Gurgaon or a premium 3BHK apartment, this corridor ensures optimal investment potential and lifestyle convenience.",
+    "Unlike older sectors, properties here offer expansive layouts and floor plans ideal for offices, retail shops, or family homes. Cross-ventilated spaces with natural sunlight ensure perfect comfort, while gated communities with 24/7 security provide safety for families and commercial tenants alike.",
+    "Leading developers like Godrej, M3M, Sobha, and Experion provide thoughtfully designed apartments, commercial units, and mixed-use properties with modern architectural standards. Premium connectivity to schools, hospitals, metro stations, and retail hubs within 10–15 minutes completes the picture.",
   ],
   layoutHighlights: [
-    "Expansive floor plans with wider deck balconies",
-    "Cross-ventilated design with natural sunlight",
-    "Master-planned gated communities with 24/7 security",
-    "Premium schools and hospitals within 10-minute radius",
+    "Flexible floor plans with dedicated balconies, utility areas, or workspace zones",
+    "Master-planned gated communities with landscaped gardens, clubhouse, and amenities",
+    "Premium locations offering high rental and long-term appreciation potential",
+    "Nearby essential services – premium schools, hospitals, and commercial hubs within easy reach",
   ],
   layoutImage: "/assets/img/3bhk-building.jpg",
 
   localFeatures: [
     {
       icon: "school",
-      title: "Premium Education",
-      description: "Live within 10 minutes of Euro International School and DPS Sec 84. Ensure a zero-stress morning routine for your children without hitting highway traffic.",
+      title: "Elite Education",
+      description:
+        "Access top international schools like American Embassy School, Pathways, and GD Goenka within 15–20 minutes. Euro International School is just 10 minutes away.",
     },
     {
       icon: "hospital",
-      title: "World-Class Healthcare",
-      description: "Immediate access to Manipal Hospital and Aarvy Healthcare. Peace of mind knowing top-tier medical facilities are just a short drive away.",
+      title: "Premium Healthcare",
+      description:
+        "World-class hospitals including Medanta, Max, and Fortis with VIP services and comprehensive healthcare. Fortis Hospital is just 5 minutes away.",
     },
     {
       icon: "connectivity",
-      title: "Global Connectivity",
-      description: "Signal-free drive to Yashobhoomi (IICC) and IGI Airport. Upcoming metro extension will further link your luxury 3BHK to the rest of NCR seamlessly.",
+      title: "Executive Connectivity",
+      description:
+        "Private car access to IGI Airport in 15 minutes. Metro stations within 5 minutes. Select properties include helicopter pad access for seamless executive travel.",
     },
   ],
 
-  localAreaTitle: "Family-Friendly Neighborhoods",
+  localAreaTitle: "Family-Friendly Neighborhoods – Dwarka Expressway",
   localAreaDescription:
-    "3 BHK apartments in Gurgaon are located in family-friendly neighborhoods with excellent schools, healthcare facilities, and recreational options within easy reach.",
+    "Properties here offer safe, convenient living with schools, hospitals, malls, and metro connectivity nearby. These neighborhoods balance lifestyle and business perfectly.",
   nearbyPlaces: [
-    { name: "Euro International School", distance: "5-10 min", type: "school" },
-    { name: "GD Goenka School", distance: "8-12 min", type: "school" },
-    { name: "Medanta Hospital", distance: "10-15 min", type: "hospital" },
-    { name: "Fortis Hospital", distance: "12-18 min", type: "hospital" },
-    { name: "Ambience Mall", distance: "15-20 min", type: "mall" },
-    { name: "Metro Connectivity", distance: "10-15 min", type: "metro" },
+    { name: "Euro International School", distance: "10 minutes", type: "school" },
+    { name: "GD Goenka School", distance: "5 minutes", type: "school" },
+    { name: "Medanta Hospital", distance: "10 minutes", type: "hospital" },
+    { name: "Fortis Hospital", distance: "5 minutes", type: "hospital" },
+    { name: "Ambience Mall", distance: "20 minutes", type: "mall" },
+    { name: "Metro Stations", distance: "5 minutes", type: "metro" },
   ],
 
   faqs: [
     {
       question: "What is the average price of a 3BHK on Dwarka Expressway?",
       answer:
-        "Currently, a premium 3BHK apartment on Dwarka Expressway ranges between Rs. 2.5 Cr to Rs. 4.5 Cr, depending on the sector, builder reputation, and construction status. Ready-to-move projects command a slight premium over new launches. This pricing reflects the significant infrastructure upgrades and proximity to Delhi.",
+        "The average price of 3BHK flats ranges from ₹1.8 Cr to ₹2.8 Cr depending on the sector, developer, and construction stage. Premium sectors like 106 and 113 command higher prices due to proximity to Delhi and modern amenities. Investors can also explore commercial property in Gurgaon for strong rental yields and long-term appreciation.",
     },
     {
       question: "Which are the best sectors for families to live in?",
       answer:
-        "For end-users, Sectors 108, 109, and 113 are highly recommended due to their Zero KM to Delhi status. Alternatively, Sectors 83 to 88 offer excellent established social infrastructure, including operational schools and neighborhood markets, making them ideal for families moving in immediately.",
+        "Sectors 102, 106, 108, 113, and 114 are popular for residential buyers. Sector 108 offers established communities ideal for families; Sector 106 provides luxury housing and premium amenities; Sector 113 has close connectivity to Delhi; and Sector 102 offers competitive pricing and infrastructure.",
     },
     {
       question: "Are these properties good for investment or end-use?",
       answer:
-        "Both. As an end-user, you benefit from luxury amenities and uncluttered connectivity. From an investment perspective, luxury properties on Dwarka Expressway have seen consistent appreciation due to the opening of the NH-8 to Delhi stretch and upcoming developments like the Global City project.",
+        "Both. Ready-to-move and under-construction flats provide excellent end-user comfort and long-term investment opportunities. Commercial investors can consider nearby commercial projects in Gurgaon or commercial shops for additional income streams.",
     },
     {
-      question: "What is the average size of 3 BHK flats in Gurgaon?",
+      question: "What is the average size of 3BHK flats in Gurgaon?",
       answer:
-        "3 BHK flats in Gurgaon typically range from 1500 to 2500 sq.ft super built-up area. Carpet area usually ranges from 1100-1800 sq.ft. Luxury 3 BHK apartments can go up to 3000+ sq.ft.",
+        "Sizes range from 1,665 to 2,588 sq. ft., offering ample space for families, guests, or home offices. Developers like Sobha, Godrej, and M3M ensure thoughtful layouts and dual-aspect designs. Nearby commercial property for sale in Gurgaon can complement residential investments for mixed-use planning.",
     },
     {
-      question: "What amenities come with 3 BHK flats in Gurgaon?",
+      question: "What amenities come with 3BHK flats in Gurgaon?",
       answer:
-        "3 BHK flats in premium projects offer clubhouse, swimming pool, gymnasium, kids play area, landscaped gardens, jogging track, multipurpose hall, 24/7 security, power backup, and dedicated parking.",
+        "Amenities include swimming pools, gyms, landscaped gardens, clubhouses, and 24/7 security. The corridor offers schools, hospitals, malls, and metro stations within 5–20 minutes, making it ideal for families and investors seeking commercial space for sale in Gurgaon with lifestyle convenience.",
     },
   ],
 
@@ -175,32 +179,32 @@ const pageContent: SEOPageContent = {
     {
       title: "4 BHK Flats in Gurgaon",
       href: "/4-bhk-flats-in-gurgaon",
-      description: "Looking for more space? Explore luxury 4 BHK options",
+      description: "Looking for more space? Explore luxury 4BHK options with premium amenities.",
     },
     {
       title: "2 BHK Flats in Gurgaon",
       href: "/2-bhk-flats-in-gurgaon",
-      description: "Compact options for couples and small families",
+      description: "Compact and affordable options for couples and small families.",
     },
     {
-      title: "Ready to Move Flats",
+      title: "Ready-to-Move Flats",
       href: "/ready-to-move-flats-in-gurgaon",
-      description: "Immediate possession apartments",
+      description: "Immediate possession apartments for quick relocation or investment.",
     },
     {
       title: "Residential Projects",
       href: "/residential-projects-on-dwarka-expressway",
-      description: "All projects on Dwarka Expressway",
+      description: "Browse all projects on Dwarka Expressway, including new launches and premium communities.",
     },
     {
       title: "Upcoming Projects",
       href: "/upcoming-projects-in-gurugram",
-      description: "New launches with pre-launch prices",
+      description: "Discover new launches with pre-launch pricing and early-bird benefits.",
     },
     {
       title: "Commercial Property",
       href: "/commercial-property-in-gurgaon",
-      description: "Office spaces & retail shops",
+      description: "Find verified commercial property in Gurgaon, commercial projects, shops, and space for sale.",
     },
   ],
 };

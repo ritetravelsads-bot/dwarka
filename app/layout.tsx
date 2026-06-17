@@ -111,6 +111,17 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWHJZTSNDT"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-SWHJZTSNDT');
+            `,
+          }}
+        />
       </head>
       <body className="bg-white text-dark antialiased" style={{ fontFamily: "'DM Sans', sans-serif" }}>
         {/* Global Schema Markup for SEO */}

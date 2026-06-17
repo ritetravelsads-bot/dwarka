@@ -1,0 +1,42 @@
+# Dwarka Expressway NCR Real Estate Platform
+
+> A real estate platform specializing in RERA-approved residential and commercial properties, new project launches, and market intelligence along the Dwarka Expressway corridor linking Delhi and Gurgaon.
+
+## Sitemaps
+
+- [XML Sitemap](https://www.dwarkaexpresswayncr.com/sitemap.xml): Contains all public & indexable URLs for this website.
+
+## Core Pages
+
+- [Home](https://www.dwarkaexpresswayncr.com/): Portal gateway featuring the live price index, property search tools, regional investment brackets, and concierge services for Dwarka Expressway real estate.
+- [New Launch](https://www.dwarkaexpresswayncr.com/new-launch): Real-time inventory updates, pre-launch offers, and freshly introduced premium developments along the corridor.
+- [Projects](https://www.dwarkaexpresswayncr.com/projects): Comprehensive catalog of RERA-approved residential complexes, townships, and commercial spaces.
+- [Connectivity](https://www.dwarkaexpresswayncr.com/connectivity): Infrastructure maps, structural highlights, and travel time analytics showing proximity to IGI Airport, NH-8, and Delhi.
+- [About Us](https://www.dwarkaexpresswayncr.com/about): Corporate background, legacy track record, developer partnerships, and professional advisory consulting profiles.
+
+## Property Categories
+
+- [Residential Projects](https://www.dwarkaexpresswayncr.com/residential-projects-on-dwarka-expressway): Deep-dive listings of premium apartments, high-rises, and luxury housing segments bordering Gurgaon and Delhi.
+- [Commercial Property](https://www.dwarkaexpresswayncr.com/commercial-property-in-gurgaon): High-street retail shops, modern office spaces, and multi-tier commercial hubs inside Gurgaon.
+- [Upcoming Projects](https://www.dwarkaexpresswayncr.com/upcoming-projects-in-gurugram): Early-stage real estate opportunities, booking allocations, and future project masterplans in Gurugram.
+- [Ready to Move Flats](https://www.dwarkaexpresswayncr.com/ready-to-move-flats-in-gurgaon): Immediately available, fully constructed residential units ready for possession along Gurgaon.
+- [2 BHK Flats](https://www.dwarkaexpresswayncr.com/2-bhk-flats-in-gurgaon): Mid-tier configurations and compact luxury floor plans suitable for professional couples and small families.
+- [3 BHK Flats](https://www.dwarkaexpresswayncr.com/3-bhk-flats-in-gurgaon): Family-sized configurations, layout options, and structural layouts in high demand across the corridor.
+- [4 BHK Flats](https://www.dwarkaexpresswayncr.com/4-bhk-flats-in-gurgaon): Premium ultra-luxury apartments, sky villas, and spacious family duplexes on the Expressway.
+
+## Market Analysis & Intelligence (Blogs)
+
+- [Main Blog Feed](https://www.dwarkaexpresswayncr.com/blogs/): Continuous coverage of real estate news, infrastructure growth tracking, price trends, and buyer sentiment indices.
+- [Property Rates in Gurgaon 2026](https://www.dwarkaexpresswayncr.com/blogs/property-rates-in-gurgaon-2026/): Current analytical breakdown of average square foot evaluations, circle rate increases, and pricing metrics across 2026 Gurgaon markets.
+- [Best 10:90 Payment Plan Projects](https://www.dwarkaexpresswayncr.com/blogs/best-dwarka-expressway-projects-1090-payment-plan/): Investor guides highlighting low-upfront payment schemes (10% booking, 90% at possession) from tier-1 developers.
+- [Sector 114 High Street Hub](https://www.dwarkaexpresswayncr.com/blogs/sector-114-gurgaon-first-high-street-commercial-hub-on-dwarka-expressway/): Focused overview of Sector 114's development as a pure-play commercial boundary and high-street zone right on the Delhi border.
+- [Miyawaki Forest Impact](https://www.dwarkaexpresswayncr.com/blogs/how-miyawaki-forest-boosting-property-value-on-dwarka-expressway/): Ecological analysis tracking how green initiatives and micro-forest landscaping affect nearby residential valuation.
+- [2026 Buyer's Pick & ROI Comparison](https://www.dwarkaexpresswayncr.com/blogs/dwarka-expressway-project-2026-sector-wise-prices-roi-comparison-best-picks-for-buyers/): Granular sector-by-sector pricing matrix, historical appreciation figures, and return-on-investment comparisons.
+- [2026 Price Predictions](https://www.dwarkaexpresswayncr.com/blogs/dwarka-expressway-2026-price-predictions/): Short-to-medium-term forecasting assessing upcoming metro extensions, commercial delivery cycles, and pricing ceilings.
+- [Completion Status & News Updates](https://www.dwarkaexpresswayncr.com/blogs/dwarka-expressway-news-completion-status/): Construction milestones, master planning timelines, and official structural updates regarding urban transit networks.
+- [Route Map & Interchanges](https://www.dwarkaexpresswayncr.com/blogs/dwarka-expressway-route-map-explained-connectivity-benefits/): Spatial orientation explaining intersections from Mahipalpur (Delhi) through to Kherki Daula (Gurgaon) and exit logic.
+
+## Contact & Assistance
+- [Site Visit Requests & Consultation](https://www.dwarkaexpresswayncr.com/): Zero-brokerage consultation, verified inventory floor plans, and end-to-end deal closures.
+- Phone Support: +91 9873702365
+- Email Support: info@dwarkaexpresswayncr.com

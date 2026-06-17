@@ -30,6 +30,7 @@ RewriteCond %{REQUEST_URI} !^/blogs [NC]
 
 RewriteCond %{REQUEST_URI} !^/google80cd23f38f1157c9.html [NC]
 RewriteCond %{REQUEST_URI} !^/google4889cdfabab3b4a9.html [NC]
+RewriteCond %{REQUEST_URI} !^/llms.txt [NC]
 
 # Ignore cPanel directories
 RewriteCond %{REQUEST_URI} !^/cgi-bin/ [NC]
