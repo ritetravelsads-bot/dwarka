@@ -46,8 +46,8 @@ const pageContent: SEOPageContent = {
 
   trustIndicators: [
     { icon: "route", value: "4 BHK Homes", label: "Luxury Configurations" },
-    { icon: "school", value: "10 Min", label: "Euro International School" },
-    { icon: "hospital", value: "10 Min", label: "Manipal Hospital" },
+    { icon: "shield", value: "10 Min", label: "Euro International School" },
+    { icon: "plane", value: "10 Min", label: "Manipal Hospital" },
     { icon: "route", value: "Dwarka Expressway", label: "Prime Connectivity" },
   ],
 
