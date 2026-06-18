@@ -102,7 +102,7 @@ const pageContent: SEOPageContent = {
     {
       name: "Affordable Housing Gurgaon",
       location: "New Gurgaon",
-      status: "Under ₹1 Crore",
+      status: "Ready to Move",
       statusColor: "blue",
       headerColor: "primary",
       configuration: "1 & 2 BHK",
