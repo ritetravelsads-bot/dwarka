@@ -48,7 +48,7 @@ const pageContent: SEOPageContent = {
     { icon: "route", value: "Ready Possession", label: "Immediate Move-In" },
     { icon: "route", value: "Dwarka Expressway", label: "Prime Connectivity" },
     { icon: "shield", value: "Under ₹1 Cr", label: "Affordable Options" },
-    { icon: "home", value: "600–2500 Sq.Ft.", label: "Multiple Configurations" },
+    { icon: "route", value: "600–2500 Sq.Ft.", label: "Multiple Configurations" },
   ],
 
   quickFacts: [
