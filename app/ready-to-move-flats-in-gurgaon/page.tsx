@@ -134,7 +134,7 @@ const pageContent: SEOPageContent = {
       description: "Major commercial and business districts located just 5–15 minutes away.",
     },
     {
-      icon: "plane",
+      icon: "connectivity",
       title: "IGI Airport",
       description: "Quick access to IGI Airport within 15–20 minutes via Dwarka Expressway.",
     },
