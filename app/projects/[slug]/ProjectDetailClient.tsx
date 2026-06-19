@@ -292,29 +292,57 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                   </div>
                 )}
 
-                {/* Configurations table */}
-                {project.configurations && project.configurations.length > 0 && (
-                  <div className="flex flex-col flex-1">
-                    {/* Table header */}
-                    <div className="grid grid-cols-4 bg-primary/10 border-b border-white/10 px-6 py-3">
-                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary">BHK Type</span>
-                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Super Area</span>
-                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Starting Price</span>
-                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-right">Payment Plan</span>
-                    </div>
+                {/* Configurations table — always shown */}
+                {(() => {
+                  // Build rows: prefer configurations[], fall back to floorPlan[], then a single placeholder row
+                  type ConfigRow = { config: string; superArea: string; startingPrice: string };
 
-                    {/* Table rows */}
-                    <div className="divide-y divide-white/[0.07]">
-                      {project.configurations.map((config, idx) => {
-                        // Try to match a floorPlan entry to this config for richer data
-                        const matched = project.floorPlan?.find((fp) =>
-                          fp.title?.toLowerCase().includes(config.toLowerCase()) ||
-                          config.toLowerCase().includes(fp.title?.toLowerCase())
-                        );
-                        const superArea = matched?.size || project.sizeRange || project.size || "On Request";
-                        const startingPrice = matched?.price || project.price || "On Request";
+                  let rows: ConfigRow[] = [];
 
-                        return (
+                  if (project.configurations && project.configurations.length > 0) {
+                    rows = project.configurations.map((config) => {
+                      const matched = project.floorPlan?.find(
+                        (fp) =>
+                          fp.title.toLowerCase().includes(config.toLowerCase()) ||
+                          config.toLowerCase().includes(fp.title.toLowerCase())
+                      );
+                      return {
+                        config,
+                        superArea: matched?.size || project.sizeRange || project.size || "Contact for Details",
+                        startingPrice: matched?.price || project.price || "Contact for Details",
+                      };
+                    });
+                  } else if (project.floorPlan && project.floorPlan.length > 0) {
+                    // No configurations[] but floorPlan[] exists — derive rows from it
+                    rows = project.floorPlan.map((fp) => ({
+                      config: fp.title,
+                      superArea: fp.size || project.sizeRange || project.size || "Contact for Details",
+                      startingPrice: fp.price || project.price || "Contact for Details",
+                    }));
+                  } else {
+                    // Absolute fallback — show one placeholder row
+                    rows = [
+                      {
+                        config: project.type === "plots" ? "Plot" : project.type === "commercial" ? "Commercial Unit" : "Residential Unit",
+                        superArea: project.sizeRange || project.size || "Contact for Details",
+                        startingPrice: project.price || "Contact for Details",
+                      },
+                    ];
+                  }
+
+                  return (
+                    <div className="flex flex-col flex-1">
+                      {/* Table header */}
+                      <div className="grid grid-cols-4 bg-primary/10 border-b border-white/10 px-6 py-3">
+                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary">BHK Type</span>
+                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Super Area</span>
+                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Starting Price</span>
+                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-right">Payment Plan</span>
+                      </div>
+
+                      {/* Table rows */}
+                      <div className="divide-y divide-white/[0.07]">
+                        {rows.map((row, idx) => (
                           <div
                             key={idx}
                             className="grid grid-cols-4 items-center px-6 py-4 hover:bg-white/[0.03] transition-colors group cursor-pointer"
@@ -328,18 +356,22 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                                 <i className="fa-solid fa-bed text-primary group-hover:text-white text-[10px] transition-colors" />
                               </div>
                               <span className="text-white font-bold text-sm group-hover:text-primary transition-colors">
-                                {config}
+                                {row.config}
                               </span>
                             </div>
 
                             {/* Super Area */}
                             <div className="text-center">
-                              <span className="text-white/80 text-sm font-medium">{superArea}</span>
+                              <span className={`text-sm font-medium ${row.superArea === "Contact for Details" ? "text-white/40 italic" : "text-white/80"}`}>
+                                {row.superArea}
+                              </span>
                             </div>
 
                             {/* Starting Price */}
                             <div className="text-center">
-                              <span className="text-primary font-bold text-sm">{startingPrice}</span>
+                              <span className={`text-sm font-bold ${row.startingPrice === "Contact for Details" ? "text-white/40 italic" : "text-primary"}`}>
+                                {row.startingPrice}
+                              </span>
                             </div>
 
                             {/* Payment Plan */}
@@ -349,26 +381,26 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                               </span>
                             </div>
                           </div>
-                        );
-                      })}
-                    </div>
+                        ))}
+                      </div>
 
-                    {/* Table footer CTA */}
-                    <div className="mt-auto px-6 py-5 bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                      <p className="text-white/50 text-xs">
-                        * Prices are indicative. Contact us for exact pricing &amp; payment schedules.
-                      </p>
-                      <button
-                        onClick={() =>
-                          document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
-                        }
-                        className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest hover:opacity-90 transition-opacity"
-                      >
-                        Get Full Price Sheet
-                      </button>
+                      {/* Table footer CTA */}
+                      <div className="mt-auto px-6 py-5 bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <p className="text-white/50 text-xs">
+                          * Prices are indicative. Contact us for exact pricing &amp; payment schedules.
+                        </p>
+                        <button
+                          onClick={() =>
+                            document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
+                          }
+                          className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest hover:opacity-90 transition-opacity"
+                        >
+                          Get Full Price Sheet
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
 
                 {/* Bottom CTAs */}
                 <div className="p-6 flex flex-wrap gap-3">
