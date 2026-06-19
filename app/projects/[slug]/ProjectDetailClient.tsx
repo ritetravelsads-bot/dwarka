@@ -292,101 +292,80 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                   </div>
                 )}
 
-                {/* Configurations table — always shown */}
+                {/* Configurations table — single aggregated row */}
                 {(() => {
-                  // Build rows: prefer configurations[], fall back to floorPlan[], then a single placeholder row
-                  type ConfigRow = { config: string; superArea: string; startingPrice: string };
+                  // Derive one combined value per column from available data
+                  const bhk = project.configurations && project.configurations.length > 0
+                    ? project.configurations.join(", ").replace(/,([^,]*)$/, " &$1") // "2 BHK, 3 BHK, 4 BHK" → "2 BHK, 3 BHK & 4 BHK"
+                    : project.floorPlan && project.floorPlan.length > 0
+                      ? project.floorPlan.map((fp) => fp.title).join(", ").replace(/,([^,]*)$/, " &$1")
+                      : project.type === "plots" ? "Residential Plot"
+                      : project.type === "commercial" ? "Commercial Unit"
+                      : "Residential Unit";
 
-                  let rows: ConfigRow[] = [];
+                  const superArea = project.sizeRange || project.size
+                    || (project.floorPlan && project.floorPlan.length > 0
+                      ? `${project.floorPlan[0].size}${project.floorPlan.length > 1 ? ` – ${project.floorPlan[project.floorPlan.length - 1].size}` : ""}`
+                      : null)
+                    || "Contact for Details";
 
-                  if (project.configurations && project.configurations.length > 0) {
-                    rows = project.configurations.map((config) => {
-                      const matched = project.floorPlan?.find(
-                        (fp) =>
-                          fp.title.toLowerCase().includes(config.toLowerCase()) ||
-                          config.toLowerCase().includes(fp.title.toLowerCase())
-                      );
-                      return {
-                        config,
-                        superArea: matched?.size || project.sizeRange || project.size || "Contact for Details",
-                        startingPrice: matched?.price || project.price || "Contact for Details",
-                      };
-                    });
-                  } else if (project.floorPlan && project.floorPlan.length > 0) {
-                    // No configurations[] but floorPlan[] exists — derive rows from it
-                    rows = project.floorPlan.map((fp) => ({
-                      config: fp.title,
-                      superArea: fp.size || project.sizeRange || project.size || "Contact for Details",
-                      startingPrice: fp.price || project.price || "Contact for Details",
-                    }));
-                  } else {
-                    // Absolute fallback — show one placeholder row
-                    rows = [
-                      {
-                        config: project.type === "plots" ? "Plot" : project.type === "commercial" ? "Commercial Unit" : "Residential Unit",
-                        superArea: project.sizeRange || project.size || "Contact for Details",
-                        startingPrice: project.price || "Contact for Details",
-                      },
-                    ];
-                  }
+                  const startingPrice = project.price
+                    || (project.floorPlan && project.floorPlan.length > 0 ? project.floorPlan[0].price : null)
+                    || "Contact for Details";
+
+                  const paymentPlan = "Flexible";
+
+                  const isMissing = (val: string) => val === "Contact for Details";
+
+                  const cols = [
+                    { label: "BHK", value: bhk, missing: false },
+                    { label: "Super Area", value: superArea, missing: isMissing(superArea) },
+                    { label: "Starting Price", value: startingPrice, missing: isMissing(startingPrice) },
+                    { label: "Payment Plan", value: paymentPlan, missing: false },
+                  ];
 
                   return (
                     <div className="flex flex-col flex-1">
-                      {/* Table header */}
-                      <div className="grid grid-cols-4 bg-primary/10 border-b border-white/10 px-6 py-3">
-                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary">BHK Type</span>
-                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Super Area</span>
-                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Starting Price</span>
-                        <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-right">Payment Plan</span>
-                      </div>
+                      {/* 4-column, 2-row table */}
+                      <div className="grid grid-cols-4 divide-x divide-white/[0.07]">
+                        {/* Row 1 — headers */}
+                        {cols.map((col) => (
+                          <div key={col.label} className="px-5 py-3 bg-primary/10 border-b border-white/10 flex items-center gap-1.5">
+                            <i className={`fa-solid text-primary text-[9px] ${
+                              col.label === "BHK" ? "fa-bed" :
+                              col.label === "Super Area" ? "fa-vector-square" :
+                              col.label === "Starting Price" ? "fa-indian-rupee-sign" :
+                              "fa-file-invoice"
+                            }`} />
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary whitespace-nowrap">
+                              {col.label}
+                            </span>
+                          </div>
+                        ))}
 
-                      {/* Table rows */}
-                      <div className="divide-y divide-white/[0.07]">
-                        {rows.map((row, idx) => (
+                        {/* Row 2 — values */}
+                        {cols.map((col) => (
                           <div
-                            key={idx}
-                            className="grid grid-cols-4 items-center px-6 py-4 hover:bg-white/[0.03] transition-colors group cursor-pointer"
+                            key={col.label + "-val"}
+                            className="px-5 py-5 flex items-center cursor-pointer hover:bg-white/[0.03] transition-colors"
                             onClick={() =>
                               document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
                             }
                           >
-                            {/* BHK */}
-                            <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:border-primary transition-colors">
-                                <i className="fa-solid fa-bed text-primary group-hover:text-white text-[10px] transition-colors" />
-                              </div>
-                              <span className="text-white font-bold text-sm group-hover:text-primary transition-colors">
-                                {row.config}
-                              </span>
-                            </div>
-
-                            {/* Super Area */}
-                            <div className="text-center">
-                              <span className={`text-sm font-medium ${row.superArea === "Contact for Details" ? "text-white/40 italic" : "text-white/80"}`}>
-                                {row.superArea}
-                              </span>
-                            </div>
-
-                            {/* Starting Price */}
-                            <div className="text-center">
-                              <span className={`text-sm font-bold ${row.startingPrice === "Contact for Details" ? "text-white/40 italic" : "text-primary"}`}>
-                                {row.startingPrice}
-                              </span>
-                            </div>
-
-                            {/* Payment Plan */}
-                            <div className="text-right">
-                              <span className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide bg-white/5 border border-white/10 text-white/60 group-hover:border-primary/40 group-hover:text-primary transition-colors">
-                                Flexible
-                              </span>
-                            </div>
+                            <span className={`font-bold text-sm leading-snug ${
+                              col.label === "Starting Price" && !col.missing ? "text-primary" :
+                              col.missing ? "text-white/35 italic font-normal" :
+                              "text-white"
+                            }`}>
+                              {col.value}
+                            </span>
                           </div>
                         ))}
                       </div>
 
-                      {/* Table footer CTA */}
-                      <div className="mt-auto px-6 py-5 bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <p className="text-white/50 text-xs">
+                      {/* Footer CTA */}
+                      <div className="mt-auto px-6 py-4 bg-white/[0.02] border-t border-white/[0.07] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <p className="text-white/40 text-xs">
                           * Prices are indicative. Contact us for exact pricing &amp; payment schedules.
                         </p>
                         <button
