@@ -88,6 +88,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   const [isEmiOpen, setIsEmiOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [aboutExpanded, setAboutExpanded] = useState(false);
 
   // Enrich project data with local data for correct images (p-X.webp format from PHP)
   const localData = project.slug 
@@ -208,18 +209,18 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
 
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-4 py-12">
-        {/* ABOUT SECTION — REDESIGNED */}
-        {(project.about?.content || project.description) && (
+        {/* ABOUT + CONFIGURATIONS SECTION */}
+        {(project.about?.content || project.description || (project.configurations && project.configurations.length > 0)) && (
           <section className="my-12">
-            {/* Section Label */}
             <div className="flex items-center gap-4 mb-8">
               <span className="text-xs uppercase tracking-[0.35em] font-bold text-primary">About the Project</span>
               <div className="flex-1 h-px bg-primary/20"></div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-              {/* Image — takes 2/5 on desktop */}
-              <div className="relative lg:col-span-2 min-h-[300px] lg:min-h-[520px] order-first">
+
+              {/* ── Left: Image panel ── */}
+              <div className="relative lg:col-span-2 min-h-[300px] lg:min-h-[600px]">
                 {(project.about?.image || enrichedMainImage) ? (
                   <>
                     <Image
@@ -228,177 +229,160 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                       fill
                       className="object-cover"
                     />
-                    {/* Overlay with project name tag */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-sm mb-2">
+                      <span className="inline-block px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest mb-2">
                         {project.status?.replace(/-/g, " ") || "Premium Project"}
                       </span>
                       <p className="text-white font-bold text-lg leading-tight">{project.name}</p>
-                      <p className="text-white/70 text-sm">{project.sector && `${project.sector}, `}{project.location}</p>
+                      <p className="text-white/60 text-sm mt-0.5">
+                        {project.sector && `${project.sector}, `}{project.location}
+                      </p>
                     </div>
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-dark">
-                    <i className="fa-solid fa-building text-white/10 text-6xl"></i>
+                    <i className="fa-solid fa-building text-white/10 text-6xl" />
                   </div>
                 )}
               </div>
 
-              {/* Content — takes 3/5 on desktop */}
-              <div className="lg:col-span-3 bg-dark p-8 md:p-12 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight font-heading">
-                    {project.about?.title || `About ${project.name}`}
-                  </h2>
-                  <div className="w-12 h-1 bg-primary mb-6"></div>
+              {/* ── Right: Content panel ── */}
+              <div className="lg:col-span-3 bg-dark flex flex-col divide-y divide-white/10">
 
-                  <p className="text-base leading-relaxed text-lightGrey/80 mb-8">
-                    {project.about?.content || project.description}
-                  </p>
+                {/* About text */}
+                {(project.about?.content || project.description) && (
+                  <div className="p-8 md:p-10">
+                    <h2 className="text-2xl md:text-3xl font-black text-white mb-2 leading-tight font-heading">
+                      {project.about?.title || `About ${project.name}`}
+                    </h2>
+                    <div className="w-10 h-1 bg-primary mb-5" />
 
-                  {/* Key Project Stats inline row */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Developer</p>
-                      <p className="text-white font-bold text-sm leading-tight">{project.developer || "—"}</p>
+                    {/* Clamped text with read more */}
+                    <div className="relative">
+                      <p
+                        className="text-sm leading-relaxed text-lightGrey/75"
+                        style={
+                          !aboutExpanded
+                            ? {
+                                display: "-webkit-box",
+                                WebkitLineClamp: 3,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                              }
+                            : undefined
+                        }
+                      >
+                        {project.about?.content || project.description}
+                      </p>
+                      {!aboutExpanded && (
+                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+                      )}
                     </div>
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Possession</p>
-                      <p className="text-white font-bold text-sm leading-tight">{project.possession || project.hero?.possession || "—"}</p>
+                    <button
+                      onClick={() => setAboutExpanded((v) => !v)}
+                      className="mt-3 flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:opacity-80 transition-opacity"
+                    >
+                      {aboutExpanded ? (
+                        <>Show Less <i className="fa-solid fa-chevron-up text-[9px]" /></>
+                      ) : (
+                        <>Read More <i className="fa-solid fa-chevron-down text-[9px]" /></>
+                      )}
+                    </button>
+                  </div>
+                )}
+
+                {/* Configurations table */}
+                {project.configurations && project.configurations.length > 0 && (
+                  <div className="flex flex-col flex-1">
+                    {/* Table header */}
+                    <div className="grid grid-cols-4 bg-primary/10 border-b border-white/10 px-6 py-3">
+                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary">BHK Type</span>
+                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Super Area</span>
+                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-center">Starting Price</span>
+                      <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-primary text-right">Payment Plan</span>
                     </div>
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Starting Price</p>
-                      <p className="text-white font-bold text-sm leading-tight">{project.price || "—"}</p>
+
+                    {/* Table rows */}
+                    <div className="divide-y divide-white/[0.07]">
+                      {project.configurations.map((config, idx) => {
+                        // Try to match a floorPlan entry to this config for richer data
+                        const matched = project.floorPlan?.find((fp) =>
+                          fp.title?.toLowerCase().includes(config.toLowerCase()) ||
+                          config.toLowerCase().includes(fp.title?.toLowerCase())
+                        );
+                        const superArea = matched?.size || project.sizeRange || project.size || "On Request";
+                        const startingPrice = matched?.price || project.price || "On Request";
+
+                        return (
+                          <div
+                            key={idx}
+                            className="grid grid-cols-4 items-center px-6 py-4 hover:bg-white/[0.03] transition-colors group cursor-pointer"
+                            onClick={() =>
+                              document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
+                            }
+                          >
+                            {/* BHK */}
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/25 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:border-primary transition-colors">
+                                <i className="fa-solid fa-bed text-primary group-hover:text-white text-[10px] transition-colors" />
+                              </div>
+                              <span className="text-white font-bold text-sm group-hover:text-primary transition-colors">
+                                {config}
+                              </span>
+                            </div>
+
+                            {/* Super Area */}
+                            <div className="text-center">
+                              <span className="text-white/80 text-sm font-medium">{superArea}</span>
+                            </div>
+
+                            {/* Starting Price */}
+                            <div className="text-center">
+                              <span className="text-primary font-bold text-sm">{startingPrice}</span>
+                            </div>
+
+                            {/* Payment Plan */}
+                            <div className="text-right">
+                              <span className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide bg-white/5 border border-white/10 text-white/60 group-hover:border-primary/40 group-hover:text-primary transition-colors">
+                                Flexible
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">RERA</p>
-                      <p className="text-white font-bold text-xs leading-tight break-all">{project.rera || "Registered"}</p>
+
+                    {/* Table footer CTA */}
+                    <div className="mt-auto px-6 py-5 bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <p className="text-white/50 text-xs">
+                        * Prices are indicative. Contact us for exact pricing &amp; payment schedules.
+                      </p>
+                      <button
+                        onClick={() =>
+                          document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
+                        }
+                        className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest hover:opacity-90 transition-opacity"
+                      >
+                        Get Full Price Sheet
+                      </button>
                     </div>
                   </div>
+                )}
 
-                  {/* Highlights */}
-                  {project.highlights && project.highlights.length > 0 && (
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-8">
-                      {project.highlights.slice(0, 6).map((highlight, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-lightGrey/80">
-                          <i className="fa-solid fa-circle-check text-primary mt-0.5 flex-shrink-0"></i>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap gap-3">
+                {/* Bottom CTAs */}
+                <div className="p-6 flex flex-wrap gap-3">
                   <button
                     onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    className="px-8 py-3 font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white rounded-sm"
+                    className="px-7 py-3 font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white"
                   >
                     Get Best Quote
                   </button>
                   <button
                     onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    className="px-8 py-3 font-bold uppercase text-xs tracking-widest transition-all border border-white/20 hover:border-primary hover:text-primary text-white rounded-sm"
+                    className="px-7 py-3 font-bold uppercase text-xs tracking-widest border border-white/20 hover:border-primary hover:text-primary text-white transition-all"
                   >
                     Schedule Site Visit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* CONFIGURATIONS SECTION */}
-        {project.configurations && project.configurations.length > 0 && (
-          <section className="my-12">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs uppercase tracking-[0.35em] font-bold text-primary">Configurations</span>
-              <div className="flex-1 h-px bg-primary/20"></div>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-dark overflow-hidden shadow-xl">
-              {/* Header bar */}
-              <div className="bg-primary px-8 py-5 flex items-center justify-between">
-                <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight font-heading">
-                  Available Configurations
-                </h2>
-                <span className="text-white/80 text-sm font-medium">
-                  {project.configurations.length} {project.configurations.length === 1 ? "Type" : "Types"} Available
-                </span>
-              </div>
-
-              {/* Configuration cards */}
-              <div className="p-6 md:p-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                  {project.configurations.map((config, idx) => (
-                    <div
-                      key={idx}
-                      className="group relative border border-white/10 rounded-xl p-6 hover:border-primary/60 hover:bg-white/5 transition-all duration-300 cursor-pointer"
-                      onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    >
-                      {/* Config icon */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 bg-primary/15 border border-primary/30 rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
-                          <i className="fa-solid fa-bed text-primary group-hover:text-white text-sm transition-colors"></i>
-                        </div>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-primary transition-colors font-semibold">
-                          Unit Type {idx + 1}
-                        </span>
-                      </div>
-
-                      <h3 className="text-white font-black text-2xl md:text-3xl font-heading mb-1 group-hover:text-primary transition-colors">
-                        {config}
-                      </h3>
-                      <p className="text-white/50 text-xs uppercase tracking-widest mb-4">
-                        {project.name}
-                      </p>
-
-                      {/* Size & price info if available */}
-                      <div className="space-y-1.5 border-t border-white/10 pt-4">
-                        {project.sizeRange && (
-                          <div className="flex justify-between text-xs">
-                            <span className="text-white/40 uppercase tracking-wider">Size Range</span>
-                            <span className="text-white/80 font-medium">{project.sizeRange}</span>
-                          </div>
-                        )}
-                        {project.size && !project.sizeRange && (
-                          <div className="flex justify-between text-xs">
-                            <span className="text-white/40 uppercase tracking-wider">Size</span>
-                            <span className="text-white/80 font-medium">{project.size}</span>
-                          </div>
-                        )}
-                        {project.pricePerSqFt && (
-                          <div className="flex justify-between text-xs">
-                            <span className="text-white/40 uppercase tracking-wider">Price / Sq.Ft.</span>
-                            <span className="text-primary font-bold">{project.pricePerSqFt}</span>
-                          </div>
-                        )}
-                        <div className="flex justify-between text-xs">
-                          <span className="text-white/40 uppercase tracking-wider">Starting At</span>
-                          <span className="text-primary font-bold">{project.price}</span>
-                        </div>
-                      </div>
-
-                      <div className="mt-4 text-[10px] uppercase tracking-widest text-white/30 group-hover:text-primary transition-colors font-semibold flex items-center gap-1">
-                        <span>Get Price Details</span>
-                        <i className="fa-solid fa-arrow-right text-[8px]"></i>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Bottom CTA strip */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div>
-                    <p className="text-white font-semibold text-sm">Looking for a specific configuration?</p>
-                    <p className="text-white/50 text-xs mt-0.5">Our property experts will help you find the perfect unit.</p>
-                  </div>
-                  <button
-                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest rounded-sm hover:opacity-90 transition-opacity"
-                  >
-                    Enquire Now
                   </button>
                 </div>
               </div>
