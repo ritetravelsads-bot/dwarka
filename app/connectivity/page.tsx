@@ -90,43 +90,6 @@ export default function ConnectivityPage() {
       <FAQSchema faqs={connectivityFaqs} />
       <ItemListSchema projects={projectListForSchema} />
 
-      {/* HERO SECTION */}
-      <section className="relative pt-12 pb-24 md:pt-10 md:pb-32 bg-gradient-to-br from-slate-900 via-dark to-slate-800 overflow-hidden text-white">
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
-          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary blur-[100px]"></div>
-          <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary/50 blur-[100px]"></div>
-        </div>
-        
-        <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center justify-center">
-          <div className="max-w-4xl mx-auto">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 text-white uppercase tracking-[0.2em] text-xs font-bold mb-6 border border-white/20 backdrop-blur-sm">
-              Real Estate Dwarka Expressway
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight font-heading">
-              Seamless <span className="text-primary font-light italic">Connectivity</span> & Projects Map
-            </h1>
-            <p className="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-12 text-center">
-              Positioned at one of the most strategic locations, the Dwarka Express Highway is redefining real estate. Explore the ultimate Dwarka Expressway route map and discover the finest luxury apartments on Dwarka Expressway.
-            </p>
-            
-            <a
-              href="#projects-map"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 text-sm font-bold tracking-wide uppercase rounded hover:bg-white hover:text-dark transition-all duration-300 shadow-lg"
-            >
-              View Connectivity Map
-              <i className="fa-solid fa-arrow-down"></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* PRIME LOCATION SECTION */}
-      <section className="py-24 bg-white border-b border-borderGrey">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-         
-        </div>
-      </section>
-
       {/* MAP SECTION */}
       <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">
         <div className="max-w-7xl mx-auto px-6">
@@ -139,7 +102,7 @@ export default function ConnectivityPage() {
               Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the <strong>sector 103 gurgaon map</strong> or <strong>sector 102 gurgaon map</strong> highlights the immense potential of this <strong>Gurgaon smart city</strong> corridor connecting straight to the Delhi border.
             </p>
           </div>
-          
+
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-borderGrey bg-lightGrey p-2 md:p-4">
             <Image
               src="/assets/img/dxp-conn-map.png"
@@ -150,58 +113,89 @@ export default function ConnectivityPage() {
             />
           </div>
         </div>
-        
-         {/* Connectivity Benefits */}
-          <div className="">
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-dark mb-1">15 minutes to IGI Airport</h3>
-                <p className="text-sm text-slate-600">Direct expressway access for seamless international travel</p>
-              </div>
+
+        {/* Connectivity Benefits */}
+        <div className="max-w-7xl mx-auto px-6 mt-5">
+          <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
             </div>
-            
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-dark mb-1">Direct Gurugram Access</h3>
-                <p className="text-sm text-slate-600">20-minute drive to Cyber City and DLF Phase offices</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-dark mb-1">5 km from Diplomatic Enclave</h3>
-                <p className="text-sm text-slate-600">Proximity to embassies and international schools</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-dark mb-1">Adjacent Metro Station (2026)</h3>
-                <p className="text-sm text-slate-600">Upcoming metro connectivity for daily commute convenience</p>
-              </div>
+            <div>
+              <h3 className="text-lg font-semibold text-dark mb-1">15 minutes to IGI Airport</h3>
+              <p className="text-sm text-slate-600">Direct expressway access for seamless international travel</p>
             </div>
           </div>
+
+          <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-dark mb-1">Direct Gurugram Access</h3>
+              <p className="text-sm text-slate-600">20-minute drive to Cyber City and DLF Phase offices</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-dark mb-1">5 km from Diplomatic Enclave</h3>
+              <p className="text-sm text-slate-600">Proximity to embassies and international schools</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 p-4 rounded-xl border border-borderGrey hover:border-primary/20 hover:shadow-md transition-all">
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-dark mb-1">Adjacent Metro Station (2026)</h3>
+              <p className="text-sm text-slate-600">Upcoming metro connectivity for daily commute convenience</p>
+            </div>
+          </div>
+        </div>
       </section>
+
+      {/* HERO SECTION */}
+      <section className="relative pt-12 pb-24 md:pt-10 md:pb-32 bg-gradient-to-br from-slate-900 via-dark to-slate-800 overflow-hidden text-white">
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
+          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary blur-[100px]"></div>
+          <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary/50 blur-[100px]"></div>
+        </div>
+
+        <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center justify-center">
+          <div className="max-w-4xl mx-auto">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 text-white uppercase tracking-[0.2em] text-xs font-bold mb-6 border border-white/20 backdrop-blur-sm">
+              Real Estate Dwarka Expressway
+            </span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight font-heading">
+              Seamless <span className="text-primary font-light italic">Connectivity</span> & Projects Map
+            </h1>
+            <p className="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-12 text-center">
+              Positioned at one of the most strategic locations, the Dwarka Express Highway is redefining real estate. Explore the ultimate Dwarka Expressway route map and discover the finest luxury apartments on Dwarka Expressway.
+            </p>
+
+            <a
+              href="#projects-map"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 text-sm font-bold tracking-wide uppercase rounded hover:bg-white hover:text-dark transition-all duration-300 shadow-lg"
+            >
+              View Connectivity Map
+              <i className="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
 
       {/* PROJECTS SECTION */}
       <section className="py-24 bg-white">
@@ -246,7 +240,7 @@ export default function ConnectivityPage() {
                         <i className="fa-solid fa-building-circle-check text-primary"></i> {prop.occupancy} Occupancy
                       </div>
                     </div>
-                    
+
                     <div className="pt-4 border-t border-borderGrey border-dashed">
                       <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
                         Expressway Connectivity:
@@ -293,18 +287,18 @@ export default function ConnectivityPage() {
       {/* CTA SECTION */}
       <section className="py-24 bg-dark text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')" }}></div>
-        
+
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight tracking-tight font-heading">
             Ready to Find Your <span className="text-primary font-light italic">Dream Home?</span>
           </h2>
-          
+
           <p className="text-slate-300 text-lg md:text-xl font-light leading-relaxed mb-12">
             Whether you are seeking <strong>upcoming affordable housing projects in Gurgaon</strong>, tracking <strong>Dwarka Expressway projects ready to move</strong>, or exploring <strong>new township</strong> launches, our experts are here to guide you.
             <br /><br />
             Secure your site visit today and get complete <strong>Dwarka Expressway project details</strong>.
           </p>
-          
+
           <Link
             href="/contact"
             className="inline-flex items-center justify-center gap-2 bg-primary text-white px-10 py-5 text-base font-bold tracking-wide uppercase hover:bg-white hover:text-dark transition-all duration-300 shadow-xl shadow-primary/20"
