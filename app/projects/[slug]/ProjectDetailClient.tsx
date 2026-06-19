@@ -208,51 +208,199 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
 
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-4 py-12">
-        {/* ABOUT SECTION */}
+        {/* ABOUT SECTION — REDESIGNED */}
         {(project.about?.content || project.description) && (
-          <section className="rounded-2xl overflow-hidden my-12 shadow-2xl border bg-dark border-borderGrey">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              <div className="p-8 md:p-16 flex flex-col justify-center relative">
-                <span className="text-xs uppercase tracking-[0.3em] font-bold mb-4 block text-primary">
-                  Discover More
-                </span>
+          <section className="my-12">
+            {/* Section Label */}
+            <div className="flex items-center gap-4 mb-8">
+              <span className="text-xs uppercase tracking-[0.35em] font-bold text-primary">About the Project</span>
+              <div className="flex-1 h-px bg-primary/20"></div>
+            </div>
 
-                <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight font-heading">
-                  {project.about?.title || `About ${project.name}`}
-                </h2>
-
-                <div className="pl-6 border-l-2 border-primary">
-                  <p className="text-base leading-relaxed mb-6 text-lightGrey">
-                    {project.about?.content || project.description}
-                  </p>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    className="inline-block px-8 py-3 rounded-full font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white"
-                  >
-                    Get More Details
-                  </button>
-                </div>
-              </div>
-
-              <div className="relative overflow-hidden min-h-[400px]">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              {/* Image — takes 2/5 on desktop */}
+              <div className="relative lg:col-span-2 min-h-[300px] lg:min-h-[520px] order-first">
                 {(project.about?.image || enrichedMainImage) ? (
                   <>
-                    <div className="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-dark to-transparent w-1/4"></div>
                     <Image
                       src={project.about?.image || enrichedMainImage}
-                      alt={`${project.name} — About image`}
+                      alt={`${project.name} — Project Overview`}
                       fill
-                      className="w-full h-full object-cover transition duration-700 hover:scale-110"
+                      className="object-cover"
                     />
+                    {/* Overlay with project name tag */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-sm mb-2">
+                        {project.status?.replace(/-/g, " ") || "Premium Project"}
+                      </span>
+                      <p className="text-white font-bold text-lg leading-tight">{project.name}</p>
+                      <p className="text-white/70 text-sm">{project.sector && `${project.sector}, `}{project.location}</p>
+                    </div>
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-dark">
-                    <p className="text-white text-lg font-semibold opacity-30 uppercase tracking-widest">No image available</p>
+                    <i className="fa-solid fa-building text-white/10 text-6xl"></i>
                   </div>
                 )}
+              </div>
+
+              {/* Content — takes 3/5 on desktop */}
+              <div className="lg:col-span-3 bg-dark p-8 md:p-12 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-black text-white mb-2 leading-tight font-heading">
+                    {project.about?.title || `About ${project.name}`}
+                  </h2>
+                  <div className="w-12 h-1 bg-primary mb-6"></div>
+
+                  <p className="text-base leading-relaxed text-lightGrey/80 mb-8">
+                    {project.about?.content || project.description}
+                  </p>
+
+                  {/* Key Project Stats inline row */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Developer</p>
+                      <p className="text-white font-bold text-sm leading-tight">{project.developer || "—"}</p>
+                    </div>
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Possession</p>
+                      <p className="text-white font-bold text-sm leading-tight">{project.possession || project.hero?.possession || "—"}</p>
+                    </div>
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">Starting Price</p>
+                      <p className="text-white font-bold text-sm leading-tight">{project.price || "—"}</p>
+                    </div>
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary mb-1">RERA</p>
+                      <p className="text-white font-bold text-xs leading-tight break-all">{project.rera || "Registered"}</p>
+                    </div>
+                  </div>
+
+                  {/* Highlights */}
+                  {project.highlights && project.highlights.length > 0 && (
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-8">
+                      {project.highlights.slice(0, 6).map((highlight, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-lightGrey/80">
+                          <i className="fa-solid fa-circle-check text-primary mt-0.5 flex-shrink-0"></i>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="px-8 py-3 font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white rounded-sm"
+                  >
+                    Get Best Quote
+                  </button>
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="px-8 py-3 font-bold uppercase text-xs tracking-widest transition-all border border-white/20 hover:border-primary hover:text-primary text-white rounded-sm"
+                  >
+                    Schedule Site Visit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CONFIGURATIONS SECTION */}
+        {project.configurations && project.configurations.length > 0 && (
+          <section className="my-12">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="text-xs uppercase tracking-[0.35em] font-bold text-primary">Configurations</span>
+              <div className="flex-1 h-px bg-primary/20"></div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-dark overflow-hidden shadow-xl">
+              {/* Header bar */}
+              <div className="bg-primary px-8 py-5 flex items-center justify-between">
+                <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight font-heading">
+                  Available Configurations
+                </h2>
+                <span className="text-white/80 text-sm font-medium">
+                  {project.configurations.length} {project.configurations.length === 1 ? "Type" : "Types"} Available
+                </span>
+              </div>
+
+              {/* Configuration cards */}
+              <div className="p-6 md:p-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                  {project.configurations.map((config, idx) => (
+                    <div
+                      key={idx}
+                      className="group relative border border-white/10 rounded-xl p-6 hover:border-primary/60 hover:bg-white/5 transition-all duration-300 cursor-pointer"
+                      onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    >
+                      {/* Config icon */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 bg-primary/15 border border-primary/30 rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
+                          <i className="fa-solid fa-bed text-primary group-hover:text-white text-sm transition-colors"></i>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-primary transition-colors font-semibold">
+                          Unit Type {idx + 1}
+                        </span>
+                      </div>
+
+                      <h3 className="text-white font-black text-2xl md:text-3xl font-heading mb-1 group-hover:text-primary transition-colors">
+                        {config}
+                      </h3>
+                      <p className="text-white/50 text-xs uppercase tracking-widest mb-4">
+                        {project.name}
+                      </p>
+
+                      {/* Size & price info if available */}
+                      <div className="space-y-1.5 border-t border-white/10 pt-4">
+                        {project.sizeRange && (
+                          <div className="flex justify-between text-xs">
+                            <span className="text-white/40 uppercase tracking-wider">Size Range</span>
+                            <span className="text-white/80 font-medium">{project.sizeRange}</span>
+                          </div>
+                        )}
+                        {project.size && !project.sizeRange && (
+                          <div className="flex justify-between text-xs">
+                            <span className="text-white/40 uppercase tracking-wider">Size</span>
+                            <span className="text-white/80 font-medium">{project.size}</span>
+                          </div>
+                        )}
+                        {project.pricePerSqFt && (
+                          <div className="flex justify-between text-xs">
+                            <span className="text-white/40 uppercase tracking-wider">Price / Sq.Ft.</span>
+                            <span className="text-primary font-bold">{project.pricePerSqFt}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between text-xs">
+                          <span className="text-white/40 uppercase tracking-wider">Starting At</span>
+                          <span className="text-primary font-bold">{project.price}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 text-[10px] uppercase tracking-widest text-white/30 group-hover:text-primary transition-colors font-semibold flex items-center gap-1">
+                        <span>Get Price Details</span>
+                        <i className="fa-solid fa-arrow-right text-[8px]"></i>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom CTA strip */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div>
+                    <p className="text-white font-semibold text-sm">Looking for a specific configuration?</p>
+                    <p className="text-white/50 text-xs mt-0.5">Our property experts will help you find the perfect unit.</p>
+                  </div>
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest rounded-sm hover:opacity-90 transition-opacity"
+                  >
+                    Enquire Now
+                  </button>
+                </div>
               </div>
             </div>
           </section>

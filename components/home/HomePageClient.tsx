@@ -30,10 +30,6 @@ export default function HomePageClient() {
 
         <PriceIndexSection />
 
-        <HighlightsSection />
-
-        <AmenitiesSection />
-
         <TrustSection />
 
         <FAQContactSection />
