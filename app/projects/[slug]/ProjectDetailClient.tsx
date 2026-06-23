@@ -88,6 +88,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   const [isEmiOpen, setIsEmiOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [aboutExpanded, setAboutExpanded] = useState(false);
 
   // Enrich project data with local data for correct images (p-X.webp format from PHP)
   const localData = project.slug 
@@ -208,51 +209,193 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
 
       {/* MAIN CONTENT */}
       <main className="max-w-6xl mx-auto px-4 py-12">
-        {/* ABOUT SECTION */}
-        {(project.about?.content || project.description) && (
-          <section className="rounded-2xl overflow-hidden my-12 shadow-2xl border bg-dark border-borderGrey">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              <div className="p-8 md:p-16 flex flex-col justify-center relative">
-                <span className="text-xs uppercase tracking-[0.3em] font-bold mb-4 block text-primary">
-                  Discover More
-                </span>
+        {/* ABOUT + CONFIGURATIONS SECTION */}
+        {(project.about?.content || project.description || (project.configurations && project.configurations.length > 0)) && (
+          <section className="my-12">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="text-xs uppercase tracking-[0.35em] font-bold text-primary">About the Project</span>
+              <div className="flex-1 h-px bg-primary/20"></div>
+            </div>
 
-                <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight font-heading">
-                  {project.about?.title || `About ${project.name}`}
-                </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
 
-                <div className="pl-6 border-l-2 border-primary">
-                  <p className="text-base leading-relaxed mb-6 text-lightGrey">
-                    {project.about?.content || project.description}
-                  </p>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
-                    className="inline-block px-8 py-3 rounded-full font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white"
-                  >
-                    Get More Details
-                  </button>
-                </div>
-              </div>
-
-              <div className="relative overflow-hidden min-h-[400px]">
+              {/* ── Left: Image panel ── */}
+              <div className="relative lg:col-span-2 min-h-[300px] lg:min-h-[600px]">
                 {(project.about?.image || enrichedMainImage) ? (
                   <>
-                    <div className="absolute inset-0 z-10 hidden md:block bg-gradient-to-r from-dark to-transparent w-1/4"></div>
                     <Image
                       src={project.about?.image || enrichedMainImage}
-                      alt={`${project.name} — About image`}
+                      alt={`${project.name} — Project Overview`}
                       fill
-                      className="w-full h-full object-cover transition duration-700 hover:scale-110"
+                      className="object-cover"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <span className="inline-block px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest mb-2">
+                        {project.status?.replace(/-/g, " ") || "Premium Project"}
+                      </span>
+                      <p className="text-white font-bold text-lg leading-tight">{project.name}</p>
+                      <p className="text-white/60 text-sm mt-0.5">
+                        {project.sector && `${project.sector}, `}{project.location}
+                      </p>
+                    </div>
                   </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-dark">
-                    <p className="text-white text-lg font-semibold opacity-30 uppercase tracking-widest">No image available</p>
+                    <i className="fa-solid fa-building text-white/10 text-6xl" />
                   </div>
                 )}
+              </div>
+
+              {/* ── Right: Content panel ── */}
+              <div className="lg:col-span-3 bg-dark flex flex-col divide-y divide-white/10">
+
+                {/* About text */}
+                {(project.about?.content || project.description) && (
+                  <div className="p-8 md:p-10">
+                    <h2 className="text-2xl md:text-3xl font-black text-white mb-2 leading-tight font-heading">
+                      {project.about?.title || `About ${project.name}`}
+                    </h2>
+                    <div className="w-10 h-1 bg-primary mb-5" />
+
+                    {/* Clamped text with read more */}
+                    <div className="relative">
+                      <p
+                        className="text-sm leading-relaxed text-lightGrey/75"
+                        style={
+                          !aboutExpanded
+                            ? {
+                                display: "-webkit-box",
+                                WebkitLineClamp: 3,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                              }
+                            : undefined
+                        }
+                      >
+                        {project.about?.content || project.description}
+                      </p>
+                      {!aboutExpanded && (
+                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+                      )}
+                    </div>
+                    <button
+                      onClick={() => setAboutExpanded((v) => !v)}
+                      className="mt-3 flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:opacity-80 transition-opacity"
+                    >
+                      {aboutExpanded ? (
+                        <>Show Less <i className="fa-solid fa-chevron-up text-[9px]" /></>
+                      ) : (
+                        <>Read More <i className="fa-solid fa-chevron-down text-[9px]" /></>
+                      )}
+                    </button>
+                  </div>
+                )}
+
+                {/* Configurations table — single aggregated row */}
+                {(() => {
+                  // Derive one combined value per column from available data
+                  const bhk = project.configurations && project.configurations.length > 0
+                    ? project.configurations.join(", ").replace(/,([^,]*)$/, " &$1") // "2 BHK, 3 BHK, 4 BHK" → "2 BHK, 3 BHK & 4 BHK"
+                    : project.floorPlan && project.floorPlan.length > 0
+                      ? project.floorPlan.map((fp) => fp.title).join(", ").replace(/,([^,]*)$/, " &$1")
+                      : project.type === "plots" ? "Residential Plot"
+                      : project.type === "commercial" ? "Commercial Unit"
+                      : "Residential Unit";
+
+                  const superArea = project.sizeRange || project.size
+                    || (project.floorPlan && project.floorPlan.length > 0
+                      ? `${project.floorPlan[0].size}${project.floorPlan.length > 1 ? ` – ${project.floorPlan[project.floorPlan.length - 1].size}` : ""}`
+                      : null)
+                    || "Contact for Details";
+
+                  const startingPrice = project.price
+                    || (project.floorPlan && project.floorPlan.length > 0 ? project.floorPlan[0].price : null)
+                    || "Contact for Details";
+
+                  const paymentPlan = "Flexible";
+
+                  const isMissing = (val: string) => val === "Contact for Details";
+
+                  const cols = [
+                    { label: "BHK", value: bhk, missing: false },
+                    { label: "Super Area", value: superArea, missing: isMissing(superArea) },
+                    { label: "Starting Price", value: startingPrice, missing: isMissing(startingPrice) },
+                    { label: "Payment Plan", value: paymentPlan, missing: false },
+                  ];
+
+                  return (
+                    <div className="flex flex-col flex-1">
+                      {/* 4-column, 2-row table */}
+                      <div className="grid grid-cols-4 divide-x divide-white/[0.07]">
+                        {/* Row 1 — headers */}
+                        {cols.map((col) => (
+                          <div key={col.label} className="px-5 py-3 bg-primary/10 border-b border-white/10 flex items-center gap-1.5">
+                            <i className={`fa-solid text-primary text-[9px] ${
+                              col.label === "BHK" ? "fa-bed" :
+                              col.label === "Super Area" ? "fa-vector-square" :
+                              col.label === "Starting Price" ? "fa-indian-rupee-sign" :
+                              "fa-file-invoice"
+                            }`} />
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary whitespace-nowrap">
+                              {col.label}
+                            </span>
+                          </div>
+                        ))}
+
+                        {/* Row 2 — values */}
+                        {cols.map((col) => (
+                          <div
+                            key={col.label + "-val"}
+                            className="px-5 py-5 flex items-center cursor-pointer hover:bg-white/[0.03] transition-colors"
+                            onClick={() =>
+                              document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
+                            }
+                          >
+                            <span className={`font-bold text-sm leading-snug ${
+                              col.label === "Starting Price" && !col.missing ? "text-primary" :
+                              col.missing ? "text-white/35 italic font-normal" :
+                              "text-white"
+                            }`}>
+                              {col.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Footer CTA */}
+                      <div className="mt-auto px-6 py-4 bg-white/[0.02] border-t border-white/[0.07] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <p className="text-white/40 text-xs">
+                          * Prices are indicative. Contact us for exact pricing &amp; payment schedules.
+                        </p>
+                        <button
+                          onClick={() =>
+                            document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })
+                          }
+                          className="flex-shrink-0 px-6 py-2.5 bg-primary text-white font-bold uppercase text-xs tracking-widest hover:opacity-90 transition-opacity"
+                        >
+                          Get Full Price Sheet
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Bottom CTAs */}
+                <div className="p-6 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="px-7 py-3 font-bold uppercase text-xs tracking-widest transition-all hover:opacity-90 bg-primary text-white"
+                  >
+                    Get Best Quote
+                  </button>
+                  <button
+                    onClick={() => document.getElementById("project-contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="px-7 py-3 font-bold uppercase text-xs tracking-widest border border-white/20 hover:border-primary hover:text-primary text-white transition-all"
+                  >
+                    Schedule Site Visit
+                  </button>
+                </div>
               </div>
             </div>
           </section>

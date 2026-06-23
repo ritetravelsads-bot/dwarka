@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/ready-to-move-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "Buy Ready to Move Flats in Gurgaon – Trusted, Verified Homes",
+  title: "Ready to Move Flats in Gurgaon | Immediate Possession Homes",
   description:
-    "Tired of delays? Browse fully completed Ready to move Apartments — 2BHK & 3BHK options, No hidden charges & Bank-approved projects. Get Expert guidance now.",
+    "Explore verified ready to move flats in Gurgaon across Dwarka Expressway, New Gurgaon, and premium residential sectors. Immediate possession, established infrastructure, and excellent connectivity to Delhi.",
   keywords:
     "ready to move flats in gurgaon, ready to move apartments, ready to move flats, ready to move flats in dwarka expressway, ready to move flats in gurgaon under 1 crore, dwarka expressway flats, dwarka expressway property, affordable housing gurgaon",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Ready to Move Flats in Gurgaon | Move In Today",
+    title: "Ready to Move Flats in Gurgaon | Immediate Possession Homes",
     description:
-      "Immediate possession flats in Gurgaon. No waiting, no GST, move in today with ready apartments on Dwarka Expressway and premium locations.",
+      "Explore verified ready to move flats in Gurgaon across Dwarka Expressway, New Gurgaon, and premium residential sectors. Immediate possession, established infrastructure, and excellent connectivity to Delhi.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -38,159 +38,214 @@ export const metadata: Metadata = {
 };
 
 const pageContent: SEOPageContent = {
-  heroTagline: "Move In Today",
-  heroTitle: "Zero-Wait Ready to Move Flats in Gurgaon",
+  heroTagline: "Immediate Possession Available",
+  heroTitle: "Ready to Move Flats in Gurgaon",
   heroSubtitle:
-    "Skip the waiting period and move into your new home immediately. Fully finished apartments with zero GST, actual site inspection, and instant possession.",
+    "Looking for ready to move flats in Gurgaon? Explore verified ready to move apartments in Gurgaon across Dwarka Expressway, New Gurgaon, and premium residential sectors.",
   heroImage: "/assets/img/ready-to-move-hero-bg.jpg",
 
   trustIndicators: [
-    { icon: "route", value: "Zero", label: "GST Applicable" },
-    { icon: "plane", value: "Instant", label: "Possession" },
-    { icon: "shield", value: "OC", label: "Received" },
+    { icon: "route", value: "Ready Possession", label: "Immediate Move-In" },
+    { icon: "route", value: "Dwarka Expressway", label: "Prime Connectivity" },
+    { icon: "shield", value: "Under ₹1 Cr", label: "Affordable Options" },
+    { icon: "route", value: "600–2500 Sq.Ft.", label: "Multiple Configurations" },
   ],
 
   quickFacts: [
-    { label: "No GST", value: "5% Saved" },
-    { label: "See & Buy", value: "No Surprises" },
-    { label: "Rent Savings", value: "Immediate" },
-    { label: "Loan Easy", value: "Fast Approval" },
+    { label: "Ready Possession", value: "Immediate Move-In" },
+    { label: "Dwarka Expressway", value: "Prime Connectivity" },
+    { label: "Under ₹1 Cr", value: "Affordable Options" },
+    { label: "Multiple Configs", value: "600–2500 Sq.Ft." },
   ],
 
-  projectsSectionTitle: "Ready Possession Projects at a Glance",
-  projectsSectionSubtitle: "Move into these fully completed projects with OC. What you see is what you get.",
+  projectsSectionTitle: "Ready to Move Flats at a Glance – Gurgaon",
+  projectsSectionSubtitle:
+    "Compare the top ready to move flats in Gurgaon, ready to move flats on Dwarka Expressway.",
 
   projectCards: [
     {
       name: "Godrej Summit",
-      location: "Sector 104, Dwarka Exp",
+      location: "Dwarka Expressway",
       status: "Ready to Move",
       statusColor: "green",
       headerColor: "primary",
-      configuration: "2/3/4 BHK",
-      sizeRange: "1,150 - 3,200 Sq.Ft.",
-      startingPrice: "Rs. 85 Lakh*",
-      connectivity: "OC Received",
+      configuration: "2 & 3 BHK",
+      sizeRange: "1,269 – 2,692 Sq.Ft.",
+      startingPrice: "₹1.80 Cr*",
+      connectivity: "Dwarka Expressway",
       href: "/projects",
     },
     {
-      name: "Emaar DigiHomes",
-      location: "Sector 62, Gurgaon",
+      name: "Experion Heartsong",
+      location: "Sector 108 Gurgaon",
       status: "Ready to Move",
       statusColor: "green",
       headerColor: "dark",
-      configuration: "3/4 BHK Premium",
-      sizeRange: "2,100 - 3,500 Sq.Ft.",
-      startingPrice: "Rs. 3.2 Cr*",
-      connectivity: "OC Received",
+      configuration: "2, 3 & 4 BHK",
+      sizeRange: "1,283 – 2,003 Sq.Ft.",
+      startingPrice: "₹1.60 Cr*",
+      connectivity: "Sector 108 Gurgaon",
+      href: "/projects",
+    },
+    {
+      name: "ATS Triumph",
+      location: "Near Delhi Border",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "amber",
+      configuration: "3 & 4 BHK",
+      sizeRange: "2,290 – 3,150 Sq.Ft.",
+      startingPrice: "₹2.75 Cr*",
+      connectivity: "Near Delhi Border",
+      href: "/projects",
+    },
+    {
+      name: "Affordable Housing Gurgaon",
+      location: "New Gurgaon",
+      status: "Ready to Move",
+      statusColor: "blue",
+      headerColor: "primary",
+      configuration: "1 & 2 BHK",
+      sizeRange: "350 – 1,200 Sq.Ft.",
+      startingPrice: "₹25 Lakhs*",
+      connectivity: "New Gurgaon",
       href: "/projects",
     },
   ],
 
-  layoutTitle: "Why Choose Ready to Move Flats in Gurgaon?",
+  layoutTitle: "The Anatomy of Ready to Move Flats in Gurgaon",
   layoutContent: [
-    "Ready to move flats in Gurgaon offer immediate possession - what you see is what you get. Unlike under-construction properties, you can physically inspect the apartment, check the actual view, natural light, and quality of construction before buying.",
-    "One of the biggest advantages is zero GST on ready-to-move properties with OC (Occupancy Certificate). This saves you 5% of the property value compared to under-construction projects. Additionally, you start earning rental income or saving rent immediately.",
-    "With the Dwarka Expressway now fully operational, several premium projects have received possession. These ready-to-move flats offer world-class amenities, established communities, and proven infrastructure.",
+    "A ready to move flat in Gurgaon offers the ideal combination of comfort, convenience, and immediate possession. Whether you are looking for ready to move apartments, affordable housing Gurgaon, or premium homes on Dwarka Expressway, these properties suit both end users and investors.",
+    "Unlike under-construction projects, ready to move flats allow buyers to inspect the actual property, evaluate amenities, and move in without waiting for completion or possession delays.",
+    "Top developers across Dwarka Expressway, New Gurgaon, and prime sectors offer ready to move flats with modern layouts, gated communities, and lifestyle amenities.",
   ],
   layoutHighlights: [
-    "Zero GST on ready inventory with OC",
-    "What you see is what you get - actual site visit",
-    "Start earning rent or save rent immediately",
-    "Easier home loan approval with ready property",
+    "Ready Possession with Immediate Move-In",
+    "Prime Dwarka Expressway Connectivity",
+    "Master-Planned Gated Communities",
+    "Price Starting from Affordable Budgets",
   ],
   layoutImage: "/assets/img/ready-to-move-building.jpg",
 
   localFeatures: [
     {
-      icon: "school",
-      title: "Operational Schools",
-      description: "Move near established schools with admission cycles. No need to wait for new schools to open.",
-    },
-    {
-      icon: "hospital",
-      title: "Active Healthcare",
-      description: "Hospitals and clinics already serving the community. Emergency services fully functional.",
+      icon: "connectivity",
+      title: "Commercial Hubs",
+      description: "Major commercial and business districts located just 5–15 minutes away.",
     },
     {
       icon: "connectivity",
-      title: "Proven Commute",
-      description: "Test your actual commute time before buying. No surprises with traffic or route changes.",
+      title: "IGI Airport",
+      description: "Quick access to IGI Airport within 15–20 minutes via Dwarka Expressway.",
+    },
+    {
+      icon: "hospital",
+      title: "Premium Hospitals",
+      description: "Top healthcare facilities and premium hospitals within 5–10 minutes.",
     },
   ],
 
-  localAreaTitle: "Ready Possession Locations",
+  localAreaTitle: "Ready to Move Flats in Gurgaon",
   localAreaDescription:
-    "Ready to move flats are available across Gurgaon's premium locations, with the highest concentration on Dwarka Expressway where multiple projects have received OC.",
+    "Ready to move flats on Dwarka Expressway are surrounded by major infrastructure, business districts, schools, hospitals, and metro connectivity, making them ideal for families and investors.",
   nearbyPlaces: [
-    { name: "Sector 113 Projects", distance: "Ready Possession", type: "highway" },
-    { name: "Sector 112 Projects", distance: "Ready Possession", type: "highway" },
-    { name: "Sector 106 Projects", distance: "Ready Possession", type: "highway" },
-    { name: "Golf Course Extension", distance: "Ready Units", type: "highway" },
-    { name: "Sohna Road Projects", distance: "Ready Units", type: "highway" },
-    { name: "New Gurgaon Sectors", distance: "Ready Units", type: "metro" },
+    { name: "Commercial Hubs", distance: "5–15 Min", type: "highway" },
+    { name: "IGI Airport", distance: "15–20 Min", type: "highway" },
+    { name: "Premium Hospitals", distance: "5–10 Min", type: "hospital" },
+    { name: "Shopping Malls", distance: "10–20 Min", type: "mall" },
+    { name: "Affordable Housing", distance: "₹25L+ Onwards", type: "highway" },
+    { name: "Metro Connectivity", distance: "5–15 Min", type: "metro" },
   ],
 
   faqs: [
     {
-      question: "What is the price range for ready to move flats in Gurgaon?",
+      question: "What are the best ready to move flats in Gurgaon?",
       answer:
-        "Ready to move flats in Gurgaon range from 50 Lakh for 2 BHK in affordable sectors to 6+ Crore for luxury 4 BHK apartments. Dwarka Expressway offers ready units starting from 80 Lakh to 4 Crore across various configurations.",
+        "The best ready to move flats in Gurgaon are located across Dwarka Expressway, New Gurgaon, and premium sectors including 102, 104, 106, 107, 108, and 113. Buyers can choose from affordable apartments, family homes, and luxury residences.",
     },
     {
-      question: "Is GST applicable on ready to move flats?",
+      question: "What is the price starting for ready to move flats in Gurgaon?",
       answer:
-        "No, GST is not applicable on ready to move flats that have received Occupancy Certificate (OC). This is a significant saving of 5% compared to under-construction properties where GST applies.",
+        "Affordable Housing Gurgaon starts from ₹25 Lakhs*, 2 BHK Apartments from ₹55 Lakhs*, 3 BHK Flats from ₹1 Crore*, and Luxury Apartments from ₹2 Crore*.",
     },
     {
-      question: "Which areas have ready to move flats in Gurgaon?",
+      question: "What is the size range of ready to move apartments in Gurgaon?",
       answer:
-        "Ready to move flats are available in Dwarka Expressway (Sectors 106, 112, 113), Golf Course Extension Road, Sohna Road, and established sectors like 54, 55, 56, 57. Each area offers different price points and amenities.",
+        "1 BHK ranges from 350–700 Sq.Ft., 2 BHK from 600–1,500 Sq.Ft., 3 BHK from 1,200–3,000 Sq.Ft., and Luxury Homes from 2,000–4,500 Sq.Ft.",
     },
     {
-      question: "What documents should I check for ready to move flats?",
+      question: "Are there ready to move flats in Gurgaon under 1 crore?",
       answer:
-        "Essential documents include Occupancy Certificate (OC), Completion Certificate, RERA registration, approved building plan, title clearance, and no-dues certificate from the builder. We help verify all documentation.",
+        "Yes. Several ready to move apartments in Gurgaon under ₹1 crore are available in affordable housing projects, builder floors, and selected residential communities across New Gurgaon and Dwarka Expressway.",
     },
     {
-      question: "Are ready to move flats on Dwarka Expressway available under 1 Crore?",
+      question: "Why buy ready to move flats on Dwarka Expressway?",
       answer:
-        "Yes, there are ready to move flats on Dwarka Expressway under 1 Crore, primarily 2 BHK configurations in affordable housing projects and some compact 3 BHK units in value segment projects.",
+        "Key benefits include Immediate Possession, Delhi Connectivity, proximity to IGI Airport, Growing Infrastructure, Strong Rental Demand, and High Appreciation Potential.",
+    },
+    {
+      question: "Is Dwarka Expressway property a good investment?",
+      answer:
+        "Yes. Dwarka Expressway property is considered one of Gurgaon's fastest-growing real estate corridors due to metro expansion, commercial developments, airport connectivity, and increasing residential demand.",
+    },
+    {
+      question: "What amenities are available in ready to move flats in Gurgaon?",
+      answer:
+        "Ready to move flats in Gurgaon offer Clubhouse, Swimming Pool, Gymnasium, Landscaped Greens, Kids Play Area, 24x7 Security, and Dedicated Parking.",
+    },
+    {
+      question: "Which sectors are popular for ready to move flats on Dwarka Expressway?",
+      answer:
+        "Sector 102 is ideal for Value Buyers, Sector 104 for Ready Possession, Sector 106 for Luxury Living, Sector 108 for Family Homes, and Sector 113 for Delhi Connectivity.",
+    },
+    {
+      question: "What is the difference between ready to move and under-construction flats?",
+      answer:
+        "Ready to Move flats offer Immediate Possession, No Construction Risk, early Rental Income, and allow Actual Property Inspection. Under-construction flats involve Future Possession, Construction Risk, Future Income, and Sample-Based Purchase.",
+    },
+    {
+      question: "Who should buy ready to move apartments in Gurgaon?",
+      answer:
+        "Ready to move apartments are ideal for end users, investors, NRIs, working professionals, and families looking for immediate possession, established communities, and hassle-free ownership.",
     },
   ],
 
   relatedLinks: [
     {
-      title: "Residential Projects",
+      title: "Ready to Move Apartments",
+      href: "/ready-to-move-flats-in-gurgaon",
+      description: "Immediate possession homes across Gurgaon locations",
+    },
+    {
+      title: "Affordable Housing Gurgaon",
+      href: "/projects",
+      description: "Budget homes with excellent connectivity options",
+    },
+    {
+      title: "Ready to Move Flats",
+      href: "/ready-to-move-flats-in-gurgaon",
+      description: "Move-in-ready apartments with premium amenities",
+    },
+    {
+      title: "Dwarka Expressway Flats",
       href: "/residential-projects-on-dwarka-expressway",
-      description: "All projects on Dwarka Expressway",
+      description: "Modern residential communities near Delhi border",
     },
     {
-      title: "3 BHK Flats",
-      href: "/3-bhk-flats-in-gurgaon",
-      description: "Spacious apartments for families",
+      title: "Flats Under ₹1 Crore",
+      href: "/projects",
+      description: "Value-driven housing for smart property buyers",
     },
     {
-      title: "4 BHK Flats",
-      href: "/4-bhk-flats-in-gurgaon",
-      description: "Luxury penthouses & apartments",
-    },
-    {
-      title: "2 BHK Flats",
-      href: "/2-bhk-flats-in-gurgaon",
-      description: "Compact options for couples",
-    },
-    {
-      title: "Upcoming Projects",
+      title: "Gurgaon Property",
       href: "/upcoming-projects-in-gurugram",
-      description: "New launches with pre-launch prices",
-    },
-    {
-      title: "Commercial Property",
-      href: "/commercial-property-in-gurgaon",
-      description: "Office spaces & retail shops",
+      description: "Explore residential investment opportunities in Gurgaon",
     },
   ],
+
+  ctaTitle: "Explore Ready to Move Flats in Gurgaon",
+  ctaDescription:
+    "Explore the best residential projects on Dwarka Expressway, Gurgaon's premier growth corridor connecting Delhi, IGI Airport, and Cyber City. Compare verified properties, new residential projects in Gurgaon, and investment opportunities across the most sought-after sectors of Dwarka Expressway.",
 };
 
 const pageFaqs = pageContent.faqs.map((faq) => ({
@@ -208,8 +263,8 @@ export default function ReadyToMovePage() {
         ]}
       />
       <WebPageSchema
-        title="Buy Ready to Move Flats in Gurgaon – Trusted, Verified Homes"
-        description="Tired of delays? Browse fully completed Ready to move Apartments — 2BHK & 3BHK options, No hidden charges & Bank-approved projects. Get Expert guidance now"
+        title="Ready to Move Flats in Gurgaon | Immediate Possession Homes"
+        description="Explore verified ready to move flats in Gurgaon across Dwarka Expressway, New Gurgaon, and premium residential sectors. Immediate possession, established infrastructure, and excellent connectivity to Delhi."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/2-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "2 BHK Flat in Dwarka – Modern Homes, Unbeatable Value	",
+  title: "2 BHK Flats in Gurgaon | Buy 2 BHK Near Dwarka Expressway",
   description:
-    "Which 2 BHK in Gurgaon Sector gives you the Best value ? Our Experts break it down by Price, Connectivity & Builder trust. Get a Callback today for Guidance.",
+    "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
   keywords:
     "2 bhk flat for rent in gurgaon, 2bhk flat in gurgaon, 2 bhk in gurgaon, 2bhk flat in dwarka, 2 bhk for sale in gurgaon, buy 2 bhk in gurgaon, 2bhk in dwarka, 2 bhk flats in dwarka price, 2 bhk flats in gurugram, 2 bhk apartment in gurgaon, 2 bhk flats in gurgaon ready to move, 2 bhk affordable flats in gurgaon, 2 bhk in gurgaon ready to move, 2 bhk society flats in dwarka for sale, 2 bhk flats in dwarka expressway for sale, 2 bhk flat for sale in dwarka expressway, 2 bhk for sale in dwarka expressway, 2 bhk flats in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "2 BHK Flats in Gurgaon | Smart Start for Couples",
+    title: "Buy 2 BHK Flats in Gurgaon with Excellent Connectivity",
     description:
-      "Affordable 2 BHK apartments in Gurgaon. Perfect for young professionals and couples looking for their first home with modern amenities.",
+      "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -38,171 +38,241 @@ export const metadata: Metadata = {
 };
 
 const pageContent: SEOPageContent = {
-  heroTagline: "Perfect Start for Young Professionals",
-  heroTitle: "Smart & Affordable 2BHK Flats in Gurgaon",
+  heroTagline: "Perfect for First-Time Homebuyers",
+  heroTitle: "Buy 2 BHK Flats in Gurgaon with Excellent Connectivity",
   heroSubtitle:
-    "Begin your homeownership journey with smart, affordable 2 bedroom apartments. Ideal for couples and young professionals seeking modern living without stretching the budget.",
+    "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
   heroImage: "/assets/img/2bhk-hero-bg.jpg",
 
   trustIndicators: [
-    { icon: "route", value: "0 km", label: "From Expressway" },
+    { icon: "route", value: "2 BHK Homes", label: "Affordable Living" },
     { icon: "plane", value: "15 Mins", label: "To IGI Airport" },
-    { icon: "shield", value: "RERA", label: "Approved Projects" },
+    { icon: "route", value: "Dwarka Expressway", label: "Prime Connectivity" },
+    { icon: "shield", value: "RERA Projects", label: "Verified Developments" },
   ],
 
   quickFacts: [
-    { label: "Affordable Entry", value: "50 Lakh+" },
-    { label: "EMI Savings", value: "vs Rent" },
-    { label: "Rental Yield", value: "4-5%" },
-    { label: "Tax Benefits", value: "Up to 3.5L" },
+    { label: "Ideal Family Size", value: "2–4 Members" },
+    { label: "Prime Connectivity", value: "Dwarka Expressway" },
+    { label: "Immediate Possession", value: "Ready to Move" },
+    { label: "Smart Layouts", value: "600–1500 Sq.Ft." },
   ],
 
-  projectsSectionTitle: "Premium 2BHK Projects at a Glance",
-  projectsSectionSubtitle: "Compare the top affordable and premium 2BHK projects. Find the perfect fit for your budget and lifestyle.",
+  projectsSectionTitle: "Premium 2 BHK Projects at a Glance",
+  projectsSectionSubtitle:
+    "Compare the top 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes on Dwarka Expressway. Find the perfect property based on configuration, price, size range, and connectivity.",
 
   projectCards: [
     {
-      name: "Godrej Summit",
-      location: "Sector 104, Dwarka Exp",
+      name: "Signature Global City",
+      location: "Dwarka Expressway",
       status: "Ready to Move",
       statusColor: "green",
       headerColor: "primary",
-      configuration: "2 BHK + Study",
-      sizeRange: "1,150 - 1,350 Sq.Ft.",
-      startingPrice: "Rs. 85 Lakh*",
-      connectivity: "5 Mins to NH-8",
+      configuration: "2 BHK Apartment",
+      sizeRange: "950–1,250 Sq.Ft.",
+      startingPrice: "₹85 Lakhs*",
+      connectivity: "Dwarka Expressway",
       href: "/projects",
     },
     {
-      name: "Signature Global",
-      location: "Sector 79B, Gurgaon",
+      name: "Smart World Gems",
+      location: "New Gurgaon",
       status: "Under Construction",
       statusColor: "blue",
       headerColor: "dark",
-      configuration: "2 BHK Compact",
-      sizeRange: "900 - 1,100 Sq.Ft.",
-      startingPrice: "Rs. 55 Lakh*",
-      connectivity: "Near SPR Road",
+      configuration: "2 BHK Floors",
+      sizeRange: "1,050–1,420 Sq.Ft.",
+      startingPrice: "₹1.10 Cr*",
+      connectivity: "New Gurgaon",
       href: "/projects",
     },
     {
-      name: "M3M Antalya Hills",
-      location: "Sector 79, Gurgaon",
-      status: "New Launch",
-      statusColor: "red",
+      name: "GLS Avenue 81",
+      location: "Near NH-48",
+      status: "Ready to Move",
+      statusColor: "green",
       headerColor: "amber",
+      configuration: "2 BHK Home",
+      sizeRange: "550–700 Sq.Ft.",
+      startingPrice: "₹45 Lakhs*",
+      connectivity: "Near NH-48",
+      href: "/projects",
+    },
+    {
+      name: "2 BHK Dwarka Expressway",
+      location: "Delhi Border",
+      status: "Ready to Move",
+      statusColor: "green",
+      headerColor: "primary",
       configuration: "2 BHK Premium",
-      sizeRange: "1,000 - 1,250 Sq.Ft.",
-      startingPrice: "Rs. 70 Lakh*",
-      connectivity: "Metro Proximity",
+      sizeRange: "900–1,500 Sq.Ft.",
+      startingPrice: "₹75 Lakhs*",
+      connectivity: "Delhi Border",
       href: "/projects",
     },
   ],
 
-  layoutTitle: "Why 2 BHK Flats in Gurgaon are the Smart Choice",
+  layoutTitle: "Why a 2 BHK Flat in Gurgaon Is Different",
   layoutContent: [
-    "A 2 BHK apartment in Gurgaon is the perfect entry point into real estate ownership. With prices starting from 50 Lakh, these homes offer excellent value with EMIs comparable to or lower than monthly rent in the same area.",
-    "2 BHK flats on Dwarka Expressway provide the same world-class amenities as larger configurations - swimming pools, clubhouses, gyms, and landscaped gardens - at a fraction of the cost. The compact size means lower maintenance charges too.",
-    "For young professionals and couples, a 2 BHK offers sufficient space for comfortable living while building equity. Many buyers later upgrade to 3 BHK, retaining their original apartment as a rental investment.",
+    "A 2 BHK flat for sale in Gurgaon offers a practical combination of affordability, convenience, and long-term value. Buyers looking to buy a 2 BHK in Gurgaon often prefer locations near Dwarka Expressway because of modern infrastructure, metro connectivity, and growing employment hubs.",
+    "Whether you are searching for a 2 BHK flat in Gurgaon ready to move, a 2 BHK affordable flat, or a 2 BHK flat in Dwarka Expressway, these homes provide excellent opportunities for both end-users and investors.",
   ],
   layoutHighlights: [
-    "Affordable entry point starting from 50 Lakh",
-    "EMIs lower than equivalent rent in the area",
-    "Full access to premium project amenities",
-    "Excellent rental potential for investment",
+    "Lower Maintenance Costs",
+    "Smart Space Planning",
+    "Strong Rental Demand",
+    "Prime Connectivity & Growth Potential",
   ],
   layoutImage: "/assets/img/2bhk-building.jpg",
 
   localFeatures: [
     {
       icon: "school",
-      title: "Quality Education",
-      description: "Access to good schools and coaching centers within 15 minutes. Perfect for young couples planning a family.",
+      title: "Elite Education",
+      description:
+        "Leading schools and educational institutions located within minutes of major residential communities.",
     },
     {
       icon: "hospital",
-      title: "Healthcare Access",
-      description: "Multiple hospitals and clinics nearby. Emergency services available round the clock.",
+      title: "Premium Healthcare",
+      description:
+        "Quick access to hospitals, clinics, and healthcare centres for everyday peace of mind.",
     },
     {
       icon: "connectivity",
-      title: "Work Connectivity",
-      description: "Quick commute to Cyber City and major IT hubs. Metro connectivity for hassle-free travel.",
+      title: "Executive Connectivity",
+      description:
+        "Fast connectivity to Dwarka Expressway, Delhi, Airport, Metro, and key employment hubs.",
     },
   ],
 
-  localAreaTitle: "Value-for-Money Locations",
+  localAreaTitle: "Hidden Gems Near 2 BHK Flats in Gurgaon",
   localAreaDescription:
-    "2 BHK apartments are available across Gurgaon's emerging corridors offering excellent connectivity and appreciation potential at affordable price points.",
+    "Live close to top schools, hospitals, shopping centres, and transport networks. Many 2 BHK flats in Dwarka Expressway provide easy access to daily essentials without long travel times.",
   nearbyPlaces: [
-    { name: "Dwarka Expressway Sectors", distance: "50L-1Cr range", type: "highway" },
-    { name: "New Gurgaon (82-95)", distance: "45L-80L range", type: "highway" },
-    { name: "Sohna Road Corridor", distance: "50L-90L range", type: "highway" },
-    { name: "Affordable Housing Zones", distance: "25L-50L range", type: "metro" },
-    { name: "Metro Connected Areas", distance: "60L-1.2Cr range", type: "metro" },
-    { name: "SPR Road Projects", distance: "55L-95L range", type: "highway" },
+    { name: "Euro International School", distance: "5–10 Min", type: "school" },
+    { name: "GD Goenka School", distance: "8–10 Min", type: "school" },
+    { name: "Manipal Hospital", distance: "8–10 Min", type: "hospital" },
+    { name: "Medanta Medicity", distance: "15–20 Min", type: "hospital" },
+    { name: "Ambience Mall", distance: "15–20 Min", type: "mall" },
+    { name: "Dwarka Metro Access", distance: "10–15 Min", type: "metro" },
   ],
 
   faqs: [
     {
-      question: "What is the price of 2 BHK flats in Gurgaon?",
+      question: "What are the best 2 BHK flats in Gurgaon?",
       answer:
-        "2 BHK flats in Gurgaon range from 50 Lakh to 1.5 Crore depending on location and amenities. Affordable housing schemes start from 25-30 Lakh, while premium 2 BHK on Dwarka Expressway ranges from 50-90 Lakh.",
+        "The best 2 BHK flats in Gurgaon are located across Dwarka Expressway, New Gurgaon, Sector 102, Sector 104, Sector 106, and emerging residential corridors offering excellent connectivity and modern amenities.",
     },
     {
-      question: "What is the EMI for 2 BHK flat in Gurgaon?",
+      question: "What is the average price of a 2 BHK flat in Gurgaon?",
       answer:
-        "For a 50 Lakh 2 BHK flat with 80% loan at 8.5% interest for 20 years, EMI would be approximately 35,000 per month. For a 75 Lakh flat, EMI would be around 52,000 per month.",
+        "Affordable Housing starts from ₹45 Lakhs*, Premium 2 BHK from ₹75 Lakhs*, Ready-to-Move 2 BHK from ₹85 Lakhs*, and Luxury 2 BHK from ₹1.20 Cr*.",
     },
     {
-      question: "Which is the best area for 2 BHK in Gurgaon?",
+      question: "What is the size range of a 2 BHK apartment in Gurgaon?",
       answer:
-        "Best areas for 2 BHK flats include Dwarka Expressway (value + appreciation), New Gurgaon sectors (affordable), and Sohna Road (emerging). Each offers different advantages based on budget and preferences.",
+        "Compact 2 BHK ranges from 550–850 Sq.Ft., Standard 2 BHK from 850–1,200 Sq.Ft., and Premium 2 BHK from 1,200–1,500 Sq.Ft.",
     },
     {
-      question: "Are there affordable 2 BHK flats in Gurgaon under 50 Lakh?",
+      question: "Are there ready-to-move 2 BHK flats in Gurgaon?",
       answer:
-        "Yes, affordable housing projects under government schemes offer 2 BHK flats starting from 25-30 Lakh. These are available in sectors like 95, 99, and along the southern periphery of Gurgaon.",
+        "Yes. Buyers can find ready-to-move 2 BHK flats in Gurgaon across Dwarka Expressway, New Gurgaon, and established residential sectors with immediate possession options.",
     },
     {
-      question: "Is 2 BHK a good investment in Gurgaon?",
+      question: "Why buy a 2 BHK flat on Dwarka Expressway?",
       answer:
-        "Yes, 2 BHK flats are excellent investments due to lower entry cost, strong rental demand from working professionals, and good appreciation. They offer the best rental yield percentage among residential configurations.",
+        "A 2 BHK flat on Dwarka Expressway offers modern infrastructure, metro connectivity, proximity to Delhi, and strong future appreciation potential.",
+    },
+    {
+      question: "Are 2 BHK affordable flats in Gurgaon a good investment?",
+      answer:
+        "Yes. Affordable 2 BHK flats attract strong rental demand and are popular among first-time homebuyers, professionals, and investors.",
+    },
+    {
+      question: "What amenities are available in modern 2 BHK apartments?",
+      answer:
+        "Modern 2 BHK apartments come with Clubhouse, Swimming Pool, Gymnasium, Landscaped Gardens, Kids Play Area, 24x7 Security, and Parking.",
+    },
+    {
+      question: "Which sectors are best for buying a 2 BHK in Gurgaon?",
+      answer:
+        "Sector 102 is ideal for value buyers, Sector 104 for ready possession, Sector 106 for premium living, Sector 108 for family homes, and Sector 113 for Delhi connectivity.",
+    },
+    {
+      question: "What is the difference between a 2 BHK apartment and a 2 BHK builder floor?",
+      answer:
+        "A 2 BHK apartment offers gated community living and shared amenities, while a builder floor provides greater privacy and lower density living.",
+    },
+    {
+      question: "Are there 2 BHK flats available for rent in Gurgaon?",
+      answer:
+        "Yes. Gurgaon offers a wide range of 2 BHK rental apartments near Dwarka Expressway, Cyber City, Udyog Vihar, and major commercial hubs.",
+    },
+    {
+      question: "Are there 2 BHK flats in Dwarka Expressway for sale?",
+      answer:
+        "Yes. Multiple developers offer 2 BHK flats in Dwarka Expressway for sale with modern amenities, excellent connectivity, and attractive payment plans.",
+    },
+    {
+      question: "What makes a 2 BHK layout ideal for first-time buyers?",
+      answer:
+        "A 2 BHK layout provides an ideal balance of affordability, functionality, maintenance costs, and comfortable living space for small families.",
+    },
+    {
+      question: "Who should buy a 2 BHK flat in Gurgaon?",
+      answer:
+        "2 BHK flats are ideal for first-time homebuyers, working professionals, young families, investors, and NRIs looking for affordable property options.",
+    },
+    {
+      question: "How close are schools and hospitals to 2 BHK flats on Dwarka Expressway?",
+      answer:
+        "Many residential projects are located near Euro International School, GD Goenka School, Manipal Hospital, Medanta Medicity, and other important social infrastructure facilities.",
+    },
+    {
+      question: "How do I choose the best 2 BHK flat in Gurgaon?",
+      answer:
+        "Buyers should compare location, builder reputation, configuration, connectivity, amenities, possession status, RERA compliance, and future appreciation potential before making a purchase decision.",
     },
   ],
 
   relatedLinks: [
     {
-      title: "3 BHK Flats in Gurgaon",
+      title: "Premium 3 BHK Flats",
       href: "/3-bhk-flats-in-gurgaon",
-      description: "Upgrade to more space for growing families",
+      description: "Looking for more space? Explore premium 3 BHK homes",
     },
     {
-      title: "Ready to Move Flats",
-      href: "/ready-to-move-flats-in-gurgaon",
-      description: "Immediate possession apartments",
-    },
-    {
-      title: "Residential Projects",
-      href: "/residential-projects-on-dwarka-expressway",
-      description: "All projects on Dwarka Expressway",
-    },
-    {
-      title: "Upcoming Projects",
-      href: "/upcoming-projects-in-gurugram",
-      description: "New launches with pre-launch prices",
-    },
-    {
-      title: "4 BHK Flats",
+      title: "Luxury 4 BHK Homes",
       href: "/4-bhk-flats-in-gurgaon",
-      description: "Luxury living options",
+      description: "Upgrade to larger family residences",
     },
     {
-      title: "Commercial Property",
-      href: "/commercial-property-in-gurgaon",
-      description: "Investment opportunities",
+      title: "Ready to Move 2 BHK",
+      href: "/ready-to-move-flats-in-gurgaon",
+      description: "Immediate possession apartments available",
+    },
+    {
+      title: "Dwarka Expressway Flats",
+      href: "/residential-projects-on-dwarka-expressway",
+      description: "Modern communities with prime connectivity",
+    },
+    {
+      title: "2 BHK for Rent Gurgaon",
+      href: "/projects",
+      description: "Popular rental homes near business hubs",
+    },
+    {
+      title: "Property Investment Gurgaon",
+      href: "/upcoming-projects-in-gurugram",
+      description: "Explore residential growth opportunities",
     },
   ],
+
+  ctaTitle: "Explore Premium 2 BHK Flats in Gurgaon",
+  ctaDescription:
+    "Explore the best 2 BHK flats in Gurgaon across Dwarka Expressway, New Gurgaon, and emerging residential sectors. Compare verified properties, affordable 2 BHK apartments, ready-to-move homes, and investment-friendly projects in some of Gurgaon's most sought-after locations.",
 };
 
 const pageFaqs = pageContent.faqs.map((faq) => ({
@@ -220,8 +290,8 @@ export default function TwoBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="2 BHK Flat in Dwarka – Modern Homes, Unbeatable Value"
-        description="Which 2 BHK in Gurgaon Sector gives you the Best value ? Our Experts break it down by Price, Connectivity & Builder trust. Get a Callback today for Guidance."
+        title="2 BHK Flats in Gurgaon | Buy 2 BHK Near Dwarka Expressway"
+        description="Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />
