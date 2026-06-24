@@ -180,7 +180,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
           Dwarka Expressway<br className="hidden md:block"/><span className="text-orange-500"> Overview</span>
         </h1>
         <p className="hidden md:block text-xs lg:text-base text-gray-300 font-medium mb-6 lg:mb-8 max-w-[95%]">
-          2, 3 &amp; 4 BHK apartments across Sectors 37D, 84–114 — ready to move &amp; new launches with 15–18% appreciation potential. Pick your budget, purpose, and location in 3 clicks.
+          2, 3 &amp; 4 BHK apartments across Sectors 37D, 84–114, ready to move &amp; new launches with 15–18% appreciation potential. Pick your budget, purpose, and location in 3 clicks.
         </p>
         <button className="hidden md:block bg-white hover:bg-orange-500 text-black hover:text-white font-black uppercase tracking-[0.2em] py-3 lg:py-3.5 px-6 lg:px-8 rounded-xl transition-all shadow-[4px_4px_0px_#f97316] hover:shadow-[4px_4px_0px_#fff] active:translate-y-1 active:translate-x-1 active:shadow-none text-[10px] lg:text-xs pointer-events-auto">
           Explore Now
