@@ -177,7 +177,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
           Exclusive Inventory
         </span>
         <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.05] mb-2 lg:mb-4">
-          Flats on Dwarka Expressway <br className="hidden md:block"/><span className="text-orange-500">2026 Best Price</span>
+          Dwarka Expressway<br className="hidden md:block"/><span className="text-orange-500"> Overview</span>
         </h1>
         <p className="hidden md:block text-xs lg:text-base text-gray-300 font-medium mb-6 lg:mb-8 max-w-[95%]">
           2, 3 &amp; 4 BHK apartments across Sectors 37D, 84–114 — ready to move &amp; new launches with 15–18% appreciation potential. Pick your budget, purpose, and location in 3 clicks.
