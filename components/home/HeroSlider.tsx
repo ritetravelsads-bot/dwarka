@@ -57,12 +57,12 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
 
       const result = await response.json();
       if (result.success) {
-        console.log('[v0] Slider data submitted successfully:', { phone, selections });
-        setSubmitMessage('Success! Our team will contact you shortly.');
+        setSubmitMessage('Success! Redirecting to your matches...');
+        const key = `${selections.budget?.id}_${selections.motive?.id}_${selections.location?.id}`;
+        const url = redirectMap[key] || '/projects';
         setTimeout(() => {
-          setSubmitMessage(null);
-          resetGame();
-        }, 3000);
+          window.location.href = url;
+        }, 1500);
       } else {
         setSubmitMessage(result.error || 'Failed to submit. Please try again.');
       }
@@ -74,27 +74,57 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
     }
   };
 
+  // Redirect map: budget key × motive key × location key → URL
+  const redirectMap: Record<string, string> = {
+    "b1_m1_l1": "/ready-to-move-flats-in-gurgaon",
+    "b1_m1_l2": "/ready-to-move-flats-in-gurgaon",
+    "b1_m1_l3": "/ready-to-move-flats-in-gurgaon",
+    "b1_m1_l4": "/ready-to-move-flats-in-gurgaon",
+    "b1_m2_l1": "/2-bhk-flats-in-gurgaon",
+    "b1_m2_l2": "/2-bhk-flats-in-gurgaon",
+    "b1_m2_l3": "/2-bhk-flats-in-gurgaon",
+    "b1_m2_l4": "/2-bhk-flats-in-gurgaon",
+    "b2_m1_l1": "/3-bhk-flats-in-gurgaon",
+    "b2_m1_l2": "/3-bhk-flats-in-gurgaon",
+    "b2_m1_l3": "/3-bhk-flats-in-gurgaon",
+    "b2_m1_l4": "/3-bhk-flats-in-gurgaon",
+    "b2_m2_l1": "/residential-projects-on-dwarka-expressway",
+    "b2_m2_l2": "/residential-projects-on-dwarka-expressway",
+    "b2_m2_l3": "/residential-projects-on-dwarka-expressway",
+    "b2_m2_l4": "/residential-projects-on-dwarka-expressway",
+    "b3_m1_l1": "/4-bhk-flats-in-gurgaon",
+    "b3_m1_l2": "/4-bhk-flats-in-gurgaon",
+    "b3_m1_l3": "/4-bhk-flats-in-gurgaon",
+    "b3_m1_l4": "/4-bhk-flats-in-gurgaon",
+    "b3_m2_l1": "/new-launch",
+    "b3_m2_l2": "/new-launch",
+    "b3_m2_l3": "/new-launch",
+    "b3_m2_l4": "/new-launch",
+  };
+
   const cardDecks = {
     1: {
       key: "budget",
       cards: [
-        { id: "b1", title: "₹1.5-3 Cr", subtitle: "Premium", stats: { Class: "A", Yield: "7/10", Risk: "Low" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=400" },
-        { id: "b2", title: "₹3-5 Cr", subtitle: "Luxury", stats: { Class: "S", Yield: "8/10", Risk: "Med" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" },
-        { id: "b3", title: "₹5 Cr +", subtitle: "Ultra", stats: { Class: "SS", Yield: "9/10", Risk: "High" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=400" }
+        { id: "b1", title: "₹1.5–3 Cr", subtitle: "Premium", stats: { BHK: "2 & 3 BHK", Possession: "Ready" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=400" },
+        { id: "b2", title: "₹3–5 Cr", subtitle: "Luxury", stats: { BHK: "3 & 4 BHK", Possession: "2026–27" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" },
+        { id: "b3", title: "₹5 Cr+", subtitle: "Ultra Luxury", stats: { BHK: "4 & 5 BHK", Possession: "2027–28" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=400" }
       ]
     },
     2: {
       key: "motive",
       cards: [
-        { id: "m1", title: "Self Use", subtitle: "Move-In", stats: { Utility: "Max", ROI: "Steady", Time: "Now" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" },
-        { id: "m2", title: "Investment", subtitle: "High ROI", stats: { Utility: "Low", ROI: "Max", Time: "3 Yrs" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" }
+        { id: "m1", title: "Ready to Move In", subtitle: "End-use / Immediate", stats: { BHK: "2–4 BHK", Possession: "Ready Now" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400" },
+        { id: "m2", title: "Investment", subtitle: "High ROI", stats: { BHK: "2–5 BHK", Possession: "Under Const." }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" }
       ]
     },
     3: {
       key: "location",
       cards: [
-        { id: "l1", title: "Delhi Border", subtitle: "Sec 102-113", stats: { Access: "10/10", Growth: "Fast", Vibe: "Urban" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=400" },
-        { id: "l2", title: "Central", subtitle: "Sec 81-99", stats: { Access: "8/10", Growth: "Steady", Vibe: "Subtle" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=400" }
+        { id: "l1", title: "Delhi Border", subtitle: "Sec 110–114", stats: { BHK: "3 & 4 BHK", Possession: "2026–28" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=400" },
+        { id: "l2", title: "Mid Corridor", subtitle: "Sec 102–109", stats: { BHK: "2–4 BHK", Possession: "Ready" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=400" },
+        { id: "l3", title: "South Zone", subtitle: "Sec 84–88 & 37D", stats: { BHK: "2 & 3 BHK", Possession: "Ready" }, border: "border-orange-500", accent: "text-orange-500", image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&q=80&w=400" },
+        { id: "l4", title: "Kherki Daula", subtitle: "Sec 81–99 & 114", stats: { BHK: "2–3 BHK", Possession: "2026" }, border: "border-black", accent: "text-black", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=400" }
       ]
     }
   };
@@ -147,10 +177,10 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
           Exclusive Inventory
         </span>
         <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.05] mb-2 lg:mb-4">
-          Dwarka Expressway <br className="hidden md:block"/><span className="text-orange-500">Overview</span>
+          Flats on Dwarka Expressway <br className="hidden md:block"/><span className="text-orange-500">2026 Best Price</span>
         </h1>
         <p className="hidden md:block text-xs lg:text-base text-gray-300 font-medium mb-6 lg:mb-8 max-w-[95%]">
-          Dwarka Expressway cuts Delhi-Gurugram travel to 20 mins to airport and premium Projects in Dwarka Expressway with luxury homes and high ROI
+          2, 3 &amp; 4 BHK apartments across Sectors 37D, 84–114 — ready to move &amp; new launches with 15–18% appreciation potential. Pick your budget, purpose, and location in 3 clicks.
         </p>
         <button className="hidden md:block bg-white hover:bg-orange-500 text-black hover:text-white font-black uppercase tracking-[0.2em] py-3 lg:py-3.5 px-6 lg:px-8 rounded-xl transition-all shadow-[4px_4px_0px_#f97316] hover:shadow-[4px_4px_0px_#fff] active:translate-y-1 active:translate-x-1 active:shadow-none text-[10px] lg:text-xs pointer-events-auto">
           Explore Now
@@ -168,9 +198,9 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
       
       <div className="absolute top-[200px] left-1/2 -translate-x-1/2 md:top-[40px] lg:top-[80px] md:right-6 lg:right-16 md:left-auto md:translate-x-0 z-30 flex gap-2 lg:gap-4 perspective-[1000px] w-full max-w-[340px] md:w-auto justify-center">
         {[
-          { key: 'budget', label: "CAPITAL" },
-          { key: 'motive', label: "TACTIC" },
-          { key: 'location', label: "ZONE" }
+        { key: 'budget', label: "BUDGET" },
+          { key: 'motive', label: "PURPOSE" },
+          { key: 'location', label: "LOCATION" }
         ].map((slot, index) => {
           const card = selections[slot.key as keyof typeof selections];
           const isCurrentSlot = step === index + 1 && introPhase === 'ready';

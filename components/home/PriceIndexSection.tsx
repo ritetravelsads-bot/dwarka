@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown, Minus, Flame, Shield, Gem } from "lucide-reac
 
 const priceData = [
   {
-    sector: "Sector 112-113",
+    sector: "Sector 112–114",
     developers: "M3M / Smartworld",
     avgPrice: "₹14,500",
     monthlyChange: "+3.2%",
@@ -13,7 +13,7 @@ const priceData = [
     statusType: "hot" as const,
   },
   {
-    sector: "Sector 106-109",
+    sector: "Sector 106–109",
     developers: "Sobha / Elan",
     avgPrice: "₹11,500",
     monthlyChange: "+2.8%",
@@ -22,8 +22,8 @@ const priceData = [
     statusType: "value" as const,
   },
   {
-    sector: "Sector 102-103",
-    developers: "Godrej / Whiteland",
+    sector: "Sector 102–105",
+    developers: "Godrej / Hero / Puri",
     avgPrice: "₹15,200",
     monthlyChange: "+1.5%",
     changeType: "up" as const,
@@ -31,21 +31,39 @@ const priceData = [
     statusType: "stable" as const,
   },
   {
-    sector: "Sector 104",
-    developers: "Hero / Puri",
-    avgPrice: "₹16,800",
-    monthlyChange: "+0.8%",
+    sector: "Sector 110–111",
+    developers: "Puri / M3M Crown",
+    avgPrice: "₹13,800",
+    monthlyChange: "+2.1%",
     changeType: "up" as const,
     status: "Premium",
     statusType: "premium" as const,
   },
   {
-    sector: "Sector 110-111",
-    developers: "Puri / M3M",
-    avgPrice: "₹10,500",
-    monthlyChange: "+2.1%",
+    sector: "Sector 84–88",
+    developers: "Signature Global / GLS",
+    avgPrice: "₹8,200",
+    monthlyChange: "+4.1%",
+    changeType: "up" as const,
+    status: "High Demand",
+    statusType: "hot" as const,
+  },
+  {
+    sector: "Sector 37D",
+    developers: "Signature Global / Sobha",
+    avgPrice: "₹9,800",
+    monthlyChange: "+3.6%",
     changeType: "up" as const,
     status: "Emerging",
+    statusType: "value" as const,
+  },
+  {
+    sector: "Kherki Daula (Sec 81–99)",
+    developers: "DLF / Central Park",
+    avgPrice: "₹7,500",
+    monthlyChange: "+2.4%",
+    changeType: "up" as const,
+    status: "Best Value",
     statusType: "value" as const,
   },
 ];
@@ -94,7 +112,7 @@ export default function PriceIndexSection() {
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-dark leading-tight">
               Dwarka Expressway Live Price Index
-              <span className="ml-2 text-sm font-normal text-slate-400 align-middle">— Trending 5</span>
+              <span className="ml-2 text-sm font-normal text-slate-400 align-middle">— All Clusters</span>
             </h2>
           </div>
           <span className="text-xs text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-borderGrey self-start sm:self-end whitespace-nowrap">
@@ -201,9 +219,9 @@ export default function PriceIndexSection() {
           <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
           <p className="text-sm text-slate-700 leading-relaxed">
             <strong className="text-dark">Expert Verdict:</strong>{" "}
-            Sectors 112–113 are seeing a spike due to proximity to the Delhi border and upcoming metro connectivity.
-            Sectors 106–109 offer the best value for 2026 with 15–20% appreciation potential. Circle rates rose up to
-            67% in April 2026, signalling strong government confidence.
+            Sectors 112–114 and 110–111 lead on luxury demand due to Delhi border proximity and metro connectivity.
+            Sector 37D and Sectors 84–88 are the fastest-rising clusters in 2026 with 3.6–4.1% monthly gains, driven by affordable 2 &amp; 3 BHK launches.
+            Kherki Daula (Sec 81–99) offers the best entry price point. Circle rates rose up to 67% in April 2026, signalling strong government confidence across all zones.
           </p>
         </div>
 
