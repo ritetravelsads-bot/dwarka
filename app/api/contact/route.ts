@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { getDatabase } from '@/lib/mongodb';
+import type { Lead } from '@/lib/types';
 
 // Configure Gmail SMTP transporter (same as PHP PHPMailer config)
 function createTransporter() {
@@ -8,8 +10,8 @@ function createTransporter() {
     port: 587,
     secure: false, // Use TLS
     auth: {
-      user: process.env.SMTP_EMAIL || process.env.GMAIL_USER,
-      pass: process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD,
+      user: process.env.SMTP_USER || process.env.SMTP_EMAIL || process.env.GMAIL_USER,
+      pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false, // For development
@@ -47,8 +49,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // STEP 1 — Persist the lead to MongoDB (primary, reliable path the admin panel reads).
+    // This must succeed for the submission to be considered successful.
+    try {
+      const db = await getDatabase();
+      const lead: Omit<Lead, '_id'> = {
+        name: String(name).trim(),
+        email: email ? String(email).trim() : '',
+        phone: String(phone).trim(),
+        message: message ? String(message).trim() : '',
+        projectId: null,
+        projectName: project || null,
+        source: source || 'contact-form',
+        createdAt: new Date(),
+        status: 'new',
+      };
+      await db.collection('leads').insertOne(lead);
+    } catch (dbError) {
+      console.error('[v0] Failed to save lead to database:', dbError);
+      return NextResponse.json(
+        { success: false, error: 'Unable to submit your request. Please try again or call us directly.' },
+        { status: 500 }
+      );
+    }
+
     // Get recipient emails from environment
-    const recipientEmail = process.env.CONTACT_EMAIL || process.env.SMTP_EMAIL || 'contact@dwarkaexpresswayncr.com';
+    const recipientEmail = process.env.CONTACT_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL || 'contact@dwarkaexpresswayncr.com';
     const ccEmails = process.env.CC_EMAILS ? process.env.CC_EMAILS.split(',') : [];
 
     // Build email content (matching PHP format)
@@ -150,43 +176,35 @@ ${message ? `Message:\n${message}` : ''}
     `.trim();
 
     // Check if SMTP is configured
-    const smtpEmail = process.env.SMTP_EMAIL || process.env.GMAIL_USER;
-    const smtpPassword = process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
+    const smtpEmail = process.env.SMTP_USER || process.env.SMTP_EMAIL || process.env.GMAIL_USER;
+    const smtpPassword = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
 
+    // STEP 2 — Best-effort email notification. The lead is already saved, so an
+    // email failure (or missing SMTP config) must NOT fail the request.
     if (!smtpEmail || !smtpPassword) {
-      // Log the lead even if email can't be sent
-      console.log('SMTP not configured. Lead received:', {
-        name,
-        email,
-        phone,
-        project: projectName,
-        source: sourcePage,
-        message,
-        timestamp: currentDate,
-      });
-      
-      // Still return success - lead was received
+      console.log('[v0] SMTP not configured — lead saved to DB, email notification skipped.');
       return NextResponse.json({
         success: true,
         message: 'Thank you! We will contact you soon.',
-        warning: 'Email notification pending configuration',
       });
     }
 
-    // Create transporter and send email
-    const transporter = createTransporter();
-
-    const mailOptions = {
-      from: `"Dwarka Expressway NCR" <${smtpEmail}>`,
-      to: recipientEmail,
-      cc: ccEmails.length > 0 ? ccEmails : undefined,
-      replyTo: email || undefined,
-      subject: `New Lead: ${name} - ${projectName}`,
-      text: plainTextContent,
-      html: htmlContent,
-    };
-
-    await transporter.sendMail(mailOptions);
+    try {
+      const transporter = createTransporter();
+      const mailOptions = {
+        from: `"Dwarka Expressway NCR" <${smtpEmail}>`,
+        to: recipientEmail,
+        cc: ccEmails.length > 0 ? ccEmails : undefined,
+        replyTo: email || undefined,
+        subject: `New Lead: ${name} - ${projectName}`,
+        text: plainTextContent,
+        html: htmlContent,
+      };
+      await transporter.sendMail(mailOptions);
+    } catch (emailError) {
+      // Lead is already saved — log the email failure but still report success.
+      console.error('[v0] Lead saved but email notification failed:', emailError);
+    }
 
     return NextResponse.json({
       success: true,
@@ -194,8 +212,8 @@ ${message ? `Message:\n${message}` : ''}
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
-    
+    console.error('[v0] Contact form error:', error);
+
     // Return a user-friendly error
     return NextResponse.json(
       { 
