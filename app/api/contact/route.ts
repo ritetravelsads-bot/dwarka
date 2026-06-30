@@ -17,11 +17,11 @@ function createTransporter() {
   const { user, pass } = getSmtpCredentials();
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Use TLS
+    port: 465,
+    secure: true, // Use SSL (port 465) — more reliable than STARTTLS on 587
     auth: { user, pass },
     tls: {
-      rejectUnauthorized: false, // For development
+      rejectUnauthorized: false,
     },
   });
 }
