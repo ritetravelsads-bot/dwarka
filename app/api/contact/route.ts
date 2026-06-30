@@ -3,16 +3,23 @@ import nodemailer from 'nodemailer';
 import { getDatabase } from '@/lib/mongodb';
 import type { Lead } from '@/lib/types';
 
+// Resolve SMTP credentials from any of the supported env var names.
+function getSmtpCredentials() {
+  const user = (process.env.SMTP_USER || process.env.SMTP_EMAIL || process.env.GMAIL_USER || '').trim();
+  // Gmail App Passwords are often copied with spaces (e.g. "abcd efgh ijkl mnop").
+  // Strip all whitespace so the 16-char password is sent correctly.
+  const pass = (process.env.SMTP_PASS || process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
+  return { user, pass };
+}
+
 // Configure Gmail SMTP transporter (same as PHP PHPMailer config)
 function createTransporter() {
+  const { user, pass } = getSmtpCredentials();
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false, // Use TLS
-    auth: {
-      user: process.env.SMTP_USER || process.env.SMTP_EMAIL || process.env.GMAIL_USER,
-      pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD,
-    },
+    auth: { user, pass },
     tls: {
       rejectUnauthorized: false, // For development
     },
@@ -73,9 +80,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get recipient emails from environment
-    const recipientEmail = process.env.CONTACT_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL || 'contact@dwarkaexpresswayncr.com';
-    const ccEmails = process.env.CC_EMAILS ? process.env.CC_EMAILS.split(',') : [];
+    // Get recipient emails from environment — all leads land on info@dwarkaexpresswayncr.com
+    const recipientEmail = process.env.CONTACT_EMAIL || 'info@dwarkaexpresswayncr.com';
+    const ccEmails = process.env.CC_EMAILS ? process.env.CC_EMAILS.split(',').map((e) => e.trim()).filter(Boolean) : [];
 
     // Build email content (matching PHP format)
     const currentDate = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
@@ -176,8 +183,7 @@ ${message ? `Message:\n${message}` : ''}
     `.trim();
 
     // Check if SMTP is configured
-    const smtpEmail = process.env.SMTP_USER || process.env.SMTP_EMAIL || process.env.GMAIL_USER;
-    const smtpPassword = process.env.SMTP_PASS || process.env.SMTP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
+    const { user: smtpEmail, pass: smtpPassword } = getSmtpCredentials();
 
     // STEP 2 — Best-effort email notification. The lead is already saved, so an
     // email failure (or missing SMTP config) must NOT fail the request.
