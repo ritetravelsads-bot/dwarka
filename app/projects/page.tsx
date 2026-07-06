@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     canonical: `${BASE_URL}/projects`,
   },
   openGraph: {
-    title: "All Projects on Dwarka Expressway | Residential & Commercial | 50+ Properties",
+    title: "Projects on Dwarka Expressway 2026 – Top Gurgaon Investments",
     description:
-      "Browse 50+ verified residential and commercial projects on Dwarka Expressway. Compare prices, floor plans, amenities, and book site visits. RERA registered properties from top developers.",
+      " High-ROI Residential and Commercial Properties on Dwarka Expressway. View Verified RERA registered properties from Top Developers.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",

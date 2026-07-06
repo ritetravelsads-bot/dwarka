@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/upcoming-projects-in-gurugram`;
 
 export const metadata: Metadata = {
-  title: "New Upcoming Projects in Gurgaon 2026: RERA-Certified",
+  title: "Upcoming Projects on dwarka expressway 2026: RERA-Certified",
   description:
-    "Find your perfect Flat on Dwarka Expressway —  Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a free Callback today.",
+    "New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today.",
   keywords:
     "upcoming projects in gurugram, new launch in gurgaon, new upcoming projects in gurgaon, upcoming projects on dwarka expressway, pre launch residential projects in gurgaon, properties on dwarka expressway, new commercial projects in gurgaon, affordable housing dwarka expressway, Best Projects on Dwarka Expressway, flat in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Upcoming Projects in Gurugram | New Launches 2026",
+    title: "Upcoming Projects on dwarka expressway 2026: RERA-Certified",
     description:
-      "Early bird offers on upcoming projects in Gurugram. Pre-launch prices, payment flexibility & maximum appreciation potential.",
+      "New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -41,7 +41,7 @@ const pageContent: SEOPageContent = {
   heroTagline: "Step into a New Launch in Gurgaon",
   heroTitle: "Upcoming Projects in Gurugram",
   heroSubtitle:
-    "Affordable housing on Dwarka Expressway. Discover the best upcoming projects in Gurugram offering modern design, strategic locations, and attractive pricing.",
+    "New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today.",
   heroImage: "/assets/img/upcoming-hero-bg.jpg",
 
   trustIndicators: [
@@ -225,7 +225,7 @@ export default function UpcomingProjectsPage() {
       />
       <WebPageSchema
         title="New Upcoming Projects in Gurgaon 2026: RERA-Certified"
-        description="Find your perfect Flat on Dwarka Expressway —  Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a free Callback today."
+        description="New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

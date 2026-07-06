@@ -6,9 +6,9 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/residential-projects-on-dwarka-expressway`;
 
 export const metadata: Metadata = {
-  title: "Residential Projects on Dwarka Expressway | Gurgaon 2026",
+  title: "New Residential Projects in Gurgaon 2026 – Top Picks",
   description:
-    "Discover premium residential projects on Dwarka Expressway, Gurgaon. Verified properties with modern amenities, excellent connectivity, trusted developers, and expert buying guidance.",
+    "Find Best Residential Projects on Dwarka Expressway with High Growth Potential & Strong Connectivity. Enquire for Price Today",
   keywords:
     "residential projects on dwarka expressway, dwarka expressway residential projects, property in dwarka expressway, new residential projects in gurgaon, dwarka expressway flats, luxury apartments dwarka expressway, ready to move flats gurgaon, residential property gurgaon 2026",
   alternates: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "New Residential Projects in Gurgaon 2026 – Top Picks",
     description:
-      "Invest wisely in Dwarka Expressway real estate — Fast appreciation, seamless Delhi connectivity & Top builders. Explore New launches. Get expert advice now.",
+      "Find Best Residential Projects on Dwarka Expressway with High Growth Potential & Strong Connectivity. Enquire for Price Today.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -41,7 +41,7 @@ const pageContent: SEOPageContent = {
   heroTagline: "Live Connected. Invest Smarter.",
   heroTitle: "Discover Premium Residential Projects on Dwarka Expressway, Gurgaon Today",
   heroSubtitle:
-    "Explore verified residential projects on Dwarka Expressway with modern amenities, excellent connectivity, trusted developers, and expert buying guidance.",
+    "Best Residential Projects on Dwarka Expressway with High Growth Potential & Strong Connectivity. Compare Projects and Request a Brochure today.",
   heroImage: "/assets/img/residential-hero-bg.jpg",
 
   trustIndicators: [
@@ -237,7 +237,7 @@ export default function ResidentialProjectsPage() {
       />
       <WebPageSchema
         title="New Residential Projects in Gurgaon 2026 – Top Picks	"
-        description="Invest wisely in Dwarka Expressway real estate — Fast appreciation, seamless Delhi connectivity & Top builders. Explore New launches. Get expert advice now."
+        description="Find Best Residential Projects on Dwarka Expressway with High Growth Potential & Strong Connectivity. Enquire for Price Today."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

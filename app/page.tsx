@@ -62,16 +62,16 @@ const homeFaqs = [
 export const metadata: Metadata = {
   title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
   description:
-    "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly!  Dwarka Expressway Top 2026 Investment Hotspot.",
+    "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
   keywords:
     "dwarka expressway, gurgaon real estate, premium apartments, luxury homes, commercial projects, new launch projects, gurugram property, dwarka expressway projects",
   alternates: {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: "Projects in Dwarka Expressway - Residential & Commercial Properties",
+    title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
     description:
-      "Explore premium residential & commercial properties on Dwarka Expressway. RERA verified projects from top developers.",
+      "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -87,8 +87,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dwarka Expressway NCR - Premium Properties",
-    description: "Explore premium residential & commercial properties on Dwarka Expressway.",
+    title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
+    description: "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
     images: [`${BASE_URL}/assets/img/Og-Image.png`],
     creator: "@dwarkaexpresswayncr",
   },
@@ -160,8 +160,8 @@ export default function HomePage() {
       
       {/* WebPage Schema */}
       <WebPageSchema
-        title="Projects in Dwarka Expressway NCR - Residential | Commercial"
-        description="2026 Rapid Infrastructure makes Dwarka Expressway Real estate Top Investment Destinations in NCR. Get Latest Price Trends, EMI Calculator."
+        title="Best Projects in Dwarka Expressway: Hot New Launches 2026"
+        description="High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot."
         url={BASE_URL}
       />
       

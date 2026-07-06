@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/2-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "2 BHK Flats in Gurgaon | Buy 2 BHK Near Dwarka Expressway",
-  description:
-    "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
+  title: "2 BHK Flat in Dwarka Expressway– Unbeatable Value, Modern Homes",
+  description: 
+    "Which 2 BHK in Gurgaon gives you the Best Value? Our Experts break it down by Price & Connectivity. Get a Callback today for Expert Guidance.",
   keywords:
     "2 bhk flat for rent in gurgaon, 2bhk flat in gurgaon, 2 bhk in gurgaon, 2bhk flat in dwarka, 2 bhk for sale in gurgaon, buy 2 bhk in gurgaon, 2bhk in dwarka, 2 bhk flats in dwarka price, 2 bhk flats in gurugram, 2 bhk apartment in gurgaon, 2 bhk flats in gurgaon ready to move, 2 bhk affordable flats in gurgaon, 2 bhk in gurgaon ready to move, 2 bhk society flats in dwarka for sale, 2 bhk flats in dwarka expressway for sale, 2 bhk flat for sale in dwarka expressway, 2 bhk for sale in dwarka expressway, 2 bhk flats in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Buy 2 BHK Flats in Gurgaon with Excellent Connectivity",
+    title: "2 BHK Flat in Dwarka Expressway– Unbeatable Value, Modern Homes",
     description:
-      "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
+      "Which 2 BHK in Gurgaon gives you the Best Value? Our Experts break it down by Price & Connectivity. Get a Callback today for Expert Guidance.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 const pageContent: SEOPageContent = {
   heroTagline: "Perfect for First-Time Homebuyers",
-  heroTitle: "Buy 2 BHK Flats in Gurgaon with Excellent Connectivity",
+  heroTitle: "2 BHK Flat in Dwarka Expressway– Unbeatable Value, Modern Homes",
   heroSubtitle:
     "Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs.",
   heroImage: "/assets/img/2bhk-hero-bg.jpg",
@@ -290,8 +290,8 @@ export default function TwoBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="2 BHK Flats in Gurgaon | Buy 2 BHK Near Dwarka Expressway"
-        description="Explore 2 BHK flats in Gurgaon, ready-to-move apartments, and affordable homes near Dwarka Expressway. Discover modern amenities, smart layouts, and excellent access to Delhi, Airport, Metro, and business hubs."
+        title="2 BHK Flat in Dwarka Expressway– Unbeatable Value, Modern Homes"
+        description="Which 2 BHK in Gurgaon gives you the Best Value? Our Experts break it down by Price & Connectivity. Get a Callback today for Expert Guidance."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

@@ -6,16 +6,16 @@ import { BreadcrumbSchema, WebPageSchema, FAQSchema, ItemListSchema } from "@/co
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link",
+  title: "Dwarka Expressway Start & End Point 2026: Route Map Connectivity ",
   description:
-    "Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!",
+    "Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here.",
   keywords: "dwarka expressway map, connectivity, IGI airport access, NH-48, metro connectivity, gurugram projects, delhi ncr real estate",
   alternates: {
     canonical: `${BASE_URL}/connectivity`,
   },
   openGraph: {
-    title: "Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link",
-    description: "Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!",
+    title: "Dwarka Expressway Start & End Point 2026: Route Map Connectivity",
+    description: "Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here.",
     url: `${BASE_URL}/connectivity`,
     type: "website",
   },
@@ -83,56 +83,12 @@ export default function ConnectivityPage() {
         ]}
       />
       <WebPageSchema
-        title="Dwarka Expressway Start & End Point 2026: Route Map & NH-8 Link"
-        description="Find the End Points & NH-8 connectivity hubs on Dwarka Expressway From Mahipalpur Delhi to Kherki Daula– Reduce your Daily Travel Time . Get the Clear Map here!"
+        title="Dwarka Expressway Start & End Point 2026: Route Map Connectivity"
+        description="Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here."
         url={`${BASE_URL}/connectivity`}
       />
       <FAQSchema faqs={connectivityFaqs} />
       <ItemListSchema projects={projectListForSchema} />
-
-      {/* LLM-GAP ANSWER SECTION — targets "What is Dwarka Expressway" intent */}
-      <section className="py-16 bg-white border-b border-borderGrey">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4 leading-tight tracking-tight font-heading">
-            What is Dwarka Expressway — and Why Does It Matter for Real Estate in 2026?
-          </h2>
-          <div className="w-12 h-1 bg-primary mb-6"></div>
-          <div className="space-y-4 text-slate-700 text-base leading-relaxed">
-            <p>
-              <strong>Dwarka Expressway</strong> (officially NH-248BB, also called the Northern Peripheral Road) is a
-              27.6 km, 16-lane signal-free highway that runs from <strong>Shiv Murti, Mahipalpur (Delhi)</strong> to
-              <strong> Kherki Daula Toll Plaza, Gurgaon</strong>. It became fully operational in 2024 and cuts
-              Delhi-to-Gurgaon travel time to under 20 minutes, with <strong>IGI Airport reachable in 15 minutes</strong>.
-            </p>
-            <p>
-              Unlike Southern Peripheral Road (SPR) or Sohna Road, Dwarka Expressway is the <em>only</em> corridor
-              that directly bridges Delhi&apos;s Dwarka sub-city with Gurugram&apos;s premium residential zones — spanning
-              Sectors 37D, 81–99 (Kherki Daula belt), 102–109 (mid-corridor), and 110–114 (Delhi border).
-              This geographic spread is why buyers get choices across every budget, from affordable 2 BHK
-              launches in Sector 84–88 at ₹8,200/sq.ft. to ultra-luxury 4 BHK penthouses in Sector 113 at ₹14,500+/sq.ft.
-            </p>
-            <p>
-              From an investment standpoint, Dwarka Expressway has seen <strong>circle rates rise by up to 67% in April 2026</strong>,
-              reflecting government-level confidence in the corridor. The upcoming metro extension connecting
-              Sector 21 (Dwarka) to Sector 101/113 will further compress commute times and unlock a new wave
-              of end-user demand. Current 2026 data shows 8–18% year-on-year appreciation across most clusters,
-              with Sector 37D and Sectors 84–88 posting the steepest gains of 3–4% per month.
-            </p>
-            <h3 className="text-xl font-bold text-dark pt-2">
-              Is Dwarka Expressway Good to Live in?
-            </h3>
-            <p>
-              Yes — and here&apos;s the specific answer buyers search for but rarely find: projects on Dwarka
-              Expressway offer <strong>signal-free access to IGI Airport (15–20 min)</strong>, a 20-minute drive
-              to Cyber City and DLF Phase 1–5 IT hubs, proximity to <strong>Yashobhoomi IICC</strong> (India&apos;s
-              largest convention centre), and access to international schools (Euro International, DPS Sector 45)
-              and hospitals (Artemis, Medanta — both within 20 min). The combination of seamless infrastructure,
-              top-rated social amenities, and rising property values makes it one of the most liveable and
-              investable corridors in NCR in 2026.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* MAP SECTION */}
       <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">

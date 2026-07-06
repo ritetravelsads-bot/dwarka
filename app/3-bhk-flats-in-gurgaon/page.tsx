@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/3-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "3 BHK Flats in Gurgaon | Find Your Perfect 3 BHK Flat",
+  title: "Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks",
   description:
-    "Explore premium 3 BHK flats in Gurgaon, luxury apartments, builder floors, and ready to move homes across Dwarka Expressway. Discover spacious layouts, modern amenities, and excellent connectivity designed for comfortable family living.",
+    "Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today",
   keywords:
     "3 bhk flats in gurgaon, 3bhk in gurgaon, 3 bhk flats in gurgaon ready to move, 3 bhk builder floor in gurgaon, buy 3 bhk in gurgaon, 3 bhk apartment in gurgaon, 3 bhk flat for sale in gurgaon, 3 bhk luxury apartments in gurgaon, 3 bhk flats in gurgaon price, 3 bhk flats in dwarka expressway, ready to move 3 bhk flats in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Find Your Perfect 3 BHK Flat in Gurgaon",
+    title: "Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks",
     description:
-      "Explore premium 3 BHK flats in Gurgaon, luxury apartments, builder floors, and ready to move homes across Dwarka Expressway. Spacious layouts, modern amenities, and excellent connectivity.",
+      "Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -289,8 +289,8 @@ export default function ThreeBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="3 BHK Flats in Gurgaon | Find Your Perfect 3 BHK Flat"
-        description="Explore premium 3 BHK flats in Gurgaon, luxury apartments, builder floors, and ready to move homes across Dwarka Expressway. Discover spacious layouts, modern amenities, and excellent connectivity designed for comfortable family living."
+        title="Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks"
+        description="Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today"
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />
