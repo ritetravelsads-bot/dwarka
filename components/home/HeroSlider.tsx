@@ -17,6 +17,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ name: '', phone: '' });
 
   // Cinematic Intro State
   const [introPhase, setIntroPhase] = useState('hidden');
@@ -33,8 +34,13 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
   }, []);
 
   const handleRevealHand = async () => {
-    const phoneInput = document.getElementById('heroPhone') as HTMLInputElement;
-    const phone = phoneInput?.value.replace(/\D/g, '').slice(-10);
+    const name = formData.name.trim();
+    const phone = formData.phone.replace(/\D/g, '').slice(-10);
+
+    if (!name) {
+      setSubmitMessage('Please enter your name');
+      return;
+    }
 
     if (!phone || phone.length !== 10) {
       setSubmitMessage('Please enter a valid 10-digit phone number');
@@ -47,7 +53,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: 'Slider User',
+          name: name,
           phone: phone,
           email: '',
           message: `Budget: ${selections.budget?.title || 'N/A'} | Motive: ${selections.motive?.title || 'N/A'} | Location: ${selections.location?.title || 'N/A'}`,
@@ -350,17 +356,26 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
               </div>
               <h3 className="text-xl lg:text-2xl font-black text-white uppercase tracking-tight mb-1">Deck Complete</h3>
               <p className="text-[9px] lg:text-[10px] text-gray-400 font-medium leading-relaxed px-2">
-                Enter your number to unlock your matches.
+                Enter your name and number to unlock your matches.
               </p>
             </div>
 
             <div className="space-y-3 mt-3 relative z-10">
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full bg-white rounded-lg px-3 py-2.5 lg:py-3 text-black font-bold outline-none placeholder-gray-400 text-xs focus:ring-[1.5px] focus:ring-orange-500 transition-all" 
+              />
               <div className="bg-white rounded-lg overflow-hidden flex items-center focus-within:ring-[1.5px] focus-within:ring-orange-500 transition-all">
                 <span className="bg-gray-100 text-gray-500 font-black text-[10px] px-3 py-2.5 lg:py-3 border-r border-gray-200">+91</span>
                 <input 
                   type="tel" 
                   placeholder="Mobile Number" 
                   id="heroPhone"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full bg-transparent px-3 py-2.5 lg:py-3 text-black font-bold outline-none placeholder-gray-400 text-xs" 
                 />
               </div>
