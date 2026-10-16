@@ -6,16 +6,15 @@ import { BreadcrumbSchema, WebPageSchema, FAQSchema, ItemListSchema } from "@/co
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Dwarka Expressway Start & End Point 2026: Route Map Connectivity ",
-  description:
-    "Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here.",
+  title: "Dwarka Expressway Route Map: Starting & Ending Point Guide",
+  description: "Dwarka Expressway Highway Connectivity from Delhi Border to NH-48. Explore the Luxury Apartment with fast IGI Airport Routes. Request a Callback.",
   keywords: "dwarka expressway map, connectivity, IGI airport access, NH-48, metro connectivity, gurugram projects, delhi ncr real estate",
   alternates: {
     canonical: `${BASE_URL}/connectivity`,
   },
   openGraph: {
     title: "Dwarka Expressway Start & End Point 2026: Route Map Connectivity",
-    description: "Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here.",
+    description: "Dwarka Expressway starting and ending points from Delhi Border to NH-48. Explore the Luxury Apartment with fast IGI Airport Routes. Request a Callback.",
     url: `${BASE_URL}/connectivity`,
     type: "website",
   },
@@ -84,7 +83,7 @@ export default function ConnectivityPage() {
       />
       <WebPageSchema
         title="Dwarka Expressway Start & End Point 2026: Route Map Connectivity"
-        description="Dwarka Expressway connectivity unlocks massive ROI potential for luxury sectors. See our Top Investment picks and Map here."
+        description="View Dwarka Expressway (NPR) route map. Trace the link from 19B Dwarka (Delhi Border) across Gurgaon Sectors 102 to 113 down to IGI Airport & SPR."
         url={`${BASE_URL}/connectivity`}
       />
       <FAQSchema faqs={connectivityFaqs} />
@@ -94,12 +93,12 @@ export default function ConnectivityPage() {
       <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-dark mb-6 tracking-tight font-heading">
-              Dwarka Expressway Map <span className="font-light">With Projects</span>
-            </h2>
+            <h1 className="text-3xl md:text-5xl font-bold text-dark mb-6 tracking-tight font-heading">
+              Dwarka Expressway Map <span className="font-light">With Sectors</span>
+            </h1>
             <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-lg text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
-              Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the <strong>sector 103 gurgaon map</strong> or <strong>sector 102 gurgaon map</strong> highlights the immense potential of this <strong>Gurgaon smart city</strong> corridor connecting straight to the Delhi border.
+               <strong>Dwarka Expressway starting and ending points</strong> from Delhi Border to NH-48. Explore the Luxury Apartment with fast IGI Airport Routes.Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the sector 103 gurgaon map or sector 102 gurgaon map highlights the immense potential of this Gurgaon smart city corridor connecting straight to the Delhi border.Visualize your next investment with our comprehensive map. As the <strong>Dwarka Expressway completion date</strong> finalizes, checking the <strong>sector 103 gurgaon map</strong> or <strong>sector 102 gurgaon map</strong> highlights the immense potential of this <strong>Gurgaon smart city</strong> corridor connecting straight to the Delhi border.
             </p>
           </div>
 

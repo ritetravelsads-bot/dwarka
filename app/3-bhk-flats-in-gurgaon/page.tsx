@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/3-bhk-flats-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks",
+  title: "3 BHK Flat on Dwarka Expressway, Gurgaon",
   description:
-    "Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today",
+    "Ready-to-move 3 BHK flats on dwarka expressway, just 15 min from IGI Airport. Sizes start at 1,200 sq.ft. Explore pricing and floor plans today!",
   keywords:
     "3 bhk flats in gurgaon, 3bhk in gurgaon, 3 bhk flats in gurgaon ready to move, 3 bhk builder floor in gurgaon, buy 3 bhk in gurgaon, 3 bhk apartment in gurgaon, 3 bhk flat for sale in gurgaon, 3 bhk luxury apartments in gurgaon, 3 bhk flats in gurgaon price, 3 bhk flats in dwarka expressway, ready to move 3 bhk flats in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks",
+    title: "3 BHK Flats on Dwarka Expressway, Gurgaon",
     description:
-      "Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today",
+      "Ready-to-move 3 BHK flats on dwarka expressway, just 15 min from IGI Airport. Sizes start at 1,200 sq.ft. Explore pricing and floor plans today!",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -41,7 +41,7 @@ const pageContent: SEOPageContent = {
   heroTagline: "Perfect for Modern Families",
   heroTitle: "Find Your Perfect 3 BHK Flat in Gurgaon",
   heroSubtitle:
-    "Explore premium 3 BHK flats in Gurgaon, luxury apartments, builder floors, and ready to move homes across Dwarka Expressway. Discover spacious layouts, modern amenities, and excellent connectivity designed for comfortable family living.",
+    "Discover Premium 3 BHK flats on Dwarka Expressway featuring modern amenities and seamless connectivity to IGI Airport. Sizes start at 1200 sq.ft. Explore Available Units and download the brochure.",
   heroImage: "/assets/img/3bhk-hero-bg.jpg",
 
   trustIndicators: [
@@ -289,8 +289,8 @@ export default function ThreeBHKPage() {
         ]}
       />
       <WebPageSchema
-        title="Buy 3 BHK Flats in Gurgaon- High-ROI Elite Blocks"
-        description="Explore Spacious 3BHK Apartments in Gurgaon Top Sectors — RERA Verified, Flexible payment plans & Ready-to-move options. Book site visit today"
+        title="3 BHK Flats in Gurgaon | Luxury Apartments From ₹1.20 Cr*"
+        description="Explore 3 BHK Apartments in Gurgaon and Dwarka Expressway. View Spacious 1200–3000 sq ft layouts, Ready to move options & Luxury builder floors."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

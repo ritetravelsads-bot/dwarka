@@ -7,8 +7,7 @@ const PAGE_URL = `${BASE_URL}/residential-projects-on-dwarka-expressway`;
 
 export const metadata: Metadata = {
   title: "New Residential Projects in Gurgaon 2026 – Top Picks",
-  description:
-    "Find Best Residential Projects on Dwarka Expressway with High Growth Potential & Strong Connectivity. Enquire for Price Today",
+  description:"Find top-rated 2, 3 & 4 BHK luxury apartments on Dwarka Expressway. Browse verified floor plans, current price lists, and developer offers across Gurugram",
   keywords:
     "residential projects on dwarka expressway, dwarka expressway residential projects, property in dwarka expressway, new residential projects in gurgaon, dwarka expressway flats, luxury apartments dwarka expressway, ready to move flats gurgaon, residential property gurgaon 2026",
   alternates: {

@@ -62,7 +62,7 @@ const homeFaqs = [
 export const metadata: Metadata = {
   title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
   description:
-    "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
+    "Explore top residential and commercial projects on Dwarka Expressway, Gurugram. Compare 2, 3 & 4 BHK layouts, live sector prices, and verified launch deals.",
   keywords:
     "dwarka expressway, gurgaon real estate, premium apartments, luxury homes, commercial projects, new launch projects, gurugram property, dwarka expressway projects",
   alternates: {
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
     description:
-      "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
+      "Get Verified Dwarka Expressway project details. Explore Top builders, Luxury BHK layouts, and Price lists across Gurugram sectors.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Best Projects in Dwarka Expressway: Hot New Launches 2026",
-    description: "High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot.",
+    description: "Get Verified Dwarka Expressway project details. Explore Top builders, Luxury BHK layouts, and Price lists across Gurugram sectors.",
     images: [`${BASE_URL}/assets/img/Og-Image.png`],
     creator: "@dwarkaexpresswayncr",
   },
@@ -161,7 +161,7 @@ export default function HomePage() {
       {/* WebPage Schema */}
       <WebPageSchema
         title="Best Projects in Dwarka Expressway: Hot New Launches 2026"
-        description="High ROI Residential and Commercial Property in Dwarka Expressway. Check live prices and EMI options instantly! Top 2026 Investment Hotspot."
+        description="Get Verified Dwarka Expressway project details. Explore Top builders, Luxury BHK layouts, and Price lists across Gurugram sectors."
         url={BASE_URL}
       />
       

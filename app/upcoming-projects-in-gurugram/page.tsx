@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/upcoming-projects-in-gurugram`;
 
 export const metadata: Metadata = {
-  title: "Upcoming Projects on dwarka expressway 2026: RERA-Certified",
+  title: "New Launch Projects in Gurgaon | Upcoming 2026 Layouts",
   description:
-    "New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today.",
+    "Explore Upcoming real estate projects and New residential launches in Gurgaon. Find Best-tier Flats and Commercial spaces directly on the Dwarka Expressway.",
   keywords:
     "upcoming projects in gurugram, new launch in gurgaon, new upcoming projects in gurgaon, upcoming projects on dwarka expressway, pre launch residential projects in gurgaon, properties on dwarka expressway, new commercial projects in gurgaon, affordable housing dwarka expressway, Best Projects on Dwarka Expressway, flat in dwarka expressway",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Upcoming Projects on dwarka expressway 2026: RERA-Certified",
+    title: "New Launch Projects in Gurgaon | Upcoming 2026 Layouts",
     description:
-      "New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today.",
+      "Explore Upcoming real estate projects and New residential launches in Gurgaon. Find Best-tier Flats and Commercial spaces directly on the Dwarka Expressway",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -224,8 +224,8 @@ export default function UpcomingProjectsPage() {
         ]}
       />
       <WebPageSchema
-        title="New Upcoming Projects in Gurgaon 2026: RERA-Certified"
-        description="New Launch Projects in Gurgaon— Pre-launch prices, Flexible payment plans & Top-rated builders. Get the Curated list & a Callback today."
+        title="New Launch Projects in Gurgaon | Upcoming 2026 Layouts"
+        description="Explore Upcoming real estate projects and New residential launches in Gurgaon. Find Best-tier Flats and Commercial spaces directly on the Dwarka Expressway"
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

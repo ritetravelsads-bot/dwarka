@@ -26,16 +26,16 @@ const faqs = [
 export const metadata: Metadata = {
   title: "Hot New Launch Projects on Dwarka Expressway– Limited Units",
   description:
-    "Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location .Get the Honest Expert Guidance.",
+    "Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location. Get the Honest Expert Guidance.",
   keywords:
     "new launch projects dwarka expressway, upcoming projects gurgaon, new residential projects, pre-launch properties, under construction flats dwarka expressway",
   alternates: {
     canonical: `${BASE_URL}/new-launch`,
   },
   openGraph: {
-    title: "New Launch Projects on Dwarka Expressway | Latest Launches 2026",
+    title: "Hot New Launch Projects on Dwarka Expressway– Limited Units",
     description:
-      "Discover the latest new launch projects on Dwarka Expressway. Premium developments with early bird pricing.",
+      "Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location. Get the Honest Expert Guidance.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -74,7 +74,7 @@ export default function NewLaunchPage() {
       />
       <WebPageSchema
         title="Hot New Launch Projects on Dwarka Expressway– Limited Units"
-        description="Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location .Get the Honest Expert Guidance."
+        description="Which New launch in Gurgaon actually Worth your Money 2026? Our experts vet every Project by Builder track record & Location. Get the Honest Expert Guidance."
         url={`${BASE_URL}/new-launch`}
       />
       <FAQSchema faqs={faqs} />

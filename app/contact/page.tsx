@@ -6,16 +6,16 @@ import { BreadcrumbSchema, WebPageSchema, LocalBusinessSchema } from "@/componen
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Trusted Dwarka Expressway Property Dealers -RERA Verified",
+  title: "Contact Us | Dwarka Expressway NCR Real Estate Experts",
   description:
-    "Best deals on Dwarka Expressway Properties with our Trusted Property Dealers. Expert Advice & Massive 2026 Appreciation. Contact us Today for Free Site Visit!",
+    "Have questions about property listings? Contact the Dwarka Expressway NCR team today.Get expert guidance on Residential flats and Commercial properties.",
   keywords: "contact dwarka expressway, book site visit, real estate consultation, dwarka expressway helpline, property enquiry gurugram",
   alternates: {
     canonical: `${BASE_URL}/contact`,
   },
   openGraph: {
-    title: "Trusted Dwarka Expressway Property Dealers -RERA Verified",
-    description: "Best deals on Dwarka Expressway Properties with our Trusted Property Dealers. Expert Advice & Massive 2026 Appreciation. Contact us Today for Free Site Visit!",
+    title: "Contact Us | Dwarka Expressway NCR Real Estate Experts",
+    description: "Have questions about property listings? Contact the Dwarka Expressway NCR team today.Get expert guidance on Residential flats and Commercial properties.",
     url: `${BASE_URL}/contact`,
     type: "website",
   },
@@ -63,8 +63,8 @@ export default function ContactPage() {
         ]}
       />
       <WebPageSchema
-        title="Contact Us | Dwarka Expressway NCR"
-        description="Book a site visit, request pricing details, and connect with Dwarka Expressway property experts."
+        title="Contact Us | Dwarka Expressway NCR Real Estate Experts"
+        description="Have questions about property listings? Contact the Dwarka Expressway NCR team today.Get expert guidance on Residential flats and Commercial properties."
         url={`${BASE_URL}/contact`}
       />
       <LocalBusinessSchema />

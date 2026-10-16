@@ -29,7 +29,7 @@ export default function ProjectCard({ project, variant = "default" }: ProjectCar
     : getProjectByName(project.name);
 
   // Use local image (p-X.webp) if available, fallback to API image, then default
-  const imageUrl = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
+  const imageUrl = project.mainImage || localData?.image || DEFAULT_PROJECT_IMAGE;
   
   // Generate proper slug
   const projectSlug = project.slug || localData?.slug || makeSlug(project.name);

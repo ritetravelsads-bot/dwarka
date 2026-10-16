@@ -17,6 +17,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ name: '', phone: '' });
 
   // Cinematic Intro State
   const [introPhase, setIntroPhase] = useState('hidden');
@@ -33,8 +34,13 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
   }, []);
 
   const handleRevealHand = async () => {
-    const phoneInput = document.getElementById('heroPhone') as HTMLInputElement;
-    const phone = phoneInput?.value.replace(/\D/g, '').slice(-10);
+    const name = formData.name.trim();
+    const phone = formData.phone.replace(/\D/g, '').slice(-10);
+
+    if (!name) {
+      setSubmitMessage('Please enter your name');
+      return;
+    }
 
     if (!phone || phone.length !== 10) {
       setSubmitMessage('Please enter a valid 10-digit phone number');
@@ -47,7 +53,7 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: 'Slider User',
+          name: name,
           phone: phone,
           email: '',
           message: `Budget: ${selections.budget?.title || 'N/A'} | Motive: ${selections.motive?.title || 'N/A'} | Location: ${selections.location?.title || 'N/A'}`,
@@ -177,14 +183,14 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
           Exclusive Inventory
         </span>
         <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.05] mb-2 lg:mb-4">
-          Dwarka Expressway<br className="hidden md:block"/><span className="text-orange-500"> Overview</span>
+          Unlock Projects in<br className="hidden md:block"/><span className="text-orange-500"> Dwarka Expressway</span>
         </h1>
-        <p className="hidden md:block text-xs lg:text-base text-gray-300 font-medium mb-6 lg:mb-8 max-w-[95%]">
-          2, 3 &amp; 4 BHK apartments across Sectors 37D, 84–114, ready to move &amp; new launches with 15–18% appreciation potential. Pick your budget, purpose, and location in 3 clicks.
+        <p className=" md:block text-xs lg:text-base text-gray-300 font-medium mb-6 lg:mb-8 max-w-[95%]">
+           Explore top residential and commercial projects on Dwarka Expressway, Gurugram. Compare 2, 3 & 4 BHK layouts, live sector prices, and verified launch deals.
         </p>
-        <button className="hidden md:block bg-white hover:bg-orange-500 text-black hover:text-white font-black uppercase tracking-[0.2em] py-3 lg:py-3.5 px-6 lg:px-8 rounded-xl transition-all shadow-[4px_4px_0px_#f97316] hover:shadow-[4px_4px_0px_#fff] active:translate-y-1 active:translate-x-1 active:shadow-none text-[10px] lg:text-xs pointer-events-auto">
+        <a href="https://www.dwarkaexpresswayncr.com/projects" className="hidden md:block bg-white hover:bg-orange-500 text-black hover:text-white font-black uppercase tracking-[0.2em] py-3 lg:py-3.5 px-6 lg:px-8 rounded-xl transition-all shadow-[4px_4px_0px_#f97316] hover:shadow-[4px_4px_0px_#fff] active:translate-y-1 active:translate-x-1 active:shadow-none text-[10px] lg:text-xs pointer-events-auto">
           Explore Now
-        </button>
+        </a>
       </div>
 
       {/* ================= THE GAME BOARD ================= */}
@@ -350,17 +356,26 @@ export default function CinematicDealersTable({ onOpenEmi, onOpenFloorPlan }: He
               </div>
               <h3 className="text-xl lg:text-2xl font-black text-white uppercase tracking-tight mb-1">Deck Complete</h3>
               <p className="text-[9px] lg:text-[10px] text-gray-400 font-medium leading-relaxed px-2">
-                Enter your number to unlock your matches.
+                Enter your name and number to unlock your matches.
               </p>
             </div>
 
             <div className="space-y-3 mt-3 relative z-10">
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full bg-white rounded-lg px-3 py-2.5 lg:py-3 text-black font-bold outline-none placeholder-gray-400 text-xs focus:ring-[1.5px] focus:ring-orange-500 transition-all" 
+              />
               <div className="bg-white rounded-lg overflow-hidden flex items-center focus-within:ring-[1.5px] focus-within:ring-orange-500 transition-all">
                 <span className="bg-gray-100 text-gray-500 font-black text-[10px] px-3 py-2.5 lg:py-3 border-r border-gray-200">+91</span>
                 <input 
                   type="tel" 
                   placeholder="Mobile Number" 
                   id="heroPhone"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full bg-transparent px-3 py-2.5 lg:py-3 text-black font-bold outline-none placeholder-gray-400 text-xs" 
                 />
               </div>

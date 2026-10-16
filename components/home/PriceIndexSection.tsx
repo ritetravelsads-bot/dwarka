@@ -116,7 +116,7 @@ export default function PriceIndexSection() {
             </h2>
           </div>
           <span className="text-xs text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-borderGrey self-start sm:self-end whitespace-nowrap">
-            Monthly Report · May 2026
+            Monthly Report · August 2026
           </span>
         </div>
 

@@ -6,18 +6,18 @@ const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 const PAGE_URL = `${BASE_URL}/commercial-property-in-gurgaon`;
 
 export const metadata: Metadata = {
-  title: "Best Commercial Projects in Gurgaon– High ROI Picks",
+  title: "Commercial Property on Dwarka Expressway | Office & Retail",
   description:
-    "Find verified Commercial Spaces for Sale in Gurgaon— Office Spaces, High Street Retail shops from Top Developers.Limited Inventory",
+    "Explore Pre-launch Commercial properties on Dwarka Expressway. Find High street retail shops, Office spaces & Shopping complex project layouts.",
   keywords:
     "commercial projects in gurgaon, commercial property for sale in gurgaon, commercial shops in gurgaon, buy commercial property in gurgaon, commercial space for sale in gurgaon, commercial office space in gurgaon",
   alternates: {
     canonical: PAGE_URL,
   },
   openGraph: {
-    title: "Best Commercial Projects in Gurgaon– High ROI Picks",
+    title: "Commercial Property on Dwarka Expressway | Office & Retail",
     description:
-      "Find verified Commercial Spaces for Sale in Gurgaon— Office Spaces, High Street Retail shops from Top Developers.Limited Inventory",
+      "Explore Pre-launch Commercial properties on Dwarka Expressway. Find High street retail shops, Office spaces & Shopping complex project layouts.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -220,8 +220,8 @@ export default function CommercialPropertyPage() {
         ]}
       />
       <WebPageSchema
-        title="Best Commercial Projects in Gurgaon– High ROI Picks"
-        description="Find verified Commercial Spaces for Sale in Gurgaon— Office Spaces, High Street Retail shops from Top Developers.Limited Inventory."
+        title="Commercial Property on Dwarka Expressway | Office & Retail"
+        description="Explore Pre-launch Commercial properties on Dwarka Expressway. Find High street retail shops, Office spaces & Shopping complex project layouts."
         url={PAGE_URL}
       />
       <FAQSchema faqs={pageFaqs} />

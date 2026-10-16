@@ -6,16 +6,15 @@ import { BreadcrumbSchema, WebPageSchema, ServiceSchema } from "@/components/seo
 const BASE_URL = "https://www.dwarkaexpresswayncr.com";
 
 export const metadata: Metadata = {
-  title: "Best Top Real Estate Agents – Residential, Commercial & SCO",
-  description:
-    "Get Expert Guidance from Award-Winning Top Real Estate Agents offering only RERA-approved Projects on Dwarka Expressway.  Contact us for a VIP tour!",
+  title: "Real Estate Agents on Dwarka Expressway | Expert Advisory ",
+  description:"Looking for Trusted Real estate agents on Dwarka Expressway? Get expert advisory with 5+ years of experience in verified residential and commercial projects.",
   keywords: "dwarka expressway real estate, gurugram property advisor, real estate consultant, dwarka expressway projects, trusted real estate",
   alternates: {
     canonical: `${BASE_URL}/about`,
   },
   openGraph: {
-    title: "Best Top Real Estate Agents – Residential, Commercial & SCO",
-    description: "Get Expert Guidance from Award-Winning Top Real Estate Agents offering only RERA-approved Projects on Dwarka Expressway.  Contact us for a VIP tour!",
+    title: "Real Estate Agents on Dwarka Expressway | Expert Advisory ",
+    description: "Looking for Trusted Real estate agents on Dwarka Expressway? Get expert advisory with 5+ years of experience in verified residential and commercial projects.",
     url: `${BASE_URL}/about`,
     type: "website",
   },
@@ -85,8 +84,8 @@ export default function AboutPage() {
         ]}
       />
       <WebPageSchema
-        title="About Us | Dwarka Expressway Real Estate Advisory"
-        description="Trusted Local Expertise for Confident Property Decisions. Over 6 years of real estate experience on Dwarka Expressway, Gurugram."
+        title="Real Estate Agents on Dwarka Expressway | Expert Advisory "
+        description="Looking for Trusted Real estate agents on Dwarka Expressway? Get expert advisory with 5+ years of experience in verified residential and commercial projects. "
         url={`${BASE_URL}/about`}
       />
       <ServiceSchema />

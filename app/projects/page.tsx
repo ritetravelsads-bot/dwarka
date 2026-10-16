@@ -30,18 +30,18 @@ const projectsFaqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "All Projects on Dwarka Expressway | Residential & Commercial | 50+ Properties",
+  title: "Top Projects on Dwarka Expressway | Luxury Flats & New Launches",
   description:
-    "Browse 50+ verified residential and commercial projects on Dwarka Expressway. Compare prices, floor plans, amenities, and book site visits. RERA registered properties from top developers.",
+    "Browse Top 10 projects on Dwarka Expressway. Discover Premium Residential launches by M3M and Godrej with verified price lists & New luxury flats in Sector 88A.",
   keywords:
     "dwarka expressway projects, gurgaon real estate, residential projects dwarka expressway, commercial projects gurgaon, new launch projects, ready to move flats, luxury apartments dwarka expressway, property near dwarka expressway",
   alternates: {
     canonical: `${BASE_URL}/projects`,
   },
   openGraph: {
-    title: "Projects on Dwarka Expressway 2026 – Top Gurgaon Investments",
+    title: "Top Projects on Dwarka Expressway | Luxury Flats & New Launches",
     description:
-      " High-ROI Residential and Commercial Properties on Dwarka Expressway. View Verified RERA registered properties from Top Developers.",
+      "Browse Top 10 projects on Dwarka Expressway. Discover Premium Residential launches by M3M and Godrej with verified price lists & New luxury flats in Sector 88A.",
     type: "website",
     locale: "en_IN",
     siteName: "Dwarka Expressway NCR",
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects on Dwarka Expressway | Gurgaon Real Estate",
-    description: "Browse 50+ verified projects on Dwarka Expressway. Compare prices and amenities.",
+    title: "Top Projects on Dwarka Expressway | Luxury Flats & New Launches",
+    description: "Browse Top 10 projects on Dwarka Expressway. Discover Premium Residential launches by M3M and Godrej with verified price lists & New luxury flats in Sector 88A.",
     images: [`${BASE_URL}/assets/img/Og-Image.png`],
   },
   robots: {
@@ -119,8 +119,8 @@ export default async function ProjectsPage() {
         ]}
       />
       <WebPageSchema
-        title="All Projects on Dwarka Expressway | Residential & Commercial Properties"
-        description="Explore 50+ premium residential and commercial projects on Dwarka Expressway, Gurgaon. Compare prices, view floor plans, and book site visits."
+        title="Top Projects on Dwarka Expressway | Luxury Flats & New Launches"
+        description="Browse Top 10 projects on Dwarka Expressway. Discover Premium Residential launches by M3M and Godrej with verified price lists & New luxury flats in Sector 88A."
         url={`${BASE_URL}/projects`}
       />
       <FAQSchema faqs={projectsFaqs} />
