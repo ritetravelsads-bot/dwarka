@@ -31,6 +31,7 @@ interface Project {
   sector?: string;
   price: string;
   pricePerSqFt?: string;
+  paymentPlan?: string;
   size?: string;
   sizeRange?: string;
   landSize?: string;
@@ -309,11 +310,8 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                       : null)
                     || "Contact for Details";
 
-                  const startingPrice = project.price
-                    || (project.floorPlan && project.floorPlan.length > 0 ? project.floorPlan[0].price : null)
-                    || "Contact for Details";
-
-                  const paymentPlan = "Flexible";
+                  const startingPrice = "On Request";
+                  const paymentPlan = project.paymentPlan || "Contact for Details";
 
                   const isMissing = (val: string) => val === "Contact for Details";
 
@@ -401,15 +399,35 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
           </section>
         )}
 
+        {/* HIGHLIGHTS SECTION */}
+        {project.highlights && project.highlights.length > 0 && (
+          <section className="mb-16 rounded-2xl bg-dark p-8 shadow-lg border border-white/10">
+            <div className="flex items-center justify-between gap-4 mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-white font-heading">
+                Highlights <span className="text-primary">&amp; Features</span>
+              </h2>
+              <span className="text-xs uppercase tracking-[0.2em] text-white/40">Project overview</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {project.highlights.map((highlight, index) => (
+                <div key={`${highlight}-${index}`} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-4">
+                  <i className="fa-solid fa-check text-primary mt-0.5" aria-hidden="true" />
+                  <span className="text-sm leading-6 text-white/80">{highlight}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* AMENITIES SECTION */}
-        <section className="max-w-6xl mx-auto px-4 mb-16 py-12 rounded-2xl shadow-lg border bg-dark border-white/10">
+        <section className="max-w-6xl mx-auto px-4 mb-16 py-10 rounded-2xl shadow-lg border bg-dark border-white/10">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center uppercase tracking-tight text-primary font-heading">
             <span className="text-white">Premium</span> Amenities
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {(project.amenities && project.amenities.length > 0 ? 
-              project.amenities.slice(0, 8).map((amenity, idx) => ({
+              project.amenities.slice(0, 6).map((amenity, idx) => ({
                 icon: defaultAmenities[idx % defaultAmenities.length].icon,
                 name: amenity
               })) : 

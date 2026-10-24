@@ -12,6 +12,7 @@ export interface Project {
   price: string;
   priceValue: number;
   pricePerSqFt?: string;
+  paymentPlan?: string;
   size?: string;
   sizeRange?: string;
   landSize?: string;

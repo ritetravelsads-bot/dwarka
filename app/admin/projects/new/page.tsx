@@ -37,6 +37,7 @@ export default function NewProjectPage() {
     price: '',
     priceValue: 0,
     pricePerSqFt: '',
+    paymentPlan: '',
     size: '',
     sizeRange: '',
     landSize: '',
@@ -179,6 +180,7 @@ export default function NewProjectPage() {
         price: formData.price,
         priceValue: formData.priceValue,
         pricePerSqFt: formData.pricePerSqFt,
+        paymentPlan: formData.paymentPlan,
         size: formData.size,
         sizeRange: formData.sizeRange,
         landSize: formData.landSize,
@@ -361,6 +363,10 @@ export default function NewProjectPage() {
                 <div>
                   <label className={labelClass}>Price Per Sq.Ft.</label>
                   <input type="text" name="pricePerSqFt" value={formData.pricePerSqFt} onChange={handleChange} placeholder="e.g., ₹18,500/sq.ft" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Payment Plan</label>
+                  <input type="text" name="paymentPlan" value={formData.paymentPlan} onChange={handleChange} placeholder="e.g., 10:90 Payment Plan" className={inputClass} />
                 </div>
                 <div>
                   <label className={labelClass}>Size</label>

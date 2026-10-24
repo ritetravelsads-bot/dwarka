@@ -40,7 +40,7 @@ export default function FeaturedProjects() {
 
   async function fetchProjects() {
     try {
-      const res = await fetch("/api/projects?limit=30");
+      const res = await fetch("/api/projects?limit=12", { cache: "force-cache" });
       const data = await res.json();
       if (data.success && data.data?.projects) {
         setProjects(data.data.projects);
