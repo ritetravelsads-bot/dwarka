@@ -121,7 +121,10 @@ export default function AdminProjectsPage() {
                 <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Project</th>
                 <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Developer</th>
                 <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Type</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Price</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">BHK</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Super Area</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Starting Price</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Payment Plan</th>
                 <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Status</th>
                 <th className="text-left px-6 py-4 text-sm font-medium text-gray-500">Featured</th>
                 <th className="text-right px-6 py-4 text-sm font-medium text-gray-500">Actions</th>
@@ -154,7 +157,12 @@ export default function AdminProjectsPage() {
                   </td>
                   <td className="px-6 py-4 text-gray-600">{project.developer || '-'}</td>
                   <td className="px-6 py-4 text-gray-600">{project.type || '-'}</td>
-                  <td className="px-6 py-4 text-gray-600">{project.price || '-'}</td>
+                  <td className="px-6 py-4 text-gray-600 whitespace-nowrap">
+                    {project.bhk?.length ? project.bhk.join(', ') : project.configurations?.length ? project.configurations.join(', ') : '-'}
+                  </td>
+                  <td className="px-6 py-4 text-gray-600 whitespace-nowrap">{project.superArea || project.sizeRange || project.size || '-'}</td>
+                  <td className="px-6 py-4 text-gray-600 whitespace-nowrap">{project.startingPrice || project.price || 'On Request'}</td>
+                  <td className="px-6 py-4 text-gray-600 whitespace-nowrap">{project.paymentPlan || '-'}</td>
                   <td className="px-6 py-4">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                       project.isActive 
