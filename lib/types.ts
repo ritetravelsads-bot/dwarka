@@ -11,8 +11,11 @@ export interface Project {
   sector: string;
   price: string;
   priceValue: number;
+  startingPrice?: string;
   pricePerSqFt?: string;
   paymentPlan?: string;
+  bhk?: string[];
+  superArea?: string;
   size?: string;
   sizeRange?: string;
   landSize?: string;

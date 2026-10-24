@@ -42,8 +42,11 @@ export default function EditProjectPage() {
     // Pricing & Size
     price: '',
     priceValue: 0,
+    startingPrice: '',
     pricePerSqFt: '',
     paymentPlan: '',
+    bhk: [] as string[],
+    superArea: '',
     size: '',
     sizeRange: '',
     landSize: '',
@@ -136,8 +139,11 @@ export default function EditProjectPage() {
           pincode: project.pincode || '',
           price: project.price || '',
           priceValue: project.priceValue || 0,
+          startingPrice: project.startingPrice || '',
           pricePerSqFt: project.pricePerSqFt || '',
           paymentPlan: project.paymentPlan || '',
+          bhk: project.bhk || project.configurations || [],
+          superArea: project.superArea || '',
           size: project.size || '',
           sizeRange: project.sizeRange || '',
           landSize: project.landSize || '',
@@ -246,14 +252,17 @@ export default function EditProjectPage() {
         pincode: formData.pincode,
         price: formData.price,
         priceValue: formData.priceValue,
+        startingPrice: formData.startingPrice,
         pricePerSqFt: formData.pricePerSqFt,
         paymentPlan: formData.paymentPlan,
+        bhk: formData.bhk,
+        configurations: formData.configurations,
+        superArea: formData.superArea,
         size: formData.size,
         sizeRange: formData.sizeRange,
         landSize: formData.landSize,
         rera: formData.rera,
         possession: formData.possession,
-        configurations: formData.configurations,
         occupancy: formData.occupancy,
         badge: formData.badge,
         description: formData.description,
@@ -454,7 +463,11 @@ export default function EditProjectPage() {
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Pricing & Size</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className={labelClass}>Price (Display)</label>
+                  <label className={labelClass}>Starting Price</label>
+                  <input type="text" name="startingPrice" value={formData.startingPrice} onChange={handleChange} placeholder="e.g., ₹2.5 Cr or On Request" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Price (Legacy Display)</label>
                   <input type="text" name="price" value={formData.price} onChange={handleChange} className={inputClass} />
                 </div>
                 <div>
@@ -474,7 +487,11 @@ export default function EditProjectPage() {
                   <input type="text" name="size" value={formData.size} onChange={handleChange} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Size Range</label>
+                  <label className={labelClass}>Super Area</label>
+                  <input type="text" name="superArea" value={formData.superArea} onChange={handleChange} placeholder="e.g., 1,850 - 2,400 sq.ft." className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Size Range (Legacy)</label>
                   <input type="text" name="sizeRange" value={formData.sizeRange} onChange={handleChange} className={inputClass} />
                 </div>
                 <div>

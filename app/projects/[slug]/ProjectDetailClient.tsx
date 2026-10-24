@@ -30,8 +30,11 @@ interface Project {
   location: string;
   sector?: string;
   price: string;
+  startingPrice?: string;
   pricePerSqFt?: string;
   paymentPlan?: string;
+  bhk?: string[];
+  superArea?: string;
   size?: string;
   sizeRange?: string;
   landSize?: string;
@@ -296,21 +299,22 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
                 {/* Configurations table — single aggregated row */}
                 {(() => {
                   // Derive one combined value per column from available data
-                  const bhk = project.configurations && project.configurations.length > 0
-                    ? project.configurations.join(", ").replace(/,([^,]*)$/, " &$1") // "2 BHK, 3 BHK, 4 BHK" → "2 BHK, 3 BHK & 4 BHK"
+                  const bhkValues = project.bhk?.length ? project.bhk : project.configurations;
+                  const bhk = bhkValues && bhkValues.length > 0
+                    ? bhkValues.join(", ").replace(/,([^,]*)$/, " &$1")
                     : project.floorPlan && project.floorPlan.length > 0
                       ? project.floorPlan.map((fp) => fp.title).join(", ").replace(/,([^,]*)$/, " &$1")
                       : project.type === "plots" ? "Residential Plot"
                       : project.type === "commercial" ? "Commercial Unit"
                       : "Residential Unit";
 
-                  const superArea = project.sizeRange || project.size
+                  const superArea = project.superArea || project.sizeRange || project.size
                     || (project.floorPlan && project.floorPlan.length > 0
                       ? `${project.floorPlan[0].size}${project.floorPlan.length > 1 ? ` – ${project.floorPlan[project.floorPlan.length - 1].size}` : ""}`
                       : null)
                     || "Contact for Details";
 
-                  const startingPrice = "On Request";
+                  const startingPrice = project.startingPrice || project.price || "On Request";
                   const paymentPlan = project.paymentPlan || "Contact for Details";
 
                   const isMissing = (val: string) => val === "Contact for Details";
