@@ -43,7 +43,8 @@ interface Project {
   possession?: string;
   description?: string;
   shortDescription?: string;
-  highlights?: string[];
+  highlights?: string[] | string;
+  features?: string[] | string;
   amenities?: string[];
   floorPlan?: FloorPlan[];
   gallery?: (string | GalleryImage)[];
@@ -119,6 +120,12 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   }
 
   const heroImage = project.hero?.image || enrichedMainImage;
+
+  const displayHighlights = (() => {
+    const source = project.highlights || project.features || [];
+    if (Array.isArray(source)) return source.map((item) => String(item).trim()).filter(Boolean);
+    return source.split(/[\n,|]+/).map((item) => item.trim()).filter(Boolean);
+  })();
 
   const defaultAmenities = [
     { icon: "fa-person-swimming", name: "Swimming Pool" },
@@ -404,7 +411,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
         )}
 
         {/* HIGHLIGHTS SECTION */}
-        {project.highlights && project.highlights.length > 0 && (
+        {displayHighlights.length > 0 && (
           <section className="mb-16 rounded-2xl bg-dark p-8 shadow-lg border border-white/10">
             <div className="flex items-center justify-between gap-4 mb-8">
               <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-white font-heading">
@@ -413,7 +420,7 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
               <span className="text-xs uppercase tracking-[0.2em] text-white/40">Project overview</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {project.highlights.map((highlight, index) => (
+              {displayHighlights.map((highlight, index) => (
                 <div key={`${highlight}-${index}`} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-4">
                   <i className="fa-solid fa-check text-primary mt-0.5" aria-hidden="true" />
                   <span className="text-sm leading-6 text-white/80">{highlight}</span>
