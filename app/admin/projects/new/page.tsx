@@ -128,7 +128,7 @@ export default function NewProjectPage() {
   };
 
   // Array field handlers
-  const addToArray = (field: 'configurations' | 'highlights' | 'amenities' | 'gallery', value: string, clearFn: () => void) => {
+  const addToArray = (field: 'configurations' | 'bhk' | 'highlights' | 'amenities' | 'gallery', value: string, clearFn: () => void) => {
     if (value.trim()) {
       setFormData({
         ...formData,
@@ -138,7 +138,7 @@ export default function NewProjectPage() {
     }
   };
 
-  const removeFromArray = (field: 'configurations' | 'highlights' | 'amenities' | 'gallery', index: number) => {
+  const removeFromArray = (field: 'configurations' | 'bhk' | 'highlights' | 'amenities' | 'gallery', index: number) => {
     setFormData({
       ...formData,
       [field]: formData[field].filter((_, i) => i !== index),
@@ -186,7 +186,7 @@ export default function NewProjectPage() {
         pricePerSqFt: formData.pricePerSqFt,
         paymentPlan: formData.paymentPlan,
         bhk: formData.bhk,
-        configurations: formData.configurations,
+        configurations: formData.bhk.length > 0 ? formData.bhk : formData.configurations,
         superArea: formData.superArea,
         size: formData.size,
         sizeRange: formData.sizeRange,
@@ -423,19 +423,19 @@ export default function NewProjectPage() {
 
               {/* Configurations */}
               <div>
-                <label className={labelClass}>Configurations (BHK options)</label>
+                <label className={labelClass}>BHK</label>
                 <div className="flex gap-2 mb-3">
-                  <input type="text" value={newConfig} onChange={(e) => setNewConfig(e.target.value)} placeholder="e.g., 3 BHK" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('configurations', newConfig, () => setNewConfig('')))} />
-                  <button type="button" onClick={() => addToArray('configurations', newConfig, () => setNewConfig(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                  <input type="text" value={newConfig} onChange={(e) => setNewConfig(e.target.value)} placeholder="e.g., 2 BHK, 3 BHK" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('bhk', newConfig, () => setNewConfig('')))} />
+                  <button type="button" onClick={() => addToArray('bhk', newConfig, () => setNewConfig(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
                     <Plus className="w-5 h-5" />
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {formData.configurations.map((config, index) => (
+                  {formData.bhk.map((config, index) => (
                     <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
                       {config}
-                      <button type="button" onClick={() => removeFromArray('configurations', index)} className="text-blue-600 hover:text-red-500"><X className="w-4 h-4" /></button>
+                      <button type="button" onClick={() => removeFromArray('bhk', index)} className="text-blue-600 hover:text-red-500"><X className="w-4 h-4" /></button>
                     </span>
                   ))}
                 </div>
