@@ -31,6 +31,21 @@ export async function GET(
       );
     }
 
+    // Keep gallery uploads compatible with the different field names used by
+    // older backend records and the current admin form.
+    const gallery = project.gallery ?? project.galleryImages ?? project.images;
+    if (Array.isArray(gallery)) {
+      project.gallery = gallery
+        .map((image: unknown) => {
+          if (typeof image === "string") return image;
+          if (image && typeof image === "object" && "url" in image) {
+            return image;
+          }
+          return null;
+        })
+        .filter(Boolean);
+    }
+
     // Get related projects
     let relatedProjects: typeof project[] = [];
     try {

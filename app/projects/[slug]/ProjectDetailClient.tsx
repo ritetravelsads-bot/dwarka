@@ -48,6 +48,8 @@ interface Project {
   amenities?: string[];
   floorPlan?: FloorPlan[];
   gallery?: (string | GalleryImage)[];
+  galleryImages?: (string | GalleryImage)[];
+  images?: (string | GalleryImage)[];
   mainImage?: string;
   logo?: string;
   brochure?: string;
@@ -104,10 +106,15 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
   const enrichedMainImage = localData?.image || project.mainImage || DEFAULT_PROJECT_IMAGE;
   const enrichedAlt = localData?.alt || project.name;
 
-  // Process gallery images
+  // Process gallery images from the saved gallery field and legacy image fields.
   const galleryImages: { url: string; alt: string }[] = [];
-  if (project.gallery && project.gallery.length > 0) {
-    project.gallery.forEach((img, idx) => {
+  const savedGallery = project.gallery?.length
+    ? project.gallery
+    : project.galleryImages?.length
+      ? project.galleryImages
+      : project.images || [];
+  if (savedGallery.length > 0) {
+    savedGallery.forEach((img, idx) => {
       if (typeof img === 'string') {
         galleryImages.push({ url: img, alt: `${project.name} - Image ${idx + 1}` });
       } else if (img && typeof img === 'object' && img.url) {
