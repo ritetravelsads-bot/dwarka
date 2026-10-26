@@ -89,6 +89,37 @@ export default function ConnectivityPage() {
       />
       <FAQSchema faqs={connectivityFaqs} />
       <ItemListSchema projects={projectListForSchema} />
+      
+      
+      {/* HERO SECTION */}
+      <section className="relative pt-12 pb-24 md:pt-10 md:pb-32 bg-gradient-to-br from-slate-900 via-dark to-slate-800 overflow-hidden text-white">
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
+          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary blur-[100px]"></div>
+          <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary/50 blur-[100px]"></div>
+        </div>
+
+        <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center justify-center">
+          <div className="max-w-4xl mx-auto">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 text-white uppercase tracking-[0.2em] text-xs font-bold mb-6 border border-white/20 backdrop-blur-sm">
+              Real Estate Dwarka Expressway
+            </span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight font-heading">
+              Seamless <span className="text-primary font-light italic">Connectivity</span> & Projects Map
+            </h1>
+            <p className="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-12 text-center">
+              Positioned at one of the most strategic locations, the Dwarka Express Highway is redefining real estate. Explore the ultimate Dwarka Expressway route map and discover the finest luxury apartments on Dwarka Expressway.
+            </p>
+
+            <a
+              href="#projects-map"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 text-sm font-bold tracking-wide uppercase rounded hover:bg-white hover:text-dark transition-all duration-300 shadow-lg"
+            >
+              View Connectivity Map
+              <i className="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* MAP SECTION */}
       <section id="projects-map" className="py-24 bg-white border-b border-borderGrey">
@@ -162,36 +193,6 @@ export default function ConnectivityPage() {
               <h3 className="text-lg font-semibold text-dark mb-1">Adjacent Metro Station (2026)</h3>
               <p className="text-sm text-slate-600">Upcoming metro connectivity for daily commute convenience</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HERO SECTION */}
-      <section className="relative pt-12 pb-24 md:pt-10 md:pb-32 bg-gradient-to-br from-slate-900 via-dark to-slate-800 overflow-hidden text-white">
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-20">
-          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary blur-[100px]"></div>
-          <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] rounded-full bg-primary/50 blur-[100px]"></div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center justify-center">
-          <div className="max-w-4xl mx-auto">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 text-white uppercase tracking-[0.2em] text-xs font-bold mb-6 border border-white/20 backdrop-blur-sm">
-              Real Estate Dwarka Expressway
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-tight font-heading">
-              Seamless <span className="text-primary font-light italic">Connectivity</span> & Projects Map
-            </h1>
-            <p className="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-12 text-center">
-              Positioned at one of the most strategic locations, the Dwarka Express Highway is redefining real estate. Explore the ultimate Dwarka Expressway route map and discover the finest luxury apartments on Dwarka Expressway.
-            </p>
-
-            <a
-              href="#projects-map"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 text-sm font-bold tracking-wide uppercase rounded hover:bg-white hover:text-dark transition-all duration-300 shadow-lg"
-            >
-              View Connectivity Map
-              <i className="fa-solid fa-arrow-down"></i>
-            </a>
           </div>
         </div>
       </section>
