@@ -97,6 +97,7 @@ export default function NewProjectPage() {
     { id: 'basic', label: 'Basic Info' },
     { id: 'location', label: 'Location' },
     { id: 'pricing', label: 'Pricing & Size' },
+    { id: 'plans', label: 'Plans Table' },
     { id: 'details', label: 'Project Details' },
     { id: 'content', label: 'Content' },
     { id: 'media', label: 'Images & Media' },
@@ -359,10 +360,6 @@ export default function NewProjectPage() {
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Pricing & Size</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className={labelClass}>Starting Price</label>
-                  <input type="text" name="startingPrice" value={formData.startingPrice} onChange={handleChange} placeholder="e.g., ₹2.5 Cr or On Request" className={inputClass} />
-                </div>
-                <div>
                   <label className={labelClass}>Price (Legacy Display)</label>
                   <input type="text" name="price" value={formData.price} onChange={handleChange} placeholder="e.g., 2.5 Cr" className={inputClass} />
                 </div>
@@ -375,16 +372,8 @@ export default function NewProjectPage() {
                   <input type="text" name="pricePerSqFt" value={formData.pricePerSqFt} onChange={handleChange} placeholder="e.g., ₹18,500/sq.ft" className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass}>Payment Plan</label>
-                  <input type="text" name="paymentPlan" value={formData.paymentPlan} onChange={handleChange} placeholder="e.g., 10:90 Payment Plan" className={inputClass} />
-                </div>
-                <div>
                   <label className={labelClass}>Size</label>
                   <input type="text" name="size" value={formData.size} onChange={handleChange} placeholder="e.g., 1850 sq.ft." className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Super Area</label>
-                  <input type="text" name="superArea" value={formData.superArea} onChange={handleChange} placeholder="e.g., 1,850 - 2,400 sq.ft." className={inputClass} />
                 </div>
                 <div>
                   <label className={labelClass}>Size Range (Legacy)</label>
@@ -393,6 +382,40 @@ export default function NewProjectPage() {
                 <div>
                   <label className={labelClass}>Land Size</label>
                   <input type="text" name="landSize" value={formData.landSize} onChange={handleChange} placeholder="e.g., 4.5 Acres" className={inputClass} />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Plans Table Tab */}
+          {activeTab === 'plans' && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Plans Table</h2>
+                <p className="text-sm text-gray-500 mt-1">These values appear in the project detail page&apos;s About section.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className={labelClass}>BHK</label>
+                  <div className="flex gap-2">
+                    <input type="text" value={newConfig} onChange={(e) => setNewConfig(e.target.value)} placeholder="e.g., 2 BHK, 3 BHK" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('bhk', newConfig, () => setNewConfig('')))} />
+                    <button type="button" onClick={() => addToArray('bhk', newConfig, () => setNewConfig(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"><Plus className="w-5 h-5" /></button>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {formData.bhk.map((item, index) => <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">{item}<button type="button" onClick={() => removeFromArray('bhk', index)} className="text-blue-600 hover:text-red-500"><X className="w-4 h-4" /></button></span>)}
+                  </div>
+                </div>
+                <div>
+                  <label className={labelClass}>Super Area</label>
+                  <input type="text" name="superArea" value={formData.superArea} onChange={handleChange} placeholder="e.g., 1,850 - 2,400 sq.ft." className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Starting Price</label>
+                  <input type="text" name="startingPrice" value={formData.startingPrice} onChange={handleChange} placeholder="e.g., ₹2.5 Cr or On Request" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Payment Plan</label>
+                  <input type="text" name="paymentPlan" value={formData.paymentPlan} onChange={handleChange} placeholder="e.g., 10:90 Payment Plan" className={inputClass} />
                 </div>
               </div>
             </div>
@@ -421,25 +444,6 @@ export default function NewProjectPage() {
                 </div>
               </div>
 
-              {/* Configurations */}
-              <div>
-                <label className={labelClass}>BHK</label>
-                <div className="flex gap-2 mb-3">
-                  <input type="text" value={newConfig} onChange={(e) => setNewConfig(e.target.value)} placeholder="e.g., 2 BHK, 3 BHK" className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addToArray('bhk', newConfig, () => setNewConfig('')))} />
-                  <button type="button" onClick={() => addToArray('bhk', newConfig, () => setNewConfig(''))} className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                    <Plus className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {formData.bhk.map((config, index) => (
-                    <span key={index} className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                      {config}
-                      <button type="button" onClick={() => removeFromArray('bhk', index)} className="text-blue-600 hover:text-red-500"><X className="w-4 h-4" /></button>
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           )}
 
