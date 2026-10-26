@@ -431,12 +431,12 @@ export default function ProjectDetailClient({ project, relatedProjects }: Props)
         )}
 
         {/* AMENITIES SECTION */}
-        <section className="max-w-6xl mx-auto px-4 mb-16 py-10 rounded-2xl shadow-lg border bg-dark border-white/10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center uppercase tracking-tight text-primary font-heading">
-            <span className="text-white">Premium</span> Amenities
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+  <section className="max-w-6xl mx-auto px-4 mb-10 py-6 md:py-7 rounded-2xl shadow-lg border bg-dark border-white/10">
+  <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center uppercase tracking-tight text-primary font-heading">
+  <span className="text-white">Premium</span> Amenities
+  </h2>
+  
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
             {(project.amenities && project.amenities.length > 0 ? 
               project.amenities.slice(0, 6).map((amenity, idx) => ({
                 icon: defaultAmenities[idx % defaultAmenities.length].icon,
